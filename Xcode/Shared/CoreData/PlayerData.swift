@@ -8,14 +8,23 @@
 
 import CoreData
 
-
 extension MemoryCard {
     
     func newPlayerData() -> PlayerData {
-        let playerData = NSEntityDescription.insertNewObject(forEntityName: "PlayerData", into: self.managedObjectContext) as! PlayerData
+        let playerData: PlayerData = self.insertNewObject()
         
+        playerData.level = 1
         playerData.modelVersion = 1
         playerData.name = ""
+        playerData.xp = 0
+        
+        playerData.mothership = self.newMothershipData()
+        
+        for _ in 0..<4 {
+            let spaceshipData: SpaceshipData = self.newSpaceshipData()
+            playerData.mothership?.addToSpaceships(spaceshipData)
+            playerData.addToSpaceships(spaceshipData)
+        }
         
         return playerData
     }
@@ -24,18 +33,5 @@ extension MemoryCard {
         if self.playerData.modelVersion < 1 {
             self.playerData.modelVersion = 1
         }
-    }
-}
-
-extension PlayerData {
-    
-    func addData(value: NSManagedObject) {
-        let items = self.mutableSetValue(forKey: "")
-        items.add(value)
-    }
-    
-    func removeData(value: NSManagedObject) {
-        let items = self.mutableSetValue(forKey: "")
-        items.remove(value)
     }
 }

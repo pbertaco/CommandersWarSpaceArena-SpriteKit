@@ -37,7 +37,7 @@ class MemoryCard {
     func loadGame() {
         guard self.playerData == nil else { return }
         
-        let fetchRequestData = self.fetchRequest()
+        let fetchRequestData: [PlayerData] = self.fetchRequest()
         
         if(fetchRequestData.count > 0) {
             self.playerData = fetchRequestData.last
@@ -50,7 +50,7 @@ class MemoryCard {
     
     func reset() {
         
-        let fetchRequestData = self.fetchRequest()
+        let fetchRequestData: [PlayerData] = self.fetchRequest()
         
         for item in fetchRequestData {
             self.managedObjectContext.delete(item)
@@ -62,9 +62,17 @@ class MemoryCard {
         self.newGame()
     }
     
-    func fetchRequest() -> [PlayerData] {
-        let fetchRequest: NSFetchRequest<PlayerData> = PlayerData.fetchRequest()
+    func fetchRequest<T: NSFetchRequestResult>() -> [T] {
+        let entityName = "\(T.self)".components(separatedBy: ".").last!
+        let fetchRequest: NSFetchRequest<T> = NSFetchRequest<T>(entityName: entityName)
         return try! self.managedObjectContext.fetch(fetchRequest)
+    }
+    
+    func insertNewObject<T>() -> T {
+        let entityName = "\(T.self)".components(separatedBy: ".").last!
+        print("New \(entityName)")
+        let managedObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: self.managedObjectContext) as! T
+        return managedObject
     }
     
     // MARK: - Core Data stack

@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="15G1108" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="MothershipData" representedClassName="MothershipData" syncable="YES" codeGenerationType="class">
+        <relationship name="parentPlayer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="mothership" inverseEntity="PlayerData" syncable="YES"/>
+        <relationship name="spaceships" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SpaceshipData" inverseName="parentMothership" inverseEntity="SpaceshipData" syncable="YES"/>
+    </entity>
     <entity name="PlayerData" representedClassName="PlayerData" syncable="YES" codeGenerationType="class">
+        <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="modelVersion" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="xp" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="mothership" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MothershipData" inverseName="parentPlayer" inverseEntity="MothershipData" syncable="YES"/>
+        <relationship name="spaceships" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SpaceshipData" inverseName="parentPlayer" inverseEntity="SpaceshipData" syncable="YES"/>
     </entity>
-    <fetchRequest name="FetchRequest" entity="PlayerData"/>
+    <entity name="SpaceshipData" representedClassName="SpaceshipData" syncable="YES" codeGenerationType="class">
+        <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="xp" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="parentMothership" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MothershipData" inverseName="spaceships" inverseEntity="MothershipData" syncable="YES"/>
+        <relationship name="parentPlayer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="spaceships" inverseEntity="PlayerData" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="PlayerData" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="MothershipData" positionX="-272" positionY="-306" width="128" height="75"/>
+        <element name="PlayerData" positionX="-63" positionY="-243" width="128" height="135"/>
+        <element name="SpaceshipData" positionX="-468" positionY="-222" width="128" height="120"/>
     </elements>
 </model>
