@@ -24,6 +24,14 @@ class LoadScene: GameScene {
     override func load() {
         super.load()
         
+        #if DEBUG
+            self.view?.showsFPS = true
+            //self.view?.showsNodeCount = true
+            //self.view?.showsPhysics = true
+            
+            //MemoryCard.sharedInstance.reset()
+        #endif
+        
         self.addChild(Control(imageNamed: "launchScreenLandscape", x: 0, y: 0, horizontalAlignment: .center, verticalAlignment: .center))
     }
 }
