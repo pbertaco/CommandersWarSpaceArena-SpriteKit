@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		840931491E268CDD00C61711 /* MothershipSpaceships.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931481E268CDD00C61711 /* MothershipSpaceships.swift */; };
-		8409314A1E268CDD00C61711 /* MothershipSpaceships.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931481E268CDD00C61711 /* MothershipSpaceships.swift */; };
-		8409314B1E268CDD00C61711 /* MothershipSpaceships.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931481E268CDD00C61711 /* MothershipSpaceships.swift */; };
-		8409314D1E26930700C61711 /* SpaceshipSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409314C1E26930700C61711 /* SpaceshipSlot.swift */; };
-		8409314E1E26930700C61711 /* SpaceshipSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409314C1E26930700C61711 /* SpaceshipSlot.swift */; };
-		8409314F1E26930700C61711 /* SpaceshipSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409314C1E26930700C61711 /* SpaceshipSlot.swift */; };
+		840931491E268CDD00C61711 /* MothershipSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931481E268CDD00C61711 /* MothershipSlots.swift */; };
+		8409314A1E268CDD00C61711 /* MothershipSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931481E268CDD00C61711 /* MothershipSlots.swift */; };
+		8409314B1E268CDD00C61711 /* MothershipSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931481E268CDD00C61711 /* MothershipSlots.swift */; };
+		8409314D1E26930700C61711 /* MothershipSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409314C1E26930700C61711 /* MothershipSlot.swift */; };
+		8409314E1E26930700C61711 /* MothershipSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409314C1E26930700C61711 /* MothershipSlot.swift */; };
+		8409314F1E26930700C61711 /* MothershipSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409314C1E26930700C61711 /* MothershipSlot.swift */; };
 		840931511E26985500C61711 /* GameColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931501E26985500C61711 /* GameColorsExtension.swift */; };
 		840931521E26985500C61711 /* GameColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931501E26985500C61711 /* GameColorsExtension.swift */; };
 		840931531E26985500C61711 /* GameColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931501E26985500C61711 /* GameColorsExtension.swift */; };
@@ -117,6 +117,9 @@
 		847182DC1E25D5BA0077D3EF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847182D91E25D5BA0077D3EF /* Fabric.framework */; };
 		847182DD1E25D5BA0077D3EF /* GameAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847182DA1E25D5BA0077D3EF /* GameAnalytics.framework */; };
 		847182E01E25D6990077D3EF /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847182DF1E25D6990077D3EF /* Metrics.swift */; };
+		84C31E281E26FF1100892544 /* MothershipSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C31E271E26FF1100892544 /* MothershipSlotData.swift */; };
+		84C31E291E26FF1100892544 /* MothershipSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C31E271E26FF1100892544 /* MothershipSlotData.swift */; };
+		84C31E2A1E26FF1100892544 /* MothershipSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C31E271E26FF1100892544 /* MothershipSlotData.swift */; };
 		84E0F2981E25C6F000E12E09 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E0F2961E25C6F000E12E09 /* Model.xcdatamodeld */; };
 		84E0F2991E25C6F000E12E09 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E0F2961E25C6F000E12E09 /* Model.xcdatamodeld */; };
 		84E0F29A1E25C6F000E12E09 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84E0F2961E25C6F000E12E09 /* Model.xcdatamodeld */; };
@@ -171,8 +174,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		840931481E268CDD00C61711 /* MothershipSpaceships.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipSpaceships.swift; sourceTree = "<group>"; };
-		8409314C1E26930700C61711 /* SpaceshipSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceshipSlot.swift; sourceTree = "<group>"; };
+		840931481E268CDD00C61711 /* MothershipSlots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipSlots.swift; sourceTree = "<group>"; };
+		8409314C1E26930700C61711 /* MothershipSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipSlot.swift; sourceTree = "<group>"; };
 		840931501E26985500C61711 /* GameColorsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameColorsExtension.swift; sourceTree = "<group>"; };
 		840B12FA1E25E49100707EE9 /* Spaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spaceship.swift; sourceTree = "<group>"; };
 		840B12FE1E25E6C200707EE9 /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
@@ -228,6 +231,7 @@
 		847182D91E25D5BA0077D3EF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		847182DA1E25D5BA0077D3EF /* GameAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GameAnalytics.framework; sourceTree = "<group>"; };
 		847182DF1E25D6990077D3EF /* Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
+		84C31E271E26FF1100892544 /* MothershipSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipSlotData.swift; sourceTree = "<group>"; };
 		84E0F2971E25C6F000E12E09 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		84E0F29B1E25C74600E12E09 /* MemoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCard.swift; sourceTree = "<group>"; };
 		84E0F29F1E25C77100E12E09 /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerData.swift; sourceTree = "<group>"; };
@@ -386,9 +390,9 @@
 				840931501E26985500C61711 /* GameColorsExtension.swift */,
 				84240B6D1E26DD060090E681 /* GameMath.swift */,
 				847182DF1E25D6990077D3EF /* Metrics.swift */,
-				840931481E268CDD00C61711 /* MothershipSpaceships.swift */,
+				8409314C1E26930700C61711 /* MothershipSlot.swift */,
+				840931481E268CDD00C61711 /* MothershipSlots.swift */,
 				840B12FA1E25E49100707EE9 /* Spaceship.swift */,
-				8409314C1E26930700C61711 /* SpaceshipSlot.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -400,6 +404,7 @@
 				840B13061E25F64400707EE9 /* MothershipData.swift */,
 				84E0F29F1E25C77100E12E09 /* PlayerData.swift */,
 				840B13021E25E7AE00707EE9 /* SpaceshipData.swift */,
+				84C31E271E26FF1100892544 /* MothershipSlotData.swift */,
 				84E0F2961E25C6F000E12E09 /* Model.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -682,9 +687,9 @@
 				847182C01E25D5A60077D3EF /* SKAction+Extensions.swift in Sources */,
 				847182B41E25D5A60077D3EF /* CGFloat+Extensions.swift in Sources */,
 				847182B71E25D5A60077D3EF /* CGPoint+Extensions.swift in Sources */,
-				840931491E268CDD00C61711 /* MothershipSpaceships.swift in Sources */,
+				840931491E268CDD00C61711 /* MothershipSlots.swift in Sources */,
 				840931511E26985500C61711 /* GameColorsExtension.swift in Sources */,
-				8409314D1E26930700C61711 /* SpaceshipSlot.swift in Sources */,
+				8409314D1E26930700C61711 /* MothershipSlot.swift in Sources */,
 				840B13031E25E7AE00707EE9 /* SpaceshipData.swift in Sources */,
 				847182E01E25D6990077D3EF /* Metrics.swift in Sources */,
 				847182BD1E25D5A60077D3EF /* Int+Extensions.swift in Sources */,
@@ -704,6 +709,7 @@
 				847182931E25D5980077D3EF /* Box.swift in Sources */,
 				847182D21E25D5A60077D3EF /* SKTTimingFunctions.swift in Sources */,
 				847182A21E25D5980077D3EF /* GameScene.swift in Sources */,
+				84C31E281E26FF1100892544 /* MothershipSlotData.swift in Sources */,
 				842A85711E25B715006B31F7 /* AppDelegate.swift in Sources */,
 				847182C61E25D5A60077D3EF /* SKColor+Extensions.swift in Sources */,
 				847182991E25D5980077D3EF /* Control.swift in Sources */,
@@ -733,7 +739,7 @@
 				8471829D1E25D5980077D3EF /* GameCamera.swift in Sources */,
 				847182C11E25D5A60077D3EF /* SKAction+Extensions.swift in Sources */,
 				847182B51E25D5A60077D3EF /* CGFloat+Extensions.swift in Sources */,
-				8409314A1E268CDD00C61711 /* MothershipSpaceships.swift in Sources */,
+				8409314A1E268CDD00C61711 /* MothershipSlots.swift in Sources */,
 				847182B81E25D5A60077D3EF /* CGPoint+Extensions.swift in Sources */,
 				847182BE1E25D5A60077D3EF /* Int+Extensions.swift in Sources */,
 				84E0F2A11E25C77100E12E09 /* PlayerData.swift in Sources */,
@@ -745,7 +751,7 @@
 				842A859D1E25B715006B31F7 /* GameViewController.swift in Sources */,
 				84E0F2991E25C6F000E12E09 /* Model.xcdatamodeld in Sources */,
 				847182D01E25D5A60077D3EF /* SKTEffects.swift in Sources */,
-				8409314E1E26930700C61711 /* SpaceshipSlot.swift in Sources */,
+				8409314E1E26930700C61711 /* MothershipSlot.swift in Sources */,
 				847182911E25D5980077D3EF /* BlackSpriteNode.swift in Sources */,
 				847182941E25D5980077D3EF /* Box.swift in Sources */,
 				847182D31E25D5A60077D3EF /* SKTTimingFunctions.swift in Sources */,
@@ -761,6 +767,7 @@
 				847182CA1E25D5A60077D3EF /* SKNode+Extensions.swift in Sources */,
 				847182A61E25D5980077D3EF /* Label.swift in Sources */,
 				847182D61E25D5A60077D3EF /* Vector3.swift in Sources */,
+				84C31E291E26FF1100892544 /* MothershipSlotData.swift in Sources */,
 				840B13001E25E6C200707EE9 /* MainMenuScene.swift in Sources */,
 				842A85FA1E25BB3F006B31F7 /* LoadScene.swift in Sources */,
 			);
@@ -774,7 +781,7 @@
 				8471829E1E25D5980077D3EF /* GameCamera.swift in Sources */,
 				847182C21E25D5A60077D3EF /* SKAction+Extensions.swift in Sources */,
 				847182B61E25D5A60077D3EF /* CGFloat+Extensions.swift in Sources */,
-				8409314B1E268CDD00C61711 /* MothershipSpaceships.swift in Sources */,
+				8409314B1E268CDD00C61711 /* MothershipSlots.swift in Sources */,
 				847182B91E25D5A60077D3EF /* CGPoint+Extensions.swift in Sources */,
 				847182BF1E25D5A60077D3EF /* Int+Extensions.swift in Sources */,
 				84E0F2A21E25C77100E12E09 /* PlayerData.swift in Sources */,
@@ -786,7 +793,7 @@
 				842A85AB1E25B715006B31F7 /* GameViewController.swift in Sources */,
 				84E0F29A1E25C6F000E12E09 /* Model.xcdatamodeld in Sources */,
 				847182D11E25D5A60077D3EF /* SKTEffects.swift in Sources */,
-				8409314F1E26930700C61711 /* SpaceshipSlot.swift in Sources */,
+				8409314F1E26930700C61711 /* MothershipSlot.swift in Sources */,
 				847182921E25D5980077D3EF /* BlackSpriteNode.swift in Sources */,
 				847182951E25D5980077D3EF /* Box.swift in Sources */,
 				847182D41E25D5A60077D3EF /* SKTTimingFunctions.swift in Sources */,
@@ -802,6 +809,7 @@
 				847182CB1E25D5A60077D3EF /* SKNode+Extensions.swift in Sources */,
 				847182A71E25D5980077D3EF /* Label.swift in Sources */,
 				847182D71E25D5A60077D3EF /* Vector3.swift in Sources */,
+				84C31E2A1E26FF1100892544 /* MothershipSlotData.swift in Sources */,
 				840B13011E25E6C200707EE9 /* MainMenuScene.swift in Sources */,
 				842A85FB1E25BB3F006B31F7 /* LoadScene.swift in Sources */,
 			);

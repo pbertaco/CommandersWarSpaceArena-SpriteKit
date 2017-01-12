@@ -1,5 +1,5 @@
 //
-//  SpaceshipSlot.swift
+//  MothershipSlot.swift
 //  GameVI
 //
 //  Created by Pablo Henrique Bertaco on 1/11/17.
@@ -8,30 +8,15 @@
 
 import SpriteKit
 
-class SpaceshipSlot: Control {
+class MothershipSlot: Control {
     
     var spaceship: Spaceship?
     
     init(x: CGFloat, y: CGFloat, horizontalAlignment: horizontalAlignment = .left,
          verticalAlignment: verticalAlignment = .top) {
-        super.init(imageNamed: "boxWhite89x89", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
+        super.init(imageNamed: "box89x89", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
         
-        switch Int.random(4) {
-        case 0:
-            self.color = GameColors.common
-            break
-        case 1:
-            self.color = GameColors.rare
-            break
-        case 2:
-            self.color = GameColors.epic
-            break
-        case 3:
-            self.color = GameColors.legendary
-            break
-        default:
-            break
-        }
+        self.color = GameColors.common
         self.colorBlendFactor = 1
     }
     
@@ -39,11 +24,11 @@ class SpaceshipSlot: Control {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func loadSpaceship(spaceshipData: SpaceshipData) {
-        self.loadSpaceship(spaceship: Spaceship(spaceshipData: spaceshipData))
+    func load(spaceshipData: SpaceshipData) {
+        self.load(spaceship: Spaceship(spaceshipData: spaceshipData))
     }
     
-    func loadSpaceship(spaceship: Spaceship) {
+    func load(spaceship: Spaceship) {
         self.spaceship = spaceship
         self.addChild(spaceship)
         
@@ -55,6 +40,21 @@ class SpaceshipSlot: Control {
         
         if spaceship.xScale > 1 {
             spaceship.setScale(1)
+        }
+        
+        switch spaceship.rarity {
+        case .common:
+            self.color = GameColors.common
+            break
+        case .rare:
+            self.color = GameColors.rare
+            break
+        case .epic:
+            self.color = GameColors.epic
+            break
+        case .legendary:
+            self.color = GameColors.legendary
+            break
         }
     }
 

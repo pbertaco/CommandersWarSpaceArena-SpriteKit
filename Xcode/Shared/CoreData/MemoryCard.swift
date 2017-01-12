@@ -37,7 +37,7 @@ class MemoryCard {
     func loadGame() {
         guard self.playerData == nil else { return }
         
-        let fetchRequestData: [PlayerData] = self.fetchRequest()
+        let fetchRequestData = self.fetchRequest() as [PlayerData]
         
         if(fetchRequestData.count > 0) {
             self.playerData = fetchRequestData.last
@@ -50,9 +50,19 @@ class MemoryCard {
     
     func reset() {
         
-        let fetchRequestData: [PlayerData] = self.fetchRequest()
+        for item in self.fetchRequest() as [MothershipData] {
+            self.managedObjectContext.delete(item)
+        }
         
-        for item in fetchRequestData {
+        for item in self.fetchRequest() as [PlayerData] {
+            self.managedObjectContext.delete(item)
+        }
+        
+        for item in self.fetchRequest() as [SpaceshipData] {
+            self.managedObjectContext.delete(item)
+        }
+        
+        for item in self.fetchRequest() as [MothershipSlotData] {
             self.managedObjectContext.delete(item)
         }
         

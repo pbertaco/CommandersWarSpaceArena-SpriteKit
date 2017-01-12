@@ -20,9 +20,14 @@ extension MemoryCard {
         
         playerData.mothership = self.newMothershipData()
         
-        for _ in 0..<4 {
+        for i in 0..<4 {
+            let mothershipSlot: MothershipSlotData = self.newMothershipSlotData()
+            mothershipSlot.index = Int16(i)
             let spaceshipData: SpaceshipData = self.newSpaceshipData()
-            playerData.mothership?.addToSpaceships(spaceshipData)
+            
+            mothershipSlot.spaceship = spaceshipData
+            
+            playerData.mothership?.addToSlots(mothershipSlot)
             playerData.addToSpaceships(spaceshipData)
         }
         
