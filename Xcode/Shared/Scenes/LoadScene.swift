@@ -42,6 +42,10 @@ class LoadScene: GameScene {
         self.backgroundColor = GameColors.loadSceneBackground
         
         self.addChild(Control(imageNamed: "launchScreenLandscape", x: 0, y: 0, horizontalAlignment: .center, verticalAlignment: .center))
+        
+        self.afterDelay(1) { [weak self] in
+            self?.nextState = .mainMenu
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -52,7 +56,6 @@ class LoadScene: GameScene {
             switch self.state {
                 
             case .load:
-                self.nextState = .mainMenu
                 break
                 
             case .mainMenu:
