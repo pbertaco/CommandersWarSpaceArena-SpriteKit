@@ -42,6 +42,16 @@ class MainMenuScene: GameScene {
         buttonShips.setIcon(imageNamed: "Rocket")
         buttonShips.setColor(color: GameColors.buttonBlue)
         self.addChild(buttonShips)
+        
+        let buttonGameCenter = Button(imageNamed: "button55x55", x: 604, y: 134, horizontalAlignment: .right, verticalAlignment: .top)
+        buttonGameCenter.setIcon(imageNamed: "Tropy")
+        buttonGameCenter.setColor(color: GameColors.buttonBlue)
+        self.addChild(buttonGameCenter)
+        #if os(iOS)
+            buttonGameCenter.touchUpEvent = { [weak self] in
+                (self?.view?.window?.rootViewController as? GameViewController)?.presentGameCenterViewController()
+            }
+        #endif
     }
     
     override func update(_ currentTime: TimeInterval) {

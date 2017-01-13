@@ -117,6 +117,8 @@
 		847182DC1E25D5BA0077D3EF /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847182D91E25D5BA0077D3EF /* Fabric.framework */; };
 		847182DD1E25D5BA0077D3EF /* GameAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847182DA1E25D5BA0077D3EF /* GameAnalytics.framework */; };
 		847182E01E25D6990077D3EF /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847182DF1E25D6990077D3EF /* Metrics.swift */; };
+		8479051A1E28412400872D70 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847905191E28412400872D70 /* GameKit.framework */; };
+		8479051C1E28584100872D70 /* GameCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479051B1E28584100872D70 /* GameCenter.swift */; };
 		84C31E281E26FF1100892544 /* MothershipSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C31E271E26FF1100892544 /* MothershipSlotData.swift */; };
 		84C31E291E26FF1100892544 /* MothershipSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C31E271E26FF1100892544 /* MothershipSlotData.swift */; };
 		84C31E2A1E26FF1100892544 /* MothershipSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C31E271E26FF1100892544 /* MothershipSlotData.swift */; };
@@ -231,6 +233,8 @@
 		847182D91E25D5BA0077D3EF /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		847182DA1E25D5BA0077D3EF /* GameAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GameAnalytics.framework; sourceTree = "<group>"; };
 		847182DF1E25D6990077D3EF /* Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
+		847905191E28412400872D70 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/GameKit.framework; sourceTree = DEVELOPER_DIR; };
+		8479051B1E28584100872D70 /* GameCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCenter.swift; sourceTree = "<group>"; };
 		84C31E271E26FF1100892544 /* MothershipSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipSlotData.swift; sourceTree = "<group>"; };
 		84E0F2971E25C6F000E12E09 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		84E0F29B1E25C74600E12E09 /* MemoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCard.swift; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 				847182DB1E25D5BA0077D3EF /* Crashlytics.framework in Frameworks */,
 				847182DD1E25D5BA0077D3EF /* GameAnalytics.framework in Frameworks */,
 				847182DC1E25D5BA0077D3EF /* Fabric.framework in Frameworks */,
+				8479051A1E28412400872D70 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +371,7 @@
 		842A85D21E25BA3B006B31F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				847905191E28412400872D70 /* GameKit.framework */,
 				847182D81E25D5BA0077D3EF /* Crashlytics.framework */,
 				847182D91E25D5BA0077D3EF /* Fabric.framework */,
 				847182DA1E25D5BA0077D3EF /* GameAnalytics.framework */,
@@ -387,6 +393,7 @@
 		842A85D41E25BABD006B31F7 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				8479051B1E28584100872D70 /* GameCenter.swift */,
 				840931501E26985500C61711 /* GameColorsExtension.swift */,
 				84240B6D1E26DD060090E681 /* GameMath.swift */,
 				847182DF1E25D6990077D3EF /* Metrics.swift */,
@@ -557,6 +564,11 @@
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = JZ3J7RVLD7;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 					842A857C1E25B715006B31F7 = {
 						CreatedOnToolsVersion = 8.2;
@@ -707,6 +719,7 @@
 				840B12FF1E25E6C200707EE9 /* MainMenuScene.swift in Sources */,
 				847182901E25D5980077D3EF /* BlackSpriteNode.swift in Sources */,
 				847182931E25D5980077D3EF /* Box.swift in Sources */,
+				8479051C1E28584100872D70 /* GameCenter.swift in Sources */,
 				847182D21E25D5A60077D3EF /* SKTTimingFunctions.swift in Sources */,
 				847182A21E25D5980077D3EF /* GameScene.swift in Sources */,
 				84C31E281E26FF1100892544 /* MothershipSlotData.swift in Sources */,
