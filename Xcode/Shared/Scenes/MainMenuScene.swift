@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+#if os(iOS)
+    import FBSDKLoginKit
+#endif
+
 class MainMenuScene: GameScene {
 
     enum state: String {
@@ -50,6 +54,21 @@ class MainMenuScene: GameScene {
         #if os(iOS)
             buttonGameCenter.touchUpEvent = { [weak self] in
                 (self?.view?.window?.rootViewController as? GameViewController)?.presentGameCenterViewController()
+            }
+        #endif
+        
+        
+        let buttonFacebook = Button(imageNamed: "button55x55", x: 604, y: 197, horizontalAlignment: .right, verticalAlignment: .top)
+        buttonFacebook.setIcon(imageNamed: "Facebook")
+        buttonFacebook.setColor(color: GameColors.buttonBlue)
+        self.addChild(buttonFacebook)
+        #if os(iOS)
+            buttonFacebook.touchUpEvent = { [weak buttonFacebook] in
+                FacebookClient.sharedInstance.logInWith(successBlock: {
+                    buttonFacebook?.removeFromParent()
+                }, andFailureBlock: { (error: Error?) in
+                    print(error?.localizedDescription ?? "Something went very wrong.")
+                })
             }
         #endif
     }

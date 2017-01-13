@@ -14,8 +14,6 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.authenticateLocalPlayer()
-        
         GameScene.viewBoundsSize = self.view.bounds.size
         
         let scene = LoadScene()
