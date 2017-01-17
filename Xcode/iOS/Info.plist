@@ -21,7 +21,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb387668731569009</string>
+				<string>fb177980719347356</string>
 			</array>
 		</dict>
 	</array>
@@ -53,9 +53,9 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>387668731569009</string>
+	<string>177980719347356</string>
 	<key>FacebookDisplayName</key>
-	<string>CommandersWar</string>
+	<string>$(PRODUCT_NAME)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

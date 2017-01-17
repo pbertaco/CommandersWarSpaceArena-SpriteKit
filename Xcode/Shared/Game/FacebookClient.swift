@@ -29,7 +29,6 @@ class FacebookClient {
         
         loginManager.logIn(withReadPermissions: permissions, from: viewController) { (loginManagerLoginResult: FBSDKLoginManagerLoginResult?, error: Error?) in
             if error != nil || loginManagerLoginResult == nil ? true : loginManagerLoginResult!.isCancelled {
-                print(error?.localizedDescription ?? "Something went very wrong.")
                 loginManager.logOut()
                 failure(error)
             } else {
@@ -58,6 +57,32 @@ class FacebookClient {
                 }
             }
         }
+    }
+    
+    func invitableFriends(completion block: @escaping (InvitableFriendsData?) -> Void)  {
+        
+        self.logInWith(successBlock: {
+            
+            let graphPath = "me/invitable_friends?limit=1000"
+            let parameters = ["fields" : "id,name,picture"]
+            
+            let graphRequest = FBSDKGraphRequest(graphPath: graphPath, parameters: parameters)
+            let connection = FBSDKGraphRequestConnection()
+            connection.add(graphRequest, completionHandler: { (graphRequestConnection: FBSDKGraphRequestConnection?, result: Any?, error: Error?) in
+                if error != nil || result == nil {
+                    print(error?.localizedDescription ?? "Something went very wrong.")
+                    block(nil)
+                } else {
+                    block(InvitableFriendsData(result: result))
+                }
+            })
+            connection.start()
+            
+        }) { (error: Error?) in
+            print(error?.localizedDescription ?? "Something went very wrong.")
+            block(nil)
+        }
+        
     }
 
 }

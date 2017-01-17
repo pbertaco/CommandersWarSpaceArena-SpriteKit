@@ -57,8 +57,6 @@
 		846F28431E28788C0040DB51 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F28401E28788C0040DB51 /* FBSDKCoreKit.framework */; };
 		846F28441E28788C0040DB51 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F28411E28788C0040DB51 /* FBSDKLoginKit.framework */; };
 		846F28461E2925510040DB51 /* FacebookClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F28451E2925510040DB51 /* FacebookClient.swift */; };
-		846F28481E2946ED0040DB51 /* FacebookGameInviter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F28471E2946ED0040DB51 /* FacebookGameInviter.swift */; };
-		846F284A1E2947850040DB51 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F28491E2947850040DB51 /* FBSDKShareKit.framework */; };
 		846F28541E29637D0040DB51 /* MultiLineLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F28531E29637D0040DB51 /* MultiLineLabel.swift */; };
 		846F28551E29637D0040DB51 /* MultiLineLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F28531E29637D0040DB51 /* MultiLineLabel.swift */; };
 		846F28561E29637D0040DB51 /* MultiLineLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F28531E29637D0040DB51 /* MultiLineLabel.swift */; };
@@ -140,6 +138,7 @@
 		84E0F2A01E25C77100E12E09 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E0F29F1E25C77100E12E09 /* PlayerData.swift */; };
 		84E0F2A11E25C77100E12E09 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E0F29F1E25C77100E12E09 /* PlayerData.swift */; };
 		84E0F2A21E25C77100E12E09 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E0F29F1E25C77100E12E09 /* PlayerData.swift */; };
+		84F945201E29C45B0034F530 /* InvitableFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9451F1E29C45B0034F530 /* InvitableFriends.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,8 +221,6 @@
 		846F28401E28788C0040DB51 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		846F28411E28788C0040DB51 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		846F28451E2925510040DB51 /* FacebookClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookClient.swift; sourceTree = "<group>"; };
-		846F28471E2946ED0040DB51 /* FacebookGameInviter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookGameInviter.swift; sourceTree = "<group>"; };
-		846F28491E2947850040DB51 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		846F28531E29637D0040DB51 /* MultiLineLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiLineLabel.swift; path = ../../../../Hydra/XCode/Frameworks/Hydra/MultiLineLabel.swift; sourceTree = "<group>"; };
 		847182881E25D5980077D3EF /* BlackSpriteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlackSpriteNode.swift; path = ../../../../Hydra/XCode/Frameworks/Hydra/BlackSpriteNode.swift; sourceTree = "<group>"; };
 		847182891E25D5980077D3EF /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Box.swift; path = ../../../../Hydra/XCode/Frameworks/Hydra/Box.swift; sourceTree = "<group>"; };
@@ -255,6 +252,7 @@
 		84E0F2971E25C6F000E12E09 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		84E0F29B1E25C74600E12E09 /* MemoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCard.swift; sourceTree = "<group>"; };
 		84E0F29F1E25C77100E12E09 /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerData.swift; sourceTree = "<group>"; };
+		84F9451F1E29C45B0034F530 /* InvitableFriends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitableFriends.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,7 +260,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				846F284A1E2947850040DB51 /* FBSDKShareKit.framework in Frameworks */,
 				846F28421E28788C0040DB51 /* Bolts.framework in Frameworks */,
 				846F28431E28788C0040DB51 /* FBSDKCoreKit.framework in Frameworks */,
 				847182DB1E25D5BA0077D3EF /* Crashlytics.framework in Frameworks */,
@@ -396,7 +393,6 @@
 				847182D91E25D5BA0077D3EF /* Fabric.framework */,
 				846F28401E28788C0040DB51 /* FBSDKCoreKit.framework */,
 				846F28411E28788C0040DB51 /* FBSDKLoginKit.framework */,
-				846F28491E2947850040DB51 /* FBSDKShareKit.framework */,
 				847182DA1E25D5BA0077D3EF /* GameAnalytics.framework */,
 				847905191E28412400872D70 /* GameKit.framework */,
 				842A85D71E25BB24006B31F7 /* Hydra */,
@@ -425,7 +421,7 @@
 				840931481E268CDD00C61711 /* MothershipSlots.swift */,
 				840B12FA1E25E49100707EE9 /* Spaceship.swift */,
 				846F28451E2925510040DB51 /* FacebookClient.swift */,
-				846F28471E2946ED0040DB51 /* FacebookGameInviter.swift */,
+				84F9451F1E29C45B0034F530 /* InvitableFriends.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -754,9 +750,9 @@
 				842A85711E25B715006B31F7 /* AppDelegate.swift in Sources */,
 				847182C61E25D5A60077D3EF /* SKColor+Extensions.swift in Sources */,
 				847182991E25D5980077D3EF /* Control.swift in Sources */,
-				846F28481E2946ED0040DB51 /* FacebookGameInviter.swift in Sources */,
 				847182961E25D5980077D3EF /* Button.swift in Sources */,
 				846F28541E29637D0040DB51 /* MultiLineLabel.swift in Sources */,
+				84F945201E29C45B0034F530 /* InvitableFriends.swift in Sources */,
 				847182C91E25D5A60077D3EF /* SKNode+Extensions.swift in Sources */,
 				84240B6E1E26DD060090E681 /* GameMath.swift in Sources */,
 				847182A51E25D5980077D3EF /* Label.swift in Sources */,
