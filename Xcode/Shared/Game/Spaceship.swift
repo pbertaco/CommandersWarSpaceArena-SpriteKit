@@ -68,11 +68,13 @@ class Spaceship: SKSpriteNode {
     
     func load(level: Int, baseDamage: Int, baseLife: Int,
               skinIndex: Int, color: SKColor) {
+        
         self.skinIndex = skinIndex
         
         let texture = Spaceship.skinTexture(index: skinIndex)
         self.texture = texture
         self.size = texture.size()
+        self.setScaleToFit(width: 55, height: 55)
         
         self.color = color
         self.colorBlendFactor = 1

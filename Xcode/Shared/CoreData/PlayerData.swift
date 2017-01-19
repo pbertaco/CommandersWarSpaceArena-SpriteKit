@@ -16,6 +16,8 @@ extension MemoryCard {
         playerData.level = 1
         playerData.modelVersion = 1
         playerData.name = ""
+        playerData.points = 10000
+        playerData.premiumPoints = 100
         playerData.xp = 0
         
         playerData.mothership = self.newMothershipData()

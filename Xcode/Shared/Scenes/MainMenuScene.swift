@@ -16,12 +16,13 @@ class MainMenuScene: GameScene {
 
     enum state: String {
         case mainMenu
+        case battle
     }
     
     var state: state = .mainMenu
     var nextState: state = .mainMenu
     
-    let playerData = MemoryCard.sharedInstance.playerData
+    let playerData = MemoryCard.sharedInstance.playerData!
     
     override func load() {
         super.load()
@@ -29,13 +30,16 @@ class MainMenuScene: GameScene {
         self.backgroundColor = GameColors.backgroundColor
         
         let mothershipSlots = MothershipSlots(x: 144, y: 143, horizontalAlignment: .center, verticalAlignment: .center)
-        mothershipSlots.load(slots: self.playerData?.mothership?.slots)
+        mothershipSlots.load(slots: self.playerData.mothership?.slots)
         self.addChild(mothershipSlots)
         
         let buttonPlay = Button(imageNamed: "button233x55", x: 218, y: 312, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonPlay.setIcon(imageNamed: "Play")
         buttonPlay.setColor(color: GameColors.buttonRed)
         self.addChild(buttonPlay)
+        buttonPlay.touchUpEvent = { [weak self] in
+            self?.nextState = .battle
+        }
         
         let buttonBuy = Button(imageNamed: "button55x55", x: 469, y: 312, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonBuy.setIcon(imageNamed: "Add Shopping Cart")
@@ -71,6 +75,19 @@ class MainMenuScene: GameScene {
                 })
             }
         #endif
+        
+        let buttonSettings = Button(imageNamed: "button55x55", x: 604, y: 71, horizontalAlignment: .right, verticalAlignment: .top)
+        buttonSettings.setIcon(imageNamed: "Settings")
+        buttonSettings.setColor(color: GameColors.buttonBlue)
+        self.addChild(buttonSettings)
+        
+        let controlPremiumPoints = ControlPremiumPoints(x: 8, y: 8)
+        controlPremiumPoints.setLabelPremiumPointsText(premiumPoints: self.playerData.premiumPoints)
+        self.addChild(controlPremiumPoints)
+        
+        let controlPoints = ControlPoints(x: 515, y: 8, horizontalAlignment: .right)
+        controlPoints.setLabelPointsText(points: self.playerData.points)
+        self.addChild(controlPoints)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -82,6 +99,8 @@ class MainMenuScene: GameScene {
                 
             case .mainMenu:
                 break
+            case .battle:
+                break
             }
         } else {
             self.state = self.nextState
@@ -89,6 +108,9 @@ class MainMenuScene: GameScene {
             switch self.nextState {
                 
             case .mainMenu:
+                break
+            case .battle:
+                self.view?.presentScene(BattleScene(), transition: GameScene.defaultTransition)
                 break
             }
         }

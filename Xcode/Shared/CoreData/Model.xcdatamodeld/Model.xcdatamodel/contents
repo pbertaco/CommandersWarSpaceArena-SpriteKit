@@ -13,6 +13,8 @@
         <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="modelVersion" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="points" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="premiumPoints" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="xp" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="mothership" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MothershipData" inverseName="parentPlayer" inverseEntity="MothershipData" syncable="YES"/>
         <relationship name="spaceships" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SpaceshipData" inverseName="parentPlayer" inverseEntity="SpaceshipData" syncable="YES"/>
@@ -33,7 +35,7 @@
     <elements>
         <element name="MothershipData" positionX="-227" positionY="-351" width="128" height="75"/>
         <element name="MothershipSlotData" positionX="-461" positionY="-378" width="128" height="88"/>
-        <element name="PlayerData" positionX="-11" positionY="-270" width="128" height="135"/>
+        <element name="PlayerData" positionX="-11" positionY="-270" width="128" height="165"/>
         <element name="SpaceshipData" positionX="-648" positionY="-351" width="128" height="208"/>
     </elements>
 </model>

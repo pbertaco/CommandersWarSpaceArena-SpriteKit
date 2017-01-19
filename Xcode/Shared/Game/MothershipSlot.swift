@@ -34,13 +34,7 @@ class MothershipSlot: Control {
         
         spaceship.position = CGPoint(x: self.size.width/2, y: -self.size.height/2)
         
-        let xScale = (self.size.width - 16) / spaceship.size.width
-        let yScale = (self.size.height - 16) / spaceship.size.height
-        spaceship.setScale(min(xScale, yScale))
-        
-        if spaceship.xScale > 1 {
-            spaceship.setScale(1)
-        }
+        spaceship.setScaleToFit(width: self.size.width - 16, height: self.size.height - 16)
         
         switch spaceship.rarity {
         case .common:
