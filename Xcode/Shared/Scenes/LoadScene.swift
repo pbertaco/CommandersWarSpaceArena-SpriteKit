@@ -19,7 +19,7 @@ class LoadScene: GameScene {
     var nextState: state = .load
     
     init() {
-        GameScene.defaultSize = CGSize(width: 667, height: 375)
+        GameScene.defaultSize = CGSize(width: 375, height: 667)
         //GameScene.defaultFilteringMode = .nearest
         super.init()
     }
@@ -34,7 +34,7 @@ class LoadScene: GameScene {
         #if DEBUG
             self.view?.showsFPS = true
             //self.view?.showsNodeCount = true
-            //self.view?.showsPhysics = true
+            self.view?.showsPhysics = true
             
             //MemoryCard.sharedInstance.reset()
             let playerData = MemoryCard.sharedInstance.playerData!
@@ -44,7 +44,7 @@ class LoadScene: GameScene {
         
         self.backgroundColor = GameColors.loadSceneBackground
         
-        self.addChild(Control(imageNamed: "launchScreenLandscape", x: 0, y: 0, horizontalAlignment: .center, verticalAlignment: .center))
+        self.addChild(Control(imageNamed: "launchScreenPortrait", x: 0, y: 0, horizontalAlignment: .center, verticalAlignment: .center))
         
         self.afterDelay(1) { [weak self] in
             self?.nextState = .mainMenu

@@ -29,31 +29,36 @@ class MainMenuScene: GameScene {
         
         self.backgroundColor = GameColors.backgroundColor
         
-        let mothershipSlots = MothershipSlots(x: 144, y: 143, horizontalAlignment: .center, verticalAlignment: .center)
+        let mothershipSlots = MothershipSlots(x: 0, y: 289, horizontalAlignment: .center, verticalAlignment: .center)
         mothershipSlots.load(slots: self.playerData.mothership?.slots)
         self.addChild(mothershipSlots)
         
-        let buttonPlay = Button(imageNamed: "button233x55", x: 218, y: 312, horizontalAlignment: .center, verticalAlignment: .bottom)
+        let buttonPlay = Button(imageNamed: "button233x55", x: 71, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonPlay.setIcon(imageNamed: "Play")
-        buttonPlay.setColor(color: GameColors.buttonRed)
+        buttonPlay.setColor(color: GameColors.controlRed)
         self.addChild(buttonPlay)
         buttonPlay.touchUpEvent = { [weak self] in
             self?.nextState = .battle
         }
         
-        let buttonBuy = Button(imageNamed: "button55x55", x: 469, y: 312, horizontalAlignment: .center, verticalAlignment: .bottom)
+        let buttonBuy = Button(imageNamed: "button55x55", x: 312, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonBuy.setIcon(imageNamed: "Add Shopping Cart")
-        buttonBuy.setColor(color: GameColors.buttonYellow)
+        buttonBuy.setColor(color: GameColors.controlYellow)
         self.addChild(buttonBuy)
         
-        let buttonShips = Button(imageNamed: "button55x55", x: 144, y: 312, horizontalAlignment: .center, verticalAlignment: .bottom)
+        let buttonShips = Button(imageNamed: "button55x55", x: 8, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonShips.setIcon(imageNamed: "Rocket")
-        buttonShips.setColor(color: GameColors.buttonBlue)
+        buttonShips.setColor(color: GameColors.controlBlue)
         self.addChild(buttonShips)
         
-        let buttonGameCenter = Button(imageNamed: "button55x55", x: 604, y: 134, horizontalAlignment: .right, verticalAlignment: .top)
+        let buttonSettings = Button(imageNamed: "button55x55", x: 312, y: 8, horizontalAlignment: .right, verticalAlignment: .top)
+        buttonSettings.setIcon(imageNamed: "Settings")
+        buttonSettings.setColor(color: GameColors.controlBlue)
+        self.addChild(buttonSettings)
+        
+        let buttonGameCenter = Button(imageNamed: "button55x55", x: 312, y: 71, horizontalAlignment: .right, verticalAlignment: .top)
         buttonGameCenter.setIcon(imageNamed: "Tropy")
-        buttonGameCenter.setColor(color: GameColors.buttonBlue)
+        buttonGameCenter.setColor(color: GameColors.controlBlue)
         self.addChild(buttonGameCenter)
         #if os(iOS)
             buttonGameCenter.touchUpEvent = { [weak self] in
@@ -61,10 +66,9 @@ class MainMenuScene: GameScene {
             }
         #endif
         
-        
-        let buttonFacebook = Button(imageNamed: "button55x55", x: 604, y: 197, horizontalAlignment: .right, verticalAlignment: .top)
+        let buttonFacebook = Button(imageNamed: "button55x55", x: 312, y: 134, horizontalAlignment: .right, verticalAlignment: .top)
         buttonFacebook.setIcon(imageNamed: "Facebook")
-        buttonFacebook.setColor(color: GameColors.buttonBlue)
+        buttonFacebook.setColor(color: GameColors.controlBlue)
         self.addChild(buttonFacebook)
         #if os(iOS)
             buttonFacebook.touchUpEvent = { [weak buttonFacebook] in
@@ -76,16 +80,11 @@ class MainMenuScene: GameScene {
             }
         #endif
         
-        let buttonSettings = Button(imageNamed: "button55x55", x: 604, y: 71, horizontalAlignment: .right, verticalAlignment: .top)
-        buttonSettings.setIcon(imageNamed: "Settings")
-        buttonSettings.setColor(color: GameColors.buttonBlue)
-        self.addChild(buttonSettings)
-        
         let controlPremiumPoints = ControlPremiumPoints(x: 8, y: 8)
         controlPremiumPoints.setLabelPremiumPointsText(premiumPoints: self.playerData.premiumPoints)
         self.addChild(controlPremiumPoints)
         
-        let controlPoints = ControlPoints(x: 515, y: 8, horizontalAlignment: .right)
+        let controlPoints = ControlPoints(x: 8, y: 71)
         controlPoints.setLabelPointsText(points: self.playerData.points)
         self.addChild(controlPoints)
     }
@@ -115,4 +114,5 @@ class MainMenuScene: GameScene {
             }
         }
     }
+    
 }

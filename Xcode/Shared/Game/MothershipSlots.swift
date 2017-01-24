@@ -17,9 +17,9 @@ class MothershipSlots: Control {
         super.init(x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
         
         self.mothershipSlots.append(MothershipSlot(x: 0, y: 0))
-        self.mothershipSlots.append(MothershipSlot(x: 97, y: 0))
-        self.mothershipSlots.append(MothershipSlot(x: 194, y: 0))
-        self.mothershipSlots.append(MothershipSlot(x: 291, y: 0))
+        self.mothershipSlots.append(MothershipSlot(x: 95, y: 0))
+        self.mothershipSlots.append(MothershipSlot(x: 191, y: 0))
+        self.mothershipSlots.append(MothershipSlot(x: 286, y: 0))
         
         for mothershipSlot in self.mothershipSlots {
             self.addChild(mothershipSlot)

@@ -18,20 +18,20 @@ class ControlPremiumPoints: Control {
         
         super.init(imageNamed: "box144x55", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
         
-        self.color = GameColors.buttonYellow
+        self.color = GameColors.controlYellow
         self.colorBlendFactor = 1
         
         let buttonBuyMore = Button(imageNamed: "button55x55", x: 144, y: 0)
         buttonBuyMore.setIcon(imageNamed: "Plus")
-        buttonBuyMore.setColor(color: GameColors.buttonYellow)
+        buttonBuyMore.setColor(color: GameColors.controlYellow)
         self.addChild(buttonBuyMore)
         
-        self.labelPremiumPoints = Label(text: "?", fontColor: GameColors.buttonYellow, x: 99, y: 27)
+        self.labelPremiumPoints = Label(text: "?", fontColor: GameColors.controlYellow, x: 99, y: 27)
         self.addChild(labelPremiumPoints)
         
         let icon = Control(imageNamed: "Minecraft Diamond", x: 0, y: 0)
         icon.size = CGSize(width: 55, height: 55)
-        icon.color = GameColors.buttonYellow
+        icon.color = GameColors.controlYellow
         icon.colorBlendFactor = 1
         self.addChild(icon)
     }

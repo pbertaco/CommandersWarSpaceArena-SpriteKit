@@ -39,7 +39,14 @@ class Spaceship: SKSpriteNode {
     var baseDamage: Int = 1
     var baseLife: Int = 1
     
-    init(spaceshipData: SpaceshipData) {
+    
+    var health: Int = 1
+    
+    var startingPosition = CGPoint.zero
+    var startingZPosition: CGFloat = 0
+    var destination = CGPoint.zero
+    
+    init(spaceshipData: SpaceshipData, loadPhysics: Bool = false) {
         super.init(texture: nil, color: SKColor.clear, size: CGSize.zero)
         self.spaceshipData = spaceshipData
         
@@ -51,10 +58,11 @@ class Spaceship: SKSpriteNode {
         self.load(level: Int(spaceshipData.level),
                   baseDamage: Int(spaceshipData.baseDamage),
                   baseLife: Int(spaceshipData.baseLife),
-                  skinIndex: Int(spaceshipData.skin), color: color)
+                  skinIndex: Int(spaceshipData.skin), color: color,
+                  loadPhysics: loadPhysics)
     }
     
-    init() {
+    init(loadPhysics: Bool = false) {
         super.init(texture: nil, color: SKColor.clear, size: CGSize.zero)
         
         self.rarity = .common
@@ -63,11 +71,12 @@ class Spaceship: SKSpriteNode {
                   baseDamage: GameMath.randomBaseDamage(rarity: self.rarity),
                   baseLife: GameMath.randomBaseLife(rarity: self.rarity),
                   skinIndex: Int.random(Spaceship.skins.count),
-                  color: Spaceship.randomColor())
+                  color: Spaceship.randomColor(),
+                  loadPhysics: loadPhysics)
     }
     
     func load(level: Int, baseDamage: Int, baseLife: Int,
-              skinIndex: Int, color: SKColor) {
+              skinIndex: Int, color: SKColor, loadPhysics: Bool = false) {
         
         self.skinIndex = skinIndex
         
@@ -78,10 +87,82 @@ class Spaceship: SKSpriteNode {
         
         self.color = color
         self.colorBlendFactor = 1
+        
+        self.life = GameMath.life(level: level, baseLife: baseLife)
+        self.damage = GameMath.damage(level: level, baseDamage: baseDamage)
+        
+        self.health = self.life
+        
+        if loadPhysics {
+            self.loadPhysics()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func move() {
+        if self.health > 0 {
+            
+        }
+    }
+    
+    func didBeginContact(with bodyB: SKPhysicsBody) {
+        if let bodyA = self.physicsBody {
+            switch GameWorld.categoryBitMask(rawValue: bodyA.categoryBitMask | bodyB.categoryBitMask) {
+            case [.mothershipSpaceship, .mothership]:
+                break
+            default:
+                #if DEBUG
+                    fatalError()
+                #endif
+                break
+            }
+        }
+    }
+    
+    func didEndContact(with bodyB: SKPhysicsBody) {
+        if let bodyA = self.physicsBody {
+            switch GameWorld.categoryBitMask(rawValue: bodyA.categoryBitMask | bodyB.categoryBitMask) {
+            default:
+                #if DEBUG
+                    fatalError()
+                #endif
+                break
+            }
+        }
+    }
+    
+    func loadPhysics() {
+        let physicsBody = SKPhysicsBody(circleOfRadius: 55/2)
+        
+        physicsBody.mass = 0.105592422187328
+        physicsBody.restitution = 0.2
+        physicsBody.linearDamping = 0.1
+        physicsBody.angularDamping = 0.1
+        
+        self.physicsBody = physicsBody
+        
+        self.setBitMasksToMothershipSpaceship()
+    }
+    
+    func setBitMasksToMothershipSpaceship() {
+        if let physicsBody = self.physicsBody {
+            physicsBody.isDynamic = false
+            physicsBody.categoryBitMask = GameWorld.categoryBitMask.mothershipSpaceship.rawValue
+            physicsBody.collisionBitMask = GameWorld.collisionBitMask.mothershipSpaceship.rawValue
+            physicsBody.contactTestBitMask = GameWorld.contactTestBitMask.mothershipSpaceship.rawValue
+        }
+    }
+    
+    func setBitMasksToSpaceship() {
+        if let physicsBody = self.physicsBody {
+            physicsBody.isDynamic = true
+            physicsBody.categoryBitMask = GameWorld.categoryBitMask.spaceship.rawValue
+            physicsBody.collisionBitMask = GameWorld.collisionBitMask.spaceship.rawValue
+            physicsBody.contactTestBitMask = GameWorld.contactTestBitMask.spaceship.rawValue
+        }
     }
     
     static func skinTexture(index i: Int) -> SKTexture {

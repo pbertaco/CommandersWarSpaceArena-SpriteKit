@@ -18,15 +18,15 @@ class ControlPoints: Control {
         
         super.init(imageNamed: "box144x55", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
         
-        self.color = GameColors.buttonBlue
+        self.color = GameColors.controlBlue
         self.colorBlendFactor = 1
         
-        self.labelPoints = Label(text: "?", fontColor: GameColors.buttonBlue, x: 99, y: 27)
+        self.labelPoints = Label(text: "?", fontColor: GameColors.controlBlue, x: 99, y: 27)
         self.addChild(labelPoints)
         
         let icon = Control(imageNamed: "Coins", x: 0, y: 0)
         icon.size = CGSize(width: 55, height: 55)
-        icon.color = GameColors.buttonBlue
+        icon.color = GameColors.controlBlue
         icon.colorBlendFactor = 1
         self.addChild(icon)
     }

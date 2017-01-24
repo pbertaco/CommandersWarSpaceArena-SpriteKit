@@ -22,10 +22,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreenLandscape" translatesAutoresizingMaskIntoConstraints="NO" id="ey2-iL-98z">
-                                <rect key="frame" x="0.0" y="228" width="375" height="211"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreenPortrait" translatesAutoresizingMaskIntoConstraints="NO" id="ey2-iL-98z">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="ey2-iL-98z" secondAttribute="height" multiplier="16:9" id="dQD-kd-WU7"/>
+                                    <constraint firstAttribute="width" secondItem="ey2-iL-98z" secondAttribute="height" multiplier="9:16" id="dQD-kd-WU7"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -43,6 +43,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launchScreenLandscape" width="667" height="375"/>
+        <image name="launchScreenPortrait" width="375" height="667"/>
     </resources>
 </document>
