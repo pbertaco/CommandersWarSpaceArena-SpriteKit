@@ -59,7 +59,7 @@ class FacebookClient {
         }
     }
     
-    func invitableFriends(completion block: @escaping (InvitableFriendsData?) -> Void)  {
+    func invitableFriends(completion block: @escaping (InvitableFriendsData?) -> Void) {
         
         self.logInWith(successBlock: {
             

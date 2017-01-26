@@ -133,7 +133,13 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
             bodyB = contact.bodyA
         }
         
-        switch bodyA.categoryBitMask | bodyB.categoryBitMask {
+        switch categoryBitMask(rawValue: bodyA.categoryBitMask | bodyB.categoryBitMask) {
+            
+        case [.mothershipSpaceship, .mothership]:
+            if let spaceship = bodyA.node as? Spaceship {
+                spaceship.didEndContact(with: bodyB)
+            }
+            break
             
         default:
             #if DEBUG

@@ -15,9 +15,13 @@ class Mothership: SKSpriteNode {
         case red
     }
     
+    var team: team
+    
     var spaceships = [Spaceship]()
 
     init(team: team) {
+        
+        self.team = team
         
         let texture = SKTexture(imageNamed: "mothership")
         texture.filteringMode = GameScene.defaultFilteringMode
@@ -47,7 +51,16 @@ class Mothership: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func update() {
+        for spaceship in self.spaceships {
+            spaceship.update()
+        }
+    }
+    
     func loadSpaceship(spaceship: Spaceship, gameWorld: GameWorld, i: Int) {
+        
+        spaceship.team = self.team
+        
         switch i {
         case 0:
             spaceship.position = self.convert(CGPoint(x: -129, y: 0), to: gameWorld)
@@ -66,12 +79,13 @@ class Mothership: SKSpriteNode {
         }
         
         spaceship.startingPosition = spaceship.position
-        spaceship.destination = spaceship.position
         
         spaceship.zRotation = self.zRotation
         spaceship.startingZPosition = spaceship.zRotation
         
         gameWorld.addChild(spaceship)
+        
+        spaceship.loadWeaponRangeShapeNode(gameWorld: gameWorld)
     }
     
     func loadSpaceships(gameWorld: GameWorld) {

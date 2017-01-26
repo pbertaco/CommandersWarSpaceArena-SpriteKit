@@ -11,7 +11,7 @@ import CoreImage
 
 extension MemoryCard {
     
-    func newSpaceshipData() -> SpaceshipData {
+    func newSpaceshipData(rarity: Spaceship.rarity) -> SpaceshipData {
         let spaceshipData: SpaceshipData = self.insertNewObject()
         
         let color: CIColor = {
@@ -26,10 +26,11 @@ extension MemoryCard {
         spaceshipData.colorRed = Double(color.red)
         spaceshipData.colorGreen = Double(color.green)
         spaceshipData.colorBlue = Double(color.blue)
-        spaceshipData.baseDamage = Int16(GameMath.randomBaseDamage(rarity: .common))
+        spaceshipData.baseDamage = Int16(GameMath.randomBaseDamage(rarity: rarity))
         spaceshipData.level = 1
-        spaceshipData.baseLife = Int16(GameMath.randomBaseLife(rarity: .common))
-        spaceshipData.rarity = Int16(Spaceship.rarity.common.rawValue)
+        spaceshipData.baseLife = Int16(GameMath.randomBaseLife(rarity: rarity))
+        spaceshipData.baseSpeed = Int16(GameMath.randomBaseSpeed(rarity: rarity))
+        spaceshipData.rarity = Int16(rarity.rawValue)
         spaceshipData.skin = Int16(Int.random(Spaceship.skins.count))
         spaceshipData.xp = 0
         
