@@ -11,8 +11,11 @@ import SpriteKit
 class GameWorld: SKNode, SKPhysicsContactDelegate {
     
     enum zPosition: CGFloat {
-        case mothership
-        case player
+        case mothership = -30
+        case mothershipHealthBar = -20
+        case shot = -10
+        case spaceship = 0
+        case spaceshipHealthBar = 10
     }
     
     static func current() -> GameWorld? {
@@ -25,6 +28,7 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         
         GameWorld.lastInstance = self
         self.addChild(SKSpriteNode(imageNamed: "gameWorld"))
+        self.loadPhysics()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,6 +36,9 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
     }
     
     func loadPhysics() {
+        
+        self.zPosition = BattleScene.zPosition.gameWorld.rawValue
+        
         let size = GameScene.sketchSize
         let physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(origin: CGPoint(x: -size.width/2, y: -size.height/2), size: size))
         
@@ -55,9 +62,54 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         
         switch categoryBitMask(rawValue: bodyA.categoryBitMask | bodyB.categoryBitMask) {
             
+            /*
+             world
+             spaceship
+             mothershipSpaceship
+             shot
+             spaceshipShot
+             mothership
+             */
+            
+        case [.spaceship, .shot]:
+            if let spaceship = bodyA.node as? Spaceship {
+                spaceship.didBeginContact(with: bodyB)
+            }
+            break
+            
+        case [.spaceship, .spaceshipShot]:
+            if let spaceship = bodyA.node as? Spaceship {
+                spaceship.didBeginContact(with: bodyB)
+            }
+            break
+            
+        case [.mothershipSpaceship, .shot]:
+            if let spaceship = bodyA.node as? Spaceship {
+                spaceship.didBeginContact(with: bodyB)
+            }
+            break
+            
+        case [.mothershipSpaceship, .spaceshipShot]:
+            if let spaceship = bodyA.node as? Spaceship {
+                spaceship.didBeginContact(with: bodyB)
+            }
+            break
+            
         case [.mothershipSpaceship, .mothership]:
             if let spaceship = bodyA.node as? Spaceship {
                 spaceship.didBeginContact(with: bodyB)
+            }
+            break
+            
+        case [.shot, .mothership]:
+            if let mothership = bodyB.node as? Mothership {
+                mothership.didBeginContact(with: bodyA)
+            }
+            break
+            
+        case [.spaceshipShot, .mothership]:
+            if let mothership = bodyB.node as? Mothership {
+                mothership.didBeginContact(with: bodyA)
             }
             break
             
@@ -134,6 +186,33 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         }
         
         switch categoryBitMask(rawValue: bodyA.categoryBitMask | bodyB.categoryBitMask) {
+            
+            /*
+             world
+             spaceship
+             mothershipSpaceship
+             shot
+             spaceshipShot
+             mothership
+             */
+            
+        case [.spaceship, .shot]:
+            if let spaceship = bodyA.node as? Spaceship {
+                spaceship.didBeginContact(with: bodyB)
+            }
+            break
+            
+        case [.spaceship, .spaceshipShot]:
+            if let spaceship = bodyA.node as? Spaceship {
+                spaceship.didEndContact(with: bodyB)
+            }
+            break
+            
+        case [.mothershipSpaceship, .spaceshipShot]:
+            if let spaceship = bodyA.node as? Spaceship {
+                spaceship.didEndContact(with: bodyB)
+            }
+            break
             
         case [.mothershipSpaceship, .mothership]:
             if let spaceship = bodyA.node as? Spaceship {
@@ -230,7 +309,7 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         static let spaceship: categoryBitMask = [.shot, .spaceshipShot]
         static let mothershipSpaceship: categoryBitMask = [.shot, .spaceshipShot, .mothership]
         static let shot: categoryBitMask = [.spaceship, .mothershipSpaceship, .mothership]
-        static let spaceshipShot: categoryBitMask = [.spaceship, .mothershipSpaceship]
-        static let mothership: categoryBitMask = [.shot]
+        static let spaceshipShot: categoryBitMask = [.spaceship, .mothershipSpaceship, .mothership]
+        static let mothership: categoryBitMask = [.mothershipSpaceship, .shot, .spaceshipShot]
     }
 }

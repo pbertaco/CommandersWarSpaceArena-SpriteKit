@@ -18,6 +18,7 @@ class MothershipSlot: Control {
         
         self.color = GameColors.common
         self.colorBlendFactor = 1
+        self.blendMode = .add
     }
     
     required init?(coder aDecoder: NSCoder) {

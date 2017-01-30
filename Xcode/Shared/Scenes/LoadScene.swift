@@ -33,13 +33,14 @@ class LoadScene: GameScene {
         
         #if DEBUG
             self.view?.showsFPS = true
+            //self.view?.showsDrawCount = true
             //self.view?.showsNodeCount = true
-            self.view?.showsPhysics = true
+            //self.view?.showsPhysics = true
             
-            //MemoryCard.sharedInstance.reset()
-            let playerData = MemoryCard.sharedInstance.playerData!
-            playerData.points = 9999999
-            playerData.premiumPoints = 9999999
+            MemoryCard.sharedInstance.reset()
+            //let playerData = MemoryCard.sharedInstance.playerData!
+            //playerData.points = 9999999
+            //playerData.premiumPoints = 9999999
         #endif
         
         self.backgroundColor = GameColors.loadSceneBackground

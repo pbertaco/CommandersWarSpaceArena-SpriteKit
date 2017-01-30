@@ -53,6 +53,9 @@
 		842A85F91E25BB3F006B31F7 /* LoadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A85F81E25BB3F006B31F7 /* LoadScene.swift */; };
 		842A85FA1E25BB3F006B31F7 /* LoadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A85F81E25BB3F006B31F7 /* LoadScene.swift */; };
 		842A85FB1E25BB3F006B31F7 /* LoadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A85F81E25BB3F006B31F7 /* LoadScene.swift */; };
+		846585421E3D9C1100C890D3 /* MothershipHealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */; };
+		846585431E3D9C1100C890D3 /* MothershipHealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */; };
+		846585441E3D9C1100C890D3 /* MothershipHealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */; };
 		846F28421E28788C0040DB51 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F283F1E28788C0040DB51 /* Bolts.framework */; };
 		846F28431E28788C0040DB51 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F28401E28788C0040DB51 /* FBSDKCoreKit.framework */; };
 		846F28441E28788C0040DB51 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F28411E28788C0040DB51 /* FBSDKLoginKit.framework */; };
@@ -126,6 +129,12 @@
 		847182E01E25D6990077D3EF /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847182DF1E25D6990077D3EF /* Metrics.swift */; };
 		8479051A1E28412400872D70 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847905191E28412400872D70 /* GameKit.framework */; };
 		8479051C1E28584100872D70 /* GameCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8479051B1E28584100872D70 /* GameCenter.swift */; };
+		847A04E81E3A3967004A4878 /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A04E71E3A3967004A4878 /* Shot.swift */; };
+		847A04E91E3A3967004A4878 /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A04E71E3A3967004A4878 /* Shot.swift */; };
+		847A04EA1E3A3967004A4878 /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A04E71E3A3967004A4878 /* Shot.swift */; };
+		84A4CFD01E3C1B0800BE28FC /* SpaceshipHealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A4CFCF1E3C1B0800BE28FC /* SpaceshipHealthBar.swift */; };
+		84A4CFD11E3C1B0800BE28FC /* SpaceshipHealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A4CFCF1E3C1B0800BE28FC /* SpaceshipHealthBar.swift */; };
+		84A4CFD21E3C1B0800BE28FC /* SpaceshipHealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A4CFCF1E3C1B0800BE28FC /* SpaceshipHealthBar.swift */; };
 		84AFAE1B1E2FC949006359DD /* BattleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAE1A1E2FC949006359DD /* BattleScene.swift */; };
 		84AFAE1C1E2FC949006359DD /* BattleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAE1A1E2FC949006359DD /* BattleScene.swift */; };
 		84AFAE1D1E2FC949006359DD /* BattleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAE1A1E2FC949006359DD /* BattleScene.swift */; };
@@ -238,6 +247,7 @@
 		842A85AD1E25B715006B31F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		842A85AF1E25B715006B31F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		842A85F81E25BB3F006B31F7 /* LoadScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadScene.swift; sourceTree = "<group>"; };
+		846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipHealthBar.swift; sourceTree = "<group>"; };
 		846F283F1E28788C0040DB51 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		846F28401E28788C0040DB51 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		846F28411E28788C0040DB51 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -269,6 +279,8 @@
 		847182DF1E25D6990077D3EF /* Metrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		847905191E28412400872D70 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/GameKit.framework; sourceTree = DEVELOPER_DIR; };
 		8479051B1E28584100872D70 /* GameCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCenter.swift; sourceTree = "<group>"; };
+		847A04E71E3A3967004A4878 /* Shot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shot.swift; sourceTree = "<group>"; };
+		84A4CFCF1E3C1B0800BE28FC /* SpaceshipHealthBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceshipHealthBar.swift; sourceTree = "<group>"; };
 		84AFAE1A1E2FC949006359DD /* BattleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleScene.swift; sourceTree = "<group>"; };
 		84AFAE1E1E2FEEEC006359DD /* GameWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameWorld.swift; sourceTree = "<group>"; };
 		84B5F59E1E32A81000AE8F8D /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerManager.swift; path = ../../../../Hydra/XCode/Frameworks/Hydra/ServerManager.swift; sourceTree = "<group>"; };
@@ -452,9 +464,12 @@
 				84F9451F1E29C45B0034F530 /* InvitableFriends.swift */,
 				847182DF1E25D6990077D3EF /* Metrics.swift */,
 				84D03EDF1E35A1E7007425E0 /* Mothership.swift */,
+				846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */,
 				8409314C1E26930700C61711 /* MothershipSlot.swift */,
 				840931481E268CDD00C61711 /* MothershipSlots.swift */,
+				847A04E71E3A3967004A4878 /* Shot.swift */,
 				840B12FA1E25E49100707EE9 /* Spaceship.swift */,
+				84A4CFCF1E3C1B0800BE28FC /* SpaceshipHealthBar.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -646,6 +661,7 @@
 					842A85A51E25B715006B31F7 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = JZ3J7RVLD7;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -773,6 +789,7 @@
 				84E0F2A01E25C77100E12E09 /* PlayerData.swift in Sources */,
 				84E0F29C1E25C74600E12E09 /* MemoryCard.swift in Sources */,
 				847182BA1E25D5A60077D3EF /* CGVector+Extensions.swift in Sources */,
+				846585421E3D9C1100C890D3 /* MothershipHealthBar.swift in Sources */,
 				847182CC1E25D5A60077D3EF /* SKTAudio.swift in Sources */,
 				840B12FB1E25E49100707EE9 /* Spaceship.swift in Sources */,
 				847182C31E25D5A60077D3EF /* SKAction+SpecialEffects.swift in Sources */,
@@ -783,6 +800,7 @@
 				847182CF1E25D5A60077D3EF /* SKTEffects.swift in Sources */,
 				84AFAE1F1E2FEEEC006359DD /* GameWorld.swift in Sources */,
 				84B5F59F1E32A81000AE8F8D /* ServerManager.swift in Sources */,
+				847A04E81E3A3967004A4878 /* Shot.swift in Sources */,
 				840B12FF1E25E6C200707EE9 /* MainMenuScene.swift in Sources */,
 				847182901E25D5980077D3EF /* BlackSpriteNode.swift in Sources */,
 				847182931E25D5980077D3EF /* Box.swift in Sources */,
@@ -792,6 +810,7 @@
 				84C31E281E26FF1100892544 /* MothershipSlotData.swift in Sources */,
 				842A85711E25B715006B31F7 /* AppDelegate.swift in Sources */,
 				847182C61E25D5A60077D3EF /* SKColor+Extensions.swift in Sources */,
+				84A4CFD01E3C1B0800BE28FC /* SpaceshipHealthBar.swift in Sources */,
 				847182991E25D5980077D3EF /* Control.swift in Sources */,
 				847182961E25D5980077D3EF /* Button.swift in Sources */,
 				846F28541E29637D0040DB51 /* MultiLineLabel.swift in Sources */,
@@ -832,6 +851,7 @@
 				846F28551E29637D0040DB51 /* MultiLineLabel.swift in Sources */,
 				847182BE1E25D5A60077D3EF /* Int+Extensions.swift in Sources */,
 				84E0F2A11E25C77100E12E09 /* PlayerData.swift in Sources */,
+				846585431E3D9C1100C890D3 /* MothershipHealthBar.swift in Sources */,
 				84E0F29D1E25C74600E12E09 /* MemoryCard.swift in Sources */,
 				847182BB1E25D5A60077D3EF /* CGVector+Extensions.swift in Sources */,
 				847182CD1E25D5A60077D3EF /* SKTAudio.swift in Sources */,
@@ -847,6 +867,7 @@
 				847182D31E25D5A60077D3EF /* SKTTimingFunctions.swift in Sources */,
 				847182A31E25D5980077D3EF /* GameScene.swift in Sources */,
 				840931521E26985500C61711 /* GameColorsExtension.swift in Sources */,
+				84A4CFD11E3C1B0800BE28FC /* SpaceshipHealthBar.swift in Sources */,
 				840B13041E25E7AE00707EE9 /* SpaceshipData.swift in Sources */,
 				84240B6F1E26DD060090E681 /* GameMath.swift in Sources */,
 				842A859B1E25B715006B31F7 /* AppDelegate.swift in Sources */,
@@ -858,6 +879,7 @@
 				847182A61E25D5980077D3EF /* Label.swift in Sources */,
 				847182D61E25D5A60077D3EF /* Vector3.swift in Sources */,
 				84C31E291E26FF1100892544 /* MothershipSlotData.swift in Sources */,
+				847A04E91E3A3967004A4878 /* Shot.swift in Sources */,
 				840B13001E25E6C200707EE9 /* MainMenuScene.swift in Sources */,
 				842A85FA1E25BB3F006B31F7 /* LoadScene.swift in Sources */,
 			);
@@ -881,6 +903,7 @@
 				846F28561E29637D0040DB51 /* MultiLineLabel.swift in Sources */,
 				847182BF1E25D5A60077D3EF /* Int+Extensions.swift in Sources */,
 				84E0F2A21E25C77100E12E09 /* PlayerData.swift in Sources */,
+				846585441E3D9C1100C890D3 /* MothershipHealthBar.swift in Sources */,
 				84E0F29E1E25C74600E12E09 /* MemoryCard.swift in Sources */,
 				847182BC1E25D5A60077D3EF /* CGVector+Extensions.swift in Sources */,
 				847182CE1E25D5A60077D3EF /* SKTAudio.swift in Sources */,
@@ -896,6 +919,7 @@
 				847182D41E25D5A60077D3EF /* SKTTimingFunctions.swift in Sources */,
 				847182A41E25D5980077D3EF /* GameScene.swift in Sources */,
 				840931531E26985500C61711 /* GameColorsExtension.swift in Sources */,
+				84A4CFD21E3C1B0800BE28FC /* SpaceshipHealthBar.swift in Sources */,
 				840B13051E25E7AE00707EE9 /* SpaceshipData.swift in Sources */,
 				84240B701E26DD060090E681 /* GameMath.swift in Sources */,
 				842A85A91E25B715006B31F7 /* AppDelegate.swift in Sources */,
@@ -907,6 +931,7 @@
 				847182A71E25D5980077D3EF /* Label.swift in Sources */,
 				847182D71E25D5A60077D3EF /* Vector3.swift in Sources */,
 				84C31E2A1E26FF1100892544 /* MothershipSlotData.swift in Sources */,
+				847A04EA1E3A3967004A4878 /* Shot.swift in Sources */,
 				840B13011E25E6C200707EE9 /* MainMenuScene.swift in Sources */,
 				842A85FB1E25BB3F006B31F7 /* LoadScene.swift in Sources */,
 			);

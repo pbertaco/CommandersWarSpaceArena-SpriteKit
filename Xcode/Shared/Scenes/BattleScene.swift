@@ -20,6 +20,7 @@ class BattleScene: GameScene {
     
     enum state: String {
         case battle
+        case mainMenu
     }
     
     var state: state = .battle
@@ -30,6 +31,9 @@ class BattleScene: GameScene {
     var mothership: Mothership!
     var botMothership: Mothership!
     
+    
+    var lastBotUpdate: Double = 0
+    
     override func load() {
         super.load()
         
@@ -38,7 +42,6 @@ class BattleScene: GameScene {
         self.backgroundColor = GameColors.backgroundColor
         
         self.gameWorld = GameWorld()
-        self.gameWorld.zPosition = zPosition.gameWorld.rawValue
         self.addChild(self.gameWorld)
         self.physicsWorld.contactDelegate = self.gameWorld
         
@@ -50,6 +53,7 @@ class BattleScene: GameScene {
         
         
         self.mothership = Mothership(team: Mothership.team.blue)
+        self.mothership.loadHealthBar(gameWorld: gameWorld)
         self.gameWorld.addChild(self.mothership)
         if let slots = (self.playerData.mothership?.slots as? Set<MothershipSlotData>)?.sorted(by: {
             return $0.index < $1.index
@@ -64,14 +68,80 @@ class BattleScene: GameScene {
         self.mothership.loadSpaceships(gameWorld: self.gameWorld)
         
         self.botMothership = Mothership(team: Mothership.team.red)
+        self.botMothership.loadHealthBar(gameWorld: gameWorld)
         self.gameWorld.addChild(self.botMothership)
+        
+        for _ in 0..<4 {
+            self.botMothership.spaceships.append(Spaceship(
+                level: 1,
+                rarity: .common,
+                loadPhysics: true, team: .red))
+        }
+        self.botMothership.loadSpaceships(gameWorld: self.gameWorld)
     }
     
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
         
-        self.mothership.update()
-        self.botMothership.update()
+        if self.state == self.nextState {
+            
+            switch self.state {
+            case .battle:
+                
+                self.mothership.update(enemyMothership: self.botMothership, enemySpaceships: self.botMothership.spaceships)
+                self.botMothership.update(enemyMothership: self.mothership, enemySpaceships: self.mothership.spaceships)
+                
+                if currentTime - self.lastBotUpdate > 1 {
+                    self.lastBotUpdate = currentTime
+                    
+                    let aliveBotSpaceships = self.botMothership.spaceships.filter({ $0.health > 0 })
+                    
+                    if aliveBotSpaceships.count > 0 {
+                        let botSpaceship = aliveBotSpaceships[Int.random(aliveBotSpaceships.count)]
+                        
+                        if botSpaceship.targetNode != nil {
+                            
+                        } else {
+                            if botSpaceship.health < botSpaceship.maxHealth/2 {
+                                botSpaceship.retreat()
+                            } else {
+                                let x = Int.random(min: -55/2, max: 55/2)
+                                let y = Int.random(min: -89, max: -89/2)
+                                let point = botSpaceship.position + CGPoint(x: x, y: y)
+                                if self.mothership.contains(point) {
+                                    botSpaceship.setTarget(mothership: self.mothership)
+                                } else {
+                                    botSpaceship.physicsBody?.isDynamic = true
+                                    botSpaceship.destination = point
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                break
+            case .mainMenu:
+                self.mothership.update()
+                self.botMothership.update()
+                break
+            }
+        } else {
+            self.state = self.nextState
+            
+            switch self.nextState {
+                
+            case .battle:
+                break
+            case .mainMenu:
+                self.view?.presentScene(MainMenuScene(), transition: GameScene.defaultTransition)
+                break
+            }
+        }
+    }
+    
+    override func didSimulatePhysics() {
+        super.didSimulatePhysics()
+        Shot.update()
     }
     
     override func didFinishUpdate() {
@@ -114,6 +184,9 @@ class BattleScene: GameScene {
             Spaceship.selectedSpaceship?.touchUp(touch: touch)
             
             break
+            
+        case .mainMenu:
+            break
         }
     }
     
@@ -138,6 +211,9 @@ class BattleScene: GameScene {
             Spaceship.selectedSpaceship?.touchUp(touch: touch)
             
             break
+            
+        case .mainMenu:
+            break
         }
     }
     
@@ -157,7 +233,7 @@ class BattleScene: GameScene {
             if let nearestSpaceship = self.nearestSpaceship(spaceships: self.mothership.spaceships + self.botMothership.spaceships, touch: touch) {
                 switch nearestSpaceship.team {
                 case .blue:
-                    if nearestSpaceship.position.distanceTo(nearestSpaceship.startingPosition) > 2 {
+                    if nearestSpaceship.position.distanceSquaredTo(nearestSpaceship.startingPosition) > 4 {
                         nearestSpaceship.touchUp(touch: touch)
                     }
                     break
@@ -171,7 +247,7 @@ class BattleScene: GameScene {
             if let parent = self.mothership.parent {
                 if self.mothership.contains(touch.location(in: parent)) {
                     if let selectedSpaceship = Spaceship.selectedSpaceship {
-                        if selectedSpaceship.position.distanceTo(selectedSpaceship.startingPosition) > 2 {
+                        if selectedSpaceship.position.distanceSquaredTo(selectedSpaceship.startingPosition) > 4 {
                             selectedSpaceship.retreat()
                         }
                     }
@@ -182,6 +258,10 @@ class BattleScene: GameScene {
             Spaceship.selectedSpaceship?.touchUp(touch: touch)
             
             break
+            
+        case .mainMenu:
+            break
+            
         }
     }
     
@@ -205,7 +285,7 @@ class BattleScene: GameScene {
             if let parent = spaceship.parent {
                 if nearestSpaceship != nil { 
                     let touchPosition = touch.location(in: parent)
-                    if touchPosition.distanceTo(spaceship.position) < touchPosition.distanceTo(nearestSpaceship!.position) {
+                    if touchPosition.distanceSquaredTo(spaceship.position) < touchPosition.distanceSquaredTo(nearestSpaceship!.position) {
                         nearestSpaceship = spaceship
                     }
                 } else {

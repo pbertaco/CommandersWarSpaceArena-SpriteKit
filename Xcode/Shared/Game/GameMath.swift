@@ -10,6 +10,34 @@ import SpriteKit
 
 class GameMath {
     
+    static func randomBaseRange(rarity: Spaceship.rarity) -> Int {
+        let min: CGFloat = 0.9
+        let max: CGFloat = 1.1
+        
+        var range = CGFloat.random(min: min, max: max)
+        
+        switch rarity {
+        case .common:
+            range = range * 178
+            break
+        case .rare:
+            range = range * 122
+            break
+        case .epic:
+            range = range * 84
+            break
+        case .legendary:
+            range = range * 58
+            break
+        }
+        
+        return Int(range)
+    }
+    
+    static func range(level: Int, baseRange: Int) -> Int {
+        return Int(Double(baseRange) * pow(1.1, Double(level - 1)))
+    }
+    
     static func randomBaseDamage(rarity: Spaceship.rarity) -> Int {
         let min: CGFloat = 0.9
         let max: CGFloat = 1.1
@@ -46,16 +74,16 @@ class GameMath {
         
         switch rarity {
         case .common:
-            life = life * 150
+            life = life * 500
             break
         case .rare:
-            life = life * 210
+            life = life * 700
             break
         case .epic:
-            life = life * 300
+            life = life * 1000
             break
         case .legendary:
-            life = life * 435
+            life = life * 1450
             break
         }
         

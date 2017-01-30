@@ -16,6 +16,9 @@ class Spaceship: SKSpriteNode {
     
     static var selectedSpaceship: Spaceship?
     
+    static var diameter: CGFloat = 55
+    var weaponRange: CGFloat = 461
+    
     static var skins: [String] = [
         "spaceshipA", "spaceshipB", "spaceshipC", "spaceshipD", "spaceshipE",
         "spaceshipF", "spaceshipG", "spaceshipH"
@@ -45,7 +48,7 @@ class Spaceship: SKSpriteNode {
     var startingPosition = CGPoint.zero
     var startingZPosition: CGFloat = 0
     var destination: CGPoint?
-    var targetSpaceship: Spaceship?
+    var targetNode: SKNode?
     
     var team: Mothership.team
     
@@ -58,6 +61,16 @@ class Spaceship: SKSpriteNode {
     var force: CGFloat = 0
     
     var weaponRangeShapeNode: SKShapeNode?
+    var healthBar: SpaceshipHealthBar?
+    
+    var lastShot: Double = 0
+    var canShot = true
+    
+    var canRespawn = true
+    var deathCount = 0
+    var deathTime = 0.0
+    var lastSecond = 0.0
+    var labelRespawn: Label?
     
     init(spaceshipData: SpaceshipData, loadPhysics: Bool = false, team: Mothership.team = .blue) {
         
@@ -77,30 +90,36 @@ class Spaceship: SKSpriteNode {
                   baseDamage: Int(spaceshipData.baseDamage),
                   baseLife: Int(spaceshipData.baseLife),
                   baseSpeed: Int(spaceshipData.baseSpeed),
+                  baseRange: Int(spaceshipData.baseRange),
                   skinIndex: Int(spaceshipData.skin), color: color,
                   loadPhysics: loadPhysics,
                   team: team)
     }
     
-    init(loadPhysics: Bool = false, team: Mothership.team = .blue) {
+    init(level: Int, rarity: rarity, loadPhysics: Bool = false, team: Mothership.team = .blue) {
         
         self.team = team
         
         super.init(texture: nil, color: SKColor.clear, size: CGSize.zero)
         
-        self.rarity = .common
+        self.rarity = rarity
         
-        self.load(level: 1,
+        self.load(level: level,
                   baseDamage: GameMath.randomBaseDamage(rarity: self.rarity),
                   baseLife: GameMath.randomBaseLife(rarity: self.rarity),
                   baseSpeed: GameMath.randomBaseSpeed(rarity: self.rarity),
+                  baseRange: GameMath.randomBaseRange(rarity: self.rarity),
                   skinIndex: Int.random(Spaceship.skins.count),
                   color: Spaceship.randomColor(),
                   loadPhysics: loadPhysics,
                   team: team)
     }
     
-    func load(level: Int, baseDamage: Int, baseLife: Int, baseSpeed: Int,
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func load(level: Int, baseDamage: Int, baseLife: Int, baseSpeed: Int, baseRange: Int,
               skinIndex: Int, color: SKColor, loadPhysics: Bool = false, team: Mothership.team) {
         
         self.level = level
@@ -110,15 +129,16 @@ class Spaceship: SKSpriteNode {
         let texture = Spaceship.skinTexture(index: skinIndex)
         self.texture = texture
         self.size = texture.size()
-        self.setScaleToFit(width: 55, height: 55)
+        self.setScaleToFit(width: Spaceship.diameter, height: Spaceship.diameter)
         
         self.color = color
-        self.blendMode = .screen
         self.colorBlendFactor = 1
+        self.blendMode = .add
         
         self.maxHealth = GameMath.maxHealth(level: level, baseLife: baseLife)
         self.damage = GameMath.damage(level: level, baseDamage: baseDamage)
         self.speedAtribute = GameMath.speed(level: level, baseSpeed: baseSpeed)
+        self.weaponRange = CGFloat(GameMath.range(level: level, baseRange: baseRange))
         
         self.health = self.maxHealth
         
@@ -127,57 +147,245 @@ class Spaceship: SKSpriteNode {
         }
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func getHitBy(_ shot: Shot) {
+        
+        if shot.shooter == self {
+            return
+        }
+        
+        let dx = Float(shot.position.x - self.position.x)
+        let dy = Float(shot.position.y - self.position.y)
+        
+        let rotationToShot = -atan2f(dx, dy)
+        var totalRotationToShot = rotationToShot - Float(self.zRotation)
+        while(totalRotationToShot < Float(-π)) { totalRotationToShot += Float(π * 2) }
+        while(totalRotationToShot > Float(π)) { totalRotationToShot -= Float(π * 2) }
+        
+        let damageMultiplier = max(abs(totalRotationToShot), 1)
+        
+        shot.damage = Int(Float(shot.damage) * damageMultiplier)
+        
+        if shot.damage > 0 {
+            self.damageEffect(damage: shot.damage, damageMultiplier: CGFloat(damageMultiplier))
+        }
+        
+        if self.health > 0 && self.health - shot.damage <= 0 {
+            self.die()
+        } else {
+            self.health = self.health - shot.damage
+        }
+        self.updateHealthBar(health: self.health, maxHealth: self.maxHealth)
+        shot.damage = 0
+        shot.removeFromParent()
     }
     
-    func update() {
+    func die() {
+        
+        self.health = 0
+        
+        self.retreat()
+        self.resetToStartingPosition()
+        
+        let physicsBody = self.physicsBody
+        self.physicsBody = nil
+        
+        self.position = self.startingPosition
+        
+        if let physicsBody = physicsBody {
+            self.physicsBody = physicsBody
+        }
+        
+        self.isHidden = true
+        
+        self.deathCount = self.deathCount + 1
+        self.deathTime = GameScene.currentTime
+        self.lastSecond = GameScene.currentTime
+        
+        if self.canRespawn {
+            self.labelRespawn?.text = (self.deathCount * 5).description
+        }
+    }
+    
+    func heal() {
+        if self.health < self.maxHealth {
+            self.health = self.health + (self.maxHealth/60)
+            if self.health > self.maxHealth {
+                self.health = self.maxHealth
+            }
+            self.updateHealthBar(health: self.health, maxHealth: self.maxHealth)
+        }
+    }
+    
+    func respawn() {
+        self.isHidden = false
+        self.health = self.maxHealth
+        self.updateHealthBar(health: self.health, maxHealth: self.maxHealth)
+        self.labelRespawn?.text = ""
+    }
+    
+    func damageEffect(damage: Int, damageMultiplier: CGFloat) {
+        
+        let duration = 0.5
+        
+        let label = Label(text: damage.description, fontSize: .fontSize8, fontColor: SKColor(red: 1, green: 1 - damageMultiplier/π, blue: 1 - damageMultiplier/π, alpha: 1))
+        label.position = CGPoint(
+            x: Int(self.position.x) + Int.random(min: -27, max: 27),
+            y: Int(self.position.y) + Int.random(min: -27, max: 27))
+        self.parent?.addChild(label)
+        
+        label.run(SKAction.scale(to: 2, duration: 0))
+        label.run(SKAction.scale(to: 1, duration: duration))
+        
+        label.run(SKAction.sequence([
+            SKAction.wait(forDuration: duration/2),
+            SKAction.fadeAlpha(to: 0, duration: duration/2),
+            SKAction.removeFromParent()
+            ]
+        ))
+    }
+    
+    func update(enemyMothership: Mothership? = nil, enemySpaceships:[Spaceship] = [], allySpaceships: [Spaceship] = []) {
         if self.health > 0 {
             if let destination = self.destination {
-                if self.position.distanceTo(destination) <= 55/2 {
+                if self.position.distanceTo(destination) <= Spaceship.diameter/2 {
                     if self.destination == self.startingPosition {
                         self.resetToStartingPosition()
                     }
                     self.destination = nil
                 } else {
-                    self.rotateTo(point: destination)
-                    let multiplier = max(1 - abs(self.totalRotationToDestination * 2), 0)
-                    self.applyForce(multiplier: multiplier)
+                    if self.destination == self.startingPosition {
+                        self.rotateTo(point: destination)
+                        self.applyForce()
+                    } else {
+                        self.rotateTo(point: destination)
+                        self.applyForce()
+                    }
                 }
             } else {
                 if let physicsBody = self.physicsBody {
                     if physicsBody.categoryBitMask == GameWorld.categoryBitMask.mothershipSpaceship.rawValue {
+                        if self.position.distanceSquaredTo(self.startingPosition) < 4 {
+                            self.heal()
+                        }
                         self.rotateTo(point: CGPoint(x: self.position.x, y: 0))
                         self.applyForce()
                     } else {
-                        if let targetSpaceship = self.targetSpaceship {
-                            if targetSpaceship.health <= 0 {
-                                self.targetSpaceship = nil
-                            } else {
-                                
-                                self.rotateTo(point: targetSpaceship.position)
-                                
-                                if self.position.distanceTo(targetSpaceship.position) <= 100 {
-                                    let multiplier = max(1 - abs(self.totalRotationToDestination * 2), 0)
-                                    self.applyForce(multiplier: multiplier)
+                        
+                        if let targetNode = self.targetNode {
+                            
+                            if let targetSpaceship = targetNode as? Spaceship {
+                                if targetSpaceship.health <= 0 {
+                                    self.targetNode = nil
+                                } else {
+                                    if targetSpaceship.position.distanceSquaredTo(targetSpaceship.startingPosition) < 4 {
+                                        self.targetNode = nil
+                                    } else {
+                                        self.rotateTo(point: targetSpaceship.position)
+                                        
+                                        if self.position.distanceTo(targetSpaceship.position) > self.weaponRange + Spaceship.diameter/2 {
+                                            self.applyForce()
+                                        } else {
+                                            self.tryToShoot()
+                                        }
+                                    }
+                                }
+                            }
+                            
+                            if let targetMothership = targetNode as? Mothership {
+                                if targetMothership.health <= 0 {
+                                    self.targetNode = nil
                                 } else {
                                     
+                                    let point = CGPoint(x: self.position.x, y: targetMothership.position.y)
+                                    self.rotateTo(point: point)
+                                    
+                                    if self.position.distanceTo(point) > self.weaponRange + 89/2 {
+                                        self.applyForce()
+                                    } else {
+                                        self.tryToShoot()
+                                    }
+                                }
+                            }
+                        } else {
+                            if let targetNode = self.nearestSpaceshipInRange(spaceships: enemySpaceships) {
+                                self.targetNode = targetNode
+                            } else {
+                                if let enemyMothership = enemyMothership {
+                                    if self.isMothershipInRange(mothership: enemyMothership) {
+                                        self.targetNode = enemyMothership
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
+        } else {
+            if self.canRespawn {
+                if GameScene.currentTime - self.lastSecond > 1 {
+                    self.lastSecond = GameScene.currentTime
+                    
+                    if GameScene.currentTime - self.deathTime > Double(self.deathCount * 5) {
+                        self.respawn()
+                    } else {
+                        if let label = self.labelRespawn {
+                            let text = Int((self.deathCount * 5) - Int(GameScene.currentTime - self.deathTime)).description
+                            label.text = text
+                        }
+                    }
+                }
+            }
         }
+        
         self.updateWeaponRangeShapeNode()
+        self.updateHealthBarPosition()
+    }
+    
+    func tryToShoot() {
+        if GameScene.currentTime - self.lastShot > 0.2 {
+            if self.canShot {
+                self.canShot = false
+                self.lastShot = GameScene.currentTime
+                self.parent?.addChild(Shot(shooter: self))
+            }
+        }
+    }
+    
+    func nearestSpaceshipInRange(spaceships: [Spaceship]) -> Spaceship? {
+        
+        var nearestSpaceship: Spaceship? = nil
+        
+        for spaceship in spaceships {
+            if spaceship.health > 0 {
+                if spaceship.position.distanceSquaredTo(spaceship.startingPosition) > 4 {
+                    if self.position.distanceTo(spaceship.position) < self.weaponRange + Spaceship.diameter/2 {
+                        
+                        if nearestSpaceship != nil {
+                            if self.position.distanceSquaredTo(spaceship.position) < self.position.distanceSquaredTo(nearestSpaceship!.position) {
+                                nearestSpaceship = spaceship
+                            }
+                        } else {
+                            nearestSpaceship = spaceship
+                        }
+                    }
+                }
+            }
+        }
+        
+        return nearestSpaceship
+    }
+    
+    func isMothershipInRange(mothership: Mothership) -> Bool {
+        let point = CGPoint(x: self.position.x, y: mothership.position.y)
+        return self.position.distanceTo(point) < self.weaponRange + 89/2
     }
     
     func resetToStartingPosition() {
+        self.physicsBody?.isDynamic = false
         self.position = self.startingPosition
         self.zRotation = self.startingZPosition
         self.physicsBody?.velocity = CGVector.zero
         self.physicsBody?.angularVelocity = 0
-        self.physicsBody?.isDynamic = false
     }
     
     func rotateTo(point: CGPoint) {
@@ -200,7 +408,10 @@ class Spaceship: SKSpriteNode {
         }
     }
     
-    func applyForce(multiplier: CGFloat = 1) {
+    func applyForce() {
+        
+        let multiplier = max(1 - abs(self.totalRotationToDestination * 2), 0)
+        
         if let physicsBody = self.physicsBody {
             let velocitySquared = (physicsBody.velocity.dx * physicsBody.velocity.dx) + (physicsBody.velocity.dy * physicsBody.velocity.dy)
             
@@ -217,7 +428,7 @@ class Spaceship: SKSpriteNode {
         
         if self == Spaceship.selectedSpaceship {
             
-            self.targetSpaceship = nil
+            self.targetNode = nil
             
             if self.contains(point) {
                 
@@ -248,11 +459,15 @@ class Spaceship: SKSpriteNode {
     }
     
     func setTarget(spaceship: Spaceship) {
-        
+        self.destination = nil
+        self.physicsBody?.isDynamic = true
+        self.targetNode = spaceship
     }
     
     func setTarget(mothership: Mothership) {
-        
+        self.destination = nil
+        self.physicsBody?.isDynamic = true
+        self.targetNode = mothership
     }
     
     static func setSelected(spaceship: Spaceship?) {
@@ -261,6 +476,7 @@ class Spaceship: SKSpriteNode {
     }
     
     func retreat() {
+        self.targetNode = nil
         self.physicsBody?.isDynamic = true
         self.destination = self.startingPosition
         self.setBitMasksToMothershipSpaceship()
@@ -270,7 +486,7 @@ class Spaceship: SKSpriteNode {
     }
     
     func loadWeaponRangeShapeNode(gameWorld: GameWorld) {
-        let shapeNode = SKShapeNode(circleOfRadius: 150)
+        let shapeNode = SKShapeNode(circleOfRadius: self.weaponRange)
         shapeNode.strokeColor = SKColor.white
         shapeNode.fillColor = SKColor.clear
         shapeNode.alpha = 0
@@ -278,6 +494,26 @@ class Spaceship: SKSpriteNode {
         gameWorld.addChild(shapeNode)
         
         self.weaponRangeShapeNode = shapeNode
+    }
+    
+    func loadHealthBar(gameWorld: GameWorld) {
+        let healthBar = SpaceshipHealthBar(level: self.level, health: self.health, team: self.team, rarity: self.rarity)
+        
+        gameWorld.addChild(healthBar)
+        
+        self.healthBar = healthBar
+    }
+    
+    func updateHealthBarPosition() {
+        if let healthBar = self.healthBar {
+            healthBar.position = self.position + healthBar.positionOffset
+        }
+    }
+    
+    func updateHealthBar(health: Int, maxHealth: Int) {
+        if let healthBar = self.healthBar {
+            healthBar.update(health: health, maxHealth: maxHealth)
+        }
     }
     
     func updateWeaponRangeShapeNode() {
@@ -299,11 +535,45 @@ class Spaceship: SKSpriteNode {
         self.weaponRangeShapeNode?.alpha = 1
     }
     
+    func loadLabelRespawn(gameWorld: GameWorld) {
+        let labelRespawn = Label(text: "", fontSize: .fontSize16, fontColor: GameColors.fontWhite)
+        labelRespawn.position = self.startingPosition
+        gameWorld.addChild(labelRespawn)
+        
+        self.labelRespawn = labelRespawn
+    }
+    
     func didBeginContact(with bodyB: SKPhysicsBody) {
         if let bodyA = self.physicsBody {
             switch GameWorld.categoryBitMask(rawValue: bodyA.categoryBitMask | bodyB.categoryBitMask) {
+            
+            case [.spaceship, .shot]:
+                if let shot = bodyB.node as? Shot {
+                    self.getHitBy(shot)
+                }
+                break
+                
+            case [.spaceship, .spaceshipShot]:
+                if let shot = bodyB.node as? Shot {
+                    self.getHitBy(shot)
+                }
+                break
+                
+            case [.mothershipSpaceship, .shot]:
+                if let shot = bodyB.node as? Shot {
+                    self.getHitBy(shot)
+                }
+                break
+                
+            case [.mothershipSpaceship, .spaceshipShot]:
+                if let shot = bodyB.node as? Shot {
+                    self.getHitBy(shot)
+                }
+                break
+                
             case [.mothershipSpaceship, .mothership]:
                 break
+                
             default:
                 #if DEBUG
                     fatalError()
@@ -316,9 +586,31 @@ class Spaceship: SKSpriteNode {
     func didEndContact(with bodyB: SKPhysicsBody) {
         if let bodyA = self.physicsBody {
             switch GameWorld.categoryBitMask(rawValue: bodyA.categoryBitMask | bodyB.categoryBitMask) {
-            case [.mothershipSpaceship, .mothership]:
-                self.setBitMasksToSpaceship()
+                
+            case [.spaceship, .shot]:
+                if let shot = bodyB.node as? Shot {
+                    self.getHitBy(shot)
+                }
                 break
+                
+            case [.spaceship, .spaceshipShot]:
+                if let shot = bodyB.node as? Shot {
+                    shot.setBitMasksToShot()
+                }
+                break
+                
+            case [.mothershipSpaceship, .spaceshipShot]:
+                if let shot = bodyB.node as? Shot {
+                    shot.setBitMasksToShot()
+                }
+                break
+                
+            case [.mothershipSpaceship, .mothership]:
+                if (self.destination ?? CGPoint.zero) != self.startingPosition {
+                    self.setBitMasksToSpaceship()
+                }
+                break
+                
             default:
                 #if DEBUG
                     fatalError()
@@ -329,7 +621,10 @@ class Spaceship: SKSpriteNode {
     }
     
     func loadPhysics() {
-        let physicsBody = SKPhysicsBody(circleOfRadius: 55/2)
+        
+        self.zPosition = GameWorld.zPosition.spaceship.rawValue
+        
+        let physicsBody = SKPhysicsBody(circleOfRadius: Spaceship.diameter/2)
         
         physicsBody.mass = 0.0455111116170883
         physicsBody.linearDamping = 2
@@ -377,5 +672,21 @@ class Spaceship: SKSpriteNode {
         blue = blue + maxColor
         
         return SKColor(red: red, green: green, blue: blue, alpha: 1)
+    }
+    
+    static func randomRarity(luck: CGFloat = 0) -> rarity {
+        
+        let luck: Int = Int(20.0 * luck.clamped(0, 1))
+        
+        switch Int.random(100) {
+        case 0..<5*luck: // 5%
+            return .legendary
+        case 5*luck..<15*luck: // 10%
+            return .epic
+        case 15*luck..<35*luck: // 20%
+            return .rare
+        default:
+            return .common
+        }
     }
 }

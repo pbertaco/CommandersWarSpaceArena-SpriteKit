@@ -20,6 +20,7 @@ class ControlPremiumPoints: Control {
         
         self.color = GameColors.controlYellow
         self.colorBlendFactor = 1
+        self.blendMode = .add
         
         let buttonBuyMore = Button(imageNamed: "button55x55", x: 144, y: 0)
         buttonBuyMore.setIcon(imageNamed: "Plus")
@@ -33,6 +34,7 @@ class ControlPremiumPoints: Control {
         icon.size = CGSize(width: 55, height: 55)
         icon.color = GameColors.controlYellow
         icon.colorBlendFactor = 1
+        icon.blendMode = .add
         self.addChild(icon)
     }
     

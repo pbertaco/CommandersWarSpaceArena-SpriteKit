@@ -22,10 +22,14 @@ extension MemoryCard {
         
         playerData.mothership = self.newMothershipData()
         
-        for i in 0..<4 {
+        let rarityList: [Spaceship.rarity] = [.common, .common, .common, .common]
+        
+        var i = 0
+        for rarity in rarityList {
             let mothershipSlot: MothershipSlotData = self.newMothershipSlotData()
             mothershipSlot.index = Int16(i)
-            let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: Spaceship.rarity(rawValue: 0)!)
+            i = i + 1
+            let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: rarity)
             
             mothershipSlot.spaceship = spaceshipData
             

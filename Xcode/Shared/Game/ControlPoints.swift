@@ -20,6 +20,7 @@ class ControlPoints: Control {
         
         self.color = GameColors.controlBlue
         self.colorBlendFactor = 1
+        self.blendMode  = .add
         
         self.labelPoints = Label(text: "?", fontColor: GameColors.controlBlue, x: 99, y: 27)
         self.addChild(labelPoints)
@@ -28,6 +29,7 @@ class ControlPoints: Control {
         icon.size = CGSize(width: 55, height: 55)
         icon.color = GameColors.controlBlue
         icon.colorBlendFactor = 1
+        icon.blendMode  = .add
         self.addChild(icon)
     }
     
