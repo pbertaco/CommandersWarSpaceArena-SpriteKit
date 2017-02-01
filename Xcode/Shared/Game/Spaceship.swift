@@ -593,6 +593,12 @@ class Spaceship: SKSpriteNode {
                 }
                 break
                 
+            case [.mothershipSpaceship, .shot]:
+                if let shot = bodyB.node as? Shot {
+                    self.getHitBy(shot)
+                }
+                break
+                
             case [.spaceship, .spaceshipShot]:
                 if let shot = bodyB.node as? Shot {
                     shot.setBitMasksToShot()

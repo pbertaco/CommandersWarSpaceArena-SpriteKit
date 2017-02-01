@@ -47,9 +47,7 @@ class Mothership: SKSpriteNode {
             break
         }
         
-        self.color = color
-        self.colorBlendFactor = 1
-        self.blendMode = .add
+        self.set(color: color)
         
         self.loadPhysics(rectangleOf: self.size)
     }
@@ -182,7 +180,6 @@ class Mothership: SKSpriteNode {
         spriteNode.position = position
         spriteNode.color = self.color
         spriteNode.colorBlendFactor = 1
-        spriteNode.blendMode = .add
         self.addChild(spriteNode)
         
         spaceship.position = self.convert(position, to: gameWorld)

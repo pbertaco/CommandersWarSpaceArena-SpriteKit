@@ -16,9 +16,7 @@ class MothershipSlot: Control {
          verticalAlignment: verticalAlignment = .top) {
         super.init(imageNamed: "box89x89", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
         
-        self.color = GameColors.common
-        self.colorBlendFactor = 1
-        self.blendMode = .add
+        self.set(color: GameColors.common)
     }
     
     required init?(coder aDecoder: NSCoder) {

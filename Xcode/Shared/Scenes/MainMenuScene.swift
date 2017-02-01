@@ -17,6 +17,7 @@ class MainMenuScene: GameScene {
     enum state: String {
         case mainMenu
         case battle
+        case hangar
     }
     
     var state: state = .mainMenu
@@ -35,7 +36,7 @@ class MainMenuScene: GameScene {
         
         let buttonPlay = Button(imageNamed: "button233x55", x: 71, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonPlay.setIcon(imageNamed: "Play")
-        buttonPlay.setColor(color: GameColors.controlRed)
+        buttonPlay.set(color: GameColors.controlRed, blendMode: .add)
         self.addChild(buttonPlay)
         buttonPlay.touchUpEvent = { [weak self] in
             self?.nextState = .battle
@@ -43,22 +44,25 @@ class MainMenuScene: GameScene {
         
         let buttonBuy = Button(imageNamed: "button55x55", x: 312, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonBuy.setIcon(imageNamed: "Add Shopping Cart")
-        buttonBuy.setColor(color: GameColors.controlYellow)
+        buttonBuy.set(color: GameColors.controlYellow, blendMode: .add)
         self.addChild(buttonBuy)
         
         let buttonShips = Button(imageNamed: "button55x55", x: 8, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonShips.setIcon(imageNamed: "Rocket")
-        buttonShips.setColor(color: GameColors.controlBlue)
+        buttonShips.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonShips)
+        buttonShips.touchUpEvent = { [weak self] in
+            self?.nextState = .hangar
+        }
         
         let buttonSettings = Button(imageNamed: "button55x55", x: 312, y: 8, horizontalAlignment: .right, verticalAlignment: .top)
         buttonSettings.setIcon(imageNamed: "Settings")
-        buttonSettings.setColor(color: GameColors.controlBlue)
+        buttonSettings.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonSettings)
         
         let buttonGameCenter = Button(imageNamed: "button55x55", x: 312, y: 71, horizontalAlignment: .right, verticalAlignment: .top)
         buttonGameCenter.setIcon(imageNamed: "Tropy")
-        buttonGameCenter.setColor(color: GameColors.controlBlue)
+        buttonGameCenter.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonGameCenter)
         #if os(iOS)
             buttonGameCenter.touchUpEvent = { [weak self] in
@@ -68,7 +72,7 @@ class MainMenuScene: GameScene {
         
         let buttonFacebook = Button(imageNamed: "button55x55", x: 312, y: 134, horizontalAlignment: .right, verticalAlignment: .top)
         buttonFacebook.setIcon(imageNamed: "Facebook")
-        buttonFacebook.setColor(color: GameColors.controlBlue)
+        buttonFacebook.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonFacebook)
         #if os(iOS)
             buttonFacebook.touchUpEvent = { [weak buttonFacebook] in
@@ -100,6 +104,8 @@ class MainMenuScene: GameScene {
                 break
             case .battle:
                 break
+            case .hangar:
+                break
             }
         } else {
             self.state = self.nextState
@@ -110,6 +116,9 @@ class MainMenuScene: GameScene {
                 break
             case .battle:
                 self.view?.presentScene(BattleScene(), transition: GameScene.defaultTransition)
+                break
+            case .hangar:
+                self.view?.presentScene(HangarScene(), transition: GameScene.defaultTransition)
                 break
             }
         }

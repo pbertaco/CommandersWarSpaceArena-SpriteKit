@@ -198,11 +198,17 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
             
         case [.spaceship, .shot]:
             if let spaceship = bodyA.node as? Spaceship {
-                spaceship.didBeginContact(with: bodyB)
+                spaceship.didEndContact(with: bodyB)
             }
             break
             
         case [.spaceship, .spaceshipShot]:
+            if let spaceship = bodyA.node as? Spaceship {
+                spaceship.didEndContact(with: bodyB)
+            }
+            break
+            
+        case [.mothershipSpaceship, .shot]:
             if let spaceship = bodyA.node as? Spaceship {
                 spaceship.didEndContact(with: bodyB)
             }

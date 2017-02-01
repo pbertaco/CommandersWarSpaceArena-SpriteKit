@@ -21,8 +21,6 @@ class MothershipHealthBar: SKSpriteNode {
         
         super.init(texture: texture, color: SKColor.clear, size: texture.size())
         
-        self.zPosition = GameWorld.zPosition.spaceshipHealthBar.rawValue
-        
         var teamColor: SKColor = .clear
         
         switch team {
