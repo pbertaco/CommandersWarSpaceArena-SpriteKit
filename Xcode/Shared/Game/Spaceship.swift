@@ -32,6 +32,11 @@ class Spaceship: SKSpriteNode {
         }
     }
     
+    var baseLife = 1
+    var baseDamage = 1
+    var baseSpeed = 1
+    var baseRange = 1
+    
     var damage: Int = 1
     var maxHealth: Int = 1
     var speedAtribute: Int = 1
@@ -135,16 +140,25 @@ class Spaceship: SKSpriteNode {
         self.colorBlendFactor = 1
         self.blendMode = .add
         
-        self.maxHealth = GameMath.maxHealth(level: level, baseLife: baseLife)
-        self.damage = GameMath.damage(level: level, baseDamage: baseDamage)
-        self.speedAtribute = GameMath.speed(level: level, baseSpeed: baseSpeed)
-        self.weaponRange = CGFloat(GameMath.range(level: level, baseRange: baseRange))
+        self.baseLife = baseLife
+        self.baseDamage = baseDamage
+        self.baseSpeed = baseSpeed
+        self.baseRange = baseRange
+        
+        self.updateAttributes()
         
         self.health = self.maxHealth
         
         if loadPhysics {
             self.loadPhysics()
         }
+    }
+    
+    func updateAttributes() {
+        self.maxHealth = GameMath.maxHealth(level: level, baseLife: self.baseLife)
+        self.damage = GameMath.damage(level: level, baseDamage: self.baseDamage)
+        self.speedAtribute = GameMath.speed(level: level, baseSpeed: self.baseSpeed)
+        self.weaponRange = CGFloat(GameMath.range(level: level, baseRange: self.baseRange))
     }
     
     func getHitBy(_ shot: Shot) {

@@ -10,6 +10,12 @@ import SpriteKit
 
 class GameMath {
     
+    static func xpForLevel(level x: Int) -> Int {
+        let x = Double(x - 1)
+        let xp = pow(2, x) * 1000
+        return Int(xp)
+    }
+    
     static func randomBaseRange(rarity: Spaceship.rarity) -> Int {
         let min: CGFloat = 0.9
         let max: CGFloat = 1.1

@@ -10,6 +10,11 @@ import SpriteKit
 
 class ControlPremiumPoints: Control {
     
+    static func current() -> ControlPremiumPoints? {
+        return ControlPremiumPoints.lastInstance
+    }
+    private static weak var lastInstance: ControlPremiumPoints? = nil
+    
     private var labelPremiumPoints: Label!
 
     init(x: CGFloat, y: CGFloat,
@@ -32,6 +37,8 @@ class ControlPremiumPoints: Control {
         icon.size = CGSize(width: 55, height: 55)
         icon.set(color: GameColors.controlYellow)
         self.addChild(icon)
+        
+        ControlPremiumPoints.lastInstance = self
     }
     
     required init?(coder aDecoder: NSCoder) {

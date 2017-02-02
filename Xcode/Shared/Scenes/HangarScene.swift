@@ -18,6 +18,10 @@ class HangarScene: GameScene {
     var state: state = .hangar
     var nextState: state = .hangar
     
+    let playerData = MemoryCard.sharedInstance.playerData!
+    
+    var scrollNode: ScrollNode!
+    
     override func load() {
         super.load()
         
@@ -31,6 +35,37 @@ class HangarScene: GameScene {
             self?.nextState = .mainMenu
         }
         
+        
+        var cells = [SpaceshipHangarCell]()
+        
+        if let playerDataSpaceships = (self.playerData.spaceships as? Set<SpaceshipData>)?.sorted(by: { (a: SpaceshipData, b: SpaceshipData) -> Bool in
+            
+            let aIndex = a.parentMothershipSlot?.index ?? 4
+            let bIndex = b.parentMothershipSlot?.index ?? 4
+            
+            return aIndex < bIndex
+        }) {
+            for spaceshipData in playerDataSpaceships {
+                let spaceship = Spaceship(spaceshipData: spaceshipData)
+                cells.append(SpaceshipHangarCell(spaceship: spaceship))
+            }
+        }
+        
+        self.scrollNode = ScrollNode(cells: cells, x: 71, y: 110, horizontalAlignment: .center, verticalAlignment: .top)
+        self.addChild(self.scrollNode)
+        
+        let control = Control(imageNamed: "box89x89", x: 375/2, y: -2, horizontalAlignment: .center)
+        control.anchorPoint.x = 0.5
+        control.size.width = GameScene.currentSize.width * 3
+        self.addChild(control)
+        
+        let controlPremiumPoints = ControlPremiumPoints(x: 8, y: 15)
+        controlPremiumPoints.setLabelPremiumPointsText(premiumPoints: self.playerData.premiumPoints)
+        self.addChild(controlPremiumPoints)
+        
+        let controlPoints = ControlPoints(x: 223, y: 15, horizontalAlignment: .right)
+        controlPoints.setLabelPointsText(points: self.playerData.points)
+        self.addChild(controlPoints)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -59,6 +94,15 @@ class HangarScene: GameScene {
                 break
             }
         }
+    }
+    
+    override func touchMoved(touch: UITouch) {
+        super.touchMoved(touch: touch)
+        
+        if self.scrollNode.contains(touch.location(in: self)) {
+            self.scrollNode.touchMoved(touchDelta: touch.delta)
+        }
+        
     }
 
 }

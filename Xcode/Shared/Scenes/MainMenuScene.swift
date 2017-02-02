@@ -55,12 +55,12 @@ class MainMenuScene: GameScene {
             self?.nextState = .hangar
         }
         
-        let buttonSettings = Button(imageNamed: "button55x55", x: 312, y: 8, horizontalAlignment: .right, verticalAlignment: .top)
+        let buttonSettings = Button(imageNamed: "button55x55", x: 312, y: 95, horizontalAlignment: .right, verticalAlignment: .top)
         buttonSettings.setIcon(imageNamed: "Settings")
         buttonSettings.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonSettings)
         
-        let buttonGameCenter = Button(imageNamed: "button55x55", x: 312, y: 71, horizontalAlignment: .right, verticalAlignment: .top)
+        let buttonGameCenter = Button(imageNamed: "button55x55", x: 312, y: 158, horizontalAlignment: .right, verticalAlignment: .top)
         buttonGameCenter.setIcon(imageNamed: "Tropy")
         buttonGameCenter.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonGameCenter)
@@ -70,7 +70,7 @@ class MainMenuScene: GameScene {
             }
         #endif
         
-        let buttonFacebook = Button(imageNamed: "button55x55", x: 312, y: 134, horizontalAlignment: .right, verticalAlignment: .top)
+        let buttonFacebook = Button(imageNamed: "button55x55", x: 312, y: 221, horizontalAlignment: .right, verticalAlignment: .top)
         buttonFacebook.setIcon(imageNamed: "Facebook")
         buttonFacebook.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonFacebook)
@@ -84,11 +84,18 @@ class MainMenuScene: GameScene {
             }
         #endif
         
-        let controlPremiumPoints = ControlPremiumPoints(x: 8, y: 8)
+        
+        
+        let control = Control(imageNamed: "box89x89", x: 375/2, y: -2, horizontalAlignment: .center)
+        control.anchorPoint.x = 0.5
+        control.size.width = GameScene.currentSize.width * 3
+        self.addChild(control)
+        
+        let controlPremiumPoints = ControlPremiumPoints(x: 8, y: 15)
         controlPremiumPoints.setLabelPremiumPointsText(premiumPoints: self.playerData.premiumPoints)
         self.addChild(controlPremiumPoints)
         
-        let controlPoints = ControlPoints(x: 8, y: 71)
+        let controlPoints = ControlPoints(x: 223, y: 15, horizontalAlignment: .right)
         controlPoints.setLabelPointsText(points: self.playerData.points)
         self.addChild(controlPoints)
     }

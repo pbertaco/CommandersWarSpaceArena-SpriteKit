@@ -238,5 +238,26 @@ class Mothership: SKSpriteNode {
             healthBar.update(health: health, maxHealth: maxHealth)
         }
     }
+    
+    func updateMaxHealth(enemySpaceships: [Spaceship]) {
+        var totalDamage = 0
+        var spaceshipCount = 0
+        for spaceship in self.spaceships + enemySpaceships {
+            totalDamage = totalDamage + spaceship.damage
+            spaceshipCount = spaceshipCount + 1
+        }
+        
+        if spaceshipCount > 0 {
+            self.maxHealth = Int((Float(totalDamage)/Float(spaceshipCount)) * 100)
+            self.health = self.maxHealth
+        }
+    }
+    
+    func endBattle() {
+        for spaceship in self.spaceships {
+            spaceship.destination = nil
+            spaceship.targetNode = nil
+        }
+    }
 
 }

@@ -10,6 +10,11 @@ import SpriteKit
 
 class ControlPoints: Control {
     
+    static func current() -> ControlPoints? {
+        return ControlPoints.lastInstance
+    }
+    private static weak var lastInstance: ControlPoints? = nil
+    
     private var labelPoints: Label!
     
     init(x: CGFloat, y: CGFloat,
@@ -28,6 +33,8 @@ class ControlPoints: Control {
         
         icon.set(color: GameColors.controlBlue)
         self.addChild(icon)
+        
+        ControlPoints.lastInstance = self
     }
     
     required init?(coder aDecoder: NSCoder) {

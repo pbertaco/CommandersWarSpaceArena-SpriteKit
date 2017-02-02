@@ -19,12 +19,20 @@ class BattleScene: GameScene {
     }
     
     enum state: String {
+        
+        case loading
+        
         case battle
+        
+        case battleEnd
+        case battleEndInterval
+        case showBattleResult
+        
         case mainMenu
     }
     
-    var state: state = .battle
-    var nextState: state = .battle
+    var state: state = .loading
+    var nextState: state = .loading
     
     let playerData = MemoryCard.sharedInstance.playerData!
     
@@ -33,6 +41,10 @@ class BattleScene: GameScene {
     
     
     var lastBotUpdate: Double = 0
+    
+    var battleEndTime: Double = 0
+    
+    var battleBeginTime: Double = 0
     
     override func load() {
         super.load()
@@ -71,13 +83,23 @@ class BattleScene: GameScene {
         self.botMothership.loadHealthBar(gameWorld: gameWorld)
         self.gameWorld.addChild(self.botMothership)
         
-        for _ in 0..<4 {
+        let mission = Mission.types[Int(self.playerData.botLevel)]
+        
+        for rarity in mission.rarities {
             self.botMothership.spaceships.append(Spaceship(
-                level: 1,
-                rarity: .common,
+                level: (mission.level + Int.random(min: -1, max: 1)).clamped(1...10),
+                rarity: rarity,
                 loadPhysics: true, team: .red))
         }
         self.botMothership.loadSpaceships(gameWorld: self.gameWorld)
+        
+        self.mothership.updateMaxHealth(enemySpaceships: self.botMothership.spaceships)
+        self.botMothership.updateMaxHealth(enemySpaceships: self.mothership.spaceships)
+        
+        self.mothership.update()
+        self.botMothership.update()
+        
+        self.nextState = .battle
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -86,7 +108,15 @@ class BattleScene: GameScene {
         if self.state == self.nextState {
             
             switch self.state {
+                
+            case .loading:
+                break
+                
             case .battle:
+                
+                if self.mothership.health <= 0 || self.botMothership.health <= 0 {
+                    self.nextState = .battleEnd
+                }
                 
                 self.mothership.update(enemyMothership: self.botMothership, enemySpaceships: self.botMothership.spaceships)
                 self.botMothership.update(enemyMothership: self.mothership, enemySpaceships: self.mothership.spaceships)
@@ -120,6 +150,26 @@ class BattleScene: GameScene {
                 }
                 
                 break
+                
+            case .battleEnd:
+                self.mothership.update()
+                self.botMothership.update()
+                break
+                
+            case .battleEndInterval:
+                self.mothership.update()
+                self.botMothership.update()
+                
+                if currentTime - self.battleEndTime > 2 {
+                    self.nextState = .showBattleResult
+                }
+                break
+                
+            case .showBattleResult:
+                self.mothership.update()
+                self.botMothership.update()
+                break
+                
             case .mainMenu:
                 self.mothership.update()
                 self.botMothership.update()
@@ -130,8 +180,49 @@ class BattleScene: GameScene {
             
             switch self.nextState {
                 
-            case .battle:
+            case .loading:
                 break
+                
+            case .battle:
+                if self.battleBeginTime == 0 {
+                    self.battleBeginTime = currentTime
+                }
+                break
+                
+            case .battleEnd:
+                self.mothership.endBattle()
+                self.botMothership.endBattle()
+                self.battleEndTime = currentTime
+                self.nextState = .battleEndInterval
+                break
+                
+            case .battleEndInterval:
+                break
+                
+            case .showBattleResult:
+                
+                if self.botMothership.health <= 0 && self.mothership.health <= 0 {
+                    
+                } else {
+                    if self.botMothership.health <= 0 {
+                        if self.battleEndTime - self.battleBeginTime < 60 * 3 {
+                            self.updateBotOnWin()
+                        } else {
+                            self.updateBotOnLose()
+                        }
+                    } else {
+                        if self.battleEndTime - self.battleBeginTime < 60 * 3 {
+                            self.updateBotOnLose()
+                        } else {
+                            self.updateBotOnLose()
+                            self.updateBotOnLose()
+                        }
+                    }
+                }
+                
+                self.nextState = .mainMenu
+                break
+                
             case .mainMenu:
                 self.view?.presentScene(MainMenuScene(), transition: GameScene.defaultTransition)
                 break
@@ -153,6 +244,10 @@ class BattleScene: GameScene {
         super.touchDown(touch: touch)
         
         switch self.state {
+            
+        case .loading:
+            break
+            
         case .battle:
             
             if let parent = self.botMothership.parent {
@@ -185,6 +280,15 @@ class BattleScene: GameScene {
             
             break
             
+        case .battleEnd:
+            break
+            
+        case .battleEndInterval:
+            break
+            
+        case .showBattleResult:
+            break
+            
         case .mainMenu:
             break
         }
@@ -194,6 +298,10 @@ class BattleScene: GameScene {
         super.touchMoved(touch: touch)
         
         switch self.state {
+            
+        case .loading:
+            break
+            
         case .battle:
             
             if let parent = self.botMothership.parent {
@@ -212,6 +320,15 @@ class BattleScene: GameScene {
             
             break
             
+        case .battleEnd:
+            break
+            
+        case .battleEndInterval:
+            break
+            
+        case .showBattleResult:
+            break
+            
         case .mainMenu:
             break
         }
@@ -221,6 +338,10 @@ class BattleScene: GameScene {
         super.touchUp(touch: touch)
         
         switch self.state {
+            
+        case .loading:
+            break
+            
         case .battle:
             
             if let parent = self.botMothership.parent {
@@ -259,6 +380,15 @@ class BattleScene: GameScene {
             
             break
             
+        case .battleEnd:
+            break
+            
+        case .battleEndInterval:
+            break
+            
+        case .showBattleResult:
+            break
+            
         case .mainMenu:
             break
             
@@ -295,6 +425,18 @@ class BattleScene: GameScene {
         }
         
         return nearestSpaceship
+    }
+    
+    func updateBotOnWin() {
+        if self.playerData.botLevel < Int16(Mission.types.count - 1) {
+            self.playerData.botLevel = self.playerData.botLevel + 1
+        }
+    }
+    
+    func updateBotOnLose() {
+        if self.playerData.botLevel > 0 {
+            self.playerData.botLevel = self.playerData.botLevel - 1
+        }
     }
     
 }

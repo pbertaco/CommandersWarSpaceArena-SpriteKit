@@ -66,7 +66,7 @@ class SpaceshipHealthBar: SKSpriteNode {
         let border = SKSpriteNode(imageNamed: "spaceshipHealthBarBorder")
         self.addChild(border)
         
-        let levelBackground = SKSpriteNode(imageNamed: "levelBackground")
+        let levelBackground = SKSpriteNode(imageNamed: "spaceshipHealthBarLevelBackground")
         levelBackground.position = CGPoint(x: -38, y: 0)
         self.addChild(levelBackground)
         

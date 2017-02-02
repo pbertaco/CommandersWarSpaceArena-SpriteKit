@@ -28,6 +28,7 @@ class MothershipSlot: Control {
     }
     
     func load(spaceship: Spaceship) {
+        self.spaceship?.removeFromParent()
         self.spaceship = spaceship
         self.addChild(spaceship)
         
