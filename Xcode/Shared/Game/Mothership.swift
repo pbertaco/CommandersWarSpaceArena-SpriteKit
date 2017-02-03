@@ -101,6 +101,19 @@ class Mothership: SKSpriteNode {
     }
     
     func getHitBy(_ shot: Shot) {
+        
+        if let shooter = shot.shooter {
+            if let spaceshipData = shooter.spaceshipData {
+                if shooter.team == self.team {
+                    shooter.battlePoints = shooter.battlePoints - shot.damage
+                    spaceshipData.xp = spaceshipData.xp - shot.damage
+                } else {
+                    shooter.battlePoints = shooter.battlePoints + shot.damage
+                    spaceshipData.xp = spaceshipData.xp + shot.damage
+                }
+            }
+        }
+        
         if shot.damage > 0 {
             self.damageEffect(damage: shot.damage, position: shot.position)
         }
@@ -131,6 +144,8 @@ class Mothership: SKSpriteNode {
             }
             spaceship.labelRespawn?.text = ""
         }
+        
+        self.setBitMasksToDeadMothership()
     }
     
     func damageEffect(damage: Int, position: CGPoint) {
@@ -216,6 +231,14 @@ class Mothership: SKSpriteNode {
         physicsBody.contactTestBitMask = GameWorld.contactTestBitMask.mothership.rawValue
         
         self.physicsBody = physicsBody
+    }
+    
+    func setBitMasksToDeadMothership() {
+        if let physicsBody = self.physicsBody {
+            physicsBody.categoryBitMask = GameWorld.categoryBitMask.deadMothership.rawValue
+            physicsBody.collisionBitMask = GameWorld.categoryBitMask.deadMothership.rawValue
+            physicsBody.contactTestBitMask = GameWorld.categoryBitMask.deadMothership.rawValue
+        }
     }
     
     func loadHealthBar(gameWorld: GameWorld) {

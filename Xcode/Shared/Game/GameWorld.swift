@@ -16,6 +16,7 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         case shot = -10
         case spaceship = 0
         case spaceshipHealthBar = 10
+        case spaceshipWeaponRangeShapeNode = 20
     }
     
     static func current() -> GameWorld? {
@@ -101,10 +102,19 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
             }
             break
             
+        case [.deadSpaceship, .shot]:
+            break
+            
+        case [.deadSpaceship, .spaceshipShot]:
+            break
+            
         case [.shot, .mothership]:
             if let mothership = bodyB.node as? Mothership {
                 mothership.didBeginContact(with: bodyA)
             }
+            break
+            
+        case [.shot, .deadMothership]:
             break
             
         case [.spaceshipShot, .mothership]:
@@ -113,13 +123,16 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
             }
             break
             
+        case [.spaceshipShot, .deadMothership]:
+            break
+            
         default:
             #if DEBUG
                 var bodyAcategoryBitMask = ""
                 var bodyBcategoryBitMask = ""
                 
                 switch (bodyA.categoryBitMask) {
-                    
+                
                 case categoryBitMask.world.rawValue:
                     bodyAcategoryBitMask = "world"
                     break
@@ -129,6 +142,9 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
                 case categoryBitMask.mothershipSpaceship.rawValue:
                     bodyAcategoryBitMask = "mothershipSpaceship"
                     break
+                case categoryBitMask.deadSpaceship.rawValue:
+                    bodyAcategoryBitMask = "deadSpaceship"
+                    break
                 case categoryBitMask.shot.rawValue:
                     bodyAcategoryBitMask = "shot"
                     break
@@ -137,6 +153,9 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
                     break
                 case categoryBitMask.mothership.rawValue:
                     bodyAcategoryBitMask = "mothership"
+                    break
+                case categoryBitMask.deadMothership.rawValue:
+                    bodyBcategoryBitMask = "deadMothership"
                     break
                 default:
                     bodyAcategoryBitMask = "unknown"
@@ -154,6 +173,9 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
                 case categoryBitMask.mothershipSpaceship.rawValue:
                     bodyBcategoryBitMask = "mothershipSpaceship"
                     break
+                case categoryBitMask.deadSpaceship.rawValue:
+                    bodyAcategoryBitMask = "deadSpaceship"
+                    break
                 case categoryBitMask.shot.rawValue:
                     bodyBcategoryBitMask = "shot"
                     break
@@ -162,6 +184,9 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
                     break
                 case categoryBitMask.mothership.rawValue:
                     bodyBcategoryBitMask = "mothership"
+                    break
+                case categoryBitMask.deadMothership.rawValue:
+                    bodyBcategoryBitMask = "deadMothership"
                     break
                 default:
                     bodyBcategoryBitMask = "unknown"
@@ -226,6 +251,12 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
             }
             break
             
+        case [.deadSpaceship, .spaceshipShot]:
+            if let spaceship = bodyA.node as? Spaceship {
+                spaceship.didEndContact(with: bodyB)
+            }
+            break
+            
         default:
             #if DEBUG
                 var bodyAcategoryBitMask = ""
@@ -242,6 +273,9 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
                 case categoryBitMask.mothershipSpaceship.rawValue:
                     bodyAcategoryBitMask = "mothershipSpaceship"
                     break
+                case categoryBitMask.deadSpaceship.rawValue:
+                    bodyAcategoryBitMask = "deadSpaceship"
+                    break
                 case categoryBitMask.shot.rawValue:
                     bodyAcategoryBitMask = "shot"
                     break
@@ -250,6 +284,9 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
                     break
                 case categoryBitMask.mothership.rawValue:
                     bodyAcategoryBitMask = "mothership"
+                    break
+                case categoryBitMask.deadMothership.rawValue:
+                    bodyBcategoryBitMask = "deadMothership"
                     break
                 default:
                     bodyAcategoryBitMask = "unknown"
@@ -267,6 +304,9 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
                 case categoryBitMask.mothershipSpaceship.rawValue:
                     bodyBcategoryBitMask = "mothershipSpaceship"
                     break
+                case categoryBitMask.deadSpaceship.rawValue:
+                    bodyAcategoryBitMask = "deadSpaceship"
+                    break
                 case categoryBitMask.shot.rawValue:
                     bodyBcategoryBitMask = "shot"
                     break
@@ -275,6 +315,9 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
                     break
                 case categoryBitMask.mothership.rawValue:
                     bodyBcategoryBitMask = "mothership"
+                    break
+                case categoryBitMask.deadMothership.rawValue:
+                    bodyBcategoryBitMask = "deadMothership"
                     break
                 default:
                     bodyBcategoryBitMask = "unknown"
@@ -294,9 +337,11 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         static let world =                  categoryBitMask(rawValue: 1 << 0)
         static let spaceship =              categoryBitMask(rawValue: 1 << 1)
         static let mothershipSpaceship =    categoryBitMask(rawValue: 1 << 2)
-        static let shot =                   categoryBitMask(rawValue: 1 << 3)
-        static let spaceshipShot =          categoryBitMask(rawValue: 1 << 4)
-        static let mothership =             categoryBitMask(rawValue: 1 << 5)
+        static let deadSpaceship =          categoryBitMask(rawValue: 1 << 3)
+        static let shot =                   categoryBitMask(rawValue: 1 << 4)
+        static let spaceshipShot =          categoryBitMask(rawValue: 1 << 5)
+        static let mothership =             categoryBitMask(rawValue: 1 << 6)
+        static let deadMothership =         categoryBitMask(rawValue: 1 << 7)
     }
     
     struct collisionBitMask {
@@ -304,9 +349,11 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         static let world: categoryBitMask = []
         static let spaceship: categoryBitMask = [.world, .spaceship, .mothershipSpaceship, .mothership]
         static let mothershipSpaceship: categoryBitMask = [.world, .spaceship, .mothershipSpaceship]
+        static let deadSpaceship: categoryBitMask = []
         static let shot: categoryBitMask = []
         static let spaceshipShot: categoryBitMask = []
         static let mothership: categoryBitMask = []
+        static let deadMothership: categoryBitMask = []
     }
     
     struct contactTestBitMask {
@@ -314,8 +361,10 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         static let world: categoryBitMask = []
         static let spaceship: categoryBitMask = [.shot, .spaceshipShot]
         static let mothershipSpaceship: categoryBitMask = [.shot, .spaceshipShot, .mothership]
+        static let deadSpaceship: categoryBitMask = []
         static let shot: categoryBitMask = [.spaceship, .mothershipSpaceship, .mothership]
         static let spaceshipShot: categoryBitMask = [.spaceship, .mothershipSpaceship, .mothership]
         static let mothership: categoryBitMask = [.mothershipSpaceship, .shot, .spaceshipShot]
+        static let deadMothership: categoryBitMask = []
     }
 }

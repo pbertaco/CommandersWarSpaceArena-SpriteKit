@@ -47,12 +47,16 @@ class SpaceshipHangarCell: Control {
         self.addChild(self.labelSpeedAtribute)
         
         if spaceship.level < 10 {
-            let xp: Int32 = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
+            var xp: Int32 = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
+            
+            if let spaceshipData = spaceship.spaceshipData {
+                xp = xp - spaceshipData.xp
+            }
             
             let buttonUpgrade = Button(imageNamed: "button89x34", x: 19, y: 102)
             
             buttonUpgrade.set(label: Label(text: "upgrade", fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: -6))
-            buttonUpgrade.set(label: Label(text: "\(xp)", fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: 6))
+            buttonUpgrade.set(label: Label(text: xp > 0 ? "\(xp)" : "free", fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: 6))
             
             buttonUpgrade.set(color: GameColors.controlBlue, blendMode: .add)
             self.addChild(buttonUpgrade)
@@ -66,10 +70,20 @@ class SpaceshipHangarCell: Control {
                         if playerData.points >= xp {
                             playerData.points = playerData.points - xp
                             
+                            if let spaceshipData = spaceship.spaceshipData {
+                                spaceshipData.xp = spaceshipData.xp + xp
+                            }
+                            
                             spaceship.level = spaceship.level + 1
                             spaceship.updateAttributes()
                             
-                            buttonUpgrade?.text = GameMath.xpForLevel(level: spaceship.level + 1).description
+                            xp = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
+                            
+                            if let spaceshipData = spaceship.spaceshipData {
+                                xp = xp - spaceshipData.xp
+                            }
+                            
+                            buttonUpgrade?.text = xp.description
                             
                             self?.updateLabels(spaceship: spaceship)
                             

@@ -77,6 +77,8 @@ class Spaceship: SKSpriteNode {
     var lastSecond = 0.0
     var labelRespawn: Label?
     
+    var battlePoints = 0
+    
     init(spaceshipData: SpaceshipData, loadPhysics: Bool = false, team: Mothership.team = .blue) {
         
         self.team = team
@@ -167,6 +169,16 @@ class Spaceship: SKSpriteNode {
             return
         }
         
+        if let shooter = shot.shooter {
+            if let spaceshipData = shooter.spaceshipData {
+                if shooter.team == self.team {
+                    spaceshipData.xp = spaceshipData.xp - shot.damage
+                } else {
+                    spaceshipData.xp = spaceshipData.xp + shot.damage
+                }
+            }
+        }
+        
         let dx = Float(shot.position.x - self.position.x)
         let dy = Float(shot.position.y - self.position.y)
         
@@ -218,6 +230,8 @@ class Spaceship: SKSpriteNode {
         if self.canRespawn {
             self.labelRespawn?.text = (self.deathCount * 5).description
         }
+        
+        self.setBitMasksToDeadSpaceship()
     }
     
     func heal() {
@@ -235,6 +249,7 @@ class Spaceship: SKSpriteNode {
         self.health = self.maxHealth
         self.updateHealthBar(health: self.health, maxHealth: self.maxHealth)
         self.labelRespawn?.text = ""
+        self.setBitMasksToMothershipSpaceship()
     }
     
     func damageEffect(damage: Int, damageMultiplier: CGFloat) {
@@ -501,6 +516,7 @@ class Spaceship: SKSpriteNode {
     
     func loadWeaponRangeShapeNode(gameWorld: GameWorld) {
         let shapeNode = SKShapeNode(circleOfRadius: self.weaponRange)
+        shapeNode.zPosition = GameWorld.zPosition.spaceshipWeaponRangeShapeNode.rawValue
         shapeNode.strokeColor = SKColor.white
         shapeNode.fillColor = SKColor.clear
         shapeNode.alpha = 0
@@ -631,6 +647,12 @@ class Spaceship: SKSpriteNode {
                 }
                 break
                 
+            case [.deadSpaceship, .spaceshipShot]:
+                if let shot = bodyB.node as? Shot {
+                    shot.setBitMasksToShot()
+                }
+                break
+                
             default:
                 #if DEBUG
                     fatalError()
@@ -672,6 +694,14 @@ class Spaceship: SKSpriteNode {
             physicsBody.categoryBitMask = GameWorld.categoryBitMask.spaceship.rawValue
             physicsBody.collisionBitMask = GameWorld.collisionBitMask.spaceship.rawValue
             physicsBody.contactTestBitMask = GameWorld.contactTestBitMask.spaceship.rawValue
+        }
+    }
+    
+    func setBitMasksToDeadSpaceship() {
+        if let physicsBody = self.physicsBody {
+            physicsBody.categoryBitMask = GameWorld.categoryBitMask.deadSpaceship.rawValue
+            physicsBody.collisionBitMask = GameWorld.categoryBitMask.deadSpaceship.rawValue
+            physicsBody.contactTestBitMask = GameWorld.categoryBitMask.deadSpaceship.rawValue
         }
     }
     

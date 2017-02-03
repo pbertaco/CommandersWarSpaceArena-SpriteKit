@@ -61,7 +61,7 @@ class MainMenuScene: GameScene {
         self.addChild(buttonSettings)
         
         let buttonGameCenter = Button(imageNamed: "button55x55", x: 312, y: 158, horizontalAlignment: .right, verticalAlignment: .top)
-        buttonGameCenter.setIcon(imageNamed: "Tropy")
+        buttonGameCenter.setIcon(imageNamed: "Game Center")
         buttonGameCenter.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonGameCenter)
         #if os(iOS)
@@ -98,6 +98,8 @@ class MainMenuScene: GameScene {
         let controlPoints = ControlPoints(x: 223, y: 15, horizontalAlignment: .right)
         controlPoints.setLabelPointsText(points: self.playerData.points)
         self.addChild(controlPoints)
+        
+        self.addChild(ControlMission(x: 71, y: 507, horizontalAlignment: .center, verticalAlignment: .center))
     }
     
     override func update(_ currentTime: TimeInterval) {
