@@ -67,9 +67,11 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
              world
              spaceship
              mothershipSpaceship
+             deadSpaceship
              shot
              spaceshipShot
              mothership
+             deadMothership
              */
             
         case [.spaceship, .shot]:
@@ -106,6 +108,9 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
             break
             
         case [.deadSpaceship, .spaceshipShot]:
+            break
+            
+        case [.deadSpaceship, .deadMothership]:
             break
             
         case [.shot, .mothership]:
@@ -216,9 +221,11 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
              world
              spaceship
              mothershipSpaceship
+             deadSpaceship
              shot
              spaceshipShot
              mothership
+             deadMothership
              */
             
         case [.spaceship, .shot]:
@@ -251,9 +258,24 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
             }
             break
             
+        case [.mothershipSpaceship, .deadMothership]:
+            if let spaceship = bodyA.node as? Spaceship {
+                spaceship.didEndContact(with: bodyB)
+            }
+            break
+            
+        case [.deadSpaceship, .shot]:
+            break
+            
         case [.deadSpaceship, .spaceshipShot]:
             if let spaceship = bodyA.node as? Spaceship {
                 spaceship.didEndContact(with: bodyB)
+            }
+            break
+            
+        case [.shot, .mothership]:
+            if let mothership = bodyB.node as? Mothership {
+                mothership.didEndContact(with: bodyA)
             }
             break
             

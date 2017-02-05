@@ -56,6 +56,9 @@
 		842A85F91E25BB3F006B31F7 /* LoadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A85F81E25BB3F006B31F7 /* LoadScene.swift */; };
 		842A85FA1E25BB3F006B31F7 /* LoadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A85F81E25BB3F006B31F7 /* LoadScene.swift */; };
 		842A85FB1E25BB3F006B31F7 /* LoadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A85F81E25BB3F006B31F7 /* LoadScene.swift */; };
+		845436661E44FE7600E1E2A7 /* BoxBattleResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845436651E44FE7600E1E2A7 /* BoxBattleResult.swift */; };
+		845436671E44FE7600E1E2A7 /* BoxBattleResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845436651E44FE7600E1E2A7 /* BoxBattleResult.swift */; };
+		845436681E44FE7600E1E2A7 /* BoxBattleResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845436651E44FE7600E1E2A7 /* BoxBattleResult.swift */; };
 		846585421E3D9C1100C890D3 /* MothershipHealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */; };
 		846585431E3D9C1100C890D3 /* MothershipHealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */; };
 		846585441E3D9C1100C890D3 /* MothershipHealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */; };
@@ -263,6 +266,7 @@
 		842A85AD1E25B715006B31F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		842A85AF1E25B715006B31F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		842A85F81E25BB3F006B31F7 /* LoadScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadScene.swift; sourceTree = "<group>"; };
+		845436651E44FE7600E1E2A7 /* BoxBattleResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxBattleResult.swift; sourceTree = "<group>"; };
 		846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipHealthBar.swift; sourceTree = "<group>"; };
 		846F283F1E28788C0040DB51 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		846F28401E28788C0040DB51 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -481,6 +485,7 @@
 		842A85D41E25BABD006B31F7 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				845436651E44FE7600E1E2A7 /* BoxBattleResult.swift */,
 				84138E001E439A9500B845E4 /* ControlMission.swift */,
 				84F945291E2EEEBA0034F530 /* ControlPoints.swift */,
 				84F945211E2EE6780034F530 /* ControlPremiumPoints.swift */,
@@ -817,6 +822,7 @@
 			files = (
 				8471829C1E25D5980077D3EF /* GameCamera.swift in Sources */,
 				847182C01E25D5A60077D3EF /* SKAction+Extensions.swift in Sources */,
+				845436661E44FE7600E1E2A7 /* BoxBattleResult.swift in Sources */,
 				84D03EE01E35A1E7007425E0 /* Mothership.swift in Sources */,
 				84A211271E3FC364008EE6ED /* HangarScene.swift in Sources */,
 				847182B41E25D5A60077D3EF /* CGFloat+Extensions.swift in Sources */,
@@ -890,6 +896,7 @@
 				847182C11E25D5A60077D3EF /* SKAction+Extensions.swift in Sources */,
 				847182B51E25D5A60077D3EF /* CGFloat+Extensions.swift in Sources */,
 				84AFAE201E2FEEEC006359DD /* GameWorld.swift in Sources */,
+				845436671E44FE7600E1E2A7 /* BoxBattleResult.swift in Sources */,
 				84D587061E426BD90041BAAD /* SpaceshipHangarCell.swift in Sources */,
 				84B5F5A01E32A81000AE8F8D /* ServerManager.swift in Sources */,
 				84F9452B1E2EEEBA0034F530 /* ControlPoints.swift in Sources */,
@@ -947,6 +954,7 @@
 				847182C21E25D5A60077D3EF /* SKAction+Extensions.swift in Sources */,
 				847182B61E25D5A60077D3EF /* CGFloat+Extensions.swift in Sources */,
 				84AFAE211E2FEEEC006359DD /* GameWorld.swift in Sources */,
+				845436681E44FE7600E1E2A7 /* BoxBattleResult.swift in Sources */,
 				84D587071E426BD90041BAAD /* SpaceshipHangarCell.swift in Sources */,
 				84B5F5A11E32A81000AE8F8D /* ServerManager.swift in Sources */,
 				84F9452C1E2EEEBA0034F530 /* ControlPoints.swift in Sources */,

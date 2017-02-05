@@ -19,7 +19,7 @@ class MothershipHealthBar: SKSpriteNode {
         let texture = SKTexture(imageNamed: "mothershipHealthBarBackground")
         texture.filteringMode = GameScene.defaultFilteringMode
         
-        super.init(texture: texture, color: SKColor.clear, size: texture.size())
+        super.init(texture: texture, color: .clear, size: texture.size())
         
         var teamColor: SKColor = .clear
         
@@ -34,7 +34,7 @@ class MothershipHealthBar: SKSpriteNode {
             break
         }
         
-        self.fill = SKSpriteNode(texture: nil, color: SKColor.clear, size: self.size)
+        self.fill = SKSpriteNode(texture: nil, color: .clear, size: self.size)
         self.fillSizeWidth = self.fill.size.width - 4
         self.fill.size.width = self.fillSizeWidth
         self.fill.size.height = self.fill.size.height - 4

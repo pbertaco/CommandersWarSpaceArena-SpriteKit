@@ -23,15 +23,16 @@ class MainMenuScene: GameScene {
     var state: state = .mainMenu
     var nextState: state = .mainMenu
     
-    let playerData = MemoryCard.sharedInstance.playerData!
-    
     override func load() {
         super.load()
+        
+        let playerData = MemoryCard.sharedInstance.playerData!
         
         self.backgroundColor = GameColors.backgroundColor
         
         let mothershipSlots = MothershipSlots(x: 0, y: 289, horizontalAlignment: .center, verticalAlignment: .center)
-        mothershipSlots.load(slots: self.playerData.mothership?.slots)
+        
+        mothershipSlots.load(slots: playerData.mothership?.slots)
         self.addChild(mothershipSlots)
         
         let buttonPlay = Button(imageNamed: "button233x55", x: 71, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
@@ -92,11 +93,11 @@ class MainMenuScene: GameScene {
         self.addChild(control)
         
         let controlPremiumPoints = ControlPremiumPoints(x: 8, y: 15)
-        controlPremiumPoints.setLabelPremiumPointsText(premiumPoints: self.playerData.premiumPoints)
+        controlPremiumPoints.setLabelPremiumPointsText(premiumPoints: playerData.premiumPoints)
         self.addChild(controlPremiumPoints)
         
         let controlPoints = ControlPoints(x: 223, y: 15, horizontalAlignment: .right)
-        controlPoints.setLabelPointsText(points: self.playerData.points)
+        controlPoints.setLabelPointsText(points: playerData.points)
         self.addChild(controlPoints)
         
         self.addChild(ControlMission(x: 71, y: 507, horizontalAlignment: .center, verticalAlignment: .center))

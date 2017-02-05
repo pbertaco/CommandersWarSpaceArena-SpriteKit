@@ -15,7 +15,8 @@ class BattleScene: GameScene {
     
     enum zPosition: CGFloat {
         case gameWorld = 0
-        case hud = 100
+        case blackSpriteNode = 1000
+        case boxBattleResult = 2000
     }
     
     enum state: String {
@@ -34,8 +35,6 @@ class BattleScene: GameScene {
     var state: state = .loading
     var nextState: state = .loading
     
-    let playerData = MemoryCard.sharedInstance.playerData!
-    
     var mothership: Mothership!
     var botMothership: Mothership!
     
@@ -48,6 +47,8 @@ class BattleScene: GameScene {
     
     override func load() {
         super.load()
+        
+        let playerData = MemoryCard.sharedInstance.playerData!
         
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         
@@ -67,7 +68,7 @@ class BattleScene: GameScene {
         self.mothership = Mothership(team: Mothership.team.blue)
         self.mothership.loadHealthBar(gameWorld: gameWorld)
         self.gameWorld.addChild(self.mothership)
-        if let slots = (self.playerData.mothership?.slots as? Set<MothershipSlotData>)?.sorted(by: {
+        if let slots = (playerData.mothership?.slots as? Set<MothershipSlotData>)?.sorted(by: {
             return $0.index < $1.index
         }) {
             for slot in slots {
@@ -83,11 +84,11 @@ class BattleScene: GameScene {
         self.botMothership.loadHealthBar(gameWorld: gameWorld)
         self.gameWorld.addChild(self.botMothership)
         
-        let mission = Mission.types[Int(self.playerData.botLevel)]
+        let mission = Mission.types[Int(playerData.botLevel)]
         
         for rarity in mission.rarities {
             self.botMothership.spaceships.append(Spaceship(
-                level: (mission.level + Int.random(min: -1, max: 1)).clamped(1...10),
+                level: (mission.level + Int.random(min: -2, max: 0)).clamped(1...10),
                 rarity: rarity,
                 loadPhysics: true, team: .red))
         }
@@ -122,6 +123,7 @@ class BattleScene: GameScene {
                 self.botMothership.update(enemyMothership: self.mothership, enemySpaceships: self.mothership.spaceships)
                 
                 if currentTime - self.lastBotUpdate > 1 {
+                    
                     self.lastBotUpdate = currentTime
                     
                     let aliveBotSpaceships = self.botMothership.spaceships.filter({ $0.health > 0 })
@@ -201,6 +203,16 @@ class BattleScene: GameScene {
                 
             case .showBattleResult:
                 
+                let boxBattleResult = BoxBattleResult(mothership: self.mothership, botMothership: self.botMothership)
+                boxBattleResult.zPosition = zPosition.boxBattleResult.rawValue
+                self.blackSpriteNode.isHidden = false
+                self.blackSpriteNode.zPosition = zPosition.blackSpriteNode.rawValue
+                self.addChild(boxBattleResult)
+                
+                boxBattleResult.buttonOK.touchUpEvent = { [weak self] in
+                    self?.nextState = .mainMenu
+                }
+                
                 if self.botMothership.health <= 0 && self.mothership.health <= 0 {
                     
                 } else {
@@ -219,8 +231,6 @@ class BattleScene: GameScene {
                         }
                     }
                 }
-                
-                self.nextState = .mainMenu
                 break
                 
             case .mainMenu:
@@ -356,6 +366,8 @@ class BattleScene: GameScene {
                 case .blue:
                     if nearestSpaceship.position.distanceSquaredTo(nearestSpaceship.startingPosition) > 4 {
                         nearestSpaceship.touchUp(touch: touch)
+                    } else {
+                        nearestSpaceship.physicsBody?.isDynamic = true
                     }
                     break
                 case .red:
@@ -428,14 +440,16 @@ class BattleScene: GameScene {
     }
     
     func updateBotOnWin() {
-        if self.playerData.botLevel < Int16(Mission.types.count - 1) {
-            self.playerData.botLevel = self.playerData.botLevel + 1
+        let playerData = MemoryCard.sharedInstance.playerData!
+        if playerData.botLevel < Int16(Mission.types.count - 1) {
+            playerData.botLevel = playerData.botLevel + 1
         }
     }
     
     func updateBotOnLose() {
-        if self.playerData.botLevel > 0 {
-            self.playerData.botLevel = self.playerData.botLevel - 1
+        let playerData = MemoryCard.sharedInstance.playerData!
+        if playerData.botLevel > 0 {
+            playerData.botLevel = playerData.botLevel - 1
         }
     }
     

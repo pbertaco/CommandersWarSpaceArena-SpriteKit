@@ -129,7 +129,7 @@ class GameMath {
     }
     
     static func spaceshipMaxVelocitySquared(level: Int, speedAtribute: Int) -> CGFloat {
-        let maxVelocity = CGFloat(speedAtribute) * 4
+        let maxVelocity = CGFloat(speedAtribute) * 6
         return maxVelocity * maxVelocity
     }
 }

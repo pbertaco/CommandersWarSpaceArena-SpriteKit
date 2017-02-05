@@ -33,7 +33,6 @@ extension MemoryCard {
         spaceshipData.baseSpeed = Int16(GameMath.randomBaseSpeed(rarity: rarity))
         spaceshipData.rarity = Int16(rarity.rawValue)
         spaceshipData.skin = Int16(Int.random(Spaceship.skins.count))
-        spaceshipData.xp = 0
         
         return spaceshipData
     }

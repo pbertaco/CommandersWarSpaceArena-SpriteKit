@@ -31,7 +31,7 @@ class Mothership: SKSpriteNode {
         let texture = SKTexture(imageNamed: "mothership")
         texture.filteringMode = GameScene.defaultFilteringMode
         
-        super.init(texture: texture, color: SKColor.clear, size: texture.size())
+        super.init(texture: texture, color: .clear, size: texture.size())
         
         var color: SKColor = .white
         
@@ -91,6 +91,12 @@ class Mothership: SKSpriteNode {
         if let bodyA = self.physicsBody {
             switch GameWorld.categoryBitMask(rawValue: bodyA.categoryBitMask | bodyB.categoryBitMask) {
                 
+            case [.shot, .mothership]:
+                if let shot = bodyB.node as? Shot {
+                    self.getHitBy(shot)
+                }
+                break
+                
             default:
                 #if DEBUG
                     fatalError()
@@ -102,24 +108,20 @@ class Mothership: SKSpriteNode {
     
     func getHitBy(_ shot: Shot) {
         
+        if shot.shooter?.team == self.team || shot.damage <= 0 {
+            return
+        }
+        
         if let shooter = shot.shooter {
-            if let spaceshipData = shooter.spaceshipData {
-                if shooter.team == self.team {
-                    shooter.battlePoints = shooter.battlePoints - shot.damage
-                    spaceshipData.xp = spaceshipData.xp - shot.damage
-                } else {
-                    shooter.battlePoints = shooter.battlePoints + shot.damage
-                    spaceshipData.xp = spaceshipData.xp + shot.damage
-                }
+            if shooter.team != self.team {
+                shooter.battlePoints = shooter.battlePoints + shot.damage
             }
         }
         
-        if shot.damage > 0 {
-            self.damageEffect(damage: shot.damage, position: shot.position)
-        }
+        self.damageEffect(damage: shot.damage, position: shot.position)
         
         if self.health > 0 && self.health - shot.damage <= 0 {
-            self.die()
+            self.die(shooter: shot.shooter)
         } else {
             self.health = self.health - shot.damage
         }
@@ -128,7 +130,8 @@ class Mothership: SKSpriteNode {
         shot.removeFromParent()
     }
     
-    func die() {
+    func die(shooter: Spaceship?) {
+        
         self.health = 0
         
         self.isHidden = true
@@ -139,7 +142,7 @@ class Mothership: SKSpriteNode {
             spaceship.canRespawn = false
             
             if self.intersects(spaceship) {
-                spaceship.die()
+                spaceship.die(shooter: shooter)
                 spaceship.updateHealthBar(health: spaceship.health, maxHealth: spaceship.maxHealth)
             }
             spaceship.labelRespawn?.text = ""
@@ -280,6 +283,7 @@ class Mothership: SKSpriteNode {
         for spaceship in self.spaceships {
             spaceship.destination = nil
             spaceship.targetNode = nil
+            spaceship.canRespawn = false
         }
     }
 

@@ -18,8 +18,10 @@ class SpaceshipHangarCell: Control {
     
     var labelXP: Label!
 
-    init(spaceship: Spaceship) {
+    init(spaceship: Spaceship, loadButtonSell: Bool = true) {
         super.init(imageNamed: "box233x144", x: 0, y: 0)
+        
+        let playerData = MemoryCard.sharedInstance.playerData!
         
         let mothershipSlot = MothershipSlot(x: 19, y: 8)
         mothershipSlot.load(spaceship: spaceship)
@@ -49,10 +51,6 @@ class SpaceshipHangarCell: Control {
         if spaceship.level < 10 {
             var xp: Int32 = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
             
-            if let spaceshipData = spaceship.spaceshipData {
-                xp = xp - spaceshipData.xp
-            }
-            
             let buttonUpgrade = Button(imageNamed: "button89x34", x: 19, y: 102)
             
             buttonUpgrade.set(label: Label(text: "upgrade", fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: -6))
@@ -61,37 +59,25 @@ class SpaceshipHangarCell: Control {
             buttonUpgrade.set(color: GameColors.controlBlue, blendMode: .add)
             self.addChild(buttonUpgrade)
             
-            weak var playerData = MemoryCard.sharedInstance.playerData!
-            
             buttonUpgrade.touchUpEvent = { [weak self, weak buttonUpgrade, weak spaceship] in
-                if let playerData = playerData {
-                    if let spaceship = spaceship {
+                if let spaceship = spaceship {
+                    
+                    if playerData.points >= xp {
+                        playerData.points = playerData.points - xp
                         
-                        if playerData.points >= xp {
-                            playerData.points = playerData.points - xp
-                            
-                            if let spaceshipData = spaceship.spaceshipData {
-                                spaceshipData.xp = spaceshipData.xp + xp
-                            }
-                            
-                            spaceship.level = spaceship.level + 1
-                            spaceship.updateAttributes()
-                            
-                            xp = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
-                            
-                            if let spaceshipData = spaceship.spaceshipData {
-                                xp = xp - spaceshipData.xp
-                            }
-                            
-                            buttonUpgrade?.text = xp.description
-                            
-                            self?.updateLabels(spaceship: spaceship)
-                            
-                            ControlPoints.current()?.setLabelPointsText(points: playerData.points)
-                            
-                            if spaceship.level >= 10 {
-                                buttonUpgrade?.removeFromParent()
-                            }
+                        spaceship.level = spaceship.level + 1
+                        spaceship.updateAttributes()
+                        
+                        xp = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
+                        
+                        buttonUpgrade?.text = xp.description
+                        
+                        self?.updateLabels(spaceship: spaceship)
+                        
+                        ControlPoints.current()?.setLabelPointsText(points: playerData.points)
+                        
+                        if spaceship.level >= 10 {
+                            buttonUpgrade?.removeFromParent()
                         }
                     }
                 }
@@ -102,9 +88,15 @@ class SpaceshipHangarCell: Control {
             self.addChild(Control(imageNamed: "box89x34", x: 125, y: 102))
             self.addChild(Control(imageNamed: "slotIndex\(mothershipSlot.index)", x: 127, y: 109))
         } else {
-            let buttonUse = Button(imageNamed: "button89x34", x: 125, y: 102)
-            buttonUse.set(color: GameColors.controlBlue, blendMode: .add)
-            self.addChild(buttonUse)
+            if loadButtonSell {
+                let buttonSell = Button(imageNamed: "button89x34", x: 125, y: 102)
+                buttonSell.set(label: Label(text: "sell", fontSize: .fontSize8, fontColor: GameColors.controlBlue))
+                buttonSell.set(color: GameColors.controlBlue, blendMode: .add)
+                self.addChild(buttonSell)
+                buttonSell.touchUpEvent = {
+                    
+                }
+            }
         }
     }
     

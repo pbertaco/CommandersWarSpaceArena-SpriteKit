@@ -63,8 +63,8 @@ class FacebookClient {
         
         self.logInWith(successBlock: {
             
-            let graphPath = "me/invitable_friends?limit=1000"
-            let parameters = ["fields" : "id,name,picture"]
+            let graphPath = "me/invitable_friends"
+            let parameters = ["fields" : "id,name,picture", "limit": "1000"]
             
             let graphRequest = FBSDKGraphRequest(graphPath: graphPath, parameters: parameters)
             let connection = FBSDKGraphRequestConnection()

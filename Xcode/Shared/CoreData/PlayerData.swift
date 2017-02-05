@@ -14,12 +14,10 @@ extension MemoryCard {
         let playerData: PlayerData = self.insertNewObject()
         
         playerData.botLevel = 0
-        playerData.level = 1
         playerData.modelVersion = 1
         playerData.name = ""
         playerData.points = 10000
         playerData.premiumPoints = 100
-        playerData.xp = 0
         
         playerData.mothership = self.newMothershipData()
         
@@ -27,11 +25,12 @@ extension MemoryCard {
             let mothershipSlot: MothershipSlotData = self.newMothershipSlotData()
             mothershipSlot.index = Int16(i)
             let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: Spaceship.randomRarity())
+            //spaceshipData.rarity = Int16(Spaceship.rarity.legendary.rawValue)
+            //spaceshipData.level = 10
             
             mothershipSlot.spaceship = spaceshipData
             
             playerData.mothership?.addToSlots(mothershipSlot)
-            playerData.addToSpaceships(spaceshipData)
         }
         
         for _ in 0..<4 {

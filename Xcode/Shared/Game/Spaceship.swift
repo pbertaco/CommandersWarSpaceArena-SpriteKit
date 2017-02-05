@@ -72,18 +72,21 @@ class Spaceship: SKSpriteNode {
     var canShot = true
     
     var canRespawn = true
-    var deathCount = 0
     var deathTime = 0.0
     var lastSecond = 0.0
     var labelRespawn: Label?
     
     var battlePoints = 0
+    var kills = 0
+    var assists = 0
+    var deaths = 0
+    var getHitBySpaceships = Set<Spaceship>()
     
     init(spaceshipData: SpaceshipData, loadPhysics: Bool = false, team: Mothership.team = .blue) {
         
         self.team = team
         
-        super.init(texture: nil, color: SKColor.clear, size: CGSize.zero)
+        super.init(texture: nil, color: .clear, size: CGSize.zero)
         self.spaceshipData = spaceshipData
         
         let color = SKColor(
@@ -107,7 +110,7 @@ class Spaceship: SKSpriteNode {
         
         self.team = team
         
-        super.init(texture: nil, color: SKColor.clear, size: CGSize.zero)
+        super.init(texture: nil, color: .clear, size: CGSize.zero)
         
         self.rarity = rarity
         
@@ -122,8 +125,32 @@ class Spaceship: SKSpriteNode {
                   team: team)
     }
     
+    private init(spaceship: Spaceship, loadPhysics: Bool = false, team: Mothership.team = .blue) {
+        self.team = team
+        
+        super.init(texture: nil, color: .clear, size: CGSize.zero)
+        
+        self.rarity = spaceship.rarity
+        
+        self.load(level: spaceship.level,
+                  baseDamage: spaceship.baseDamage,
+                  baseLife: spaceship.baseLife,
+                  baseSpeed: spaceship.baseSpeed,
+                  baseRange: spaceship.baseRange,
+                  skinIndex: spaceship.skinIndex,
+                  color: spaceship.color,
+                  loadPhysics: loadPhysics,
+                  team: team)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func createCopy(loadPhysics: Bool = false, team: Mothership.team = .blue) -> Spaceship {
+        let spaceship = Spaceship(spaceship: self, loadPhysics: loadPhysics, team: team)
+        spaceship.spaceshipData = self.spaceshipData
+        return spaceship
     }
     
     func load(level: Int, baseDamage: Int, baseLife: Int, baseSpeed: Int, baseRange: Int,
@@ -165,18 +192,8 @@ class Spaceship: SKSpriteNode {
     
     func getHitBy(_ shot: Shot) {
         
-        if shot.shooter == self {
+        if shot.shooter?.team == self.team || shot.damage <= 0 {
             return
-        }
-        
-        if let shooter = shot.shooter {
-            if let spaceshipData = shooter.spaceshipData {
-                if shooter.team == self.team {
-                    spaceshipData.xp = spaceshipData.xp - shot.damage
-                } else {
-                    spaceshipData.xp = spaceshipData.xp + shot.damage
-                }
-            }
         }
         
         let dx = Float(shot.position.x - self.position.x)
@@ -191,21 +208,38 @@ class Spaceship: SKSpriteNode {
         
         shot.damage = Int(Float(shot.damage) * damageMultiplier)
         
-        if shot.damage > 0 {
-            self.damageEffect(damage: shot.damage, damageMultiplier: CGFloat(damageMultiplier))
+        if let shooter = shot.shooter {
+            if shooter.team != self.team {
+                self.getHitBySpaceships.insert(shooter)
+                shooter.battlePoints = shooter.battlePoints + shot.damage
+            }
         }
         
+        self.damageEffect(damage: shot.damage, damageMultiplier: CGFloat(damageMultiplier))
+        
         if self.health > 0 && self.health - shot.damage <= 0 {
-            self.die()
+            self.die(shooter: shot.shooter)
         } else {
             self.health = self.health - shot.damage
         }
         self.updateHealthBar(health: self.health, maxHealth: self.maxHealth)
+        
         shot.damage = 0
         shot.removeFromParent()
     }
     
-    func die() {
+    func die(shooter: Spaceship?) {
+        
+        if let shooter = shooter {
+            shooter.kills = shooter.kills + 1
+            self.getHitBySpaceships.remove(shooter)
+        }
+        
+        for shooter in self.getHitBySpaceships {
+            shooter.assists = shooter.assists + 1
+        }
+        
+        self.getHitBySpaceships.removeAll()
         
         self.health = 0
         
@@ -223,12 +257,12 @@ class Spaceship: SKSpriteNode {
         
         self.isHidden = true
         
-        self.deathCount = self.deathCount + 1
+        self.deaths = self.deaths + 1
         self.deathTime = GameScene.currentTime
         self.lastSecond = GameScene.currentTime
         
         if self.canRespawn {
-            self.labelRespawn?.text = (self.deathCount * 5).description
+            self.labelRespawn?.text = (self.deaths * 5).description
         }
         
         self.setBitMasksToDeadSpaceship()
@@ -239,6 +273,9 @@ class Spaceship: SKSpriteNode {
             self.health = self.health + (self.maxHealth/60)
             if self.health > self.maxHealth {
                 self.health = self.maxHealth
+            }
+            if self.health == self.maxHealth {
+                self.getHitBySpaceships.removeAll()
             }
             self.updateHealthBar(health: self.health, maxHealth: self.maxHealth)
         }
@@ -354,11 +391,11 @@ class Spaceship: SKSpriteNode {
                 if GameScene.currentTime - self.lastSecond > 1 {
                     self.lastSecond = GameScene.currentTime
                     
-                    if GameScene.currentTime - self.deathTime > Double(self.deathCount * 5) {
+                    if GameScene.currentTime - self.deathTime > Double(self.deaths * 5) {
                         self.respawn()
                     } else {
                         if let label = self.labelRespawn {
-                            let text = Int((self.deathCount * 5) - Int(GameScene.currentTime - self.deathTime)).description
+                            let text = Int((self.deaths * 5) - Int(GameScene.currentTime - self.deathTime)).description
                             label.text = text
                         }
                     }
@@ -518,7 +555,7 @@ class Spaceship: SKSpriteNode {
         let shapeNode = SKShapeNode(circleOfRadius: self.weaponRange)
         shapeNode.zPosition = GameWorld.zPosition.spaceshipWeaponRangeShapeNode.rawValue
         shapeNode.strokeColor = SKColor.white
-        shapeNode.fillColor = SKColor.clear
+        shapeNode.fillColor = .clear
         shapeNode.alpha = 0
         shapeNode.position = self.position
         gameWorld.addChild(shapeNode)
@@ -647,6 +684,12 @@ class Spaceship: SKSpriteNode {
                 }
                 break
                 
+            case [.mothershipSpaceship, .deadMothership]:
+                if (self.destination ?? CGPoint.zero) != self.startingPosition {
+                    self.setBitMasksToSpaceship()
+                }
+                break
+                
             case [.deadSpaceship, .spaceshipShot]:
                 if let shot = bodyB.node as? Shot {
                     shot.setBitMasksToShot()
@@ -678,7 +721,7 @@ class Spaceship: SKSpriteNode {
         physicsBody.isDynamic = false
         
         self.maxVelocitySquared = GameMath.spaceshipMaxVelocitySquared(level: self.level, speedAtribute: self.speedAtribute)
-        self.force = maxVelocitySquared / 120
+        self.force = maxVelocitySquared / 240
     }
     
     func setBitMasksToMothershipSpaceship() {

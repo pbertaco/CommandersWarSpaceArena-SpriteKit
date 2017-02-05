@@ -27,7 +27,12 @@ class MothershipSlot: Control {
         self.load(spaceship: Spaceship(spaceshipData: spaceshipData))
     }
     
-    func load(spaceship: Spaceship) {
+    func load(spaceship: Spaceship, createCopy: Bool = false) {
+        self.load(spaceship: createCopy ? spaceship.createCopy() : spaceship)
+    }
+    
+    private func load(spaceship: Spaceship) {
+        
         self.spaceship?.removeFromParent()
         self.spaceship = spaceship
         self.addChild(spaceship)

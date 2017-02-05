@@ -35,7 +35,7 @@ class Shot: SKSpriteNode {
         
         let texture = SKTexture(imageNamed: "shot")
         
-        super.init(texture: texture, color: SKColor.clear, size: texture.size())
+        super.init(texture: texture, color: .clear, size: texture.size())
         
         self.color = color
         self.colorBlendFactor = 1

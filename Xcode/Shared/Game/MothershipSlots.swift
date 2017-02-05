@@ -36,18 +36,17 @@ class MothershipSlots: Control {
                 if let mothershipSlotData = item as? MothershipSlotData {
                     if let spaceshipData = mothershipSlotData.spaceship {
                         let index = Int(mothershipSlotData.index)
-                        let spaceship = Spaceship(spaceshipData: spaceshipData)
-                        self.loadMothershipSlot(index: index, spaceship: spaceship)
+                        self.loadMothershipSlot(index: index, spaceshipData: spaceshipData)
                     }
                 }
             }
         }
     }
     
-    func loadMothershipSlot(index: Int, spaceship: Spaceship) {
+    func loadMothershipSlot(index: Int, spaceshipData: SpaceshipData) {
         switch index {
         case 0, 1, 2, 3:
-            self.mothershipSlots[index].load(spaceship: spaceship)
+            self.mothershipSlots[index].load(spaceshipData: spaceshipData)
             break
         default:
             break

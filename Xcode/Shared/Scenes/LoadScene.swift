@@ -52,6 +52,8 @@ class LoadScene: GameScene {
         }
         
         Label.defaultFontName = .kenPixel
+        
+        SKTDefaultTimingFunction = SKTTimingFunctionElasticEaseOut
     }
     
     override func update(_ currentTime: TimeInterval) {
