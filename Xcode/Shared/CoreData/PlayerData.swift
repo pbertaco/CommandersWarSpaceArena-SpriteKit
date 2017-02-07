@@ -25,8 +25,6 @@ extension MemoryCard {
             let mothershipSlot: MothershipSlotData = self.newMothershipSlotData()
             mothershipSlot.index = Int16(i)
             let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: Spaceship.randomRarity())
-            //spaceshipData.rarity = Int16(Spaceship.rarity.legendary.rawValue)
-            //spaceshipData.level = 10
             
             mothershipSlot.spaceship = spaceshipData
             

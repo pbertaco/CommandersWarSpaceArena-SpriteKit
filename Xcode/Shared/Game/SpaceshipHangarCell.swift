@@ -17,6 +17,11 @@ class SpaceshipHangarCell: Control {
     var labelSpeedAtribute: Label!
     
     var labelXP: Label!
+    
+    var control0: Control?
+    var control1: Control?
+    
+    private weak var spaceship: Spaceship?
 
     init(spaceship: Spaceship, loadButtonSell: Bool = true) {
         super.init(imageNamed: "box233x144", x: 0, y: 0)
@@ -48,56 +53,66 @@ class SpaceshipHangarCell: Control {
         self.labelSpeedAtribute = Label(text: spaceship.speedAtribute.description, horizontalAlignmentMode: .left, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 179, y: 83)
         self.addChild(self.labelSpeedAtribute)
         
-        if spaceship.level < 10 {
-            var xp: Int32 = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
+        if let spaceshipData = spaceship.spaceshipData {
             
-            let buttonUpgrade = Button(imageNamed: "button89x34", x: 19, y: 102)
-            
-            buttonUpgrade.set(label: Label(text: "upgrade", fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: -6))
-            buttonUpgrade.set(label: Label(text: xp > 0 ? "\(xp)" : "free", fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: 6))
-            
-            buttonUpgrade.set(color: GameColors.controlBlue, blendMode: .add)
-            self.addChild(buttonUpgrade)
-            
-            buttonUpgrade.touchUpEvent = { [weak self, weak buttonUpgrade, weak spaceship] in
-                if let spaceship = spaceship {
-                    
-                    if playerData.points >= xp {
-                        playerData.points = playerData.points - xp
+            if spaceship.level < 10 {
+                var xp: Int32 = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
+                
+                let buttonUpgrade = Button(imageNamed: "button89x34", x: 19, y: 102)
+                
+                buttonUpgrade.set(label: Label(text: "upgrade", fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: -6))
+                buttonUpgrade.set(label: Label(text: xp > 0 ? "\(xp)" : "free", fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: 6))
+                
+                buttonUpgrade.set(color: GameColors.controlBlue, blendMode: .add)
+                self.addChild(buttonUpgrade)
+                
+                buttonUpgrade.touchUpEvent = { [weak self, weak buttonUpgrade, weak spaceship] in
+                    if let spaceship = spaceship {
                         
-                        spaceship.level = spaceship.level + 1
-                        spaceship.updateAttributes()
-                        
-                        xp = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
-                        
-                        buttonUpgrade?.text = xp.description
-                        
-                        self?.updateLabels(spaceship: spaceship)
-                        
-                        ControlPoints.current()?.setLabelPointsText(points: playerData.points)
-                        
-                        if spaceship.level >= 10 {
-                            buttonUpgrade?.removeFromParent()
+                        if playerData.points >= xp {
+                            playerData.points = playerData.points - xp
+                            
+                            spaceship.level = spaceship.level + 1
+                            spaceship.updateAttributes()
+                            
+                            xp = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
+                            
+                            buttonUpgrade?.text = xp.description
+                            
+                            self?.updateLabels(spaceship: spaceship)
+                            
+                            ControlPoints.current()?.setLabelPointsText(points: playerData.points)
+                            
+                            if spaceship.level >= 10 {
+                                buttonUpgrade?.removeFromParent()
+                            }
                         }
                     }
                 }
             }
-        }
-        
-        if let mothershipSlot = spaceship.spaceshipData?.parentMothershipSlot {
-            self.addChild(Control(imageNamed: "box89x34", x: 125, y: 102))
-            self.addChild(Control(imageNamed: "slotIndex\(mothershipSlot.index)", x: 127, y: 109))
-        } else {
-            if loadButtonSell {
-                let buttonSell = Button(imageNamed: "button89x34", x: 125, y: 102)
-                buttonSell.set(label: Label(text: "sell", fontSize: .fontSize8, fontColor: GameColors.controlBlue))
-                buttonSell.set(color: GameColors.controlBlue, blendMode: .add)
-                self.addChild(buttonSell)
-                buttonSell.touchUpEvent = {
-                    
+            
+            
+            if let mothershipSlot = spaceshipData.parentMothershipSlot {
+                let control = Control(imageNamed: "box89x34", x: 125, y: 102)
+                control.addChild(Control(imageNamed: "slotIndex\(mothershipSlot.index)", x: 2, y: 8))
+                self.addChild(control)
+                self.control1 = control
+            } else {
+                if loadButtonSell {
+                    let buttonSell = Button(imageNamed: "button89x34", x: 125, y: 102)
+                    buttonSell.set(label: Label(text: "sell", fontSize: .fontSize8, fontColor: GameColors.controlBlue))
+                    buttonSell.set(color: GameColors.controlBlue, blendMode: .add)
+                    self.addChild(buttonSell)
+                    buttonSell.touchUpEvent = {
+                        
+                    }
+                    buttonSell.isHidden = true
+                    self.control1 = buttonSell
                 }
             }
         }
+        
+        self.spaceship = spaceship
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -110,5 +125,9 @@ class SpaceshipHangarCell: Control {
         self.labelMaxHealth.text = spaceship.maxHealth.description
         self.labelWeaponRange.text = Int(spaceship.weaponRange).description
         self.labelSpeedAtribute.text = spaceship.speedAtribute.description
+    }
+    
+    func spaceshipData() -> SpaceshipData? {
+        return self.spaceship?.spaceshipData
     }
 }

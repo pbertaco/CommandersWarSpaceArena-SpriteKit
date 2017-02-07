@@ -364,7 +364,7 @@ class BattleScene: GameScene {
             if let nearestSpaceship = self.nearestSpaceship(spaceships: self.mothership.spaceships + self.botMothership.spaceships, touch: touch) {
                 switch nearestSpaceship.team {
                 case .blue:
-                    if nearestSpaceship.position.distanceSquaredTo(nearestSpaceship.startingPosition) > 4 {
+                    if (nearestSpaceship.position - nearestSpaceship.startingPosition).lengthSquared() > 4 {
                         nearestSpaceship.touchUp(touch: touch)
                     } else {
                         nearestSpaceship.physicsBody?.isDynamic = true
@@ -380,7 +380,7 @@ class BattleScene: GameScene {
             if let parent = self.mothership.parent {
                 if self.mothership.contains(touch.location(in: parent)) {
                     if let selectedSpaceship = Spaceship.selectedSpaceship {
-                        if selectedSpaceship.position.distanceSquaredTo(selectedSpaceship.startingPosition) > 4 {
+                        if selectedSpaceship.position.distanceTo(selectedSpaceship.startingPosition) > 4 {
                             selectedSpaceship.retreat()
                         }
                     }
@@ -427,7 +427,7 @@ class BattleScene: GameScene {
             if let parent = spaceship.parent {
                 if nearestSpaceship != nil { 
                     let touchPosition = touch.location(in: parent)
-                    if touchPosition.distanceSquaredTo(spaceship.position) < touchPosition.distanceSquaredTo(nearestSpaceship!.position) {
+                    if touchPosition.distanceTo(spaceship.position) < touchPosition.distanceTo(nearestSpaceship!.position) {
                         nearestSpaceship = spaceship
                     }
                 } else {

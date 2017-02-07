@@ -21,6 +21,9 @@ class HangarScene: GameScene {
     var cellIndexMothershipSlots = 0
     var cellIndexPlayerDataSpaceships = 0
     
+    var scrollNodeMothershipSlots: ScrollNode!
+    var scrollNodePlayerDataSpaceships: ScrollNode!
+    
     override func load() {
         super.load()
         
@@ -40,10 +43,7 @@ class HangarScene: GameScene {
         
         self.loadPlayerDataSpaceships()
         
-        let buttonChange = Button(imageNamed: "button233x55", x: 71, y: 306, horizontalAlignment: .center, verticalAlignment: .center)
-        buttonChange.setIcon(imageNamed: "Data in Both Directions")
-        buttonChange.set(color: GameColors.controlBlue, blendMode: .add)
-        self.addChild(buttonChange)
+        self.loadButtonChange()
         
         
         let control = Control(imageNamed: "box89x89", x: 375/2, y: -2, horizontalAlignment: .center)
@@ -88,9 +88,59 @@ class HangarScene: GameScene {
         }
     }
     
-    override func touchMoved(touch: UITouch) {
-        super.touchMoved(touch: touch)
+    func loadButtonChange() {
         
+        let playerData = MemoryCard.sharedInstance.playerData!
+        
+        let buttonChange = Button(imageNamed: "button233x55", x: 71, y: 306, horizontalAlignment: .center, verticalAlignment: .center)
+        buttonChange.setIcon(imageNamed: "Data in Both Directions")
+        buttonChange.set(color: GameColors.controlBlue, blendMode: .add)
+        self.addChild(buttonChange)
+        
+        buttonChange.touchUpEvent = { [weak self, weak playerData] in
+            guard let this = self else { return }
+            
+            let a = this.scrollNodeMothershipSlots.cells[this.cellIndexMothershipSlots]
+            let b = this.scrollNodePlayerDataSpaceships.cells[this.cellIndexPlayerDataSpaceships]
+            
+            this.scrollNodeMothershipSlots.cells[this.cellIndexMothershipSlots] = b
+            this.scrollNodePlayerDataSpaceships.cells[this.cellIndexPlayerDataSpaceships] = a
+            
+            if let aParent = a.parent {
+                if let bParent = b.parent {
+                    a.move(toParent: bParent)
+                    b.move(toParent: aParent)
+                    
+                    let aPosition = a.position
+                    let bPosition = b.position
+                    a.position = bPosition
+                    b.position = aPosition
+                }
+            }
+            
+            if let a = a as? SpaceshipHangarCell {
+                if let b = b as? SpaceshipHangarCell {
+                    a.control1?.move(toParent: b)
+                    b.control1?.move(toParent: a)
+                    
+                    let aControl1 = a.control1
+                    a.control1 = b.control1
+                    b.control1 = aControl1
+                    
+                    if let aSpaceshipData = a.spaceshipData() {
+                        if let bSpaceshipData = b.spaceshipData() {
+                            aSpaceshipData.parentMothershipSlot?.spaceship = bSpaceshipData
+                            playerData?.removeFromSpaceships(bSpaceshipData)
+                            playerData?.addToSpaceships(aSpaceshipData)
+                        }
+                    }
+                }
+            }
+        }
+        
+        if scrollNodePlayerDataSpaceships.cells.count <= 0 {
+            buttonChange.isHidden = true
+        }
     }
     
     func loadPlayerDataSpaceships() {
@@ -98,7 +148,9 @@ class HangarScene: GameScene {
         
         var cellsPlayerDataSpaceships = [SpaceshipHangarCell]()
         
-        if let playerDataSpaceships = playerData.spaceships as? Set<SpaceshipData> {
+        if let playerDataSpaceships = (playerData.spaceships as? Set<SpaceshipData>)?.sorted(by: {
+            $0.baseDamage > $1.baseDamage
+        }) {
             for spaceshipData in playerDataSpaceships {
                 let spaceship = Spaceship(spaceshipData: spaceshipData)
                 cellsPlayerDataSpaceships.append(SpaceshipHangarCell(spaceship: spaceship))
@@ -154,6 +206,12 @@ class HangarScene: GameScene {
         }
         
         buttonLeft.isHidden = true
+        
+        self.scrollNodePlayerDataSpaceships = scrollNode
+        
+        if scrollNode.cells.count <= 0 {
+            buttonRight.isHidden = true
+        }
     }
     
     func loadMothershipSlots() {
@@ -161,7 +219,9 @@ class HangarScene: GameScene {
         
         var cellsMothershipSlots = [SpaceshipHangarCell]()
         
-        if let mothershipSlots = playerData.mothership?.slots as? Set<MothershipSlotData> {
+        if let mothershipSlots = (playerData.mothership?.slots as? Set<MothershipSlotData>)?.sorted(by: {
+        return $0.index < $1.index
+        }) {
             for slot in mothershipSlots {
                 if let spaceshipData = slot.spaceship {
                     let spaceship = Spaceship(spaceshipData: spaceshipData)
@@ -219,5 +279,7 @@ class HangarScene: GameScene {
         }
         
         buttonLeft.isHidden = true
+        
+        self.scrollNodeMothershipSlots = scrollNode
     }
 }

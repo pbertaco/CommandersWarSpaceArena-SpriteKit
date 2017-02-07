@@ -294,6 +294,7 @@ class Spaceship: SKSpriteNode {
         let duration = 0.5
         
         let label = Label(text: damage.description, fontSize: .fontSize8, fontColor: SKColor(red: 1, green: 1 - damageMultiplier/π, blue: 1 - damageMultiplier/π, alpha: 1))
+        Control.set.remove(label)
         label.position = CGPoint(
             x: Int(self.position.x) + Int.random(min: -27, max: 27),
             y: Int(self.position.y) + Int.random(min: -27, max: 27))
@@ -330,7 +331,7 @@ class Spaceship: SKSpriteNode {
             } else {
                 if let physicsBody = self.physicsBody {
                     if physicsBody.categoryBitMask == GameWorld.categoryBitMask.mothershipSpaceship.rawValue {
-                        if self.position.distanceSquaredTo(self.startingPosition) < 4 {
+                        if (self.position - self.startingPosition).lengthSquared() < 4 {
                             self.heal()
                         }
                         self.rotateTo(point: CGPoint(x: self.position.x, y: 0))
@@ -343,7 +344,7 @@ class Spaceship: SKSpriteNode {
                                 if targetSpaceship.health <= 0 {
                                     self.targetNode = nil
                                 } else {
-                                    if targetSpaceship.position.distanceSquaredTo(targetSpaceship.startingPosition) < 4 {
+                                    if (targetSpaceship.position - targetSpaceship.startingPosition).lengthSquared() < 4 {
                                         self.targetNode = nil
                                     } else {
                                         self.rotateTo(point: targetSpaceship.position)
@@ -423,11 +424,11 @@ class Spaceship: SKSpriteNode {
         
         for spaceship in spaceships {
             if spaceship.health > 0 {
-                if spaceship.position.distanceSquaredTo(spaceship.startingPosition) > 4 {
+                if (spaceship.position - spaceship.startingPosition).lengthSquared() > 4 {
                     if self.position.distanceTo(spaceship.position) < self.weaponRange + Spaceship.diameter/2 {
                         
                         if nearestSpaceship != nil {
-                            if self.position.distanceSquaredTo(spaceship.position) < self.position.distanceSquaredTo(nearestSpaceship!.position) {
+                            if (self.position - spaceship.position).lengthSquared() < (self.position - nearestSpaceship!.position).lengthSquared() {
                                 nearestSpaceship = spaceship
                             }
                         } else {
@@ -604,6 +605,7 @@ class Spaceship: SKSpriteNode {
     
     func loadLabelRespawn(gameWorld: GameWorld) {
         let labelRespawn = Label(text: "", fontSize: .fontSize16, fontColor: GameColors.fontWhite)
+        Control.set.remove(labelRespawn)
         labelRespawn.position = self.startingPosition
         gameWorld.addChild(labelRespawn)
         
@@ -767,16 +769,14 @@ class Spaceship: SKSpriteNode {
         return SKColor(red: red, green: green, blue: blue, alpha: 1)
     }
     
-    static func randomRarity(luck: CGFloat = 0) -> rarity {
-        
-        let luck: Int = Int(20.0 * luck.clamped(0, 1))
+    static func randomRarity() -> rarity {
         
         switch Int.random(100) {
-        case 0..<5*luck: // 5%
+        case 0..<5: // 5%
             return .legendary
-        case 5*luck..<15*luck: // 10%
+        case 5..<15: // 10%
             return .epic
-        case 15*luck..<35*luck: // 20%
+        case 15..<35: // 20%
             return .rare
         default:
             return .common

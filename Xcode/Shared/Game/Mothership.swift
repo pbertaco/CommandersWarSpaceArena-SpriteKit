@@ -156,6 +156,8 @@ class Mothership: SKSpriteNode {
         let duration = 0.5
         
         let label = Label(text: damage.description, fontSize: .fontSize8, fontColor: SKColor.red)
+        Control.set.remove(label)
+        
         label.position = position
         self.parent?.addChild(label)
         

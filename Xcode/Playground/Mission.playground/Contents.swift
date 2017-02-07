@@ -14,7 +14,7 @@ for a in rarities {
     for b in rarities {
         for c in rarities {
             for d in rarities {
-                missions.append([a, b, c, d])//.sorted(by: { $0.rawValue > $1.rawValue }))
+                missions.append([a, b, c, d].sorted(by: { $0.rawValue > $1.rawValue }))
             }
         }
     }

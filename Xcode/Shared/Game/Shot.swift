@@ -64,7 +64,7 @@ class Shot: SKSpriteNode {
     }
     
     func update() {
-        if self.position.distanceSquaredTo(self.startingPosition) > self.rangeSquared {
+        if (self.position - self.startingPosition).lengthSquared() > self.rangeSquared {
             self.removeFromParent()
         }
     }
