@@ -102,8 +102,6 @@ class BattleScene: GameScene {
         self.botMothership.update()
         
         self.nextState = .battle
-        
-        self.botMothership.health = 0
     }
     
     override func update(_ currentTime: TimeInterval) {
