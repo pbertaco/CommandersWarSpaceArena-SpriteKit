@@ -43,7 +43,7 @@ class LoadScene: GameScene {
             //playerData.premiumPoints = 9999999
         #endif
         
-        self.backgroundColor = GameColors.loadSceneBackground
+        self.backgroundColor = GameColors.backgroundColor
         
         self.addChild(Control(imageNamed: "launchScreenPortrait", x: 0, y: 0, horizontalAlignment: .center, verticalAlignment: .center))
         
