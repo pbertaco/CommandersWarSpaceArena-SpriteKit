@@ -36,4 +36,22 @@ extension MemoryCard {
         
         return spaceshipData
     }
+    
+    func newSpaceshipData(spaceship: Spaceship) -> SpaceshipData {
+        let spaceshipData: SpaceshipData = self.insertNewObject()
+        
+        spaceshipData.colorRed = Double(spaceship.colorRed)
+        spaceshipData.colorGreen = Double(spaceship.colorGreen)
+        spaceshipData.colorBlue = Double(spaceship.colorBlue)
+        spaceshipData.baseDamage = Int16(spaceship.baseDamage)
+        spaceshipData.level = Int16(spaceship.level)
+        spaceshipData.baseLife = Int16(spaceship.baseLife)
+        spaceshipData.baseRange = Int16(spaceship.baseRange)
+        spaceshipData.baseSpeed = Int16(spaceship.baseSpeed)
+        spaceshipData.rarity = Int16(spaceship.rarity.rawValue)
+        spaceshipData.skin = Int16(spaceship.skinIndex)
+        
+        return spaceshipData
+        
+    }
 }

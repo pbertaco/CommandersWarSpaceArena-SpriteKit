@@ -10,6 +10,21 @@ import SpriteKit
 
 class GameMath {
     
+    static func unlockSpaceshipPriceInPremiumPoints(rarity: Spaceship.rarity) -> Int {
+        let price = pow(2.0, Double(rarity.rawValue))
+        return Int(price)
+    }
+    
+    static func buySpaceshipPriceInPremiumPoints(rarity: Spaceship.rarity) -> Int {
+        let price = pow(2.0, Double(rarity.rawValue)) * 10
+        return Int(price)
+    }
+    
+    static func buySpaceshipPriceInPoints(rarity: Spaceship.rarity) -> Int {
+        let price = pow(2.0, Double(rarity.rawValue)) * 62500
+        return Int(price)
+    }
+    
     static func xpForLevel(level x: Int) -> Int {
         let x = Double(x - 1)
         let xp = pow(2, x) * 1000

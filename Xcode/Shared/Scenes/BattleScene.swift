@@ -17,6 +17,7 @@ class BattleScene: GameScene {
         case gameWorld = 0
         case blackSpriteNode = 1000
         case boxBattleResult = 2000
+        case boxUnlockSpaceship = 3000
     }
     
     enum state: String {
@@ -101,6 +102,8 @@ class BattleScene: GameScene {
         self.botMothership.update()
         
         self.nextState = .battle
+        
+        self.botMothership.health = 0
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -209,8 +212,32 @@ class BattleScene: GameScene {
                 self.blackSpriteNode.zPosition = zPosition.blackSpriteNode.rawValue
                 self.addChild(boxBattleResult)
                 
-                boxBattleResult.buttonOK.touchUpEvent = { [weak self] in
-                    self?.nextState = .mainMenu
+                boxBattleResult.buttonOK.addHandler { [weak self, weak boxBattleResult] in
+                    guard let this = self else { return }
+                    
+                    if this.mothership.health > 0 {
+                        if let rarity = Spaceship.randomRarity() {
+                            boxBattleResult?.removeFromParent()
+                            let boxUnlockSpaceship = BoxUnlockSpaceship(rarity: rarity)
+                            boxUnlockSpaceship.zPosition = BattleScene.zPosition.boxUnlockSpaceship.rawValue
+                            this.addChild(boxUnlockSpaceship)
+                            
+                            boxUnlockSpaceship.buttonIgnore?.addHandler {
+                                this.nextState = .mainMenu
+                            }
+                            
+                            boxUnlockSpaceship.buttonUnlock?.addHandler {
+                                this.afterDelay(3, runBlock: {
+                                    this.nextState = .mainMenu
+                                })
+                            }
+                            
+                        } else {
+                            this.nextState = .mainMenu
+                        }
+                    } else {
+                        this.nextState = .mainMenu
+                    }
                 }
                 
                 if self.botMothership.health <= 0 && self.mothership.health <= 0 {

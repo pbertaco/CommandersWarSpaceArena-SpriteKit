@@ -39,6 +39,8 @@ class ControlPremiumPoints: Control {
         self.addChild(icon)
         
         ControlPremiumPoints.lastInstance = self
+        
+        buttonBuyMore.isHidden = true
     }
     
     required init?(coder aDecoder: NSCoder) {

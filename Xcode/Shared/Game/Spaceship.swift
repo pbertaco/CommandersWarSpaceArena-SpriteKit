@@ -769,7 +769,7 @@ class Spaceship: SKSpriteNode {
         return SKColor(red: red, green: green, blue: blue, alpha: 1)
     }
     
-    static func randomRarity() -> rarity {
+    static func randomRarity() -> rarity? {
         
         switch Int.random(100) {
         case 0..<5: // 5%
@@ -778,8 +778,10 @@ class Spaceship: SKSpriteNode {
             return .epic
         case 15..<35: // 20%
             return .rare
-        default:
+        case 35..<75: // 40%
             return .common
+        default:
+            return nil
         }
     }
 }

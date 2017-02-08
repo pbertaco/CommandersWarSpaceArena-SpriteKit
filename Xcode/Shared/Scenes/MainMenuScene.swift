@@ -39,7 +39,7 @@ class MainMenuScene: GameScene {
         buttonPlay.setIcon(imageNamed: "Play")
         buttonPlay.set(color: GameColors.controlRed, blendMode: .add)
         self.addChild(buttonPlay)
-        buttonPlay.touchUpEvent = { [weak self] in
+        buttonPlay.addHandler { [weak self] in
             self?.nextState = .battle
         }
         
@@ -52,7 +52,7 @@ class MainMenuScene: GameScene {
         buttonShips.setIcon(imageNamed: "Rocket")
         buttonShips.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonShips)
-        buttonShips.touchUpEvent = { [weak self] in
+        buttonShips.addHandler { [weak self] in
             self?.nextState = .hangar
         }
         
@@ -66,7 +66,7 @@ class MainMenuScene: GameScene {
         buttonGameCenter.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonGameCenter)
         #if os(iOS)
-            buttonGameCenter.touchUpEvent = { [weak self] in
+            buttonGameCenter.addHandler { [weak self] in
                 (self?.view?.window?.rootViewController as? GameViewController)?.presentGameCenterViewController()
             }
         #endif
@@ -76,7 +76,7 @@ class MainMenuScene: GameScene {
         buttonFacebook.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonFacebook)
         #if os(iOS)
-            buttonFacebook.touchUpEvent = { [weak buttonFacebook] in
+            buttonFacebook.addHandler { [weak buttonFacebook] in
                 FacebookClient.sharedInstance.logInWith(successBlock: {
                     buttonFacebook?.removeFromParent()
                 }, andFailureBlock: { (error: Error?) in
@@ -101,6 +101,12 @@ class MainMenuScene: GameScene {
         self.addChild(controlPoints)
         
         self.addChild(ControlMission(x: 71, y: 507, horizontalAlignment: .center, verticalAlignment: .center))
+        
+        
+        buttonSettings.isHidden = true
+        buttonGameCenter.isHidden = true
+        buttonFacebook.isHidden = true
+        buttonBuy.isHidden = true
     }
     
     override func update(_ currentTime: TimeInterval) {

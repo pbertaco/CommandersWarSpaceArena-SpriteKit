@@ -24,7 +24,7 @@ extension MemoryCard {
         for i in 0..<4 {
             let mothershipSlot: MothershipSlotData = self.newMothershipSlotData()
             mothershipSlot.index = Int16(i)
-            let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: Spaceship.randomRarity())
+            let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: Spaceship.randomRarity() ?? .common)
             
             mothershipSlot.spaceship = spaceshipData
             
@@ -32,7 +32,7 @@ extension MemoryCard {
         }
         
         for _ in 0..<4 {
-            let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: Spaceship.randomRarity())
+            let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: Spaceship.randomRarity() ?? .common)
             playerData.addToSpaceships(spaceshipData)
         }
         

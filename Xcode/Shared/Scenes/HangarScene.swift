@@ -35,7 +35,7 @@ class HangarScene: GameScene {
         buttonBack.setIcon(imageNamed: "Back")
         buttonBack.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonBack)
-        buttonBack.touchUpEvent = { [weak self] in
+        buttonBack.addHandler { [weak self] in
             self?.nextState = .mainMenu
         }
         
@@ -97,11 +97,17 @@ class HangarScene: GameScene {
         buttonChange.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonChange)
         
-        buttonChange.touchUpEvent = { [weak self, weak playerData] in
+        buttonChange.addHandler { [weak self, weak playerData] in
             guard let this = self else { return }
             
             let a = this.scrollNodeMothershipSlots.cells[this.cellIndexMothershipSlots]
             let b = this.scrollNodePlayerDataSpaceships.cells[this.cellIndexPlayerDataSpaceships]
+            
+            if let b = b as? SpaceshipHangarCell {
+                if b.spaceshipData() == nil {
+                    return
+                }
+            }
             
             this.scrollNodeMothershipSlots.cells[this.cellIndexMothershipSlots] = b
             this.scrollNodePlayerDataSpaceships.cells[this.cellIndexPlayerDataSpaceships] = a
@@ -120,12 +126,15 @@ class HangarScene: GameScene {
             
             if let a = a as? SpaceshipHangarCell {
                 if let b = b as? SpaceshipHangarCell {
+                    
                     a.control1?.move(toParent: b)
                     b.control1?.move(toParent: a)
                     
                     let aControl1 = a.control1
                     a.control1 = b.control1
                     b.control1 = aControl1
+                    
+                    a.loadButtonSell()
                     
                     if let aSpaceshipData = a.spaceshipData() {
                         if let bSpaceshipData = b.spaceshipData() {
@@ -171,7 +180,7 @@ class HangarScene: GameScene {
         buttonRight.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonRight)
         
-        buttonLeft.touchUpEvent = { [weak self, weak scrollNode, weak buttonLeft, weak buttonRight] in
+        buttonLeft.addHandler { [weak self, weak scrollNode, weak buttonLeft, weak buttonRight] in
             guard let this = self else { return }
             guard let scrollNode = scrollNode else { return }
             guard let buttonLeft = buttonLeft else { return }
@@ -188,7 +197,7 @@ class HangarScene: GameScene {
             }
         }
         
-        buttonRight.touchUpEvent = { [weak self, weak scrollNode, weak buttonLeft, weak buttonRight] in
+        buttonRight.addHandler { [weak self, weak scrollNode, weak buttonLeft, weak buttonRight] in
             guard let this = self else { return }
             guard let scrollNode = scrollNode else { return }
             guard let buttonLeft = buttonLeft else { return }
@@ -209,7 +218,7 @@ class HangarScene: GameScene {
         
         self.scrollNodePlayerDataSpaceships = scrollNode
         
-        if scrollNode.cells.count <= 0 {
+        if scrollNode.cells.count <= 1 {
             buttonRight.isHidden = true
         }
     }
@@ -244,7 +253,7 @@ class HangarScene: GameScene {
         buttonRight.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonRight)
         
-        buttonLeft.touchUpEvent = { [weak self, weak scrollNode, weak buttonLeft, weak buttonRight] in
+        buttonLeft.addHandler { [weak self, weak scrollNode, weak buttonLeft, weak buttonRight] in
             guard let this = self else { return }
             guard let scrollNode = scrollNode else { return }
             guard let buttonLeft = buttonLeft else { return }
@@ -261,7 +270,7 @@ class HangarScene: GameScene {
             }
         }
         
-        buttonRight.touchUpEvent = { [weak self, weak scrollNode, weak buttonLeft, weak buttonRight] in
+        buttonRight.addHandler { [weak self, weak scrollNode, weak buttonLeft, weak buttonRight] in
             guard let this = self else { return }
             guard let scrollNode = scrollNode else { return }
             guard let buttonLeft = buttonLeft else { return }

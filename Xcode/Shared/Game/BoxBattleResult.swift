@@ -13,7 +13,7 @@ class BoxBattleResult: Box {
     var buttonOK: Button!
     
     init(mothership: Mothership, botMothership: Mothership) {
-        super.init(imageNamed: "boxWhite233x610", y: 23)
+        super.init(imageNamed: "boxWhite233x610", y: 12)
         
         let playerData = MemoryCard.sharedInstance.playerData!
         
@@ -149,7 +149,7 @@ class BoxBattleResult: Box {
         buttonHelp.setIcon(imageNamed: "Help")
         buttonHelp.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonHelp)
-        buttonHelp.touchUpEvent = { [weak controlHelp] in
+        buttonHelp.addHandler { [weak controlHelp] in
             if let controlHelp = controlHelp {
                 controlHelp.isHidden = !controlHelp.isHidden
             }
