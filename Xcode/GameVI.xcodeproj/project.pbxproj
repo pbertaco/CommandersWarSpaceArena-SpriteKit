@@ -165,6 +165,9 @@
 		84AFAE1F1E2FEEEC006359DD /* GameWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAE1E1E2FEEEC006359DD /* GameWorld.swift */; };
 		84AFAE201E2FEEEC006359DD /* GameWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAE1E1E2FEEEC006359DD /* GameWorld.swift */; };
 		84AFAE211E2FEEEC006359DD /* GameWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAE1E1E2FEEEC006359DD /* GameWorld.swift */; };
+		84B7BAF91E4D186B00074CDA /* ChooseMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7BAF81E4D186B00074CDA /* ChooseMissionScene.swift */; };
+		84B7BAFA1E4D186B00074CDA /* ChooseMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7BAF81E4D186B00074CDA /* ChooseMissionScene.swift */; };
+		84B7BAFB1E4D186B00074CDA /* ChooseMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7BAF81E4D186B00074CDA /* ChooseMissionScene.swift */; };
 		84C31E281E26FF1100892544 /* MothershipSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C31E271E26FF1100892544 /* MothershipSlotData.swift */; };
 		84C31E291E26FF1100892544 /* MothershipSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C31E271E26FF1100892544 /* MothershipSlotData.swift */; };
 		84C31E2A1E26FF1100892544 /* MothershipSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C31E271E26FF1100892544 /* MothershipSlotData.swift */; };
@@ -315,6 +318,7 @@
 		84A4CFCF1E3C1B0800BE28FC /* SpaceshipHealthBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceshipHealthBar.swift; sourceTree = "<group>"; };
 		84AFAE1A1E2FC949006359DD /* BattleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleScene.swift; sourceTree = "<group>"; };
 		84AFAE1E1E2FEEEC006359DD /* GameWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameWorld.swift; sourceTree = "<group>"; };
+		84B7BAF81E4D186B00074CDA /* ChooseMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseMissionScene.swift; sourceTree = "<group>"; };
 		84B93A431E42DFA300F3708B /* Mission.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Mission.playground; sourceTree = "<group>"; };
 		84B93A441E42DFBB00F3708B /* SpaceshipXP.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SpaceshipXP.playground; sourceTree = "<group>"; };
 		84C31E271E26FF1100892544 /* MothershipSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipSlotData.swift; sourceTree = "<group>"; };
@@ -483,6 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				84AFAE1A1E2FC949006359DD /* BattleScene.swift */,
+				84B7BAF81E4D186B00074CDA /* ChooseMissionScene.swift */,
 				84A211261E3FC364008EE6ED /* HangarScene.swift */,
 				842A85F81E25BB3F006B31F7 /* LoadScene.swift */,
 				840B12FE1E25E6C200707EE9 /* MainMenuScene.swift */,
@@ -873,6 +878,7 @@
 				842A85711E25B715006B31F7 /* AppDelegate.swift in Sources */,
 				847182C61E25D5A60077D3EF /* SKColor+Extensions.swift in Sources */,
 				84A4CFD01E3C1B0800BE28FC /* SpaceshipHealthBar.swift in Sources */,
+				84B7BAF91E4D186B00074CDA /* ChooseMissionScene.swift in Sources */,
 				84138E011E439A9500B845E4 /* ControlMission.swift in Sources */,
 				8400802D1E4BCD46005AF200 /* GameCamera.swift in Sources */,
 				840080211E4BCD46005AF200 /* Box.swift in Sources */,
@@ -956,6 +962,7 @@
 				842A85FA1E25BB3F006B31F7 /* LoadScene.swift in Sources */,
 				840080341E4BCD46005AF200 /* GameScene.swift in Sources */,
 				840080251E4BCD46005AF200 /* Button.swift in Sources */,
+				84B7BAFA1E4D186B00074CDA /* ChooseMissionScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1016,6 +1023,7 @@
 				842A85FB1E25BB3F006B31F7 /* LoadScene.swift in Sources */,
 				840080351E4BCD46005AF200 /* GameScene.swift in Sources */,
 				840080261E4BCD46005AF200 /* Button.swift in Sources */,
+				84B7BAFB1E4D186B00074CDA /* ChooseMissionScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
