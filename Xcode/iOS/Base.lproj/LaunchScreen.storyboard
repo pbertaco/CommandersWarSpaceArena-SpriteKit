@@ -33,7 +33,7 @@
                         <constraints>
                             <constraint firstItem="ey2-iL-98z" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="1bZ-Ap-qIU"/>
                             <constraint firstItem="ey2-iL-98z" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="nqB-l8-6QB"/>
-                            <constraint firstItem="ey2-iL-98z" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="s1B-G7-7rO"/>
+                            <constraint firstItem="ey2-iL-98z" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="s1B-G7-7rO"/>
                         </constraints>
                     </view>
                 </viewController>
