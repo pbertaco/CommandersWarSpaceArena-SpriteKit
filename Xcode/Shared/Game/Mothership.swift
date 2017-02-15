@@ -28,8 +28,7 @@ class Mothership: SKSpriteNode {
         
         self.team = team
         
-        let texture = SKTexture(imageNamed: "mothership")
-        texture.filteringMode = GameScene.defaultFilteringMode
+        let texture = SKTexture(imageNamed: "mothership", filteringMode: GameScene.defaultFilteringMode)
         
         super.init(texture: texture, color: .clear, size: texture.size())
         
@@ -196,7 +195,7 @@ class Mothership: SKSpriteNode {
             break
         }
         
-        let spriteNode = SKSpriteNode(imageNamed: "mothershipSlot")
+        let spriteNode = SKSpriteNode(imageNamed: "mothershipSlot", filteringMode: GameScene.defaultFilteringMode)
         spriteNode.position = position
         spriteNode.color = self.color
         spriteNode.colorBlendFactor = 1

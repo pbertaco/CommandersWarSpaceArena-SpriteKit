@@ -18,8 +18,7 @@ class SpaceshipHealthBar: SKSpriteNode {
     
     init(level: Int, health: Int, team: Mothership.team, rarity: Spaceship.rarity) {
         
-        let texture = SKTexture(imageNamed: "spaceshipHealthBarBackground")
-        texture.filteringMode = GameScene.defaultFilteringMode
+        let texture = SKTexture(imageNamed: "spaceshipHealthBarBackground", filteringMode: GameScene.defaultFilteringMode)
         
         super.init(texture: texture, color: .clear, size: texture.size())
         
@@ -63,10 +62,10 @@ class SpaceshipHealthBar: SKSpriteNode {
         self.fill.anchorPoint = CGPoint(x: 0, y: 0.5)
         self.addChild(self.fill)
         
-        let border = SKSpriteNode(imageNamed: "spaceshipHealthBarBorder")
+        let border = SKSpriteNode(imageNamed: "spaceshipHealthBarBorder", filteringMode: GameScene.defaultFilteringMode)
         self.addChild(border)
         
-        let levelBackground = SKSpriteNode(imageNamed: "spaceshipHealthBarLevelBackground")
+        let levelBackground = SKSpriteNode(imageNamed: "spaceshipHealthBarLevelBackground", filteringMode: GameScene.defaultFilteringMode)
         levelBackground.position = CGPoint(x: -38, y: 0)
         self.addChild(levelBackground)
         

@@ -751,8 +751,7 @@ class Spaceship: SKSpriteNode {
     }
     
     static func skinTexture(index i: Int) -> SKTexture {
-        let texture = SKTexture(imageNamed: Spaceship.skins[i])
-        texture.filteringMode = GameScene.defaultFilteringMode
+        let texture = SKTexture(imageNamed: Spaceship.skins[i], filteringMode: GameScene.defaultFilteringMode)
         return texture
     }
     

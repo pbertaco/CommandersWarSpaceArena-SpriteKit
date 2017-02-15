@@ -67,6 +67,9 @@
 		840BDF681E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BDF671E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift */; };
 		840BDF691E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BDF671E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift */; };
 		840BDF6A1E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BDF671E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift */; };
+		840DB2841E54F72800247ACB /* Stars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840DB2831E54F72800247ACB /* Stars.swift */; };
+		840DB2851E54F72800247ACB /* Stars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840DB2831E54F72800247ACB /* Stars.swift */; };
+		840DB2861E54F72800247ACB /* Stars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840DB2831E54F72800247ACB /* Stars.swift */; };
 		84138E011E439A9500B845E4 /* ControlMission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84138E001E439A9500B845E4 /* ControlMission.swift */; };
 		84138E021E439A9500B845E4 /* ControlMission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84138E001E439A9500B845E4 /* ControlMission.swift */; };
 		84138E031E439A9500B845E4 /* ControlMission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84138E001E439A9500B845E4 /* ControlMission.swift */; };
@@ -264,6 +267,7 @@
 		840B13021E25E7AE00707EE9 /* SpaceshipData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceshipData.swift; sourceTree = "<group>"; };
 		840B13061E25F64400707EE9 /* MothershipData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipData.swift; sourceTree = "<group>"; };
 		840BDF671E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxUnlockSpaceship.swift; sourceTree = "<group>"; };
+		840DB2831E54F72800247ACB /* Stars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stars.swift; sourceTree = "<group>"; };
 		84138E001E439A9500B845E4 /* ControlMission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlMission.swift; sourceTree = "<group>"; };
 		84240B6D1E26DD060090E681 /* GameMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMath.swift; sourceTree = "<group>"; };
 		842A85681E25B715006B31F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -524,6 +528,7 @@
 				840B12FA1E25E49100707EE9 /* Spaceship.swift */,
 				84D587041E426BD90041BAAD /* SpaceshipHangarCell.swift */,
 				84A4CFCF1E3C1B0800BE28FC /* SpaceshipHealthBar.swift */,
+				840DB2831E54F72800247ACB /* Stars.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -871,6 +876,7 @@
 				847182C31E25D5A60077D3EF /* SKAction+SpecialEffects.swift in Sources */,
 				842A85731E25B715006B31F7 /* GameViewController.swift in Sources */,
 				84E0F2981E25C6F000E12E09 /* Model.xcdatamodeld in Sources */,
+				840DB2841E54F72800247ACB /* Stars.swift in Sources */,
 				840B13071E25F64400707EE9 /* MothershipData.swift in Sources */,
 				847182CF1E25D5A60077D3EF /* SKTEffects.swift in Sources */,
 				84AFAE1F1E2FEEEC006359DD /* GameWorld.swift in Sources */,
@@ -926,6 +932,7 @@
 				84F9452B1E2EEEBA0034F530 /* ControlPoints.swift in Sources */,
 				84138E021E439A9500B845E4 /* ControlMission.swift in Sources */,
 				840080371E4BCD46005AF200 /* Label.swift in Sources */,
+				840DB2851E54F72800247ACB /* Stars.swift in Sources */,
 				8400802B1E4BCD46005AF200 /* Event.swift in Sources */,
 				84F945231E2EE6780034F530 /* ControlPremiumPoints.swift in Sources */,
 				84AFAE1C1E2FC949006359DD /* BattleScene.swift in Sources */,
@@ -988,6 +995,7 @@
 				84F9452C1E2EEEBA0034F530 /* ControlPoints.swift in Sources */,
 				84138E031E439A9500B845E4 /* ControlMission.swift in Sources */,
 				840080381E4BCD46005AF200 /* Label.swift in Sources */,
+				840DB2861E54F72800247ACB /* Stars.swift in Sources */,
 				8400802C1E4BCD46005AF200 /* Event.swift in Sources */,
 				84F945241E2EE6780034F530 /* ControlPremiumPoints.swift in Sources */,
 				84AFAE1D1E2FC949006359DD /* BattleScene.swift in Sources */,

@@ -33,7 +33,7 @@ class Shot: SKSpriteNode {
             break
         }
         
-        let texture = SKTexture(imageNamed: "shot")
+        let texture = SKTexture(imageNamed: "shot", filteringMode: GameScene.defaultFilteringMode)
         
         super.init(texture: texture, color: .clear, size: texture.size())
         

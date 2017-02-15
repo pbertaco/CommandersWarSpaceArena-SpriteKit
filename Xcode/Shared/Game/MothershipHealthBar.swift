@@ -16,8 +16,7 @@ class MothershipHealthBar: SKSpriteNode {
     var fill: SKSpriteNode!
     
     init(team: Mothership.team) {
-        let texture = SKTexture(imageNamed: "mothershipHealthBarBackground")
-        texture.filteringMode = GameScene.defaultFilteringMode
+        let texture = SKTexture(imageNamed: "mothershipHealthBarBackground", filteringMode: GameScene.defaultFilteringMode)
         
         super.init(texture: texture, color: .clear, size: texture.size())
         
@@ -42,7 +41,7 @@ class MothershipHealthBar: SKSpriteNode {
         self.fill.anchorPoint = CGPoint(x: 0, y: 0.5)
         self.addChild(self.fill)
         
-        let border = SKSpriteNode(imageNamed: "mothershipHealthBarBorder")
+        let border = SKSpriteNode(imageNamed: "mothershipHealthBarBorder", filteringMode: GameScene.defaultFilteringMode)
         self.addChild(border)
         
         self.color = teamColor

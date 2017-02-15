@@ -11,6 +11,8 @@ import SpriteKit
 class GameWorld: SKNode, SKPhysicsContactDelegate {
     
     enum zPosition: CGFloat {
+        case stars = -50
+        case border = -40
         case mothership = -30
         case mothershipHealthBar = -20
         case shot = -10
@@ -28,7 +30,13 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         super.init()
         
         GameWorld.lastInstance = self
-        self.addChild(SKSpriteNode(imageNamed: "gameWorld"))
+        
+        let border = SKSpriteNode(imageNamed: "gameWorld", filteringMode: GameScene.defaultFilteringMode)
+        border.zPosition = zPosition.border.rawValue
+        self.addChild(border)
+        
+        self.addChild(Stars())
+        
         self.loadPhysics()
     }
     
