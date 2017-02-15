@@ -469,6 +469,10 @@ class BattleScene: GameScene {
         if playerData.botLevel < Int16(Mission.types.count - 1) {
             playerData.botLevel = playerData.botLevel + 1
         }
+        
+        if playerData.maxBotLevel < playerData.botLevel  {
+            playerData.maxBotLevel = playerData.botLevel
+        }
     }
     
     func updateBotOnLose() {

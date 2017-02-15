@@ -1,6 +1,7 @@
 //: Playground - noun: a place where people can play
 
 import Cocoa
+import SpriteKit
 
 enum rarity: Int {
     case common = 500, rare = 700, epic = 1000, legendary = 1450
@@ -47,9 +48,31 @@ for m in missions {
     }
 }
 
+func random() -> CGFloat {
+    return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
+}
+
+func randomColor() -> SKColor {
+    var red = random()
+    var green = random()
+    var blue = random()
+    let maxColor = 1 - max(max(red, green), blue)
+    
+    red = red + maxColor
+    green = green + maxColor
+    blue = blue + maxColor
+    
+    return SKColor(red: red, green: green, blue: blue, alpha: 1)
+}
+
 var i: Float = 0
 for m in finalMissions {
-    print("Mission(level: \(Int(i/Float(finalMissions.count) * 10.0) + 1), rarities: \(m)),")
+    
+    let color = randomColor()
+    
+    let colorString = "SKColor(red: \(String(format: "%.1f", color.redComponent)), green: \(String(format: "%.1f", color.greenComponent)), blue: \(String(format: "%.1f", color.blueComponent)), alpha: 1)"
+    
+    print("Mission(level: \(Int(i/Float(finalMissions.count) * 10.0) + 1), rarities: \(m), color: \(colorString)),")
     i = i + 1
 }
 

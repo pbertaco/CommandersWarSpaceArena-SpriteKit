@@ -14,6 +14,7 @@ extension MemoryCard {
         let playerData: PlayerData = self.insertNewObject()
         
         playerData.botLevel = 0
+        playerData.maxBotLevel = 0
         playerData.modelVersion = 1
         playerData.name = ""
         playerData.points = 10000

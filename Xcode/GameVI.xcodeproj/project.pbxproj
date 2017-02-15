@@ -165,6 +165,9 @@
 		84AFAE1F1E2FEEEC006359DD /* GameWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAE1E1E2FEEEC006359DD /* GameWorld.swift */; };
 		84AFAE201E2FEEEC006359DD /* GameWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAE1E1E2FEEEC006359DD /* GameWorld.swift */; };
 		84AFAE211E2FEEEC006359DD /* GameWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AFAE1E1E2FEEEC006359DD /* GameWorld.swift */; };
+		84B4E33D1E53A2C9003E8674 /* MissionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4E33C1E53A2C9003E8674 /* MissionCell.swift */; };
+		84B4E33E1E53A2C9003E8674 /* MissionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4E33C1E53A2C9003E8674 /* MissionCell.swift */; };
+		84B4E33F1E53A2C9003E8674 /* MissionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4E33C1E53A2C9003E8674 /* MissionCell.swift */; };
 		84B7BAF91E4D186B00074CDA /* ChooseMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7BAF81E4D186B00074CDA /* ChooseMissionScene.swift */; };
 		84B7BAFA1E4D186B00074CDA /* ChooseMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7BAF81E4D186B00074CDA /* ChooseMissionScene.swift */; };
 		84B7BAFB1E4D186B00074CDA /* ChooseMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7BAF81E4D186B00074CDA /* ChooseMissionScene.swift */; };
@@ -318,6 +321,7 @@
 		84A4CFCF1E3C1B0800BE28FC /* SpaceshipHealthBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceshipHealthBar.swift; sourceTree = "<group>"; };
 		84AFAE1A1E2FC949006359DD /* BattleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleScene.swift; sourceTree = "<group>"; };
 		84AFAE1E1E2FEEEC006359DD /* GameWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameWorld.swift; sourceTree = "<group>"; };
+		84B4E33C1E53A2C9003E8674 /* MissionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MissionCell.swift; sourceTree = "<group>"; };
 		84B7BAF81E4D186B00074CDA /* ChooseMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseMissionScene.swift; sourceTree = "<group>"; };
 		84B93A431E42DFA300F3708B /* Mission.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Mission.playground; sourceTree = "<group>"; };
 		84B93A441E42DFBB00F3708B /* SpaceshipXP.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SpaceshipXP.playground; sourceTree = "<group>"; };
@@ -511,6 +515,7 @@
 				84F9451F1E29C45B0034F530 /* InvitableFriends.swift */,
 				847182DF1E25D6990077D3EF /* Metrics.swift */,
 				849632C61E42DCB100AEC90F /* Mission.swift */,
+				84B4E33C1E53A2C9003E8674 /* MissionCell.swift */,
 				84D03EDF1E35A1E7007425E0 /* Mothership.swift */,
 				846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */,
 				8409314C1E26930700C61711 /* MothershipSlot.swift */,
@@ -835,6 +840,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84B4E33D1E53A2C9003E8674 /* MissionCell.swift in Sources */,
 				847182C01E25D5A60077D3EF /* SKAction+Extensions.swift in Sources */,
 				845436661E44FE7600E1E2A7 /* BoxBattleResult.swift in Sources */,
 				84D03EE01E35A1E7007425E0 /* Mothership.swift in Sources */,
@@ -910,6 +916,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				840B12FC1E25E49100707EE9 /* Spaceship.swift in Sources */,
+				84B4E33E1E53A2C9003E8674 /* MissionCell.swift in Sources */,
 				847182C11E25D5A60077D3EF /* SKAction+Extensions.swift in Sources */,
 				847182B51E25D5A60077D3EF /* CGFloat+Extensions.swift in Sources */,
 				84AFAE201E2FEEEC006359DD /* GameWorld.swift in Sources */,
@@ -971,6 +978,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				840B12FD1E25E49100707EE9 /* Spaceship.swift in Sources */,
+				84B4E33F1E53A2C9003E8674 /* MissionCell.swift in Sources */,
 				847182C21E25D5A60077D3EF /* SKAction+Extensions.swift in Sources */,
 				847182B61E25D5A60077D3EF /* CGFloat+Extensions.swift in Sources */,
 				84AFAE211E2FEEEC006359DD /* GameWorld.swift in Sources */,

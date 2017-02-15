@@ -18,6 +18,7 @@ class MainMenuScene: GameScene {
         case mainMenu
         case battle
         case hangar
+        case chooseMission
     }
     
     var state: state = .mainMenu
@@ -100,8 +101,12 @@ class MainMenuScene: GameScene {
         controlPoints.setLabelPointsText(points: playerData.points)
         self.addChild(controlPoints)
         
-        self.addChild(ControlMission(x: 71, y: 507, horizontalAlignment: .center, verticalAlignment: .center))
+        let controlMission = ControlMission(x: 71, y: 507, horizontalAlignment: .center, verticalAlignment: .center)
+        self.addChild(controlMission)
         
+        controlMission.buttonChooseMission.addHandler { [weak self] in
+            self?.nextState = .chooseMission
+        }
         
         buttonSettings.isHidden = true
         buttonGameCenter.isHidden = true
@@ -122,6 +127,8 @@ class MainMenuScene: GameScene {
                 break
             case .hangar:
                 break
+            case .chooseMission:
+                break
             }
         } else {
             self.state = self.nextState
@@ -135,6 +142,9 @@ class MainMenuScene: GameScene {
                 break
             case .hangar:
                 self.view?.presentScene(HangarScene(), transition: GameScene.defaultTransition)
+                break
+            case .chooseMission:
+                self.view?.presentScene(ChooseMissionScene(), transition: GameScene.defaultTransition)
                 break
             }
         }
