@@ -26,6 +26,11 @@ class ChooseMissionScene: GameScene {
         
         self.backgroundColor = GameColors.backgroundColor
         
+        let stars = Stars()
+        stars.position.x = stars.position.x + GameScene.currentSize.width/2
+        stars.position.y = stars.position.y - GameScene.currentSize.height/2
+        self.addChild(stars)
+        
         let buttonBack = Button(imageNamed: "button55x55", x: 8, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonBack.setIcon(imageNamed: "Back")
         buttonBack.set(color: GameColors.controlBlue, blendMode: .add)

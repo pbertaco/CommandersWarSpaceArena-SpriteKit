@@ -31,6 +31,11 @@ class MainMenuScene: GameScene {
         
         self.backgroundColor = GameColors.backgroundColor
         
+        let stars = Stars()
+        stars.position.x = stars.position.x + GameScene.currentSize.width/2
+        stars.position.y = stars.position.y - GameScene.currentSize.height/2
+        self.addChild(stars)
+        
         let mothershipSlots = MothershipSlots(x: 0, y: 289, horizontalAlignment: .center, verticalAlignment: .center)
         
         mothershipSlots.load(slots: playerData.mothership?.slots)
