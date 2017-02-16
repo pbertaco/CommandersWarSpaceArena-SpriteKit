@@ -118,6 +118,9 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         case [.deadSpaceship, .spaceshipShot]:
             break
             
+        case [.deadSpaceship, .mothership]:
+            break
+            
         case [.deadSpaceship, .deadMothership]:
             break
             

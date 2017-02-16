@@ -17,7 +17,9 @@ class Shot: SKSpriteNode {
     var damage = 1
     var rangeSquared: CGFloat = 0
     var startingPosition = CGPoint.zero
-
+    
+    weak var emitterNode: SKEmitterNode?
+    
     init(shooter: Spaceship) {
         
         self.shooter = shooter
@@ -33,7 +35,7 @@ class Shot: SKSpriteNode {
             break
         }
         
-        let texture = SKTexture(imageNamed: "shot", filteringMode: GameScene.defaultFilteringMode)
+        let texture = SKTexture(imageNamed: "spark", filteringMode: GameScene.defaultFilteringMode)
         
         super.init(texture: texture, color: .clear, size: texture.size())
         
@@ -49,6 +51,8 @@ class Shot: SKSpriteNode {
         self.zRotation = shooter.zRotation + CGFloat.random(min: -0.1, max: 0.1)
         
         self.loadPhysics(shooter: shooter)
+        
+        self.loadEmitterNode(targetNode: shooter.parent, color: color)
         
         Shot.set.insert(self)
     }
@@ -66,6 +70,10 @@ class Shot: SKSpriteNode {
     func update() {
         if (self.position - self.startingPosition).lengthSquared() > self.rangeSquared {
             self.removeFromParent()
+        } else {
+            if let emitterNode = self.emitterNode {
+                emitterNode.position = self.position
+            }
         }
     }
     
@@ -101,10 +109,39 @@ class Shot: SKSpriteNode {
         }
     }
     
+    func loadEmitterNode(targetNode: SKNode?, color: SKColor) {
+        let emitterNode = SKEmitterNode()
+        let texture = SKTexture(imageNamed: "spark")
+        emitterNode.particleTexture = texture
+        emitterNode.particleSize = CGSize(width: 8, height: 8)
+        emitterNode.particleBirthRate = 240
+        emitterNode.particleLifetime = 1
+        emitterNode.particleAlpha = 0.25
+        emitterNode.particleAlphaSpeed = -1
+        emitterNode.particleScaleSpeed = -1
+        emitterNode.particleColorBlendFactor = 1
+        emitterNode.particleColor = color
+        emitterNode.particleBlendMode = .add
+        
+        emitterNode.particleZPosition = self.zPosition - 1
+        
+        emitterNode.particlePositionRange = CGVector(dx: 8, dy: 8)
+        
+        emitterNode.targetNode = targetNode
+        targetNode?.addChild(emitterNode)
+        
+        self.emitterNode = emitterNode
+        
+        self.update()
+    }
+    
     override func removeFromParent() {
         Shot.set.remove(self)
         self.shooter?.canShot = true
         super.removeFromParent()
+        
+        self.emitterNode?.particleBirthRate = 0
+        self.emitterNode?.run(SKAction.removeFromParentAfterDelay(1))
     }
     
 }
