@@ -23,4 +23,5 @@ extension GameColors {
     
     static let blueTeam = #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 1, alpha: 1)
     static let redTeam = #colorLiteral(red: 1, green: 0.5019607843, blue: 0.5019607843, alpha: 1)
+    static let explosion = #colorLiteral(red: 1, green: 0.5019607843, blue: 0.2509803922, alpha: 1)
 }

@@ -242,6 +242,7 @@ class Spaceship: SKSpriteNode {
         self.getHitBySpaceships.removeAll()
         
         self.health = 0
+        self.explosionEffect()
         
         self.retreat()
         self.resetToStartingPosition()
@@ -309,6 +310,36 @@ class Spaceship: SKSpriteNode {
             SKAction.removeFromParent()
             ]
         ))
+    }
+    
+    func explosionEffect() {
+        guard let targetNode = self.parent else { return }
+        
+        let emitterNode = SKEmitterNode()
+        let texture = SKTexture(imageNamed: "spark")
+        emitterNode.particleTexture = texture
+        emitterNode.particleSize = CGSize(width: 21, height: 21)
+        emitterNode.numParticlesToEmit = 100
+        emitterNode.particleBirthRate = 12000
+        emitterNode.particleLifetime = 1
+        emitterNode.particleAlpha = 1
+        emitterNode.particleAlphaSpeed = -1
+        emitterNode.particleScaleSpeed = -1
+        emitterNode.particleColorBlendFactor = 1
+        emitterNode.particleColor = GameColors.explosion
+        emitterNode.particleBlendMode = .add
+        
+        emitterNode.particleZPosition = GameWorld.zPosition.explosion.rawValue
+        
+        emitterNode.particleSpeed = 500
+        emitterNode.particleSpeedRange = 1000
+        emitterNode.emissionAngleRange = π * 2.0
+        
+        emitterNode.targetNode = targetNode
+        emitterNode.position = self.position
+        targetNode.addChild(emitterNode)
+        
+        emitterNode.run(SKAction.removeFromParentAfterDelay(1))
     }
     
     func update(enemyMothership: Mothership? = nil, enemySpaceships:[Spaceship] = [], allySpaceships: [Spaceship] = []) {

@@ -19,6 +19,7 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         case spaceship = 0
         case spaceshipHealthBar = 10
         case spaceshipWeaponRangeShapeNode = 20
+        case explosion = 30
     }
     
     static func current() -> GameWorld? {
@@ -285,6 +286,12 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
             break
             
         case [.shot, .mothership]:
+            if let mothership = bodyB.node as? Mothership {
+                mothership.didEndContact(with: bodyA)
+            }
+            break
+            
+        case [.spaceshipShot, .mothership]:
             if let mothership = bodyB.node as? Mothership {
                 mothership.didEndContact(with: bodyA)
             }

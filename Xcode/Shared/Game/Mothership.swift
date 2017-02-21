@@ -96,6 +96,12 @@ class Mothership: SKSpriteNode {
                 }
                 break
                 
+            case [.spaceshipShot, .mothership]:
+                if let shot = bodyB.node as? Shot {
+                    self.getHitBy(shot)
+                }
+                break
+                
             default:
                 #if DEBUG
                     fatalError()
@@ -132,17 +138,17 @@ class Mothership: SKSpriteNode {
     func die(shooter: Spaceship?) {
         
         self.health = 0
-        
-        self.isHidden = true
-        self.healthBar?.isHidden = true
+        self.explosionEffect()
         
         for spaceship in self.spaceships {
             
             spaceship.canRespawn = false
             
             if self.intersects(spaceship) {
-                spaceship.die(shooter: shooter)
-                spaceship.updateHealthBar(health: spaceship.health, maxHealth: spaceship.maxHealth)
+                if spaceship.health > 0 {
+                    spaceship.die(shooter: shooter)
+                    spaceship.updateHealthBar(health: spaceship.health, maxHealth: spaceship.maxHealth)
+                }
             }
             spaceship.labelRespawn?.text = ""
         }
@@ -170,6 +176,60 @@ class Mothership: SKSpriteNode {
             SKAction.removeFromParent()
             ]
         ))
+    }
+    
+    func explosionEffect() {
+        guard let targetNode = self.parent else { return }
+        let particleZPosition = GameWorld.zPosition.explosion.rawValue
+        let position = self.position
+        let particlePositionRange = CGVector(dx: self.size.width/2, dy: self.size.height/2)
+        let texture = SKTexture(imageNamed: "spark")
+        
+        var action = SKAction.run {
+            let emitterNode = SKEmitterNode()
+            emitterNode.particleTexture = texture
+            emitterNode.particleSize = CGSize(width: 21, height: 21)
+            emitterNode.numParticlesToEmit = 200
+            emitterNode.particleBirthRate = 12000
+            emitterNode.particleLifetime = 1
+            emitterNode.particleAlpha = 1
+            emitterNode.particleAlphaSpeed = -1
+            emitterNode.particleScaleSpeed = -1
+            emitterNode.particleColorBlendFactor = 1
+            emitterNode.particleColor = GameColors.explosion
+            emitterNode.particleBlendMode = .add
+            
+            emitterNode.particleZPosition = particleZPosition
+            
+            emitterNode.particleSpeed = 500
+            emitterNode.particleSpeedRange = 1000
+            emitterNode.emissionAngleRange = π * 2.0
+            
+            emitterNode.targetNode = targetNode
+            emitterNode.position = position + CGPoint(
+                x: CGFloat.random(min: -particlePositionRange.dx, max: particlePositionRange.dx),
+                y: CGFloat.random(min: -particlePositionRange.dy, max: particlePositionRange.dy))
+            targetNode.addChild(emitterNode)
+            
+            emitterNode.run(SKAction.removeFromParentAfterDelay(1))
+        }
+        
+        var actions = [SKAction]()
+        actions.append(action)
+        
+        for _ in  1..<10 {
+            let delay: TimeInterval = Double(CGFloat.random(min: 0.1, max: 0.5))
+            actions.append(SKAction.afterDelay(delay, performAction: action))
+        }
+        
+        action = SKAction.run { [weak self] in
+            self?.isHidden = true
+            self?.healthBar?.isHidden = true
+        }
+        
+        actions.append(action)
+        
+        self.run(SKAction.sequence(actions))
     }
     
     func loadSpaceship(spaceship: Spaceship, gameWorld: GameWorld, i: Int) {
