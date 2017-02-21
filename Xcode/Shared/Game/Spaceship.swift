@@ -153,6 +153,7 @@ class Spaceship: SKSpriteNode {
         return spaceship
     }
     
+    // swiftlint:disable:next function_parameter_count
     func load(level: Int, baseDamage: Int, baseLife: Int, baseSpeed: Int, baseRange: Int,
               skinIndex: Int, color: SKColor, loadPhysics: Bool = false, team: Mothership.team) {
         
@@ -201,8 +202,8 @@ class Spaceship: SKSpriteNode {
         
         let rotationToShot = -atan2f(dx, dy)
         var totalRotationToShot = rotationToShot - Float(self.zRotation)
-        while(totalRotationToShot < Float(-π)) { totalRotationToShot += Float(π * 2) }
-        while(totalRotationToShot > Float(π)) { totalRotationToShot -= Float(π * 2) }
+        while totalRotationToShot < Float(-π) { totalRotationToShot += Float(π * 2) }
+        while totalRotationToShot > Float(π) { totalRotationToShot -= Float(π * 2) }
         
         let damageMultiplier = max(abs(totalRotationToShot), 1)
         
@@ -342,7 +343,7 @@ class Spaceship: SKSpriteNode {
         emitterNode.run(SKAction.removeFromParentAfterDelay(1))
     }
     
-    func update(enemyMothership: Mothership? = nil, enemySpaceships:[Spaceship] = [], allySpaceships: [Spaceship] = []) {
+    func update(enemyMothership: Mothership? = nil, enemySpaceships: [Spaceship] = [], allySpaceships: [Spaceship] = []) {
         if self.health > 0 {
             if let destination = self.destination {
                 if self.position.distanceTo(destination) <= Spaceship.diameter/2 {

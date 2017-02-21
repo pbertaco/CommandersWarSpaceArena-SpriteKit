@@ -19,8 +19,7 @@ class GameViewController: UIViewController {
         let scene = LoadScene()
 
         // Present the scene
-        let skView = self.view as! SKView
-        skView.presentScene(scene)
+        (self.view as? SKView)?.presentScene(scene)
     }
     
     override func viewWillLayoutSubviews() {

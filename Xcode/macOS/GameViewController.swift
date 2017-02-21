@@ -19,8 +19,7 @@ class GameViewController: NSViewController, NSWindowDelegate {
         let scene = LoadScene()
         
         // Present the scene
-        let skView = self.view as! SKView
-        skView.presentScene(scene)
+        (self.view as? SKView)?.presentScene(scene)
     }
     
     override func viewDidAppear() {
@@ -41,4 +40,3 @@ class GameViewController: NSViewController, NSWindowDelegate {
         }
     }
 }
-

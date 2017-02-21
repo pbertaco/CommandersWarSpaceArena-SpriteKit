@@ -39,7 +39,7 @@ class MemoryCard {
         
         let fetchRequestData = self.fetchRequest() as [PlayerData]
         
-        if(fetchRequestData.count > 0) {
+        if fetchRequestData.count > 0 {
             self.playerData = fetchRequestData.last
             self.updateModelVersion()
             self.autoSave = true
@@ -75,12 +75,13 @@ class MemoryCard {
     func fetchRequest<T: NSFetchRequestResult>() -> [T] {
         let entityName = "\(T.self)".components(separatedBy: ".").last!
         let fetchRequest: NSFetchRequest<T> = NSFetchRequest<T>(entityName: entityName)
-        return try! self.managedObjectContext.fetch(fetchRequest)
+        return (try? self.managedObjectContext.fetch(fetchRequest)) ?? []
     }
     
     func insertNewObject<T>() -> T {
         let entityName = "\(T.self)".components(separatedBy: ".").last!
         print("New \(entityName)")
+        // swiftlint:disable:next force_cast
         let managedObject = NSEntityDescription.insertNewObject(forEntityName: entityName, into: self.managedObjectContext) as! T
         return managedObject
     }
@@ -95,7 +96,7 @@ class MemoryCard {
         
         let fileManager = FileManager.default
         if !fileManager.fileExists(atPath: url.path) {
-            try! fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            try? fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         }
         
         return url
@@ -112,7 +113,7 @@ class MemoryCard {
         
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         
-        let productName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
+        let productName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "App"
         
         #if DEBUG
             let fileName = "\(productName)Debug.sqlite"
@@ -138,7 +139,7 @@ class MemoryCard {
             try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
         } catch let error as NSError {
             #if DEBUG
-                try! fileManager.removeItem(at: url)
+                try? fileManager.removeItem(at: url)
                 exit(1)
             #endif
         }
@@ -157,7 +158,7 @@ class MemoryCard {
     
     func saveContext() {
         if self.managedObjectContext.hasChanges {
-            try! managedObjectContext.save()
+            try? managedObjectContext.save()
         }
     }
 }

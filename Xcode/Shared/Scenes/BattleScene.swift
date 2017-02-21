@@ -470,7 +470,7 @@ class BattleScene: GameScene {
             playerData.botLevel = playerData.botLevel + 1
         }
         
-        if playerData.maxBotLevel < playerData.botLevel  {
+        if playerData.maxBotLevel < playerData.botLevel {
             playerData.maxBotLevel = playerData.botLevel
         }
     }

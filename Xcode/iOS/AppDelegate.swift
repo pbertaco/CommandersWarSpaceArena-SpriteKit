@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if Metrics.canSendEvents() {
             Fabric.with([Crashlytics.self, GameAnalytics.self])
             
-            let bundleShortVersionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+            let bundleShortVersionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
             GameAnalytics.configureBuild(bundleShortVersionString)
             GameAnalytics.initializeWithConfiguredGameKeyAndGameSecret()
         }
@@ -67,4 +67,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-

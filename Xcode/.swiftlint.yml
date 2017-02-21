@@ -1,0 +1,11 @@
+disabled_rules:
+  - trailing_whitespace
+  - variable_name
+  - type_name
+  - file_length
+  - line_length
+  - type_body_length
+  - cyclomatic_complexity
+  - function_body_length
+
+

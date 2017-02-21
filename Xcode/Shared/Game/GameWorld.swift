@@ -148,7 +148,7 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
                 var bodyAcategoryBitMask = ""
                 var bodyBcategoryBitMask = ""
                 
-                switch (bodyA.categoryBitMask) {
+                switch bodyA.categoryBitMask {
                 
                 case categoryBitMask.world.rawValue:
                     bodyAcategoryBitMask = "world"
@@ -179,7 +179,7 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
                     break
                 }
                 
-                switch (bodyB.categoryBitMask) {
+                switch bodyB.categoryBitMask {
                     
                 case categoryBitMask.world.rawValue:
                     bodyBcategoryBitMask = "world"
@@ -302,7 +302,7 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
                 var bodyAcategoryBitMask = ""
                 var bodyBcategoryBitMask = ""
                 
-                switch (bodyA.categoryBitMask) {
+                switch bodyA.categoryBitMask {
                     
                 case categoryBitMask.world.rawValue:
                     bodyAcategoryBitMask = "world"
@@ -333,7 +333,7 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
                     break
                 }
                 
-                switch (bodyB.categoryBitMask) {
+                switch bodyB.categoryBitMask {
                     
                 case categoryBitMask.world.rawValue:
                     bodyBcategoryBitMask = "world"
