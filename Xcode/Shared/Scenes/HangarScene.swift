@@ -132,20 +132,15 @@ class HangarScene: GameScene {
             if let a = a as? SpaceshipHangarCell {
                 if let b = b as? SpaceshipHangarCell {
                     
-                    a.control1?.move(toParent: b)
-                    b.control1?.move(toParent: a)
-                    
-                    let aControl1 = a.control1
-                    a.control1 = b.control1
-                    b.control1 = aControl1
-                    
-                    a.loadButtonSell()
-                    
                     if let aSpaceshipData = a.spaceshipData() {
                         if let bSpaceshipData = b.spaceshipData() {
+                            
                             aSpaceshipData.parentMothershipSlot?.spaceship = bSpaceshipData
                             playerData?.removeFromSpaceships(bSpaceshipData)
                             playerData?.addToSpaceships(aSpaceshipData)
+                            
+                            a.loadButtonSell()
+                            b.loadControlSlot()
                         }
                     }
                 }

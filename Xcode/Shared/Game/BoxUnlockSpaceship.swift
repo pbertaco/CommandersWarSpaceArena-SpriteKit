@@ -26,7 +26,6 @@ class BoxUnlockSpaceship: Box {
         
         self.addChild(Label(text: "secret spaceship matrix", fontColor: GameColors.fontWhite, x: 189, y: 41))
         
-        
         var rarityText = ""
         switch rarity {
         case .common:

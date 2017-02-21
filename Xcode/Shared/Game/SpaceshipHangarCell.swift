@@ -23,13 +23,12 @@ class SpaceshipHangarCell: Control {
     
     private weak var spaceship: Spaceship?
 
-    init(spaceship: Spaceship, loadButtonSell: Bool = true) {
+    init(spaceship: Spaceship) {
         super.init(imageNamed: "box233x144", x: 0, y: 0)
         
         let mothershipSlot = MothershipSlot(x: 19, y: 8)
         mothershipSlot.load(spaceship: spaceship)
         self.addChild(mothershipSlot)
-        
         
         self.addChild(Label(text: "level", horizontalAlignmentMode: .right, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 172, y: 23))
         self.labelLevel = Label(text: spaceship.level.description, horizontalAlignmentMode: .left, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 179, y: 23)
@@ -57,15 +56,10 @@ class SpaceshipHangarCell: Control {
             
             self.loadButtonUpgrade()
             
-            if let mothershipSlot = spaceshipData.parentMothershipSlot {
-                let control = Control(imageNamed: "box89x34", x: 125, y: 102)
-                control.addChild(Control(imageNamed: "slotIndex\(mothershipSlot.index)", x: 2, y: 8))
-                self.addChild(control)
-                self.control1 = control
+            if spaceshipData.parentMothershipSlot != nil {
+                self.loadControlSlot()
             } else {
-                if loadButtonSell {
-                    self.loadButtonSell()
-                }
+                self.loadButtonSell()
             }
         } else {
             self.lock()
@@ -122,8 +116,23 @@ class SpaceshipHangarCell: Control {
         }
     }
     
+    func loadControlSlot() {
+        guard let mothershipSlotIndex = self.spaceship?.spaceshipData?.parentMothershipSlot?.index else { return }
+    
+        let control = Control(imageNamed: "box89x34", x: 125, y: 102)
+        control.addChild(Control(imageNamed: "slotIndex\(mothershipSlotIndex)", x: 2, y: 8))
+        self.addChild(control)
+        
+        self.control1?.removeFromParent()
+        self.control1 = control
+    }
+    
     func loadButtonSell() {
         guard let spaceship = self.spaceship else { return }
+        
+        if spaceship.spaceshipData?.parentMothershipSlot != nil {
+            return
+        }
         
         let points: Int32 = Int32(GameMath.xpForLevel(level: spaceship.level))
         
@@ -160,9 +169,25 @@ class SpaceshipHangarCell: Control {
         
         spaceship.isHidden = true
         
+        var rocketColor: SKColor = .clear
+        switch spaceship.rarity {
+        case .common:
+            rocketColor = GameColors.common
+            break
+        case .rare:
+            rocketColor = GameColors.rare
+            break
+        case .epic:
+            rocketColor = GameColors.epic
+            break
+        case .legendary:
+            rocketColor = GameColors.legendary
+            break
+        }
+        
         let rocket = Control(imageNamed: "Rocket", x: 19, y: 8)
         rocket.setScaleToFit(size: CGSize(width: 89, height: 89))
-        rocket.set(color: spaceship.color, blendMode: .add)
+        rocket.set(color: rocketColor, blendMode: .add)
         self.addChild(rocket)
         
         let circuit = Control(imageNamed: "Circuit", x: 19, y: 8)
@@ -198,10 +223,6 @@ class SpaceshipHangarCell: Control {
             self?.control1?.isHidden = true
             rocket?.removeFromParent()
             circuit?.removeFromParent()
-        }
-        
-        buttonIgnore.addHandler { [weak self] in
-            guard self != nil else { return }
         }
     }
     
