@@ -341,6 +341,7 @@ class Spaceship: SKSpriteNode {
         targetNode.addChild(emitterNode)
         
         emitterNode.run(SKAction.removeFromParentAfterDelay(1))
+        GameWorld.current()?.shake()
     }
     
     func update(enemyMothership: Mothership? = nil, enemySpaceships: [Spaceship] = [], allySpaceships: [Spaceship] = []) {

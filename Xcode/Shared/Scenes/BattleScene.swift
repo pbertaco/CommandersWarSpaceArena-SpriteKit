@@ -270,11 +270,6 @@ class BattleScene: GameScene {
         Shot.update()
     }
     
-    override func didFinishUpdate() {
-        super.didFinishUpdate()
-        self.gameCamera.update()
-    }
-    
     override func touchDown(touch: UITouch) {
         super.touchDown(touch: touch)
         

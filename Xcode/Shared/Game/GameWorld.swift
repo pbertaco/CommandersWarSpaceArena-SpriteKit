@@ -60,6 +60,13 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         self.physicsBody = physicsBody
     }
     
+    func shake() {
+        let zRotation = CGFloat.random(min: -π, max: +π)
+        let distance: CGFloat = 34
+        let amount = CGPoint(x: -sin(zRotation) * distance, y: cos(zRotation) * distance)
+        self.run(SKAction.screenShakeWithNode(self, amount: amount, oscillations: 10, duration: 1))
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         
         // Assign the two physics bodies so that the one with the lower category is always stored in firstBody
