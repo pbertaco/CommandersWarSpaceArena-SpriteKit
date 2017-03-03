@@ -273,7 +273,7 @@ class Mothership: SKSpriteNode {
         spaceship.loadWeaponRangeShapeNode(gameWorld: gameWorld)
         spaceship.loadHealthBar(gameWorld: gameWorld)
         spaceship.loadLabelRespawn(gameWorld: gameWorld)
-        
+        spaceship.loadJetEffect(gameWorld: gameWorld)
     }
     
     func loadSpaceships(gameWorld: GameWorld) {

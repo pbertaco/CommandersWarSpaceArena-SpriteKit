@@ -80,11 +80,6 @@
 		842A85731E25B715006B31F7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A85721E25B715006B31F7 /* GameViewController.swift */; };
 		842A85761E25B715006B31F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842A85741E25B715006B31F7 /* Main.storyboard */; };
 		842A85791E25B715006B31F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842A85771E25B715006B31F7 /* LaunchScreen.storyboard */; };
-		842A857E1E25B715006B31F7 /* GameVI.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 842A857D1E25B715006B31F7 /* GameVI.app */; };
-		842A85841E25B715006B31F7 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842A85821E25B715006B31F7 /* Interface.storyboard */; };
-		842A858B1E25B715006B31F7 /* GameVI Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 842A858A1E25B715006B31F7 /* GameVI Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		842A85901E25B715006B31F7 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A858F1E25B715006B31F7 /* InterfaceController.swift */; };
-		842A85921E25B715006B31F7 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A85911E25B715006B31F7 /* ExtensionDelegate.swift */; };
 		842A859B1E25B715006B31F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A859A1E25B715006B31F7 /* AppDelegate.swift */; };
 		842A859D1E25B715006B31F7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A859C1E25B715006B31F7 /* GameViewController.swift */; };
 		842A85A01E25B715006B31F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842A859E1E25B715006B31F7 /* Main.storyboard */; };
@@ -92,7 +87,6 @@
 		842A85AB1E25B715006B31F7 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A85AA1E25B715006B31F7 /* GameViewController.swift */; };
 		842A85AE1E25B715006B31F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842A85AC1E25B715006B31F7 /* Main.storyboard */; };
 		842A85BB1E25B715006B31F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 842A85681E25B715006B31F7 /* Assets.xcassets */; };
-		842A85BC1E25B715006B31F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 842A85681E25B715006B31F7 /* Assets.xcassets */; };
 		842A85BD1E25B715006B31F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 842A85681E25B715006B31F7 /* Assets.xcassets */; };
 		842A85BE1E25B715006B31F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 842A85681E25B715006B31F7 /* Assets.xcassets */; };
 		842A85F91E25BB3F006B31F7 /* LoadScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842A85F81E25BB3F006B31F7 /* LoadScene.swift */; };
@@ -204,42 +198,13 @@
 		84F9452C1E2EEEBA0034F530 /* ControlPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F945291E2EEEBA0034F530 /* ControlPoints.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		842A857F1E25B715006B31F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 842A85601E25B715006B31F7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 842A857C1E25B715006B31F7;
-			remoteInfo = "watchOS App";
-		};
-		842A858C1E25B715006B31F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 842A85601E25B715006B31F7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 842A85891E25B715006B31F7;
-			remoteInfo = "watchOS Extension";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
-		842A85C41E25B715006B31F7 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				842A858B1E25B715006B31F7 /* GameVI Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		842A85C81E25B715006B31F7 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				842A857E1E25B715006B31F7 /* GameVI.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,13 +242,6 @@
 		842A85751E25B715006B31F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		842A85781E25B715006B31F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		842A857A1E25B715006B31F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		842A857D1E25B715006B31F7 /* GameVI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameVI.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		842A85831E25B715006B31F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		842A85851E25B715006B31F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		842A858A1E25B715006B31F7 /* GameVI Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "GameVI Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		842A858F1E25B715006B31F7 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		842A85911E25B715006B31F7 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		842A85931E25B715006B31F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		842A85981E25B715006B31F7 /* GameVI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameVI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		842A859A1E25B715006B31F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		842A859C1E25B715006B31F7 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -359,13 +317,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		842A85871E25B715006B31F7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		842A85951E25B715006B31F7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -390,8 +341,6 @@
 				842A85641E25B715006B31F7 /* Shared */,
 				84D587081E426DC30041BAAD /* Playground */,
 				842A856F1E25B715006B31F7 /* iOS */,
-				842A85811E25B715006B31F7 /* watchOS App */,
-				842A858E1E25B715006B31F7 /* watchOS Extension */,
 				842A85991E25B715006B31F7 /* tvOS */,
 				842A85A71E25B715006B31F7 /* macOS */,
 				842A856E1E25B715006B31F7 /* Products */,
@@ -414,8 +363,6 @@
 			isa = PBXGroup;
 			children = (
 				842A856D1E25B715006B31F7 /* GameVI.app */,
-				842A857D1E25B715006B31F7 /* GameVI.app */,
-				842A858A1E25B715006B31F7 /* GameVI Extension.appex */,
 				842A85981E25B715006B31F7 /* GameVI.app */,
 				842A85A61E25B715006B31F7 /* GameVI.app */,
 			);
@@ -432,25 +379,6 @@
 				842A857A1E25B715006B31F7 /* Info.plist */,
 			);
 			path = iOS;
-			sourceTree = "<group>";
-		};
-		842A85811E25B715006B31F7 /* watchOS App */ = {
-			isa = PBXGroup;
-			children = (
-				842A85821E25B715006B31F7 /* Interface.storyboard */,
-				842A85851E25B715006B31F7 /* Info.plist */,
-			);
-			path = "watchOS App";
-			sourceTree = "<group>";
-		};
-		842A858E1E25B715006B31F7 /* watchOS Extension */ = {
-			isa = PBXGroup;
-			children = (
-				842A858F1E25B715006B31F7 /* InterfaceController.swift */,
-				842A85911E25B715006B31F7 /* ExtensionDelegate.swift */,
-				842A85931E25B715006B31F7 /* Info.plist */,
-			);
-			path = "watchOS Extension";
 			sourceTree = "<group>";
 		};
 		842A85991E25B715006B31F7 /* tvOS */ = {
@@ -620,47 +548,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				842A85801E25B715006B31F7 /* PBXTargetDependency */,
 			);
 			name = iOS;
 			productName = iOS;
 			productReference = 842A856D1E25B715006B31F7 /* GameVI.app */;
 			productType = "com.apple.product-type.application";
-		};
-		842A857C1E25B715006B31F7 /* watchOS App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 842A85C51E25B715006B31F7 /* Build configuration list for PBXNativeTarget "watchOS App" */;
-			buildPhases = (
-				842A857B1E25B715006B31F7 /* Resources */,
-				842A85C41E25B715006B31F7 /* Embed App Extensions */,
-				847182E11E25D7870077D3EF /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				842A858D1E25B715006B31F7 /* PBXTargetDependency */,
-			);
-			name = "watchOS App";
-			productName = "watchOS App";
-			productReference = 842A857D1E25B715006B31F7 /* GameVI.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		842A85891E25B715006B31F7 /* watchOS Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 842A85C11E25B715006B31F7 /* Build configuration list for PBXNativeTarget "watchOS Extension" */;
-			buildPhases = (
-				842A85861E25B715006B31F7 /* Sources */,
-				842A85871E25B715006B31F7 /* Frameworks */,
-				842A85881E25B715006B31F7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "watchOS Extension";
-			productName = "watchOS Extension";
-			productReference = 842A858A1E25B715006B31F7 /* GameVI Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		842A85971E25B715006B31F7 /* tvOS */ = {
 			isa = PBXNativeTarget;
@@ -717,16 +609,6 @@
 							};
 						};
 					};
-					842A857C1E25B715006B31F7 = {
-						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = JZ3J7RVLD7;
-						ProvisioningStyle = Automatic;
-					};
-					842A85891E25B715006B31F7 = {
-						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = JZ3J7RVLD7;
-						ProvisioningStyle = Automatic;
-					};
 					842A85971E25B715006B31F7 = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = JZ3J7RVLD7;
@@ -754,8 +636,6 @@
 			projectRoot = "";
 			targets = (
 				842A856C1E25B715006B31F7 /* iOS */,
-				842A857C1E25B715006B31F7 /* watchOS App */,
-				842A85891E25B715006B31F7 /* watchOS Extension */,
 				842A85971E25B715006B31F7 /* tvOS */,
 				842A85A51E25B715006B31F7 /* macOS */,
 			);
@@ -771,22 +651,6 @@
 				842A85761E25B715006B31F7 /* Main.storyboard in Resources */,
 				842A85791E25B715006B31F7 /* LaunchScreen.storyboard in Resources */,
 				842A85BB1E25B715006B31F7 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		842A857B1E25B715006B31F7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				842A85BC1E25B715006B31F7 /* Assets.xcassets in Resources */,
-				842A85841E25B715006B31F7 /* Interface.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		842A85881E25B715006B31F7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,19 +689,6 @@
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "./Frameworks/Fabric.framework/run 3e7f6f013ee0dc3a5f45f5e4db357d194356643b 850680baf12e910f1f651af0e6d7a8d27fc45be1905cbf7f243b802cce84c15e\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
-		};
-		847182E11E25D7870077D3EF /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
 		};
 		8498D9C71E5BFA8300C2D92D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -919,15 +770,6 @@
 				847182D51E25D5A60077D3EF /* Vector3.swift in Sources */,
 				84F945221E2EE6780034F530 /* ControlPremiumPoints.swift in Sources */,
 				842A85F91E25BB3F006B31F7 /* LoadScene.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		842A85861E25B715006B31F7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				842A85921E25B715006B31F7 /* ExtensionDelegate.swift in Sources */,
-				842A85901E25B715006B31F7 /* InterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,19 +901,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		842A85801E25B715006B31F7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 842A857C1E25B715006B31F7 /* watchOS App */;
-			targetProxy = 842A857F1E25B715006B31F7 /* PBXContainerItemProxy */;
-		};
-		842A858D1E25B715006B31F7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 842A85891E25B715006B31F7 /* watchOS Extension */;
-			targetProxy = 842A858C1E25B715006B31F7 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		842A85741E25B715006B31F7 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -1087,14 +916,6 @@
 				842A85781E25B715006B31F7 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		842A85821E25B715006B31F7 /* Interface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				842A85831E25B715006B31F7 /* Base */,
-			);
-			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 		842A859E1E25B715006B31F7 /* Main.storyboard */ = {
@@ -1201,68 +1022,6 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-			};
-			name = Release;
-		};
-		842A85C21E25B715006B31F7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = JZ3J7RVLD7;
-				INFOPLIST_FILE = "watchOS Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "GameVI Extension";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		842A85C31E25B715006B31F7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = JZ3J7RVLD7;
-				INFOPLIST_FILE = "watchOS Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "GameVI Extension";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		842A85C61E25B715006B31F7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JZ3J7RVLD7;
-				IBSC_MODULE = GameVI_Extension;
-				INFOPLIST_FILE = "watchOS App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI.watchkitapp;
-				PRODUCT_NAME = GameVI;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		842A85C71E25B715006B31F7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = JZ3J7RVLD7;
-				IBSC_MODULE = GameVI_Extension;
-				INFOPLIST_FILE = "watchOS App/Info.plist";
-				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI.watchkitapp;
-				PRODUCT_NAME = GameVI;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -1378,24 +1137,6 @@
 			buildConfigurations = (
 				842A85BF1E25B715006B31F7 /* Debug */,
 				842A85C01E25B715006B31F7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		842A85C11E25B715006B31F7 /* Build configuration list for PBXNativeTarget "watchOS Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				842A85C21E25B715006B31F7 /* Debug */,
-				842A85C31E25B715006B31F7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		842A85C51E25B715006B31F7 /* Build configuration list for PBXNativeTarget "watchOS App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				842A85C61E25B715006B31F7 /* Debug */,
-				842A85C71E25B715006B31F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

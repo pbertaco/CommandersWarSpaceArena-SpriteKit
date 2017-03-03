@@ -82,6 +82,10 @@ class Spaceship: SKSpriteNode {
     var deaths = 0
     var getHitBySpaceships = Set<Spaceship>()
     
+    var emitterNode: SKEmitterNode?
+    var emitterNodeParticleBirthRate: CGFloat = 0
+    var defaultEmitterNodeParticleBirthRate: CGFloat = 0
+    
     init(spaceshipData: SpaceshipData, loadPhysics: Bool = false, team: Mothership.team = .blue) {
         
         self.team = team
@@ -313,6 +317,42 @@ class Spaceship: SKSpriteNode {
         ))
     }
     
+    func loadJetEffect(gameWorld targetNode: GameWorld) {
+        
+        self.defaultEmitterNodeParticleBirthRate  = CGFloat(self.speedAtribute * 20)
+        
+        let emitterNode = SKEmitterNode()
+        let texture = SKTexture(imageNamed: "spark")
+        emitterNode.particleTexture = texture
+        emitterNode.particleSize = CGSize(width: 8, height: 8)
+        emitterNode.particleLifetime = 1
+        emitterNode.particleAlpha = 0.25
+        emitterNode.particleAlphaSpeed = -1
+        emitterNode.particleScaleSpeed = -1
+        emitterNode.particleColorBlendFactor = 1
+        emitterNode.particleColor = self.color
+        emitterNode.particleBlendMode = .add
+        
+        emitterNode.particleZPosition = self.zPosition - 1
+        
+        emitterNode.particlePositionRange = CGVector(dx: 8, dy: 8)
+        
+        emitterNode.targetNode = targetNode
+        targetNode.addChild(emitterNode)
+        
+        self.emitterNode = emitterNode
+    }
+    
+    func updateJetEffect() {
+        if let emitterNode = self.emitterNode {
+            emitterNode.particleBirthRate = self.emitterNodeParticleBirthRate
+            emitterNode.particleSpeed = self.emitterNodeParticleBirthRate
+            emitterNode.particleSpeedRange = self.emitterNodeParticleBirthRate/2
+            emitterNode.position = self.position
+            emitterNode.emissionAngle = self.zRotation - π/2
+        }
+    }
+    
     func explosionEffect() {
         guard let targetNode = self.parent else { return }
         
@@ -345,6 +385,9 @@ class Spaceship: SKSpriteNode {
     }
     
     func update(enemyMothership: Mothership? = nil, enemySpaceships: [Spaceship] = [], allySpaceships: [Spaceship] = []) {
+        
+        self.emitterNodeParticleBirthRate = 0
+        
         if self.health > 0 {
             if let destination = self.destination {
                 if self.position.distanceTo(destination) <= Spaceship.diameter/2 {
@@ -353,13 +396,8 @@ class Spaceship: SKSpriteNode {
                     }
                     self.destination = nil
                 } else {
-                    if self.destination == self.startingPosition {
-                        self.rotateTo(point: destination)
-                        self.applyForce()
-                    } else {
-                        self.rotateTo(point: destination)
-                        self.applyForce()
-                    }
+                    self.rotateTo(point: destination)
+                    self.applyForce()
                 }
             } else {
                 if let physicsBody = self.physicsBody {
@@ -367,8 +405,10 @@ class Spaceship: SKSpriteNode {
                         if (self.position - self.startingPosition).lengthSquared() < 4 {
                             self.heal()
                         }
-                        self.rotateTo(point: CGPoint(x: self.position.x, y: 0))
-                        self.applyForce()
+                        if physicsBody.isDynamic {
+                            self.rotateTo(point: CGPoint(x: self.position.x, y: 0))
+                            self.applyForce()
+                        }
                     } else {
                         
                         if let targetNode = self.targetNode {
@@ -439,6 +479,7 @@ class Spaceship: SKSpriteNode {
         
         self.updateWeaponRangeShapeNode()
         self.updateHealthBarPosition()
+        self.updateJetEffect()
     }
     
     func tryToShoot() {
@@ -512,11 +553,14 @@ class Spaceship: SKSpriteNode {
         
         let multiplier = max(1 - abs(self.totalRotationToDestination * 2), 0)
         
-        if let physicsBody = self.physicsBody {
-            let velocitySquared = (physicsBody.velocity.dx * physicsBody.velocity.dx) + (physicsBody.velocity.dy * physicsBody.velocity.dy)
-            
-            if velocitySquared < self.maxVelocitySquared {
-                physicsBody.applyForce(CGVector(dx: -sin(self.zRotation) * self.force * multiplier, dy: cos(self.zRotation) * self.force * multiplier))
+        if multiplier > 0 {
+            if let physicsBody = self.physicsBody {
+                let velocitySquared = (physicsBody.velocity.dx * physicsBody.velocity.dx) + (physicsBody.velocity.dy * physicsBody.velocity.dy)
+                
+                if velocitySquared < self.maxVelocitySquared {
+                    physicsBody.applyForce(CGVector(dx: -sin(self.zRotation) * self.force * multiplier, dy: cos(self.zRotation) * self.force * multiplier))
+                }
+                self.emitterNodeParticleBirthRate = self.defaultEmitterNodeParticleBirthRate
             }
         }
     }
