@@ -114,10 +114,10 @@ class Shot: SKSpriteNode {
         let texture = SKTexture(imageNamed: "spark")
         emitterNode.particleTexture = texture
         emitterNode.particleSize = CGSize(width: 8, height: 8)
-        emitterNode.particleBirthRate = 240
+        emitterNode.particleBirthRate = 60
         emitterNode.particleLifetime = 1
-        emitterNode.particleAlpha = 0.25
-        emitterNode.particleAlphaSpeed = -1
+        emitterNode.particleAlpha = 1
+        emitterNode.particleAlphaSpeed = -4
         emitterNode.particleScaleSpeed = -1
         emitterNode.particleColorBlendFactor = 1
         emitterNode.particleColor = color
