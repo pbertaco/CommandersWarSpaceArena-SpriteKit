@@ -85,6 +85,7 @@ class Spaceship: SKSpriteNode {
     var emitterNode: SKEmitterNode?
     var emitterNodeParticleBirthRate: CGFloat = 0
     var defaultEmitterNodeParticleBirthRate: CGFloat = 0
+    var emitterNodeMaskNode: SKSpriteNode?
     
     init(spaceshipData: SpaceshipData, loadPhysics: Bool = false, team: Mothership.team = .blue) {
         
@@ -326,30 +327,46 @@ class Spaceship: SKSpriteNode {
         emitterNode.particleTexture = texture
         emitterNode.particleSize = CGSize(width: 8, height: 8)
         emitterNode.particleLifetime = 1
-        emitterNode.particleAlpha = 0.25
-        emitterNode.particleAlphaSpeed = -1
+        emitterNode.particleAlpha = 1
+        emitterNode.particleAlphaSpeed = -4
         emitterNode.particleScaleSpeed = -1
         emitterNode.particleColorBlendFactor = 1
         emitterNode.particleColor = self.color
         emitterNode.particleBlendMode = .add
         
-        emitterNode.particleZPosition = self.zPosition - 1
-        
         emitterNode.particlePositionRange = CGVector(dx: 8, dy: 8)
         
-        emitterNode.targetNode = targetNode
-        targetNode.addChild(emitterNode)
+        let effectNode = SKEffectNode()
+        effectNode.blendMode = .add
+        effectNode.zPosition = self.zPosition - 1
+        
+        let maskTexture = Spaceship.skinMaskTexture(index: skinIndex)
+        let maskNode = SKSpriteNode(texture: maskTexture, size: maskTexture.size())
+        maskNode.setScaleToFit(width: Spaceship.diameter, height: Spaceship.diameter)
+        
+        maskNode.color = .white
+        maskNode.colorBlendFactor = 1
+        maskNode.blendMode = .subtract
+        
+        effectNode.addChild(emitterNode)
+        effectNode.addChild(maskNode)
+        targetNode.addChild(effectNode)
         
         self.emitterNode = emitterNode
+        self.emitterNodeMaskNode = maskNode
     }
     
     func updateJetEffect() {
         if let emitterNode = self.emitterNode {
-            emitterNode.particleBirthRate = self.emitterNodeParticleBirthRate
+            emitterNode.particleBirthRate = self.emitterNodeParticleBirthRate/4
             emitterNode.particleSpeed = self.emitterNodeParticleBirthRate
             emitterNode.particleSpeedRange = self.emitterNodeParticleBirthRate/2
-            emitterNode.position = self.position
+            emitterNode.parent?.position = self.position
             emitterNode.emissionAngle = self.zRotation - π/2
+            
+            if let emitterNodeMaskNode = self.emitterNodeMaskNode {
+                emitterNodeMaskNode.zRotation = self.zRotation
+            }
         }
     }
     
@@ -479,6 +496,9 @@ class Spaceship: SKSpriteNode {
         
         self.updateWeaponRangeShapeNode()
         self.updateHealthBarPosition()
+    }
+    
+    func didSimulatePhysics() {
         self.updateJetEffect()
     }
     
@@ -829,6 +849,11 @@ class Spaceship: SKSpriteNode {
     
     static func skinTexture(index i: Int) -> SKTexture {
         let texture = SKTexture(imageNamed: Spaceship.skins[i], filteringMode: GameScene.defaultFilteringMode)
+        return texture
+    }
+    
+    static func skinMaskTexture(index i: Int) -> SKTexture {
+        let texture = SKTexture(imageNamed: Spaceship.skins[i] + "Mask", filteringMode: GameScene.defaultFilteringMode)
         return texture
     }
     

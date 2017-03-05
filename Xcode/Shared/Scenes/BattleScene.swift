@@ -268,6 +268,10 @@ class BattleScene: GameScene {
     override func didSimulatePhysics() {
         super.didSimulatePhysics()
         Shot.update()
+        
+        self.mothership.didSimulatePhysics()
+        self.botMothership.didSimulatePhysics()
+        
     }
     
     override func touchDown(touch: UITouch) {

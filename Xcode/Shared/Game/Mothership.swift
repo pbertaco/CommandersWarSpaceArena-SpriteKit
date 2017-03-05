@@ -61,6 +61,12 @@ class Mothership: SKSpriteNode {
         }
     }
     
+    func didSimulatePhysics() {
+        for spaceship in self.spaceships {
+            spaceship.didSimulatePhysics()
+        }
+    }
+    
     func didBeginContact(with bodyB: SKPhysicsBody) {
         if let bodyA = self.physicsBody {
             switch GameWorld.categoryBitMask(rawValue: bodyA.categoryBitMask | bodyB.categoryBitMask) {
