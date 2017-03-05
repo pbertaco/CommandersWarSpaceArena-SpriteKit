@@ -333,6 +333,7 @@ class Spaceship: SKSpriteNode {
         emitterNode.particleColorBlendFactor = 1
         emitterNode.particleColor = self.color
         emitterNode.particleBlendMode = .add
+        emitterNode.particleZPosition = -1
         
         emitterNode.particlePositionRange = CGVector(dx: 8, dy: 8)
         
