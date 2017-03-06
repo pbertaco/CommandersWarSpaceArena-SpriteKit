@@ -1,6 +1,6 @@
 //
 //  BoxUnlockSpaceship.swift
-//  GameVI
+//  CommandersWar
 //
 //  Created by Pablo Henrique Bertaco on 2/7/17.
 //  Copyright © 2017 PabloHenri91. All rights reserved.

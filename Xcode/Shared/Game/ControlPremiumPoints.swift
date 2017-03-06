@@ -1,6 +1,6 @@
 //
 //  ControlPoints.swift
-//  GameVI
+//  CommandersWar
 //
 //  Created by Pablo Henrique Bertaco on 1/17/17.
 //  Copyright © 2017 PabloHenri91. All rights reserved.

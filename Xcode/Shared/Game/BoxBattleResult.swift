@@ -1,6 +1,6 @@
 //
 //  BoxBattleResult.swift
-//  GameVI
+//  CommandersWar
 //
 //  Created by Pablo Henrique Bertaco on 2/3/17.
 //  Copyright © 2017 PabloHenri91. All rights reserved.

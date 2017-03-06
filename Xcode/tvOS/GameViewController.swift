@@ -1,5 +1,5 @@
 //
-//  GameViewController.swift
+//  CommandersWarewController.swift
 //  tvOS
 //
 //  Created by Pablo Henrique Bertaco on 1/10/17.

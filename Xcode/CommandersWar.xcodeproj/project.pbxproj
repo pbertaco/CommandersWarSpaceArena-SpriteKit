@@ -236,18 +236,18 @@
 		84138E001E439A9500B845E4 /* ControlMission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlMission.swift; sourceTree = "<group>"; };
 		84240B6D1E26DD060090E681 /* GameMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMath.swift; sourceTree = "<group>"; };
 		842A85681E25B715006B31F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		842A856D1E25B715006B31F7 /* GameVI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameVI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		842A856D1E25B715006B31F7 /* CommandersWar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommandersWar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		842A85701E25B715006B31F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		842A85721E25B715006B31F7 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		842A85751E25B715006B31F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		842A85781E25B715006B31F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		842A857A1E25B715006B31F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		842A85981E25B715006B31F7 /* GameVI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameVI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		842A85981E25B715006B31F7 /* CommandersWar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommandersWar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		842A859A1E25B715006B31F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		842A859C1E25B715006B31F7 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		842A859F1E25B715006B31F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		842A85A11E25B715006B31F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		842A85A61E25B715006B31F7 /* GameVI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameVI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		842A85A61E25B715006B31F7 /* CommandersWar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommandersWar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		842A85A81E25B715006B31F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		842A85AA1E25B715006B31F7 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		842A85AD1E25B715006B31F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -362,9 +362,9 @@
 		842A856E1E25B715006B31F7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				842A856D1E25B715006B31F7 /* GameVI.app */,
-				842A85981E25B715006B31F7 /* GameVI.app */,
-				842A85A61E25B715006B31F7 /* GameVI.app */,
+				842A856D1E25B715006B31F7 /* CommandersWar.app */,
+				842A85981E25B715006B31F7 /* CommandersWar.app */,
+				842A85A61E25B715006B31F7 /* CommandersWar.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -551,7 +551,7 @@
 			);
 			name = iOS;
 			productName = iOS;
-			productReference = 842A856D1E25B715006B31F7 /* GameVI.app */;
+			productReference = 842A856D1E25B715006B31F7 /* CommandersWar.app */;
 			productType = "com.apple.product-type.application";
 		};
 		842A85971E25B715006B31F7 /* tvOS */ = {
@@ -568,7 +568,7 @@
 			);
 			name = tvOS;
 			productName = tvOS;
-			productReference = 842A85981E25B715006B31F7 /* GameVI.app */;
+			productReference = 842A85981E25B715006B31F7 /* CommandersWar.app */;
 			productType = "com.apple.product-type.application";
 		};
 		842A85A51E25B715006B31F7 /* macOS */ = {
@@ -586,7 +586,7 @@
 			);
 			name = macOS;
 			productName = macOS;
-			productReference = 842A85A61E25B715006B31F7 /* GameVI.app */;
+			productReference = 842A85A61E25B715006B31F7 /* CommandersWar.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -622,7 +622,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 842A85631E25B715006B31F7 /* Build configuration list for PBXProject "GameVI" */;
+			buildConfigurationList = 842A85631E25B715006B31F7 /* Build configuration list for PBXProject "CommandersWar" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1038,7 +1038,7 @@
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI;
-				PRODUCT_NAME = GameVI;
+				PRODUCT_NAME = CommandersWar;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1058,7 +1058,7 @@
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI;
-				PRODUCT_NAME = GameVI;
+				PRODUCT_NAME = CommandersWar;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1075,7 +1075,7 @@
 				INFOPLIST_FILE = tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI;
-				PRODUCT_NAME = GameVI;
+				PRODUCT_NAME = CommandersWar;
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1090,7 +1090,7 @@
 				INFOPLIST_FILE = tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI;
-				PRODUCT_NAME = GameVI;
+				PRODUCT_NAME = CommandersWar;
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
@@ -1107,7 +1107,7 @@
 				INFOPLIST_FILE = macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI;
-				PRODUCT_NAME = GameVI;
+				PRODUCT_NAME = CommandersWar;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1123,7 +1123,7 @@
 				INFOPLIST_FILE = macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI;
-				PRODUCT_NAME = GameVI;
+				PRODUCT_NAME = CommandersWar;
 				SDKROOT = macosx;
 				SWIFT_VERSION = 3.0;
 			};
@@ -1132,7 +1132,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		842A85631E25B715006B31F7 /* Build configuration list for PBXProject "GameVI" */ = {
+		842A85631E25B715006B31F7 /* Build configuration list for PBXProject "CommandersWar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				842A85BF1E25B715006B31F7 /* Debug */,

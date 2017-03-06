@@ -1,5 +1,5 @@
 //
-//  GameViewController.swift
+//  CommandersWarewController.swift
 //  macOS
 //
 //  Created by Pablo Henrique Bertaco on 1/10/17.
