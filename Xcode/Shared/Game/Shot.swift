@@ -48,7 +48,7 @@ class Shot: SKSpriteNode {
         self.startingPosition = shooter.position
         
         self.position = shooter.position
-        self.zRotation = shooter.zRotation + CGFloat.random(min: -0.1, max: 0.1)
+        self.zRotation = shooter.zRotation// + CGFloat.random(min: -0.1, max: 0.1)
         
         self.loadPhysics(shooter: shooter)
         
@@ -135,7 +135,44 @@ class Shot: SKSpriteNode {
         self.update()
     }
     
+    func explosionEffect() {
+        guard let targetNode = self.parent else { return }
+        
+        let emitterNode = SKEmitterNode()
+        let texture = SKTexture(imageNamed: "spark")
+        emitterNode.particleTexture = texture
+        emitterNode.particleSize = CGSize(width: 5, height: 5)
+        emitterNode.numParticlesToEmit = 5
+        emitterNode.particleBirthRate = 1200
+        emitterNode.particleLifetime = 1
+        emitterNode.particleAlpha = 1
+        emitterNode.particleAlphaSpeed = -1
+        emitterNode.particleScaleSpeed = -1
+        emitterNode.particleColorBlendFactor = 1
+        emitterNode.particleColor = GameColors.explosion
+        emitterNode.particleBlendMode = .add
+        
+        emitterNode.particleZPosition = GameWorld.zPosition.explosion.rawValue
+        
+        emitterNode.particleSpeed = 500/2
+        emitterNode.particleSpeedRange = 1000/2
+        emitterNode.emissionAngle = self.zRotation - π/2
+        emitterNode.emissionAngleRange = π/2
+        
+        
+        emitterNode.targetNode = targetNode
+        emitterNode.position = self.position
+        targetNode.addChild(emitterNode)
+        
+        emitterNode.run(SKAction.removeFromParentAfterDelay(1))
+    }
+    
     override func removeFromParent() {
+        
+        if self.damage == 0 {
+            self.explosionEffect()
+        }
+        
         Shot.set.remove(self)
         self.shooter?.canShot = true
         super.removeFromParent()

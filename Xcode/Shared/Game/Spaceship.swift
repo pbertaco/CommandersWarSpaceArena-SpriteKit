@@ -221,7 +221,7 @@ class Spaceship: SKSpriteNode {
             }
         }
         
-        self.damageEffect(damage: shot.damage, damageMultiplier: CGFloat(damageMultiplier))
+        self.damageEffect(damage: shot.damage, damageMultiplier: CGFloat(damageMultiplier), position: shot.position)
         
         if self.health > 0 && self.health - shot.damage <= 0 {
             self.die(shooter: shot.shooter)
@@ -296,15 +296,16 @@ class Spaceship: SKSpriteNode {
         self.setBitMasksToMothershipSpaceship()
     }
     
-    func damageEffect(damage: Int, damageMultiplier: CGFloat) {
+    func damageEffect(damage: Int, damageMultiplier: CGFloat, position: CGPoint) {
         
         let duration = 0.5
         
         let label = Label(text: damage.description, fontSize: .fontSize8, fontColor: SKColor(red: 1, green: 1 - damageMultiplier/π, blue: 1 - damageMultiplier/π, alpha: 1))
+        label.position = position
         Control.set.remove(label)
-        label.position = CGPoint(
-            x: Int(self.position.x) + Int.random(min: -27, max: 27),
-            y: Int(self.position.y) + Int.random(min: -27, max: 27))
+//        label.position = CGPoint(
+//            x: Int(self.position.x) + Int.random(min: -27, max: 27),
+//            y: Int(self.position.y) + Int.random(min: -27, max: 27))
         self.parent?.addChild(label)
         
         label.run(SKAction.scale(to: 2, duration: 0))
