@@ -40,9 +40,18 @@ extension MemoryCard {
     func newSpaceshipData(spaceship: Spaceship) -> SpaceshipData {
         let spaceshipData: SpaceshipData = self.insertNewObject()
         
-        spaceshipData.colorRed = Double(spaceship.colorRed)
-        spaceshipData.colorGreen = Double(spaceship.colorGreen)
-        spaceshipData.colorBlue = Double(spaceship.colorBlue)
+        let color: CIColor = {
+            let color = CIColor(color: spaceship.color)
+            #if os(OSX)
+                return color!
+            #else
+                return color
+            #endif
+        }()
+        
+        spaceshipData.colorRed = Double(color.red)
+        spaceshipData.colorGreen = Double(color.green)
+        spaceshipData.colorBlue = Double(color.blue)
         spaceshipData.baseDamage = Int16(spaceship.baseDamage)
         spaceshipData.level = Int16(spaceship.level)
         spaceshipData.baseLife = Int16(spaceship.baseLife)

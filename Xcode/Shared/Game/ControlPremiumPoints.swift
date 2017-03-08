@@ -30,7 +30,7 @@ class ControlPremiumPoints: Control {
         buttonBuyMore.set(color: GameColors.controlYellow, blendMode: .add)
         self.addChild(buttonBuyMore)
         
-        self.labelPremiumPoints = Label(text: "?", fontColor: GameColors.controlYellow, x: 99, y: 27)
+        self.labelPremiumPoints = Label(text: "?", fontColor: GameColors.controlYellow, x: 97, y: 27)
         self.addChild(labelPremiumPoints)
         
         let icon = Control(imageNamed: "Minecraft Diamond", x: 0, y: 0)

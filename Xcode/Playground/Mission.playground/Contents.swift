@@ -72,7 +72,7 @@ for m in finalMissions {
     
     let colorString = "SKColor(red: \(String(format: "%.1f", color.redComponent)), green: \(String(format: "%.1f", color.greenComponent)), blue: \(String(format: "%.1f", color.blueComponent)), alpha: 1)"
     
-    print("Mission(level: \(Int(i/Float(finalMissions.count) * 10.0) + 1), rarities: \(m), color: \(colorString)),")
+    print("Mission(level: \(Int(i/Float(finalMissions.count) * 12.0) + 1), rarities: \(m), color: \(colorString)),")
     i = i + 1
 }
 

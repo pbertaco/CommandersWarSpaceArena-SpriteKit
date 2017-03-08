@@ -45,9 +45,9 @@ Int((epic * min) * pow(1.1, Double(10 - 1)))
 Int((epic * 1.0) * pow(1.1, Double(10 - 1)))
 Int((epic * max) * pow(1.1, Double(10 - 1)))
 
-Int((epic * min) * pow(1.1, Double(1 - 1)))
-Int((epic * 1.0) * pow(1.1, Double(1 - 1)))
-Int((epic * max) * pow(1.1, Double(1 - 1)))
+Int((legendary * min) * pow(1.1, Double(1 - 1)))
+Int((legendary * 1.0) * pow(1.1, Double(1 - 1)))
+Int((legendary * max) * pow(1.1, Double(1 - 1)))
 
 Int((legendary * min) * pow(1.1, Double(5 - 1)))
 Int((legendary * 1.0) * pow(1.1, Double(5 - 1)))

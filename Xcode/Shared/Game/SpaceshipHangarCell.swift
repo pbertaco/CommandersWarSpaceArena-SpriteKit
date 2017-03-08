@@ -138,7 +138,7 @@ class SpaceshipHangarCell: Control {
         
         let buttonSell = Button(imageNamed: "button89x34", x: 125, y: 102)
         buttonSell.set(label: Label(text: "sell", fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: -6))
-        buttonSell.set(label: Label(text: "+\(points)", fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: 6))
+        buttonSell.set(label: Label(text: "+\(points)".points(), fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: 6))
         buttonSell.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonSell)
         buttonSell.addHandler { [weak self] in

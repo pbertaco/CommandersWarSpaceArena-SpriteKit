@@ -17,6 +17,13 @@ class ControlPoints: Control {
     
     private var labelPoints: Label!
     
+    
+    static let numberFormatter = { () -> NumberFormatter in
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter
+    }()
+    
     init(x: CGFloat, y: CGFloat,
          horizontalAlignment: horizontalAlignment = .left,
          verticalAlignment: verticalAlignment = .top) {
@@ -25,7 +32,7 @@ class ControlPoints: Control {
         
         self.set(color: GameColors.controlBlue)
         
-        self.labelPoints = Label(text: "?", fontColor: GameColors.controlBlue, x: 99, y: 27)
+        self.labelPoints = Label(text: "?", fontColor: GameColors.controlBlue, x: 97, y: 27)
         self.addChild(labelPoints)
         
         let icon = Control(imageNamed: "Coins", x: 0, y: 0)
@@ -42,6 +49,12 @@ class ControlPoints: Control {
     }
     
     func setLabelPointsText(points: Int32) {
-        self.labelPoints.text = points.description
+        self.labelPoints.text = ControlPoints.numberFormatter.string(from: NSNumber(value: points))!
+    }
+}
+
+extension String {
+    func points() -> String {
+        return ControlPoints.numberFormatter.string(from: NSNumber(value: Int32(self) ?? 0)) ?? "0"
     }
 }

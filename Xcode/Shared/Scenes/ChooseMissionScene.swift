@@ -22,6 +22,8 @@ class ChooseMissionScene: GameScene {
     override func load() {
         super.load()
         
+        Music.sharedInstance.playMusic(withType: .menu)
+        
         let playerData = MemoryCard.sharedInstance.playerData!
         
         self.backgroundColor = GameColors.backgroundColor

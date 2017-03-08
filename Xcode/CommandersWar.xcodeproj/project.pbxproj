@@ -150,6 +150,21 @@
 		849632C71E42DCB100AEC90F /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849632C61E42DCB100AEC90F /* Mission.swift */; };
 		849632C81E42DCB100AEC90F /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849632C61E42DCB100AEC90F /* Mission.swift */; };
 		849632C91E42DCB100AEC90F /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849632C61E42DCB100AEC90F /* Mission.swift */; };
+		849B4CA51E6EFC9600C14B8F /* klamm_moonset.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 849B4CA41E6EFC9600C14B8F /* klamm_moonset.mp3 */; };
+		849B4CA61E6EFC9600C14B8F /* klamm_moonset.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 849B4CA41E6EFC9600C14B8F /* klamm_moonset.mp3 */; };
+		849B4CA71E6EFC9600C14B8F /* klamm_moonset.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 849B4CA41E6EFC9600C14B8F /* klamm_moonset.mp3 */; };
+		849B4CA91E6EFCA000C14B8F /* klamm_prisma.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 849B4CA81E6EFCA000C14B8F /* klamm_prisma.mp3 */; };
+		849B4CAA1E6EFCA000C14B8F /* klamm_prisma.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 849B4CA81E6EFCA000C14B8F /* klamm_prisma.mp3 */; };
+		849B4CAB1E6EFCA000C14B8F /* klamm_prisma.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 849B4CA81E6EFCA000C14B8F /* klamm_prisma.mp3 */; };
+		849B4CAD1E6EFCD600C14B8F /* klamm_infinity.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 849B4CAC1E6EFCD600C14B8F /* klamm_infinity.mp3 */; };
+		849B4CAE1E6EFCD600C14B8F /* klamm_infinity.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 849B4CAC1E6EFCD600C14B8F /* klamm_infinity.mp3 */; };
+		849B4CAF1E6EFCD600C14B8F /* klamm_infinity.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 849B4CAC1E6EFCD600C14B8F /* klamm_infinity.mp3 */; };
+		849B4CB11E6F0F7D00C14B8F /* klamm_cracks.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 849B4CB01E6F0F7D00C14B8F /* klamm_cracks.mp3 */; };
+		849B4CB21E6F0F7D00C14B8F /* klamm_cracks.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 849B4CB01E6F0F7D00C14B8F /* klamm_cracks.mp3 */; };
+		849B4CB31E6F0F7D00C14B8F /* klamm_cracks.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 849B4CB01E6F0F7D00C14B8F /* klamm_cracks.mp3 */; };
+		849B4CB51E6F179300C14B8F /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B4CB41E6F179300C14B8F /* Music.swift */; };
+		849B4CB61E6F179300C14B8F /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B4CB41E6F179300C14B8F /* Music.swift */; };
+		849B4CB71E6F179300C14B8F /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B4CB41E6F179300C14B8F /* Music.swift */; };
 		84A211271E3FC364008EE6ED /* HangarScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A211261E3FC364008EE6ED /* HangarScene.swift */; };
 		84A211281E3FC364008EE6ED /* HangarScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A211261E3FC364008EE6ED /* HangarScene.swift */; };
 		84A211291E3FC364008EE6ED /* HangarScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A211261E3FC364008EE6ED /* HangarScene.swift */; };
@@ -279,6 +294,11 @@
 		8479051B1E28584100872D70 /* GameCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCenter.swift; sourceTree = "<group>"; };
 		847A04E71E3A3967004A4878 /* Shot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shot.swift; sourceTree = "<group>"; };
 		849632C61E42DCB100AEC90F /* Mission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mission.swift; sourceTree = "<group>"; };
+		849B4CA41E6EFC9600C14B8F /* klamm_moonset.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = klamm_moonset.mp3; sourceTree = "<group>"; };
+		849B4CA81E6EFCA000C14B8F /* klamm_prisma.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = klamm_prisma.mp3; sourceTree = "<group>"; };
+		849B4CAC1E6EFCD600C14B8F /* klamm_infinity.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = klamm_infinity.mp3; sourceTree = "<group>"; };
+		849B4CB01E6F0F7D00C14B8F /* klamm_cracks.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = klamm_cracks.mp3; sourceTree = "<group>"; };
+		849B4CB41E6F179300C14B8F /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		84A211261E3FC364008EE6ED /* HangarScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HangarScene.swift; sourceTree = "<group>"; };
 		84A4CFCF1E3C1B0800BE28FC /* SpaceshipHealthBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceshipHealthBar.swift; sourceTree = "<group>"; };
 		84AFAE1A1E2FC949006359DD /* BattleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleScene.swift; sourceTree = "<group>"; };
@@ -354,6 +374,7 @@
 				842A85D51E25BAC9006B31F7 /* CoreData */,
 				842A85D61E25BAD3006B31F7 /* Fonts */,
 				842A85D41E25BABD006B31F7 /* Game */,
+				849B4C931E6EF4C700C14B8F /* Music */,
 				842A85D31E25BAAF006B31F7 /* Scenes */,
 			);
 			path = Shared;
@@ -452,6 +473,7 @@
 				846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */,
 				8409314C1E26930700C61711 /* MothershipSlot.swift */,
 				840931481E268CDD00C61711 /* MothershipSlots.swift */,
+				849B4CB41E6F179300C14B8F /* Music.swift */,
 				847A04E71E3A3967004A4878 /* Shot.swift */,
 				840B12FA1E25E49100707EE9 /* Spaceship.swift */,
 				84D587041E426BD90041BAAD /* SpaceshipHangarCell.swift */,
@@ -518,6 +540,17 @@
 				847182B31E25D5A60077D3EF /* Vector3.swift */,
 			);
 			path = SKTUtils;
+			sourceTree = "<group>";
+		};
+		849B4C931E6EF4C700C14B8F /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				849B4CB01E6F0F7D00C14B8F /* klamm_cracks.mp3 */,
+				849B4CAC1E6EFCD600C14B8F /* klamm_infinity.mp3 */,
+				849B4CA41E6EFC9600C14B8F /* klamm_moonset.mp3 */,
+				849B4CA81E6EFCA000C14B8F /* klamm_prisma.mp3 */,
+			);
+			path = Music;
 			sourceTree = "<group>";
 		};
 		84D587081E426DC30041BAAD /* Playground */ = {
@@ -648,8 +681,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				84F945261E2EEBCD0034F530 /* kenpixel.ttf in Resources */,
+				849B4CA91E6EFCA000C14B8F /* klamm_prisma.mp3 in Resources */,
 				842A85761E25B715006B31F7 /* Main.storyboard in Resources */,
+				849B4CAD1E6EFCD600C14B8F /* klamm_infinity.mp3 in Resources */,
 				842A85791E25B715006B31F7 /* LaunchScreen.storyboard in Resources */,
+				849B4CA51E6EFC9600C14B8F /* klamm_moonset.mp3 in Resources */,
+				849B4CB11E6F0F7D00C14B8F /* klamm_cracks.mp3 in Resources */,
 				842A85BB1E25B715006B31F7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -658,8 +695,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849B4CAA1E6EFCA000C14B8F /* klamm_prisma.mp3 in Resources */,
+				849B4CAE1E6EFCD600C14B8F /* klamm_infinity.mp3 in Resources */,
 				842A85A01E25B715006B31F7 /* Main.storyboard in Resources */,
+				849B4CA61E6EFC9600C14B8F /* klamm_moonset.mp3 in Resources */,
 				84F945271E2EEBCD0034F530 /* kenpixel.ttf in Resources */,
+				849B4CB21E6F0F7D00C14B8F /* klamm_cracks.mp3 in Resources */,
 				842A85BD1E25B715006B31F7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,8 +709,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849B4CAB1E6EFCA000C14B8F /* klamm_prisma.mp3 in Resources */,
+				849B4CAF1E6EFCD600C14B8F /* klamm_infinity.mp3 in Resources */,
 				842A85AE1E25B715006B31F7 /* Main.storyboard in Resources */,
+				849B4CA71E6EFC9600C14B8F /* klamm_moonset.mp3 in Resources */,
 				84F945281E2EEBCD0034F530 /* kenpixel.ttf in Resources */,
+				849B4CB31E6F0F7D00C14B8F /* klamm_cracks.mp3 in Resources */,
 				842A85BE1E25B715006B31F7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -714,6 +759,7 @@
 				847182C01E25D5A60077D3EF /* SKAction+Extensions.swift in Sources */,
 				845436661E44FE7600E1E2A7 /* BoxBattleResult.swift in Sources */,
 				84D03EE01E35A1E7007425E0 /* Mothership.swift in Sources */,
+				849B4CB51E6F179300C14B8F /* Music.swift in Sources */,
 				84A211271E3FC364008EE6ED /* HangarScene.swift in Sources */,
 				840080391E4BCD46005AF200 /* MultiLineLabel.swift in Sources */,
 				8400801E1E4BCD46005AF200 /* BlackSpriteNode.swift in Sources */,
@@ -785,6 +831,7 @@
 				845436671E44FE7600E1E2A7 /* BoxBattleResult.swift in Sources */,
 				84D587061E426BD90041BAAD /* SpaceshipHangarCell.swift in Sources */,
 				8400803A1E4BCD46005AF200 /* MultiLineLabel.swift in Sources */,
+				849B4CB61E6F179300C14B8F /* Music.swift in Sources */,
 				84F9452B1E2EEEBA0034F530 /* ControlPoints.swift in Sources */,
 				84138E021E439A9500B845E4 /* ControlMission.swift in Sources */,
 				840080371E4BCD46005AF200 /* Label.swift in Sources */,
@@ -848,6 +895,7 @@
 				845436681E44FE7600E1E2A7 /* BoxBattleResult.swift in Sources */,
 				84D587071E426BD90041BAAD /* SpaceshipHangarCell.swift in Sources */,
 				8400803B1E4BCD46005AF200 /* MultiLineLabel.swift in Sources */,
+				849B4CB71E6F179300C14B8F /* Music.swift in Sources */,
 				84F9452C1E2EEEBA0034F530 /* ControlPoints.swift in Sources */,
 				84138E031E439A9500B845E4 /* ControlMission.swift in Sources */,
 				840080381E4BCD46005AF200 /* Label.swift in Sources */,

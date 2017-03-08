@@ -46,9 +46,6 @@ class Spaceship: SKSpriteNode {
     var rarity: rarity = .common
     
     var skinIndex: Int = 0
-    var colorRed: CGFloat = 1
-    var colorGreen: CGFloat = 1
-    var colorBlue: CGFloat = 1
     
     var startingPosition = CGPoint.zero
     var startingZPosition: CGFloat = 0
@@ -106,7 +103,8 @@ class Spaceship: SKSpriteNode {
                   baseLife: Int(spaceshipData.baseLife),
                   baseSpeed: Int(spaceshipData.baseSpeed),
                   baseRange: Int(spaceshipData.baseRange),
-                  skinIndex: Int(spaceshipData.skin), color: color,
+                  skinIndex: Int(spaceshipData.skin),
+                  color: color,
                   loadPhysics: loadPhysics,
                   team: team)
     }
@@ -815,6 +813,8 @@ class Spaceship: SKSpriteNode {
         physicsBody.mass = 0.0455111116170883
         physicsBody.linearDamping = 2
         physicsBody.angularDamping = 5
+        
+        physicsBody.restitution = 0.9
         
         self.physicsBody = physicsBody
         

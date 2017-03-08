@@ -169,7 +169,7 @@ class Shot: SKSpriteNode {
     
     override func removeFromParent() {
         
-        if self.damage == 0 {
+        if self.damage <= 0 {
             self.explosionEffect()
         }
         

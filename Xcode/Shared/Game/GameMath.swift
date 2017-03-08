@@ -11,7 +11,7 @@ import SpriteKit
 class GameMath {
     
     static func unlockSpaceshipPriceInPremiumPoints(rarity: Spaceship.rarity) -> Int {
-        let price = pow(2.0, Double(rarity.rawValue))
+        let price = pow(2.0, Double(rarity.rawValue + 3))
         return Int(price)
     }
     

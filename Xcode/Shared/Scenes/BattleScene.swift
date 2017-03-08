@@ -49,6 +49,8 @@ class BattleScene: GameScene {
     override func load() {
         super.load()
         
+        Music.sharedInstance.playMusic(withType: .battle)
+        
         let playerData = MemoryCard.sharedInstance.playerData!
         
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
@@ -132,20 +134,42 @@ class BattleScene: GameScene {
                     if aliveBotSpaceships.count > 0 {
                         let botSpaceship = aliveBotSpaceships[Int.random(aliveBotSpaceships.count)]
                         
-                        if botSpaceship.targetNode != nil {
-                            
+                        let aliveSpaceships = self.mothership.spaceships.filter({ (spaceship: Spaceship) -> Bool in
+                            if spaceship.health > 0 {
+                                if let targetMothership = spaceship.targetNode as? Mothership {
+                                    let point = CGPoint(x: spaceship.position.x, y: targetMothership.position.y)
+                                    if spaceship.position.distanceTo(point) <= spaceship.weaponRange + 89/2 {
+                                        return true
+                                    }
+                                }
+                            }
+                            return false
+                        }).sorted(by: { $0.health < $1.health })
+                        
+                        if aliveSpaceships.count > 0 {
+                            botSpaceship.setTarget(spaceship: aliveSpaceships[0])
                         } else {
-                            if botSpaceship.health < botSpaceship.maxHealth/2 {
-                                botSpaceship.retreat()
+                            if botSpaceship.targetNode != nil {
+                                if botSpaceship.health < botSpaceship.maxHealth/2 {
+                                    botSpaceship.retreat()
+                                }
                             } else {
-                                let x = Int.random(min: -55/2, max: 55/2)
-                                let y = Int.random(min: -89, max: -89/2)
-                                let point = botSpaceship.position + CGPoint(x: x, y: y)
-                                if self.mothership.contains(point) {
-                                    botSpaceship.setTarget(mothership: self.mothership)
-                                } else {
-                                    botSpaceship.physicsBody?.isDynamic = true
-                                    botSpaceship.destination = point
+                                if let physicsBody = botSpaceship.physicsBody {
+                                    if physicsBody.isDynamic || botSpaceship.health == botSpaceship.maxHealth {
+                                        if botSpaceship.health < botSpaceship.maxHealth {
+                                            botSpaceship.retreat()
+                                        } else {
+                                            let x = Int.random(min: -55/2, max: 55/2)
+                                            let y = Int.random(min: -89, max: -89/2)
+                                            let point = botSpaceship.position + CGPoint(x: x, y: y)
+                                            if self.mothership.contains(point) {
+                                                botSpaceship.setTarget(mothership: self.mothership)
+                                            } else {
+                                                botSpaceship.physicsBody?.isDynamic = true
+                                                botSpaceship.destination = point
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }

@@ -48,7 +48,7 @@ class BoxBattleResult: Box {
         coins.set(color: GameColors.controlBlue)
         self.addChild(coins)
         
-        self.addChild(Label(text: "+\(totalBattlePoints)", fontColor: GameColors.controlBlue, x: 144, y: 100))
+        self.addChild(Label(text: "+\(totalBattlePoints)".points(), fontColor: GameColors.controlBlue, x: 144, y: 100))
         
         var i = 0
         var totalKills = 0

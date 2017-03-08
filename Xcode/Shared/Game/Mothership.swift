@@ -125,7 +125,7 @@ class Mothership: SKSpriteNode {
         
         if let shooter = shot.shooter {
             if shooter.team != self.team {
-                shooter.battlePoints = shooter.battlePoints + shot.damage
+                shooter.battlePoints = shooter.battlePoints + shot.damage/2
             }
         }
         
@@ -342,7 +342,7 @@ class Mothership: SKSpriteNode {
         }
         
         if spaceshipCount > 0 {
-            self.maxHealth = Int((Float(totalDamage)/Float(spaceshipCount)) * 100)
+            self.maxHealth = Int((Float(totalDamage)/Float(spaceshipCount)) * 200)
             self.health = self.maxHealth
         }
     }
