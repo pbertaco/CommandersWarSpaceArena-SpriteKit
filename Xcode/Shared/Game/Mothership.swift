@@ -218,6 +218,7 @@ class Mothership: SKSpriteNode {
             targetNode.addChild(emitterNode)
             
             emitterNode.run(SKAction.removeFromParentAfterDelay(1))
+            GameWorld.current()?.explosionSoundEffect?.play()
             GameWorld.current()?.shake()
         }
         

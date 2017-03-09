@@ -18,14 +18,14 @@ extension MemoryCard {
         playerData.modelVersion = 1
         playerData.name = ""
         playerData.points = 10000
-        playerData.premiumPoints = 100
+        playerData.premiumPoints = 256
         
         playerData.mothership = self.newMothershipData()
         
         for i in 0..<4 {
             let mothershipSlot: MothershipSlotData = self.newMothershipSlotData()
             mothershipSlot.index = Int16(i)
-            let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: Spaceship.randomRarity() ?? .common)
+            let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: .common)
             
             mothershipSlot.spaceship = spaceshipData
             
@@ -33,8 +33,8 @@ extension MemoryCard {
         }
         
         for _ in 0..<4 {
-            let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: Spaceship.randomRarity() ?? .common)
-            playerData.addToSpaceships(spaceshipData)
+            //let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: .common)
+            //playerData.addToSpaceships(spaceshipData)
         }
         
         return playerData

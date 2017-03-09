@@ -18,11 +18,11 @@ class Music {
     
     struct fileName {
         static var menu = [
-            "klamm_cracks.mp3"]
+            "klamm_cracks.m4a"]
         static var battle = [
-            "klamm_infinity.mp3",
-            "klamm_moonset.mp3",
-            "klamm_prisma.mp3"]
+            "klamm_infinity.m4a",
+            "klamm_moonset.m4a",
+            "klamm_prisma.m4a"]
     }
     
     static let sharedInstance = Music()
@@ -61,7 +61,7 @@ class Music {
         
         do {
             let audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer.volume = 0.3
+            audioPlayer.volume = 1.0
             audioPlayer.numberOfLoops = -1
             self.audioPlayer = audioPlayer
             self.play()

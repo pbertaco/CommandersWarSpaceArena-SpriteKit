@@ -27,6 +27,9 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
     }
     private static weak var lastInstance: GameWorld? = nil
     
+    var explosionSoundEffect: SoundEffect!
+    var shotSoundEffect: SoundEffect!
+    
     override init() {
         super.init()
         
@@ -39,6 +42,7 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         self.addChild(Stars())
         
         self.loadPhysics()
+        self.loadSoundEffect()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -58,6 +62,11 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         physicsBody.contactTestBitMask = GameWorld.contactTestBitMask.world.rawValue
         
         self.physicsBody = physicsBody
+    }
+    
+    func loadSoundEffect() {
+        self.explosionSoundEffect = SoundEffect(effectType: .explosion)
+        self.shotSoundEffect = SoundEffect(effectType: .laser)
     }
     
     func shake() {

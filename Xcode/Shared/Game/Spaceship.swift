@@ -398,6 +398,7 @@ class Spaceship: SKSpriteNode {
         targetNode.addChild(emitterNode)
         
         emitterNode.run(SKAction.removeFromParentAfterDelay(1))
+        GameWorld.current()?.explosionSoundEffect?.play()
         GameWorld.current()?.shake()
     }
     
@@ -508,6 +509,7 @@ class Spaceship: SKSpriteNode {
                 self.canShot = false
                 self.lastShot = GameScene.currentTime
                 self.parent?.addChild(Shot(shooter: self))
+                GameWorld.current()?.shotSoundEffect?.play()
             }
         }
     }

@@ -266,12 +266,14 @@ class BattleScene: GameScene {
                     
                 } else {
                     if self.botMothership.health <= 0 {
+                        Metrics.win()
                         if self.battleEndTime - self.battleBeginTime < 60 * 3 {
                             self.updateBotOnWin()
                         } else {
                             self.updateBotOnLose()
                         }
                     } else {
+                        Metrics.lose()
                         if self.battleEndTime - self.battleBeginTime < 60 * 3 {
                             self.updateBotOnLose()
                         } else {
