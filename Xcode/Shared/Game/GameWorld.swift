@@ -17,9 +17,10 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         case mothershipHealthBar = -20
         case shot = -10
         case spaceship = 0
-        case spaceshipHealthBar = 10
-        case spaceshipWeaponRangeShapeNode = 20
-        case explosion = 30
+        case explosion = 10
+        case targetEffect = 20
+        case spaceshipWeaponRangeShapeNode = 30
+        case spaceshipHealthBar = 40
     }
     
     static func current() -> GameWorld? {

@@ -84,6 +84,8 @@ class Spaceship: SKSpriteNode {
     var defaultEmitterNodeParticleBirthRate: CGFloat = 0
     var emitterNodeMaskNode: SKSpriteNode?
     
+    var destinationEffectSpriteNode: SKSpriteNode?
+    
     init(spaceshipData: SpaceshipData, loadPhysics: Bool = false, team: Mothership.team = .blue) {
         
         self.team = team
@@ -271,6 +273,7 @@ class Spaceship: SKSpriteNode {
         }
         
         self.setBitMasksToDeadSpaceship()
+        self.fadeSetDestinationEffect()
     }
     
     func heal() {
@@ -413,6 +416,7 @@ class Spaceship: SKSpriteNode {
                         self.resetToStartingPosition()
                     }
                     self.destination = nil
+                    self.fadeSetDestinationEffect()
                 } else {
                     self.rotateTo(point: destination)
                     self.applyForce()
@@ -466,11 +470,11 @@ class Spaceship: SKSpriteNode {
                             }
                         } else {
                             if let targetNode = self.nearestSpaceshipInRange(spaceships: enemySpaceships) {
-                                self.targetNode = targetNode
+                                self.setTarget(spaceship: targetNode)
                             } else {
                                 if let enemyMothership = enemyMothership {
                                     if self.isMothershipInRange(mothership: enemyMothership) {
-                                        self.targetNode = enemyMothership
+                                        self.setTarget(mothership: enemyMothership)
                                     }
                                 }
                             }
@@ -611,11 +615,13 @@ class Spaceship: SKSpriteNode {
                     }
                     
                     self.destination = nil
+                    self.fadeSetDestinationEffect()
                 }
                 
             } else {
                 self.physicsBody?.isDynamic = true
                 self.destination = point
+                self.setDestinationEffect()
             }
         } else {
             if self.contains(point) {
@@ -626,14 +632,79 @@ class Spaceship: SKSpriteNode {
     
     func setTarget(spaceship: Spaceship) {
         self.destination = nil
+        self.fadeSetDestinationEffect()
         self.physicsBody?.isDynamic = true
         self.targetNode = spaceship
+        self.setTargetEffect(position: spaceship.position, move: true)
     }
     
     func setTarget(mothership: Mothership) {
         self.destination = nil
+        self.fadeSetDestinationEffect()
         self.physicsBody?.isDynamic = true
         self.targetNode = mothership
+        self.setTargetEffect(position: CGPoint(x: self.position.x, y: mothership.position.y), move: false)
+    }
+    
+    func loadSetDestinationEffect(gameWorld: GameWorld) {
+        guard self.team == .blue else { return }
+        let spriteNode = SKSpriteNode(imageNamed: "Define Location", filteringMode: GameScene.defaultFilteringMode)
+        spriteNode.zPosition = GameWorld.zPosition.targetEffect.rawValue
+        spriteNode.setScale(0.75)
+        spriteNode.set(color: self.color, blendMode: .add)
+        spriteNode.alpha = 0
+        
+        gameWorld.addChild(spriteNode)
+        self.destinationEffectSpriteNode = spriteNode
+    }
+    
+    func setDestinationEffect() {
+        guard self.team == .blue else { return }
+        guard let destination = self.destination else { return }
+        guard let spriteNode = self.destinationEffectSpriteNode else { return }
+        
+        spriteNode.removeAllActions()
+        spriteNode.alpha = 1
+        spriteNode.position = destination
+    }
+    
+    func fadeSetDestinationEffect() {
+        guard self.team == .blue else { return }
+        guard let spriteNode = self.destinationEffectSpriteNode else { return }
+        
+        let duration = 0.5
+        
+        spriteNode.run(SKAction.fadeAlpha(to: 0, duration: duration))
+    }
+    
+    func setTargetEffect(position: CGPoint, move: Bool) {
+        guard self.team == .blue else { return }
+        guard let targetNode = self.targetNode else { return }
+        
+        let spriteNode = SKSpriteNode(imageNamed: "Define Location", filteringMode: GameScene.defaultFilteringMode)
+        spriteNode.zPosition = GameWorld.zPosition.targetEffect.rawValue
+        spriteNode.set(color: .red, blendMode: .add)
+        spriteNode.position = position
+        targetNode.parent?.addChild(spriteNode)
+        
+        let duration = 0.5
+        
+        spriteNode.run(SKAction.group([
+            SKAction.scale(to: 0.75, duration: duration/2),
+            SKAction.rotate(byAngle: π/2 * CGFloat.randomSign(), duration: duration/2),
+            SKAction.sequence([
+                SKAction.wait(forDuration: duration/2),
+                SKAction.fadeAlpha(to: 0, duration: duration/2),
+                SKAction.removeFromParent()
+                ])
+            ]))
+        
+        if move {
+            spriteNode.run(SKAction.customAction(withDuration: duration) { [weak targetNode] (node: SKNode, elapsedTime: CGFloat)  in
+                guard let targetNode = targetNode else { return }
+                node.position = targetNode.position
+            })
+        }
     }
     
     static func setSelected(spaceship: Spaceship?) {
@@ -645,6 +716,7 @@ class Spaceship: SKSpriteNode {
         self.targetNode = nil
         self.physicsBody?.isDynamic = true
         self.destination = self.startingPosition
+        self.setDestinationEffect()
         self.setBitMasksToMothershipSpaceship()
         if self == Spaceship.selectedSpaceship {
             Spaceship.setSelected(spaceship: nil)

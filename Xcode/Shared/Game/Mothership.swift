@@ -281,6 +281,7 @@ class Mothership: SKSpriteNode {
         spaceship.loadHealthBar(gameWorld: gameWorld)
         spaceship.loadLabelRespawn(gameWorld: gameWorld)
         spaceship.loadJetEffect(gameWorld: gameWorld)
+        spaceship.loadSetDestinationEffect(gameWorld: gameWorld)
     }
     
     func loadSpaceships(gameWorld: GameWorld) {
@@ -351,6 +352,7 @@ class Mothership: SKSpriteNode {
     func endBattle() {
         for spaceship in self.spaceships {
             spaceship.destination = nil
+            spaceship.fadeSetDestinationEffect()
             spaceship.targetNode = nil
             spaceship.canRespawn = false
         }
