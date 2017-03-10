@@ -41,7 +41,7 @@ class LoadScene: GameScene {
             //self.view?.showsNodeCount = true
             //self.view?.showsPhysics = true
             
-            //MemoryCard.sharedInstance.reset()
+            MemoryCard.sharedInstance.reset()
             //let playerData = MemoryCard.sharedInstance.playerData!
             //playerData.points = 9999999
             //playerData.premiumPoints = 9999999

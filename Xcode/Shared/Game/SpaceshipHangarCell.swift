@@ -116,18 +116,22 @@ class SpaceshipHangarCell: Control {
         }
     }
     
-    func loadControlSlot() {
+    func loadControlSlot(duration sec: TimeInterval = 0) {
         guard let mothershipSlotIndex = self.spaceship?.spaceshipData?.parentMothershipSlot?.index else { return }
     
         let control = Control(imageNamed: "box89x34", x: 125, y: 102)
         control.addChild(Control(imageNamed: "slotIndex\(mothershipSlotIndex)", x: 2, y: 8))
         self.addChild(control)
         
-        self.control1?.removeFromParent()
+        self.control1?.isUserInteractionEnabled = false
+        self.control1?.run(SKAction.sequence([SKAction.fadeAlpha(to: 0, duration: sec), SKAction.removeFromParent()]))
+        control.alpha = 0
+        control.run(SKAction.fadeAlpha(to: 1, duration: sec))
+        
         self.control1 = control
     }
     
-    func loadButtonSell() {
+    func loadButtonSell(duration sec: TimeInterval = 0) {
         guard let spaceship = self.spaceship else { return }
         
         if spaceship.spaceshipData?.parentMothershipSlot != nil {
@@ -144,7 +148,14 @@ class SpaceshipHangarCell: Control {
         buttonSell.addHandler { [weak self] in
             self?.sell(points: points)
         }
-        self.control1?.removeFromParent()
+        
+        self.control1?.isUserInteractionEnabled = false
+        self.control1?.run(SKAction.sequence([SKAction.fadeAlpha(to: 0, duration: sec), SKAction.removeFromParent()]))
+        buttonSell.alpha = 0
+        buttonSell.run(SKAction.fadeAlpha(to: 1, duration: sec))
+        
+        
+        
         self.control1 = buttonSell
     }
     

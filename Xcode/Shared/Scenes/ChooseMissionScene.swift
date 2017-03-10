@@ -82,6 +82,12 @@ class ChooseMissionScene: GameScene {
         let controlPoints = ControlPoints(x: 223, y: 15, horizontalAlignment: .right)
         controlPoints.setLabelPointsText(points: playerData.points)
         self.addChild(controlPoints)
+        
+        if playerData.botLevel > 0 {
+            for _ in 0..<Int(playerData.botLevel) {
+                scrollNode.forward()
+            }
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {

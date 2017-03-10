@@ -47,6 +47,7 @@ class MothershipSlots: Control {
         switch index {
         case 0, 1, 2, 3:
             self.mothershipSlots[index].load(spaceshipData: spaceshipData)
+            self.mothershipSlots[index].loadHealthBar()
             break
         default:
             break

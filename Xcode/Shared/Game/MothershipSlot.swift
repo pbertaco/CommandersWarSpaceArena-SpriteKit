@@ -31,6 +31,12 @@ class MothershipSlot: Control {
         self.load(spaceship: createCopy ? spaceship.createCopy() : spaceship)
     }
     
+    func loadHealthBar() {
+        self.spaceship?.loadHealthBar(gameWorld: self)
+        self.spaceship?.healthBar?.positionOffset = CGPoint(x: 4, y: Int(-self.size.height/2) - 9)
+        self.spaceship?.updateHealthBarPosition()
+    }
+    
     private func load(spaceship: Spaceship) {
         
         self.spaceship?.removeFromParent()

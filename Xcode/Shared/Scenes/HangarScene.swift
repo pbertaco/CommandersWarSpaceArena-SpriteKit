@@ -124,10 +124,13 @@ class HangarScene: GameScene {
                     a.move(toParent: bParent)
                     b.move(toParent: aParent)
                     
-                    let aPosition = a.position
-                    let bPosition = b.position
-                    a.position = bPosition
-                    b.position = aPosition
+                    let aMoveEffect = SKTMoveEffect(node: a, duration: 2, startPosition: aParent.convert(a.position, to: bParent), endPosition: a.position)
+                    aMoveEffect.timingFunction = SKTTimingFunctionElasticEaseOut
+                    let bMoveEffect = SKTMoveEffect(node: b, duration: 2, startPosition: bParent.convert(b.position, to: aParent), endPosition: b.position)
+                    bMoveEffect.timingFunction = SKTTimingFunctionElasticEaseOut
+                    
+                    a.run(SKAction.actionWithEffect(aMoveEffect))
+                    a.run(SKAction.actionWithEffect(bMoveEffect))
                 }
             }
             
@@ -141,8 +144,8 @@ class HangarScene: GameScene {
                             playerData?.removeFromSpaceships(bSpaceshipData)
                             playerData?.addToSpaceships(aSpaceshipData)
                             
-                            a.loadButtonSell()
-                            b.loadControlSlot()
+                            a.loadButtonSell(duration: 0.25)
+                            b.loadControlSlot(duration: 0.25)
                         }
                     }
                 }
@@ -188,13 +191,15 @@ class HangarScene: GameScene {
             guard let buttonLeft = buttonLeft else { return }
             guard let buttonRight = buttonRight else { return }
             
-            buttonRight.isHidden = false
+            buttonRight.isUserInteractionEnabled = true
+            buttonRight.run(SKAction.fadeAlpha(to: 1, duration: 0.25))
             
             if this.cellIndexPlayerDataSpaceships > 0 {
                 this.cellIndexPlayerDataSpaceships = this.cellIndexPlayerDataSpaceships - 1
-                scrollNode.touchMoved(touchDelta: CGPoint(x: -304/2, y: 0))
+                scrollNode.back()
                 if this.cellIndexPlayerDataSpaceships <= 0 {
-                    buttonLeft.isHidden = true
+                    buttonLeft.isUserInteractionEnabled = false
+                    buttonLeft.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
                 }
             }
         }
@@ -205,23 +210,27 @@ class HangarScene: GameScene {
             guard let buttonLeft = buttonLeft else { return }
             guard let buttonRight = buttonRight else { return }
             
-            buttonLeft.isHidden = false
+            buttonLeft.isUserInteractionEnabled = true
+            buttonLeft.run(SKAction.fadeAlpha(to: 1, duration: 0.25))
             
             if this.cellIndexPlayerDataSpaceships < cellsPlayerDataSpaceships.count - 1 {
                 this.cellIndexPlayerDataSpaceships = this.cellIndexPlayerDataSpaceships + 1
-                scrollNode.touchMoved(touchDelta: CGPoint(x: 304/2, y: 0))
+                scrollNode.forward()
                 if this.cellIndexPlayerDataSpaceships >= cellsPlayerDataSpaceships.count - 1 {
-                    buttonRight.isHidden = true
+                    buttonRight.isUserInteractionEnabled = false
+                    buttonRight.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
                 }
             }
         }
         
-        buttonLeft.isHidden = true
+        buttonLeft.alpha = 0
+        buttonLeft.isUserInteractionEnabled = false
         
         self.scrollNodePlayerDataSpaceships = scrollNode
         
         if scrollNode.cells.count <= 1 {
-            buttonRight.isHidden = true
+            buttonRight.alpha = 0
+            buttonRight.isUserInteractionEnabled = false
         }
     }
     
@@ -261,13 +270,15 @@ class HangarScene: GameScene {
             guard let buttonLeft = buttonLeft else { return }
             guard let buttonRight = buttonRight else { return }
             
-            buttonRight.isHidden = false
+            buttonRight.isUserInteractionEnabled = true
+            buttonRight.run(SKAction.fadeAlpha(to: 1, duration: 0.25))
             
             if this.cellIndexMothershipSlots > 0 {
                 this.cellIndexMothershipSlots = this.cellIndexMothershipSlots - 1
-                scrollNode.touchMoved(touchDelta: CGPoint(x: -304/2, y: 0))
+                scrollNode.back()
                 if this.cellIndexMothershipSlots <= 0 {
-                    buttonLeft.isHidden = true
+                    buttonLeft.isUserInteractionEnabled = false
+                    buttonLeft.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
                 }
             }
         }
@@ -278,18 +289,21 @@ class HangarScene: GameScene {
             guard let buttonLeft = buttonLeft else { return }
             guard let buttonRight = buttonRight else { return }
             
-            buttonLeft.isHidden = false
+            buttonLeft.isUserInteractionEnabled = true
+            buttonLeft.run(SKAction.fadeAlpha(to: 1, duration: 0.25))
             
             if this.cellIndexMothershipSlots < cellsMothershipSlots.count - 1 {
                 this.cellIndexMothershipSlots = this.cellIndexMothershipSlots + 1
-                scrollNode.touchMoved(touchDelta: CGPoint(x: 304/2, y: 0))
+                scrollNode.forward()
                 if this.cellIndexMothershipSlots >= cellsMothershipSlots.count - 1 {
-                    buttonRight.isHidden = true
+                    buttonRight.isUserInteractionEnabled = false
+                    buttonRight.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
                 }
             }
         }
         
-        buttonLeft.isHidden = true
+        buttonLeft.alpha = 0
+        buttonLeft.isUserInteractionEnabled = false
         
         self.scrollNodeMothershipSlots = scrollNode
     }

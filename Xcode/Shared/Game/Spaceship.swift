@@ -663,7 +663,7 @@ class Spaceship: SKSpriteNode {
         self.weaponRangeShapeNode = shapeNode
     }
     
-    func loadHealthBar(gameWorld: GameWorld) {
+    func loadHealthBar(gameWorld: SKNode) {
         let healthBar = SpaceshipHealthBar(level: self.level, health: self.health, team: self.team, rarity: self.rarity)
         
         gameWorld.addChild(healthBar)
