@@ -10,16 +10,14 @@ import SpriteKit
 
 class SpaceshipHangarCell: Control {
     
-    var labelLevel: Label!
-    var labelDamage: Label!
-    var labelMaxHealth: Label!
-    var labelWeaponRange: Label!
-    var labelSpeedAtribute: Label!
+    weak var labelLevel: Label!
+    weak var labelDamage: Label!
+    weak var labelMaxHealth: Label!
+    weak var labelWeaponRange: Label!
+    weak var labelSpeedAtribute: Label!
     
-    var labelXP: Label!
-    
-    var control0: Control?
-    var control1: Control?
+    weak var control0: Control?
+    weak var control1: Control?
     
     private weak var spaceship: Spaceship?
 

@@ -13,6 +13,11 @@ import SpriteKit
 #endif
 
 class MainMenuScene: GameScene {
+    
+    enum zPosition: CGFloat {
+        case blackSpriteNode = 100000
+        case boxSettings = 1000000
+    }
 
     enum state: String {
         case mainMenu
@@ -68,6 +73,18 @@ class MainMenuScene: GameScene {
         buttonSettings.setIcon(imageNamed: "Settings")
         buttonSettings.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonSettings)
+        buttonSettings.addHandler { [weak self] in
+            let boxSettings = BoxSettings()
+            boxSettings.zPosition = zPosition.boxSettings.rawValue
+            self?.blackSpriteNode.isHidden = false
+            self?.blackSpriteNode.zPosition = zPosition.blackSpriteNode.rawValue
+            self?.addChild(boxSettings)
+            self?.blackSpriteNode.removeAllHandlers()
+            self?.blackSpriteNode.addHandler { [weak boxSettings] in
+                boxSettings?.removeFromParent()
+                self?.blackSpriteNode.isHidden = true
+            }
+        }
         
         let buttonGameCenter = Button(imageNamed: "button55x55", x: 312, y: 158, horizontalAlignment: .right, verticalAlignment: .top)
         buttonGameCenter.setIcon(imageNamed: "Game Center")
@@ -115,7 +132,6 @@ class MainMenuScene: GameScene {
             self?.nextState = .chooseMission
         }
         
-        buttonSettings.isHidden = true
         buttonGameCenter.isHidden = true
         buttonFacebook.isHidden = true
         buttonBuy.isHidden = true

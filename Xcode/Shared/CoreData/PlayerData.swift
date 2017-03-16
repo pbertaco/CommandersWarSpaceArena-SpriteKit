@@ -16,9 +16,11 @@ extension MemoryCard {
         playerData.botLevel = 0
         playerData.maxBotLevel = 0
         playerData.modelVersion = 1
+        playerData.music = true
         playerData.name = ""
         playerData.points = 10000
         playerData.premiumPoints = 256
+        playerData.sound = true
         
         playerData.mothership = self.newMothershipData()
         

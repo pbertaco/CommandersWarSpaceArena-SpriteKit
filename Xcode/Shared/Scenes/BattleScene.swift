@@ -10,8 +10,8 @@ import SpriteKit
 
 class BattleScene: GameScene {
     
-    var gameWorld: GameWorld!
-    var gameCamera: GameCamera!
+    weak var gameWorld: GameWorld!
+    weak var gameCamera: GameCamera!
     
     enum zPosition: CGFloat {
         case gameWorld = 0
@@ -36,8 +36,8 @@ class BattleScene: GameScene {
     var state: state = .loading
     var nextState: state = .loading
     
-    var mothership: Mothership!
-    var botMothership: Mothership!
+    weak var mothership: Mothership!
+    weak var botMothership: Mothership!
     
     
     var lastBotUpdate: Double = 0
@@ -57,53 +57,59 @@ class BattleScene: GameScene {
         
         self.backgroundColor = GameColors.backgroundColor
         
-        self.gameWorld = GameWorld()
-        self.addChild(self.gameWorld)
-        self.physicsWorld.contactDelegate = self.gameWorld
+        let gameWorld = GameWorld()
+        self.addChild(gameWorld)
+        self.physicsWorld.contactDelegate = gameWorld
         
-        self.gameCamera = GameCamera()
-        self.gameCamera.node = SKNode()
-        self.gameWorld.addChild(self.gameCamera)
-        self.gameWorld.addChild(self.gameCamera.node!)
-        self.gameCamera.update()
+        let gameCamera = GameCamera()
+        let gameCameraNode = SKNode()
+        gameCamera.node = gameCameraNode
+        gameWorld.addChild(gameCamera)
+        gameWorld.addChild(gameCameraNode)
+        gameCamera.update()
         
         
-        self.mothership = Mothership(team: Mothership.team.blue)
-        self.mothership.loadHealthBar(gameWorld: gameWorld)
-        self.gameWorld.addChild(self.mothership)
+        let mothership = Mothership(team: Mothership.team.blue)
+        mothership.loadHealthBar(gameWorld: gameWorld)
+        gameWorld.addChild(mothership)
         if let slots = (playerData.mothership?.slots as? Set<MothershipSlotData>)?.sorted(by: {
             return $0.index < $1.index
         }) {
             for slot in slots {
                 if let spaceshipData = slot.spaceship {
                     let spaceship = Spaceship(spaceshipData: spaceshipData, loadPhysics: true)
-                    self.mothership.spaceships.append(spaceship)
+                    mothership.spaceships.append(spaceship)
                 }
             }
         }
-        self.mothership.loadSpaceships(gameWorld: self.gameWorld)
+        mothership.loadSpaceships(gameWorld: gameWorld)
         
-        self.botMothership = Mothership(team: Mothership.team.red)
-        self.botMothership.loadHealthBar(gameWorld: gameWorld)
-        self.gameWorld.addChild(self.botMothership)
+        let botMothership = Mothership(team: Mothership.team.red)
+        botMothership.loadHealthBar(gameWorld: gameWorld)
+        gameWorld.addChild(botMothership)
         
         let mission = Mission.types[Int(playerData.botLevel)]
         
         for rarity in mission.rarities {
-            self.botMothership.spaceships.append(Spaceship(
+            botMothership.spaceships.append(Spaceship(
                 level: (mission.level + Int.random(min: -2, max: 0)).clamped(1...10),
                 rarity: rarity,
                 loadPhysics: true, team: .red))
         }
-        self.botMothership.loadSpaceships(gameWorld: self.gameWorld)
+        botMothership.loadSpaceships(gameWorld: gameWorld)
         
-        self.mothership.updateMaxHealth(enemySpaceships: self.botMothership.spaceships)
-        self.botMothership.updateMaxHealth(enemySpaceships: self.mothership.spaceships)
+        mothership.updateMaxHealth(enemySpaceships: botMothership.spaceships)
+        botMothership.updateMaxHealth(enemySpaceships: mothership.spaceships)
         
-        self.mothership.update()
-        self.botMothership.update()
+        mothership.update()
+        botMothership.update()
         
         self.nextState = .battle
+        
+        self.gameWorld = gameWorld
+        self.gameCamera = gameCamera
+        self.mothership = mothership
+        self.botMothership = botMothership
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -322,7 +328,7 @@ class BattleScene: GameScene {
                 case .blue:
                     nearestSpaceship.touchUp(touch: touch)
                     break
-                case .red:
+                case .red, .none:
                     Spaceship.selectedSpaceship?.setTarget(spaceship: nearestSpaceship)
                     break
                 }
@@ -420,7 +426,7 @@ class BattleScene: GameScene {
                         nearestSpaceship.physicsBody?.isDynamic = true
                     }
                     break
-                case .red:
+                case .red, .none:
                     Spaceship.selectedSpaceship?.setTarget(spaceship: nearestSpaceship)
                     break
                 }

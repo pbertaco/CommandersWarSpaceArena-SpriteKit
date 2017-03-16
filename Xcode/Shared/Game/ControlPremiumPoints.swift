@@ -15,7 +15,7 @@ class ControlPremiumPoints: Control {
     }
     private static weak var lastInstance: ControlPremiumPoints? = nil
     
-    private var labelPremiumPoints: Label!
+    private weak var labelPremiumPoints: Label!
 
     init(x: CGFloat, y: CGFloat,
          horizontalAlignment: horizontalAlignment = .left,
@@ -31,7 +31,7 @@ class ControlPremiumPoints: Control {
         self.addChild(buttonBuyMore)
         
         self.labelPremiumPoints = Label(text: "?", fontColor: GameColors.controlYellow, x: 97, y: 27)
-        self.addChild(labelPremiumPoints)
+        self.addChild(self.labelPremiumPoints)
         
         let icon = Control(imageNamed: "Minecraft Diamond", x: 0, y: 0)
         icon.size = CGSize(width: 55, height: 55)

@@ -11,6 +11,7 @@ import SpriteKit
 class Mothership: SKSpriteNode {
     
     enum team {
+        case none
         case blue
         case red
     }
@@ -22,7 +23,7 @@ class Mothership: SKSpriteNode {
     var maxHealth = 5800
     var health = 5800
     
-    var healthBar: MothershipHealthBar?
+    weak var healthBar: MothershipHealthBar?
 
     init(team: team) {
         
@@ -43,6 +44,9 @@ class Mothership: SKSpriteNode {
             color = GameColors.redTeam
             self.position = CGPoint(x: 0, y: 289)
             self.zRotation = π
+            break
+        case .none:
+            fatalError()
             break
         }
         

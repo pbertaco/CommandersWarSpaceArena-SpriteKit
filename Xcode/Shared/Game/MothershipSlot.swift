@@ -10,7 +10,7 @@ import SpriteKit
 
 class MothershipSlot: Control {
     
-    var spaceship: Spaceship?
+    weak var spaceship: Spaceship?
     
     init(x: CGFloat, y: CGFloat, horizontalAlignment: horizontalAlignment = .left,
          verticalAlignment: verticalAlignment = .top) {

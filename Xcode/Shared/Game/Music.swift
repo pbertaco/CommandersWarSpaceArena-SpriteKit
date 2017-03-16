@@ -18,14 +18,23 @@ class Music {
     
     struct fileName {
         static var menu = [
-            "klamm_cracks.m4a"]
+            "klamm_cracks.m4a"
+        ]
         static var battle = [
+            "klamm_airborne.m4a",
+            "klamm_atmosphere.m4a",
+            "klamm_battleship.m4a",
+            "klamm_destroyer.m4a",
+            "klamm_ice-and-fire.m4a",
             "klamm_infinity.m4a",
             "klamm_moonset.m4a",
-            "klamm_prisma.m4a"]
+            "klamm_prisma.m4a",
+            "klamm_robot-warrior-plus.m4a",
+            "klamm_vortex.m4a"
+        ]
     }
     
-    static let sharedInstance = Music()
+    static var sharedInstance = Music()
     
     private var audioPlayer: AVAudioPlayer?
     private var musicName = ""
@@ -71,7 +80,11 @@ class Music {
     }
     
     func play() {
-        self.audioPlayer?.play()
+        if MemoryCard.sharedInstance.playerData.music {
+            self.audioPlayer?.play()
+        } else {
+            self.pause()
+        }
     }
     
     func pause() {

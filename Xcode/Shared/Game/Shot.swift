@@ -30,7 +30,7 @@ class Shot: SKSpriteNode {
         case .blue:
             color = GameColors.blueTeam
             break
-        case .red:
+        case .red, .none:
             color = GameColors.redTeam
             break
         }

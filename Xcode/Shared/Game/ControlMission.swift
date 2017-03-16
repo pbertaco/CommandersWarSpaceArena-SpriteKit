@@ -10,7 +10,7 @@ import SpriteKit
 
 class ControlMission: Control {
     
-    var buttonChooseMission: Button!
+    weak var buttonChooseMission: Button!
     
     init(x: CGFloat, y: CGFloat,
          horizontalAlignment: horizontalAlignment = .left,

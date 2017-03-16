@@ -13,8 +13,8 @@ class SpaceshipHealthBar: SKSpriteNode {
     var positionOffset = CGPoint(x: 0, y: 0)
     var fillSizeWidth: CGFloat = 1
     
-    var fill: SKSpriteNode!
-    var label: Label!
+    weak var fill: SKSpriteNode!
+    weak var label: Label!
     
     init(level: Int, health: Int, team: Mothership.team, rarity: Spaceship.rarity) {
         
@@ -31,7 +31,7 @@ class SpaceshipHealthBar: SKSpriteNode {
             teamColor = GameColors.blueTeam
             self.positionOffset = CGPoint(x: 0, y: -Spaceship.diameter/2 - 8)
             break
-        case .red:
+        case .red, .none:
             teamColor = GameColors.redTeam
             self.positionOffset = CGPoint(x: 0, y: Spaceship.diameter/2 + 8)
             break
@@ -54,13 +54,14 @@ class SpaceshipHealthBar: SKSpriteNode {
             break
         }
         
-        self.fill = SKSpriteNode(texture: nil, color: .clear, size: self.size)
-        self.fillSizeWidth = self.fill.size.width - 4
-        self.fill.size.width = self.fillSizeWidth
-        self.fill.size.height = self.fill.size.height - 4
-        self.fill.position = CGPoint(x: -25.5, y: 0)
-        self.fill.anchorPoint = CGPoint(x: 0, y: 0.5)
-        self.addChild(self.fill)
+        let fill = SKSpriteNode(texture: nil, color: .clear, size: self.size)
+        self.fillSizeWidth = fill.size.width - 4
+        fill.size.width = self.fillSizeWidth
+        fill.size.height = fill.size.height - 4
+        fill.position = CGPoint(x: -25.5, y: 0)
+        fill.anchorPoint = CGPoint(x: 0, y: 0.5)
+        self.addChild(fill)
+        self.fill = fill
         
         let border = SKSpriteNode(imageNamed: "spaceshipHealthBarBorder", filteringMode: GameScene.defaultFilteringMode)
         self.addChild(border)

@@ -10,10 +10,10 @@ import SpriteKit
 
 class BoxBattleResult: Box {
     
-    var buttonOK: Button!
+    weak var buttonOK: Button!
     
     init(mothership: Mothership, botMothership: Mothership) {
-        super.init(imageNamed: "boxWhite233x610", y: 12)
+        super.init(imageNamed: "box233x610", y: 12)
         
         let playerData = MemoryCard.sharedInstance.playerData!
         

@@ -14,7 +14,7 @@ class Spaceship: SKSpriteNode {
         case common, rare, epic, legendary
     }
     
-    static var selectedSpaceship: Spaceship?
+    static weak var selectedSpaceship: Spaceship?
     
     static var diameter: CGFloat = 55
     var weaponRange: CGFloat = 461
@@ -24,7 +24,7 @@ class Spaceship: SKSpriteNode {
         "spaceshipF", "spaceshipG", "spaceshipH"
     ]
     
-    private(set) var spaceshipData: SpaceshipData?
+    private(set) weak var spaceshipData: SpaceshipData?
     
     var level: Int! {
         didSet {
@@ -50,7 +50,7 @@ class Spaceship: SKSpriteNode {
     var startingPosition = CGPoint.zero
     var startingZPosition: CGFloat = 0
     var destination: CGPoint?
-    var targetNode: SKNode?
+    weak var targetNode: SKNode?
     
     var team: Mothership.team
     
@@ -62,8 +62,8 @@ class Spaceship: SKSpriteNode {
     var maxVelocitySquared: CGFloat = 0
     var force: CGFloat = 0
     
-    var weaponRangeShapeNode: SKShapeNode?
-    var healthBar: SpaceshipHealthBar?
+    weak var weaponRangeShapeNode: SKShapeNode?
+    weak var healthBar: SpaceshipHealthBar?
     
     var lastShot: Double = 0
     var canShot = true
@@ -71,7 +71,7 @@ class Spaceship: SKSpriteNode {
     var canRespawn = true
     var deathTime = 0.0
     var lastSecond = 0.0
-    var labelRespawn: Label?
+    weak var labelRespawn: Label?
     
     var battlePoints = 0
     var kills = 0
@@ -198,8 +198,14 @@ class Spaceship: SKSpriteNode {
     
     func getHitBy(_ shot: Shot) {
         
-        if shot.shooter?.team == self.team || shot.damage <= 0 {
+        if shot.shooter == self {
             return
+        }
+        
+        if self.team != .none {
+            if shot.shooter?.team == self.team || shot.damage <= 0 {
+                return
+            }
         }
         
         let dx = Float(shot.position.x - self.position.x)
@@ -523,6 +529,9 @@ class Spaceship: SKSpriteNode {
         var nearestSpaceship: Spaceship? = nil
         
         for spaceship in spaceships {
+            
+            if spaceship == self { continue }
+            
             if spaceship.health > 0 {
                 if (spaceship.position - spaceship.startingPosition).lengthSquared() > 4 {
                     if self.position.distanceTo(spaceship.position) < self.weaponRange + Spaceship.diameter/2 {
