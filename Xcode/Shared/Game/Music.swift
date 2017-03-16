@@ -27,10 +27,9 @@ class Music {
             "klamm_destroyer.m4a",
             "klamm_ice-and-fire.m4a",
             "klamm_infinity.m4a",
-            "klamm_moonset.m4a",
             "klamm_prisma.m4a",
-            "klamm_robot-warrior-plus.m4a",
-            "klamm_vortex.m4a"
+            "klamm_vortex.m4a",
+            "Scorpion.m4a"
         ]
     }
     

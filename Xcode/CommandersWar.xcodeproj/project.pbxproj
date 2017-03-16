@@ -109,9 +109,6 @@
 		844779821E7892C1004AF4B9 /* klamm_ice-and-fire.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 844779721E7892C1004AF4B9 /* klamm_ice-and-fire.m4a */; };
 		844779831E7892C1004AF4B9 /* klamm_ice-and-fire.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 844779721E7892C1004AF4B9 /* klamm_ice-and-fire.m4a */; };
 		844779841E7892C1004AF4B9 /* klamm_ice-and-fire.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 844779721E7892C1004AF4B9 /* klamm_ice-and-fire.m4a */; };
-		844779851E7892C1004AF4B9 /* klamm_robot-warrior-plus.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 844779731E7892C1004AF4B9 /* klamm_robot-warrior-plus.m4a */; };
-		844779861E7892C1004AF4B9 /* klamm_robot-warrior-plus.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 844779731E7892C1004AF4B9 /* klamm_robot-warrior-plus.m4a */; };
-		844779871E7892C1004AF4B9 /* klamm_robot-warrior-plus.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 844779731E7892C1004AF4B9 /* klamm_robot-warrior-plus.m4a */; };
 		8447798B1E7892C1004AF4B9 /* klamm_vortex.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 844779751E7892C1004AF4B9 /* klamm_vortex.m4a */; };
 		8447798C1E7892C1004AF4B9 /* klamm_vortex.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 844779751E7892C1004AF4B9 /* klamm_vortex.m4a */; };
 		8447798D1E7892C1004AF4B9 /* klamm_vortex.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 844779751E7892C1004AF4B9 /* klamm_vortex.m4a */; };
@@ -121,6 +118,9 @@
 		846585421E3D9C1100C890D3 /* MothershipHealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */; };
 		846585431E3D9C1100C890D3 /* MothershipHealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */; };
 		846585441E3D9C1100C890D3 /* MothershipHealthBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */; };
+		84660A531E7A4BB5006C0D1C /* Scorpion.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84660A4F1E7A4BB5006C0D1C /* Scorpion.m4a */; };
+		84660A541E7A4BB5006C0D1C /* Scorpion.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84660A4F1E7A4BB5006C0D1C /* Scorpion.m4a */; };
+		84660A551E7A4BB5006C0D1C /* Scorpion.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84660A4F1E7A4BB5006C0D1C /* Scorpion.m4a */; };
 		846F28421E28788C0040DB51 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F283F1E28788C0040DB51 /* Bolts.framework */; };
 		846F28431E28788C0040DB51 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F28401E28788C0040DB51 /* FBSDKCoreKit.framework */; };
 		846F28441E28788C0040DB51 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F28411E28788C0040DB51 /* FBSDKLoginKit.framework */; };
@@ -182,9 +182,6 @@
 		8487B0461E78CC9E007A4921 /* klamm_infinity.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8487B0401E78CC9E007A4921 /* klamm_infinity.m4a */; };
 		8487B0471E78CC9E007A4921 /* klamm_infinity.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8487B0401E78CC9E007A4921 /* klamm_infinity.m4a */; };
 		8487B0481E78CC9E007A4921 /* klamm_infinity.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8487B0401E78CC9E007A4921 /* klamm_infinity.m4a */; };
-		8487B0491E78CC9E007A4921 /* klamm_moonset.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8487B0411E78CC9E007A4921 /* klamm_moonset.m4a */; };
-		8487B04A1E78CC9E007A4921 /* klamm_moonset.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8487B0411E78CC9E007A4921 /* klamm_moonset.m4a */; };
-		8487B04B1E78CC9E007A4921 /* klamm_moonset.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8487B0411E78CC9E007A4921 /* klamm_moonset.m4a */; };
 		8487B04C1E78CC9E007A4921 /* klamm_prisma.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8487B0421E78CC9E007A4921 /* klamm_prisma.m4a */; };
 		8487B04D1E78CC9E007A4921 /* klamm_prisma.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8487B0421E78CC9E007A4921 /* klamm_prisma.m4a */; };
 		8487B04E1E78CC9E007A4921 /* klamm_prisma.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 8487B0421E78CC9E007A4921 /* klamm_prisma.m4a */; };
@@ -356,10 +353,10 @@
 		844779701E7892C1004AF4B9 /* klamm_battleship.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = klamm_battleship.m4a; sourceTree = "<group>"; };
 		844779711E7892C1004AF4B9 /* klamm_destroyer.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = klamm_destroyer.m4a; sourceTree = "<group>"; };
 		844779721E7892C1004AF4B9 /* klamm_ice-and-fire.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "klamm_ice-and-fire.m4a"; sourceTree = "<group>"; };
-		844779731E7892C1004AF4B9 /* klamm_robot-warrior-plus.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "klamm_robot-warrior-plus.m4a"; sourceTree = "<group>"; };
 		844779751E7892C1004AF4B9 /* klamm_vortex.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = klamm_vortex.m4a; sourceTree = "<group>"; };
 		845436651E44FE7600E1E2A7 /* BoxBattleResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxBattleResult.swift; sourceTree = "<group>"; };
 		846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipHealthBar.swift; sourceTree = "<group>"; };
+		84660A4F1E7A4BB5006C0D1C /* Scorpion.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Scorpion.m4a; sourceTree = "<group>"; };
 		846F283F1E28788C0040DB51 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		846F28401E28788C0040DB51 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		846F28411E28788C0040DB51 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -384,10 +381,10 @@
 		8479051B1E28584100872D70 /* GameCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCenter.swift; sourceTree = "<group>"; };
 		84798FA21E7083C100741DE5 /* SoundEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundEffect.swift; sourceTree = "<group>"; };
 		847A04E71E3A3967004A4878 /* Shot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shot.swift; sourceTree = "<group>"; };
+		8484EC411E7A192600EB14DB /* CommandersWar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommandersWar.entitlements; sourceTree = "<group>"; };
 		8487B03B1E78A807007A4921 /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
 		8487B03F1E78CC9E007A4921 /* klamm_cracks.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = klamm_cracks.m4a; sourceTree = "<group>"; };
 		8487B0401E78CC9E007A4921 /* klamm_infinity.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = klamm_infinity.m4a; sourceTree = "<group>"; };
-		8487B0411E78CC9E007A4921 /* klamm_moonset.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = klamm_moonset.m4a; sourceTree = "<group>"; };
 		8487B0421E78CC9E007A4921 /* klamm_prisma.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = klamm_prisma.m4a; sourceTree = "<group>"; };
 		8487B04F1E78E15E007A4921 /* BoxSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxSettings.swift; sourceTree = "<group>"; };
 		8487B0571E78F109007A4921 /* BoxResetData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxResetData.swift; sourceTree = "<group>"; };
@@ -504,6 +501,7 @@
 		842A856F1E25B715006B31F7 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				8484EC411E7A192600EB14DB /* CommandersWar.entitlements */,
 				842A85701E25B715006B31F7 /* AppDelegate.swift */,
 				842A85721E25B715006B31F7 /* GameViewController.swift */,
 				842A85741E25B715006B31F7 /* Main.storyboard */,
@@ -706,10 +704,9 @@
 				844779711E7892C1004AF4B9 /* klamm_destroyer.m4a */,
 				844779721E7892C1004AF4B9 /* klamm_ice-and-fire.m4a */,
 				8487B0401E78CC9E007A4921 /* klamm_infinity.m4a */,
-				8487B0411E78CC9E007A4921 /* klamm_moonset.m4a */,
 				8487B0421E78CC9E007A4921 /* klamm_prisma.m4a */,
-				844779731E7892C1004AF4B9 /* klamm_robot-warrior-plus.m4a */,
 				844779751E7892C1004AF4B9 /* klamm_vortex.m4a */,
+				84660A4F1E7A4BB5006C0D1C /* Scorpion.m4a */,
 			);
 			path = Music;
 			sourceTree = "<group>";
@@ -801,6 +798,9 @@
 							com.apple.GameCenter = {
 								enabled = 1;
 							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
 						};
 					};
 					842A85971E25B715006B31F7 = {
@@ -813,6 +813,11 @@
 						DevelopmentTeam = JZ3J7RVLD7;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -843,7 +848,6 @@
 			files = (
 				84BE8BF91E70C8A300BBDAA6 /* laser7.m4a in Resources */,
 				8487B0431E78CC9E007A4921 /* klamm_cracks.m4a in Resources */,
-				844779851E7892C1004AF4B9 /* klamm_robot-warrior-plus.m4a in Resources */,
 				84F945261E2EEBCD0034F530 /* kenpixel.ttf in Resources */,
 				84BE8BB41E70C66300BBDAA6 /* explosion7.m4a in Resources */,
 				84BE8BE71E70C8A300BBDAA6 /* laser1.m4a in Resources */,
@@ -857,8 +861,8 @@
 				84BE8BFF1E70C8A400BBDAA6 /* laser9.m4a in Resources */,
 				842A85791E25B715006B31F7 /* LaunchScreen.storyboard in Resources */,
 				84BE8BEA1E70C8A300BBDAA6 /* laser2.m4a in Resources */,
+				84660A531E7A4BB5006C0D1C /* Scorpion.m4a in Resources */,
 				8447797F1E7892C1004AF4B9 /* klamm_destroyer.m4a in Resources */,
-				8487B0491E78CC9E007A4921 /* klamm_moonset.m4a in Resources */,
 				84BE8B961E70C66300BBDAA6 /* explosion2.m4a in Resources */,
 				844779821E7892C1004AF4B9 /* klamm_ice-and-fire.m4a in Resources */,
 				84BE8BAE1E70C66300BBDAA6 /* explosion6.m4a in Resources */,
@@ -880,14 +884,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				84BE8BB51E70C66300BBDAA6 /* explosion7.m4a in Resources */,
-				8487B04A1E78CC9E007A4921 /* klamm_moonset.m4a in Resources */,
 				8447797D1E7892C1004AF4B9 /* klamm_battleship.m4a in Resources */,
 				84BE8BA91E70C66300BBDAA6 /* explosion5.m4a in Resources */,
 				84BE8BFA1E70C8A300BBDAA6 /* laser7.m4a in Resources */,
 				84BE8BF11E70C8A300BBDAA6 /* laser4.m4a in Resources */,
 				8447797A1E7892C1004AF4B9 /* klamm_atmosphere.m4a in Resources */,
 				8447798C1E7892C1004AF4B9 /* klamm_vortex.m4a in Resources */,
-				844779861E7892C1004AF4B9 /* klamm_robot-warrior-plus.m4a in Resources */,
+				84660A541E7A4BB5006C0D1C /* Scorpion.m4a in Resources */,
 				84BE8BEE1E70C8A300BBDAA6 /* laser3.m4a in Resources */,
 				84BE8BEB1E70C8A300BBDAA6 /* laser2.m4a in Resources */,
 				84BE8BAF1E70C66300BBDAA6 /* explosion6.m4a in Resources */,
@@ -917,14 +920,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				84BE8BB61E70C66300BBDAA6 /* explosion7.m4a in Resources */,
-				8487B04B1E78CC9E007A4921 /* klamm_moonset.m4a in Resources */,
 				8447797E1E7892C1004AF4B9 /* klamm_battleship.m4a in Resources */,
 				84BE8BAA1E70C66300BBDAA6 /* explosion5.m4a in Resources */,
 				84BE8BFB1E70C8A400BBDAA6 /* laser7.m4a in Resources */,
 				84BE8BF21E70C8A300BBDAA6 /* laser4.m4a in Resources */,
 				8447797B1E7892C1004AF4B9 /* klamm_atmosphere.m4a in Resources */,
 				8447798D1E7892C1004AF4B9 /* klamm_vortex.m4a in Resources */,
-				844779871E7892C1004AF4B9 /* klamm_robot-warrior-plus.m4a in Resources */,
+				84660A551E7A4BB5006C0D1C /* Scorpion.m4a in Resources */,
 				84BE8BEF1E70C8A300BBDAA6 /* laser3.m4a in Resources */,
 				84BE8BEC1E70C8A300BBDAA6 /* laser2.m4a in Resources */,
 				84BE8BB01E70C66300BBDAA6 /* explosion6.m4a in Resources */,
@@ -1321,6 +1323,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iOS/CommandersWar.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JZ3J7RVLD7;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1341,6 +1344,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iOS/CommandersWar.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = JZ3J7RVLD7;
 				FRAMEWORK_SEARCH_PATHS = (

@@ -88,7 +88,7 @@ class MemoryCard {
     
     // MARK: - Core Data stack
     
-    lazy var applicationDocumentsDirectory: URL = {
+    lazy var applicationSupportDirectory: URL = {
         
         let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
         
@@ -121,27 +121,43 @@ class MemoryCard {
             let fileName = "\(productName).sqlite"
         #endif
         
+        let options = [
+            NSMigratePersistentStoresAutomaticallyOption: true,
+            NSInferMappingModelAutomaticallyOption: true
+        ]
+        
         let url: URL = {
-            if let url = fileManager.url(forUbiquityContainerIdentifier: "iCloud\(Bundle.main.bundleIdentifier!)") {
+            if let url = fileManager.url(forUbiquityContainerIdentifier: "iCloud.\(Bundle.main.bundleIdentifier!)") {
+                let applicationSupportDirectoryURL = self.applicationSupportDirectory.appendingPathComponent(fileName)
+                if fileManager.fileExists(atPath: applicationSupportDirectoryURL.path) {
+                    do {
+                        try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: applicationSupportDirectoryURL, options: options)
+                        for persistentStore in coordinator.persistentStores {
+                            try coordinator.migratePersistentStore(persistentStore, to: url.appendingPathComponent(fileName), options: options, withType: NSSQLiteStoreType)
+                        }
+                        try fileManager.removeItem(at: applicationSupportDirectoryURL)
+                    } catch {
+                        #if DEBUG
+                            try! fileManager.removeItem(at: applicationSupportDirectoryURL)
+                            exit(1)
+                        #endif
+                    }
+                }
                 return url.appendingPathComponent(fileName)
             } else {
-                return self.applicationDocumentsDirectory.appendingPathComponent(fileName)
+                return self.applicationSupportDirectory.appendingPathComponent(fileName)
             }
         }()
         
-        do {
-            
-            let options = [
-                NSMigratePersistentStoresAutomaticallyOption: true,
-                NSInferMappingModelAutomaticallyOption: true
-            ]
-            
-            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
-        } catch let error as NSError {
-            #if DEBUG
-                try? fileManager.removeItem(at: url)
-                exit(1)
-            #endif
+        if coordinator.persistentStores.count <= 0 {
+            do {
+                try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
+            } catch {
+                #if DEBUG
+                    try? fileManager.removeItem(at: url)
+                    exit(1)
+                #endif
+            }
         }
         
         return coordinator

@@ -242,6 +242,8 @@ class Spaceship: SKSpriteNode {
     
     func die(shooter: Spaceship?) {
         
+        self.emitterNodeParticleBirthRate = 0
+        
         if let shooter = shooter {
             shooter.kills = shooter.kills + 1
             self.getHitBySpaceships.remove(shooter)

@@ -167,6 +167,7 @@ class CreditsScene: GameScene {
                 spaceship.run(action)
                 spaceship.healthBar?.alpha = 0
                 spaceship.healthBar?.run(action)
+                spaceship.zRotation = CGFloat.random(min: -π, max: +π)
             }
             
             if self.spaceships.count > 0 {

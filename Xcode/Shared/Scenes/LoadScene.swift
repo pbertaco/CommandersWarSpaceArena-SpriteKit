@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import GameKit
 
 class LoadScene: GameScene {
     
@@ -72,7 +73,12 @@ class LoadScene: GameScene {
         title.set(color: .white, blendMode: .add)
         self.addChild(title)
         
-        self.addChild(Label(text: "tap to start", fontSize: .fontSize16, fontColor: GameColors.fontWhite, x: 187, y: 620, horizontalAlignment: .center, verticalAlignment: .center))
+        self.addChild(Label(text: "touch to start", fontSize: .fontSize16, fontColor: GameColors.fontWhite, x: 187, y: 620, horizontalAlignment: .center, verticalAlignment: .center))
+        
+        let bundleShortVersionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
+        let bundleVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1"
+        
+        self.addChild(Label(text: "v\(bundleShortVersionString)(\(bundleVersion))", horizontalAlignmentMode: .right, verticalAlignmentMode: .baseline, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 370, y: 646, horizontalAlignment: .center, verticalAlignment: .center))
         
         self.afterDelay(60) { [weak self] in
             self?.view?.presentScene(LoadScene(), transition: GameScene.defaultTransition)
@@ -121,6 +127,7 @@ class LoadScene: GameScene {
                 spaceship.run(action)
                 spaceship.healthBar?.alpha = 0
                 spaceship.healthBar?.run(action)
+                spaceship.zRotation = CGFloat.random(min: -π, max: +π)
             }
             
             if self.spaceships.count > 0 {
@@ -153,5 +160,10 @@ class LoadScene: GameScene {
     override func touchUp(touch: UITouch) {
         super.touchUp(touch: touch)
         self.view?.presentScene(MainMenuScene(), transition: GameScene.defaultTransition)
+        (self.view?.window?.rootViewController as? GameViewController)?.authenticateLocalPlayer {
+            if let alias = GKLocalPlayer.localPlayer().alias {
+                MemoryCard.sharedInstance.playerData.name = alias
+            }
+        }
     }
 }

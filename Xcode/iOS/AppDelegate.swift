@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        if Metrics.canSendEvents() {
+        if Metrics.canSendEvents {
             Fabric.with([Crashlytics.self, GameAnalytics.self])
             
             let bundleShortVersionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
@@ -30,8 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        
-        (self.window?.rootViewController as? GameViewController)?.authenticateLocalPlayer()
         
         return true
     }
