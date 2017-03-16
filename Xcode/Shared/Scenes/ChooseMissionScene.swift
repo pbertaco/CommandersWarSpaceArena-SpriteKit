@@ -55,15 +55,9 @@ class ChooseMissionScene: GameScene {
                 }
             }
             
-            if Int16(i) <= playerData.maxBotLevel + 1 {
-                missionCells.append(MissionCell(missionIndex: i, status: status, recommended: Int16(i) == playerData.botLevel, buttonPlayHandler: { [weak self] in
+            missionCells.append(MissionCell(missionIndex: i, status: status, recommended: Int16(i) == playerData.botLevel, buttonPlayHandler: { [weak self] in
                 self?.nextState = .battle
             }))
-            
-                
-            } else {
-                break
-            }
         }
         
         let scrollNode = ScrollNode(cells: missionCells, spacing: 8, scrollDirection: .vertical, x: 71, y: 110, horizontalAlignment: .center, verticalAlignment: .center)
