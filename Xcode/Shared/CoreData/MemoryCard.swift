@@ -110,21 +110,18 @@ class MemoryCard {
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         
         let fileManager = FileManager.default
-        
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        
         let productName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "App"
+        let options = [
+            NSMigratePersistentStoresAutomaticallyOption: true,
+            NSInferMappingModelAutomaticallyOption: true
+        ]
         
         #if DEBUG
             let fileName = "\(productName)Debug.sqlite"
         #else
             let fileName = "\(productName).sqlite"
         #endif
-        
-        let options = [
-            NSMigratePersistentStoresAutomaticallyOption: true,
-            NSInferMappingModelAutomaticallyOption: true
-        ]
         
         let url: URL = {
             if let url = fileManager.url(forUbiquityContainerIdentifier: "iCloud.\(Bundle.main.bundleIdentifier!)") {
@@ -138,7 +135,7 @@ class MemoryCard {
                         try fileManager.removeItem(at: applicationSupportDirectoryURL)
                     } catch {
                         #if DEBUG
-                            try! fileManager.removeItem(at: applicationSupportDirectoryURL)
+                            try? fileManager.removeItem(at: applicationSupportDirectoryURL)
                             exit(1)
                         #endif
                     }

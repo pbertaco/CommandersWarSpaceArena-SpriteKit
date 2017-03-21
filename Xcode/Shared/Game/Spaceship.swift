@@ -310,6 +310,7 @@ class Spaceship: SKSpriteNode {
         let duration = 0.5
         
         let label = Label(text: damage.description, fontSize: .fontSize8, fontColor: SKColor(red: 1, green: 1 - damageMultiplier/π, blue: 1 - damageMultiplier/π, alpha: 1))
+        label.zPosition = GameWorld.zPosition.damageEffect.rawValue
         label.position = position
         Control.set.remove(label)
 //        label.position = CGPoint(

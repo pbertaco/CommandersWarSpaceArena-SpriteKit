@@ -14,6 +14,8 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(GameAdManager.sharedInstance)
+        
         GameScene.viewBoundsSize = self.view.bounds.size
         
         let scene = LoadScene()

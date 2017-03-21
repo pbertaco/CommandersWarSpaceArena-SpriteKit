@@ -160,10 +160,12 @@ class LoadScene: GameScene {
     override func touchUp(touch: UITouch) {
         super.touchUp(touch: touch)
         self.view?.presentScene(MainMenuScene(), transition: GameScene.defaultTransition)
-        (self.view?.window?.rootViewController as? GameViewController)?.authenticateLocalPlayer {
-            if let alias = GKLocalPlayer.localPlayer().alias {
-                MemoryCard.sharedInstance.playerData.name = alias
+        #if os(iOS)
+            (self.view?.window?.rootViewController as? GameViewController)?.authenticateLocalPlayer {
+                if let alias = GKLocalPlayer.localPlayer().alias {
+                    MemoryCard.sharedInstance.playerData.name = alias
+                }
             }
-        }
+        #endif
     }
 }

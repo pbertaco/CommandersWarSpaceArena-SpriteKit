@@ -47,7 +47,7 @@ class Metrics {
         return GKLocalPlayer.localPlayer().alias ?? "Unknown"
     }
     
-    static let canSendEvents: Bool =  {
+    static let canSendEvents: Bool = {
         
         if let alias = GKLocalPlayer.localPlayer().alias {
             if ["PabloHenri91"].contains(alias) {

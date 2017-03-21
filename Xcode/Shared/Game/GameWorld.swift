@@ -21,6 +21,7 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         case targetEffect = 20
         case spaceshipWeaponRangeShapeNode = 30
         case spaceshipHealthBar = 40
+        case damageEffect = 50
     }
     
     static func current() -> GameWorld? {

@@ -171,6 +171,7 @@ class Mothership: SKSpriteNode {
         let duration = 0.5
         
         let label = Label(text: damage.description, fontSize: .fontSize8, fontColor: SKColor.red)
+        label.zPosition = GameWorld.zPosition.damageEffect.rawValue
         Control.set.remove(label)
         
         label.position = position
