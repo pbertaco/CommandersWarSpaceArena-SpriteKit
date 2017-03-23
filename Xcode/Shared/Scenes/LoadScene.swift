@@ -47,6 +47,7 @@ class LoadScene: GameScene {
         self.backgroundColor = GameColors.backgroundColor
         
         Label.defaultFontName = .kenPixel
+        Label.defaultColor = GameColors.fontWhite
         
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         
@@ -73,12 +74,12 @@ class LoadScene: GameScene {
         title.set(color: .white, blendMode: .add)
         self.addChild(title)
         
-        self.addChild(Label(text: "touch to start", fontSize: .fontSize16, fontColor: GameColors.fontWhite, x: 187, y: 620, horizontalAlignment: .center, verticalAlignment: .center))
+        self.addChild(Label(text: "TOUCH TO START", x: 187, y: 620, horizontalAlignment: .center, verticalAlignment: .center))
         
         let bundleShortVersionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
         let bundleVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1"
         
-        self.addChild(Label(text: "v\(bundleShortVersionString)(\(bundleVersion))", horizontalAlignmentMode: .right, verticalAlignmentMode: .baseline, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 370, y: 646, horizontalAlignment: .center, verticalAlignment: .center))
+        self.addChild(Label(text: "v\(bundleShortVersionString)(\(bundleVersion))", horizontalAlignmentMode: .right, verticalAlignmentMode: .baseline, fontName: .kenPixel, fontSize: .fontSize8, x: 370, y: 646, horizontalAlignment: .center, verticalAlignment: .center))
         
         self.afterDelay(60) { [weak self] in
             self?.view?.presentScene(LoadScene(), transition: GameScene.defaultTransition)

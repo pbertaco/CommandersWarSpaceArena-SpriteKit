@@ -13,13 +13,13 @@ class BoxResetData: Box {
     init() {
         super.init(imageNamed: "box377x377")
         
-        self.addChild(Label(text: "are you sure?", fontSize: .fontSize24, fontColor: GameColors.fontWhite, x: 189, y: 73))
+        self.addChild(Label(text: "Are you sure?", fontSize: .fontSize24, x: 189, y: 73))
         
-        self.addChild(MultiLineLabel(text: "all progress will be lost!", maxWidth: 233, fontSize: .fontSize24, fontColor: GameColors.fontWhite, x: 72, y: 143))
+        self.addChild(MultiLineLabel(text: "All progress will be lost!", maxWidth: 233, fontSize: .fontSize24, x: 72, y: 143))
         
         
         let buttonNo = Button(imageNamed: "button233x55", x: 19, y: 268)
-        buttonNo.set(label: Label(text: "nooooooooo", fontSize: .fontSize16, fontColor: GameColors.fontWhite))
+        buttonNo.set(label: Label(text: "Nooooooooo"))
         buttonNo.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonNo)
         buttonNo.addHandler { [weak self] in
@@ -28,7 +28,7 @@ class BoxResetData: Box {
         }
         
         let buttonYes = Button(imageNamed: "button89x34", x: 269, y: 279)
-        buttonYes.set(label: Label(text: "yes", fontSize: .fontSize16, fontColor: GameColors.fontWhite))
+        buttonYes.set(label: Label(text: "Yes"))
         buttonYes.set(color: GameColors.controlRed, blendMode: .add)
         self.addChild(buttonYes)
         buttonYes.addHandler { [weak self] in

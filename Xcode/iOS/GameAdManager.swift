@@ -12,7 +12,7 @@ class GameAdManager: UIResponder, VungleSDKDelegate {
 
     static let sharedInstance = GameAdManager()
     
-    var needToConfigure = false
+    var needToConfigure = true
     var isReady = false
     
     var adColonyIsReady = false
@@ -26,6 +26,9 @@ class GameAdManager: UIResponder, VungleSDKDelegate {
     private var reachability: Reachability?
     
     var eventHandlers = [() -> ()]()
+    
+    var onAdAvailabilityChange: ((_ isReady: Bool) -> Void)?
+    var onVideoAdAttemptFinished: ((_ shown: Bool) -> Void)?
     
     override init() {
         self.reachability = Reachability()
@@ -60,16 +63,7 @@ class GameAdManager: UIResponder, VungleSDKDelegate {
         let isReady = self.adColonyIsReady || self.vungleIsReady
         if self.isReady != isReady {
             self.isReady = isReady
-            self.onAdAvailabilityChange()
-        }
-    }
-    
-    private func onAdAvailabilityChange() {
-        
-        if self.isReady {
-            print("ready")
-        } else {
-            print("loading")
+            self.onAdAvailabilityChange?(self.isReady)
         }
     }
     
@@ -81,10 +75,6 @@ class GameAdManager: UIResponder, VungleSDKDelegate {
         }
     }
     
-    func videoAdAttemptFinished(shown: Bool) {
-        
-    }
-    
     //MARK: Vungle
     
     private func configureVungle() {
@@ -94,7 +84,7 @@ class GameAdManager: UIResponder, VungleSDKDelegate {
         }
     }
     
-    private func playVungle() {
+    private func playVideoVungle() {
         do {
             try VungleSDK.shared().playAd((UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController)
         } catch {
@@ -105,13 +95,14 @@ class GameAdManager: UIResponder, VungleSDKDelegate {
     func vungleSDKAdPlayableChanged(_ isAdPlayable: Bool) {
         self.vungleIsReady = isAdPlayable
         if isAdPlayable {
-            self.eventHandlers.append(self.playVungle)
+            self.eventHandlers.append(self.playVideoVungle)
         }
         self.checkAdAvailability()
     }
     
     func vungleSDKwillCloseAd(withViewInfo viewInfo: [AnyHashable : Any]!, willPresentProductSheet: Bool) {
         Music.sharedInstance.play()
+        self.onVideoAdAttemptFinished?(true)
     }
     
     
@@ -140,6 +131,7 @@ class GameAdManager: UIResponder, VungleSDKDelegate {
                 this?.checkAdAvailability()
                 this?.loadVideoAdColony()
                 Music.sharedInstance.play()
+                this?.onVideoAdAttemptFinished?(true)
             })
             
             adColonyInterstitial.setExpire({ [weak this] in

@@ -49,12 +49,12 @@ class ControlPoints: Control {
     }
     
     func setLabelPointsText(points: Int32) {
-        self.labelPoints.text = ControlPoints.numberFormatter.string(from: NSNumber(value: points))!
+        self.labelPoints.text = points.pointsString()
     }
 }
 
-extension String {
-    func points() -> String {
-        return ControlPoints.numberFormatter.string(from: NSNumber(value: Int32(self) ?? 0)) ?? "0"
+extension Int32 {
+    func pointsString() -> String {
+        return ControlPoints.numberFormatter.string(from: NSNumber(value: self))!
     }
 }

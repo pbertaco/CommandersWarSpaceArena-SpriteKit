@@ -16,7 +16,7 @@ class MainMenuScene: GameScene {
     
     enum zPosition: CGFloat {
         case blackSpriteNode = 100000
-        case boxSettings = 1000000
+        case box = 1000000
     }
 
     enum state: String {
@@ -75,7 +75,7 @@ class MainMenuScene: GameScene {
         self.addChild(buttonSettings)
         buttonSettings.addHandler { [weak self] in
             let boxSettings = BoxSettings()
-            boxSettings.zPosition = zPosition.boxSettings.rawValue
+            boxSettings.zPosition = zPosition.box.rawValue
             self?.blackSpriteNode.isHidden = false
             self?.blackSpriteNode.zPosition = zPosition.blackSpriteNode.rawValue
             self?.addChild(boxSettings)

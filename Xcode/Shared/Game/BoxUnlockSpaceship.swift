@@ -27,22 +27,22 @@ class BoxUnlockSpaceship: Box {
         var rarityText = ""
         switch rarity {
         case .common:
-            rarityText = "common"
+            rarityText = "Common"
             break
         case .rare:
-            rarityText = "rare"
+            rarityText = "Rare"
             break
         case .epic:
-            rarityText = "epic"
+            rarityText = "Epic"
             break
         case .legendary:
-            rarityText = "legendary"
+            rarityText = "Legendary"
             break
         }
         
-        self.addChild(Label(text: "secret \(rarityText) spaceship", fontColor: GameColors.fontWhite, x: 189, y: 41))
+        self.addChild(Label(text: "Secret \(rarityText) Spaceship", x: 189, y: 41))
         
-        self.addChild(MultiLineLabel(text: "contains a \(rarityText) spaceship, and can be unlocked at a lower cost", maxWidth: 233, fontColor: GameColors.fontWhite, x: 72, y: 252))
+        self.addChild(MultiLineLabel(text: "Contains a \(rarityText) spaceship, and can be unlocked at a lower cost.", maxWidth: 233, x: 72, y: 252))
         
         self.buttonUnlock = spaceshipHangarCell.control1 as? Button
         

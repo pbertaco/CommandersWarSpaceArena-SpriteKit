@@ -34,22 +34,22 @@ class MissionCell: Control {
         let sectorNumber = missionIndex / 10 + 1
         let missionNumber = missionIndex % 10 + 1
         
-        self.addChild(Label(text: "sector \(sectorNumber).\(missionNumber)", fontColor: .white, x: 168, y: 36))
+        self.addChild(Label(text: "Sector \(sectorNumber).\(missionNumber)", x: 168, y: 36))
         
         var labelText = ""
         var loadButtonStart = false
         
         switch status {
         case .available:
-            labelText = "available"
+            labelText = "Available"
             loadButtonStart = true
             break
         case .completed:
-            labelText = "completed"
+            labelText = "Completed"
             loadButtonStart = true
             break
         case .locked:
-            labelText = "locked"
+            labelText = "Locked"
             break
         }
         
@@ -68,7 +68,7 @@ class MissionCell: Control {
             buttonPlay.addHandler(block: block)
         }
         
-        self.addChild(Label(text: labelText, fontColor: .white, x: 168, y: 71))
+        self.addChild(Label(text: labelText, x: 168, y: 71))
     }
     
     required init?(coder aDecoder: NSCoder) {

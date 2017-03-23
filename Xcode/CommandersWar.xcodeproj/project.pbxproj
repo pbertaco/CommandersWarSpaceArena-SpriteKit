@@ -121,6 +121,7 @@
 		84660A531E7A4BB5006C0D1C /* Scorpion.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84660A4F1E7A4BB5006C0D1C /* Scorpion.m4a */; };
 		84660A541E7A4BB5006C0D1C /* Scorpion.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84660A4F1E7A4BB5006C0D1C /* Scorpion.m4a */; };
 		84660A551E7A4BB5006C0D1C /* Scorpion.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 84660A4F1E7A4BB5006C0D1C /* Scorpion.m4a */; };
+		8468411A1E839B0A004CAF31 /* BoxWatchAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846841191E839B0A004CAF31 /* BoxWatchAd.swift */; };
 		846F28421E28788C0040DB51 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F283F1E28788C0040DB51 /* Bolts.framework */; };
 		846F28431E28788C0040DB51 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F28401E28788C0040DB51 /* FBSDKCoreKit.framework */; };
 		846F28441E28788C0040DB51 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 846F28411E28788C0040DB51 /* FBSDKLoginKit.framework */; };
@@ -389,6 +390,7 @@
 		845436651E44FE7600E1E2A7 /* BoxBattleResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxBattleResult.swift; sourceTree = "<group>"; };
 		846585411E3D9C1100C890D3 /* MothershipHealthBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipHealthBar.swift; sourceTree = "<group>"; };
 		84660A4F1E7A4BB5006C0D1C /* Scorpion.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = Scorpion.m4a; sourceTree = "<group>"; };
+		846841191E839B0A004CAF31 /* BoxWatchAd.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxWatchAd.swift; sourceTree = "<group>"; };
 		846F283F1E28788C0040DB51 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		846F28401E28788C0040DB51 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		846F28411E28788C0040DB51 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -685,6 +687,7 @@
 				8487B0571E78F109007A4921 /* BoxResetData.swift */,
 				8487B04F1E78E15E007A4921 /* BoxSettings.swift */,
 				840BDF671E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift */,
+				846841191E839B0A004CAF31 /* BoxWatchAd.swift */,
 				84138E001E439A9500B845E4 /* ControlMission.swift */,
 				84F945291E2EEEBA0034F530 /* ControlPoints.swift */,
 				84F945211E2EE6780034F530 /* ControlPremiumPoints.swift */,
@@ -1156,6 +1159,7 @@
 				840080271E4BCD46005AF200 /* Control.swift in Sources */,
 				84F9452A1E2EEEBA0034F530 /* ControlPoints.swift in Sources */,
 				840931511E26985500C61711 /* GameColorsExtension.swift in Sources */,
+				8468411A1E839B0A004CAF31 /* BoxWatchAd.swift in Sources */,
 				84AFAE1B1E2FC949006359DD /* BattleScene.swift in Sources */,
 				8409314D1E26930700C61711 /* MothershipSlot.swift in Sources */,
 				840080331E4BCD46005AF200 /* GameScene.swift in Sources */,

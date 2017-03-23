@@ -45,9 +45,9 @@ class CreditsScene: GameScene {
         let box = Control(imageNamed: "box233x377", x: 71, y: 35, horizontalAlignment: .center, verticalAlignment: .center)
         self.addChild(box)
         
-        box.addChild(Label(text: "code", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, fontSize: .fontSize16, fontColor: GameColors.fontWhite, x: 26, y: 51))
+        box.addChild(Label(text: "Code", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, x: 26, y: 51))
         
-        box.addChild(Label(text: "Pablo Bertaco", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, fontSize: .fontSize16, fontColor: GameColors.fontWhite, x: 26, y: 82))
+        box.addChild(Label(text: "Pablo Bertaco", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, x: 26, y: 82))
         
         let buttonPabloMail = Button(imageNamed: "button55x55", x: 26, y: 110)
         buttonPabloMail.setIcon(imageNamed: "Email")
@@ -79,9 +79,9 @@ class CreditsScene: GameScene {
             #endif
         }
         
-        box.addChild(Label(text: "music", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, fontSize: .fontSize16, fontColor: GameColors.fontWhite, x: 26, y: 233))
+        box.addChild(Label(text: "Music", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, x: 26, y: 233))
         
-        box.addChild(Label(text: "Klamm", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, fontSize: .fontSize16, fontColor: GameColors.fontWhite, x: 26, y: 261))
+        box.addChild(Label(text: "Klamm", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, x: 26, y: 261))
         
         let buttonKlammMail = Button(imageNamed: "button55x55", x: 26, y: 289)
         buttonKlammMail.setIcon(imageNamed: "Email")
@@ -118,7 +118,7 @@ class CreditsScene: GameScene {
         title.set(color: .white, blendMode: .add)
         self.addChild(title)
         
-        self.addChild(Label(text: "thanks for playing!", fontSize: .fontSize16, fontColor: GameColors.fontWhite, x: 187, y: 620, horizontalAlignment: .center, verticalAlignment: .center))
+        self.addChild(Label(text: "Thanks for playing!", x: 187, y: 620, horizontalAlignment: .center, verticalAlignment: .center))
         
         self.afterDelay(60) { [weak self] in
             self?.view?.presentScene(CreditsScene(), transition: GameScene.defaultTransition)

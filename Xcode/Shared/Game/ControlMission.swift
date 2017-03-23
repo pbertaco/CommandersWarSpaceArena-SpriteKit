@@ -23,7 +23,7 @@ class ControlMission: Control {
         let sector = playerData.botLevel / 10
         let mission = playerData.botLevel % 10
         
-        self.addChild(Label(text: "sector \(sector + 1).\(mission + 1)", fontColor: .white, x: 151, y: 44))
+        self.addChild(Label(text: "Sector \(sector + 1).\(mission + 1)", x: 151, y: 44))
         
         self.buttonChooseMission = Button(imageNamed: "button55x55", x: 17, y: 17)
         self.buttonChooseMission.setIcon(imageNamed: "Waypoint Map")

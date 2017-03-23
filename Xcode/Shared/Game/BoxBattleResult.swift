@@ -20,23 +20,23 @@ class BoxBattleResult: Box {
         var title = ""
         
         if botMothership.health <= 0 && mothership.health <= 0 {
-            title = "draw"
+            title = "Draw"
         } else {
             if botMothership.health <= 0 {
-                title = "victory"
+                title = "Victory"
             } else {
-                title = "defeat"
+                title = "Defeat"
             }
         }
         
-        self.addChild(Label(text: title, fontColor: GameColors.fontWhite, x: 117, y: 40))
+        self.addChild(Label(text: title, x: 117, y: 40))
         
         self.buttonOK = Button(imageNamed: "button89x34", x: 72, y: 554)
-        self.buttonOK.set(label: Label(text: "ok", fontColor: GameColors.fontWhite))
+        self.buttonOK.set(label: Label(text: "OK"))
         self.buttonOK.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(self.buttonOK)
         
-        var totalBattlePoints = 0
+        var totalBattlePoints: Int32 = 0
         for spaceship in mothership.spaceships {
             totalBattlePoints = totalBattlePoints + spaceship.battlePoints
         }
@@ -48,7 +48,7 @@ class BoxBattleResult: Box {
         coins.set(color: GameColors.controlBlue)
         self.addChild(coins)
         
-        self.addChild(Label(text: "+\(totalBattlePoints)".points(), fontColor: GameColors.controlBlue, x: 144, y: 100))
+        self.addChild(Label(text: "+\(totalBattlePoints.pointsString())", fontColor: GameColors.controlBlue, x: 144, y: 100))
         
         var i = 0
         var totalKills = 0
@@ -143,7 +143,7 @@ class BoxBattleResult: Box {
         let controlHelp = Control(imageNamed: "box233x34", x: 0, y: 610)
         controlHelp.isHidden = true
         self.addChild(controlHelp)
-        controlHelp.addChild(Label(text: "kills/deaths/assists", fontColor: GameColors.fontWhite, x: controlHelp.size.width/2, y: controlHelp.size.height/2))
+        controlHelp.addChild(Label(text: "Kills/Deaths/Assists", x: controlHelp.size.width/2, y: controlHelp.size.height/2))
         
         let buttonHelp = Button(imageNamed: "button34x34", x: 178, y: 554)
         buttonHelp.setIcon(imageNamed: "Help")

@@ -28,24 +28,24 @@ class SpaceshipHangarCell: Control {
         mothershipSlot.load(spaceship: spaceship)
         self.addChild(mothershipSlot)
         
-        self.addChild(Label(text: "level", horizontalAlignmentMode: .right, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 172, y: 23))
-        self.labelLevel = Label(text: spaceship.level.description, horizontalAlignmentMode: .left, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 179, y: 23)
+        self.addChild(Label(text: "level", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 23))
+        self.labelLevel = Label(text: spaceship.level.description, horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 23)
         self.addChild(self.labelLevel)
         
-        self.addChild(Label(text: "damage", horizontalAlignmentMode: .right, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 172, y: 38))
-        self.labelDamage = Label(text: spaceship.damage.description, horizontalAlignmentMode: .left, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 179, y: 38)
+        self.addChild(Label(text: "damage", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 38))
+        self.labelDamage = Label(text: spaceship.damage.description, horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 38)
         self.addChild(self.labelDamage)
         
-        self.addChild(Label(text: "life", horizontalAlignmentMode: .right, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 172, y: 53))
-        self.labelMaxHealth = Label(text: spaceship.maxHealth.description, horizontalAlignmentMode: .left, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 179, y: 53)
+        self.addChild(Label(text: "life", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 53))
+        self.labelMaxHealth = Label(text: spaceship.maxHealth.description, horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 53)
         self.addChild(self.labelMaxHealth)
         
-        self.addChild(Label(text: "range", horizontalAlignmentMode: .right, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 172, y: 68))
-        self.labelWeaponRange = Label(text: Int(spaceship.weaponRange).description, horizontalAlignmentMode: .left, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 179, y: 68)
+        self.addChild(Label(text: "range", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 68))
+        self.labelWeaponRange = Label(text: Int(spaceship.weaponRange).description, horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 68)
         self.addChild(self.labelWeaponRange)
         
-        self.addChild(Label(text: "speed", horizontalAlignmentMode: .right, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 172, y: 83))
-        self.labelSpeedAtribute = Label(text: spaceship.speedAtribute.description, horizontalAlignmentMode: .left, fontSize: .fontSize8, fontColor: GameColors.fontWhite, x: 179, y: 83)
+        self.addChild(Label(text: "speed", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 83))
+        self.labelSpeedAtribute = Label(text: spaceship.speedAtribute.description, horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 83)
         self.addChild(self.labelSpeedAtribute)
         
         self.spaceship = spaceship
@@ -78,8 +78,8 @@ class SpaceshipHangarCell: Control {
             
             let buttonUpgrade = Button(imageNamed: "button89x34", x: 19, y: 102)
             
-            buttonUpgrade.set(label: Label(text: "upgrade", fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: -6))
-            buttonUpgrade.set(label: Label(text: xp > 0 ? "\(xp)" : "free", fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: 6))
+            buttonUpgrade.set(label: Label(text: "upgrade", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: -6))
+            buttonUpgrade.set(label: Label(text: xp > 0 ? "\(xp)" : "free", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: 6))
             
             buttonUpgrade.set(color: GameColors.controlBlue, blendMode: .add)
             self.addChild(buttonUpgrade)
@@ -139,8 +139,8 @@ class SpaceshipHangarCell: Control {
         let points: Int32 = Int32(GameMath.xpForLevel(level: spaceship.level))
         
         let buttonSell = Button(imageNamed: "button89x34", x: 125, y: 102)
-        buttonSell.set(label: Label(text: "sell", fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: -6))
-        buttonSell.set(label: Label(text: "+\(points)".points(), fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: 6))
+        buttonSell.set(label: Label(text: "sell", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: -6))
+        buttonSell.set(label: Label(text: "+\(points.pointsString())", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: 6))
         buttonSell.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonSell)
         buttonSell.addHandler { [weak self] in
@@ -151,8 +151,6 @@ class SpaceshipHangarCell: Control {
         self.control1?.run(SKAction.sequence([SKAction.fadeAlpha(to: 0, duration: sec), SKAction.removeFromParent()]))
         buttonSell.alpha = 0
         buttonSell.run(SKAction.fadeAlpha(to: 1, duration: sec))
-        
-        
         
         self.control1 = buttonSell
     }
@@ -212,15 +210,15 @@ class SpaceshipHangarCell: Control {
         
         let buttonIgnore = Button(imageNamed: "button89x34", x: 19, y: 102)
         buttonIgnore.set(color: GameColors.controlBlue)
-        buttonIgnore.set(label: Label(text: "ignore", fontSize: .fontSize8, fontColor: GameColors.controlBlue))
+        buttonIgnore.set(label: Label(text: "Ignore", fontSize: .fontSize8, fontColor: GameColors.controlBlue))
         self.addChild(buttonIgnore)
         self.control0 = buttonIgnore
         
         let buttonUnlock = Button(imageNamed: "button89x34", x: 125, y: 102)
         buttonUnlock.set(color: GameColors.controlYellow)
         let priceInPremiumPoints = GameMath.unlockSpaceshipPriceInPremiumPoints(rarity: spaceship.rarity)
-        buttonUnlock.set(label: Label(text: "unlock", fontSize: .fontSize8, fontColor: GameColors.controlYellow, y: -6))
-        buttonUnlock.set(label: Label(text: "\(priceInPremiumPoints)", fontSize: .fontSize8, fontColor: GameColors.controlYellow, y: 6))
+        buttonUnlock.set(label: Label(text: "unlock", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.controlYellow, y: -6))
+        buttonUnlock.set(label: Label(text: "\(priceInPremiumPoints)", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.controlYellow, y: 6))
         self.addChild(buttonUnlock)
         self.control1 = buttonUnlock
         

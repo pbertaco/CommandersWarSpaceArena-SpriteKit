@@ -70,7 +70,7 @@ class SpaceshipHealthBar: SKSpriteNode {
         levelBackground.position = CGPoint(x: -38, y: 0)
         self.addChild(levelBackground)
         
-        let labelLevel = Label(text: level.description, fontSize: .fontSize8, fontColor: GameColors.fontBlack)
+        let labelLevel = Label(text: level.description, fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.fontBlack)
         levelBackground.addChild(labelLevel)
         
         self.color = teamColor
@@ -83,7 +83,7 @@ class SpaceshipHealthBar: SKSpriteNode {
         border.colorBlendFactor = 1
         levelBackground.colorBlendFactor = 1
         
-        let label = Label(text: health.description, fontSize: .fontSize8, fontColor: GameColors.fontBlack)
+        let label = Label(text: health.description, fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.fontBlack)
         label.position.y = -0.5
         self.addChild(label)
         self.label = label
