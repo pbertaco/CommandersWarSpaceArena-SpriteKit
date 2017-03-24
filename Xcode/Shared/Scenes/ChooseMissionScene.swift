@@ -18,6 +18,8 @@ class ChooseMissionScene: GameScene {
     
     var state: state = .chooseMission
     var nextState: state = .chooseMission
+    
+    weak var stars: Stars!
 
     override func load() {
         super.load()
@@ -32,6 +34,7 @@ class ChooseMissionScene: GameScene {
         stars.position.x = stars.position.x + GameScene.currentSize.width/2
         stars.position.y = stars.position.y - GameScene.currentSize.height/2
         self.addChild(stars)
+        self.stars = stars
         
         let buttonBack = Button(imageNamed: "button55x55", x: 8, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonBack.setIcon(imageNamed: "Back")
@@ -82,6 +85,13 @@ class ChooseMissionScene: GameScene {
                 scrollNode.forward()
             }
         }
+    }
+    
+    override func updateSize() {
+        super.updateSize()
+        self.stars.updateSize()
+        self.stars.position.x = self.stars.position.x + GameScene.currentSize.width/2
+        self.stars.position.y = self.stars.position.y - GameScene.currentSize.height/2
     }
     
     override func update(_ currentTime: TimeInterval) {

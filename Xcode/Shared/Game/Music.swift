@@ -80,7 +80,11 @@ class Music {
     
     func play() {
         if MemoryCard.sharedInstance.playerData.music {
-            self.audioPlayer?.play()
+            if let audioPlayer = self.audioPlayer {
+                audioPlayer.pause()
+                audioPlayer.prepareToPlay()
+                audioPlayer.play(atTime: audioPlayer.deviceCurrentTime + 1)
+            }
         } else {
             self.pause()
         }

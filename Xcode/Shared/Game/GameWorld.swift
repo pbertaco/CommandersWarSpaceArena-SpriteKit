@@ -32,6 +32,8 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
     var explosionSoundEffect: SoundEffect!
     var shotSoundEffect: SoundEffect!
     
+    weak var stars: Stars!
+    
     override init() {
         super.init()
         
@@ -41,7 +43,9 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         border.zPosition = zPosition.border.rawValue
         self.addChild(border)
         
-        self.addChild(Stars())
+        let stars = Stars()
+        self.addChild(stars)
+        self.stars = stars
         
         self.loadPhysics()
         self.loadSoundEffect()
@@ -49,6 +53,10 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateSize() {
+        self.stars.updateSize()
     }
     
     func loadPhysics() {

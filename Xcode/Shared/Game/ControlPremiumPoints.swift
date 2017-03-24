@@ -40,35 +40,36 @@ class ControlPremiumPoints: Control {
         
         ControlPremiumPoints.lastInstance = self
         
-        let gameAdManager = GameAdManager.sharedInstance
-        
-        gameAdManager.onAdAvailabilityChange = { [weak buttonBuyMore] isReady in
-            buttonBuyMore?.isHidden = !gameAdManager.isReady
-        }
-        
-        gameAdManager.onVideoAdAttemptFinished = { [weak self] shown in
-            let playerData = MemoryCard.sharedInstance.playerData!
-            playerData.premiumPoints = playerData.premiumPoints + 3
-            self?.setLabelPremiumPointsText(premiumPoints: playerData.premiumPoints)
-        }
-        
-        buttonBuyMore.isHidden = !gameAdManager.isReady
-        
-        buttonBuyMore.addHandler {
-            guard let scene = GameScene.current() else { return }
+        #if os(iOS)
+            let gameAdManager = GameAdManager.sharedInstance
             
-            let boxWatchAd = BoxWatchAd()
-            boxWatchAd.zPosition = MainMenuScene.zPosition.box.rawValue
-            scene.blackSpriteNode.isHidden = false
-            scene.blackSpriteNode.zPosition = MainMenuScene.zPosition.blackSpriteNode.rawValue
-            scene.addChild(boxWatchAd)
-            scene.blackSpriteNode.removeAllHandlers()
-            scene.blackSpriteNode.addHandler { [weak boxWatchAd] in
-                boxWatchAd?.removeFromParent()
-                GameScene.current()?.blackSpriteNode.isHidden = true
+            gameAdManager.onAdAvailabilityChange = { [weak buttonBuyMore] isReady in
+                buttonBuyMore?.isHidden = !gameAdManager.isReady
             }
-        }
-        
+            
+            gameAdManager.onVideoAdAttemptFinished = { [weak self] shown in
+                let playerData = MemoryCard.sharedInstance.playerData!
+                playerData.premiumPoints = playerData.premiumPoints + 3
+                self?.setLabelPremiumPointsText(premiumPoints: playerData.premiumPoints)
+            }
+            
+            buttonBuyMore.isHidden = !gameAdManager.isReady
+            
+            buttonBuyMore.addHandler {
+                guard let scene = GameScene.current() else { return }
+                
+                let boxWatchAd = BoxWatchAd()
+                boxWatchAd.zPosition = MainMenuScene.zPosition.box.rawValue
+                scene.blackSpriteNode.isHidden = false
+                scene.blackSpriteNode.zPosition = MainMenuScene.zPosition.blackSpriteNode.rawValue
+                scene.addChild(boxWatchAd)
+                scene.blackSpriteNode.removeAllHandlers()
+                scene.blackSpriteNode.addHandler { [weak boxWatchAd] in
+                    boxWatchAd?.removeFromParent()
+                    GameScene.current()?.blackSpriteNode.isHidden = true
+                }
+            }
+        #endif
     }
     
     required init?(coder aDecoder: NSCoder) {

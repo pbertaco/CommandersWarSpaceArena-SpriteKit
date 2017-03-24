@@ -16,6 +16,7 @@ class LoadScene: GameScene {
     
     var spaceships = [Spaceship]()
     weak var gameWorld: GameWorld!
+    weak var gameCamera: GameCamera!
     
     init() {
         GameScene.defaultSize = CGSize(width: 375, height: 667)
@@ -39,9 +40,9 @@ class LoadScene: GameScene {
             //self.view?.showsPhysics = true
             
             //MemoryCard.sharedInstance.reset()
-            let playerData = MemoryCard.sharedInstance.playerData!
-            playerData.points = 9999999
-            playerData.premiumPoints = 9999999
+            //let playerData = MemoryCard.sharedInstance.playerData!
+            //playerData.points = 9999999
+            //playerData.premiumPoints = 9999999
         #endif
         
         self.backgroundColor = GameColors.backgroundColor
@@ -69,6 +70,7 @@ class LoadScene: GameScene {
         gameWorld.shotSoundEffect = nil
         
         self.gameWorld = gameWorld
+        self.gameCamera = gameCamera
         
         let title = Control(imageNamed: "title", x: 9, y: 281, horizontalAlignment: .center, verticalAlignment: .center)
         title.set(color: .white, blendMode: .add)
@@ -84,6 +86,12 @@ class LoadScene: GameScene {
         self.afterDelay(60) { [weak self] in
             self?.view?.presentScene(LoadScene(), transition: GameScene.defaultTransition)
         }
+    }
+    
+    override func updateSize() {
+        super.updateSize()
+        self.gameCamera.update()
+        self.gameWorld.updateSize()
     }
     
     override func update(_ currentTime: TimeInterval) {

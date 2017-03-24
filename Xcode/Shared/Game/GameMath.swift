@@ -52,7 +52,7 @@ class GameMath {
             break
         }
         
-        return Int(range)
+        return Int(round(range))
     }
     
     static func range(level: Int, baseRange: Int) -> Int {
@@ -67,20 +67,20 @@ class GameMath {
         
         switch rarity {
         case .common:
-            damage = damage * 10
+            damage = damage * 11
             break
         case .rare:
-            damage = damage * 14
+            damage = damage * 16
             break
         case .epic:
-            damage = damage * 20
+            damage = damage * 23
             break
         case .legendary:
-            damage = damage * 29
+            damage = damage * 33
             break
         }
         
-        return Int(damage)
+        return Int(round(damage))
     }
     
     static func damage(level: Int, baseDamage: Int) -> Int {
@@ -95,20 +95,20 @@ class GameMath {
         
         switch rarity {
         case .common:
-            life = life * 500
+            life = life * 550
             break
         case .rare:
-            life = life * 700
+            life = life * 800
             break
         case .epic:
-            life = life * 1000
+            life = life * 1150
             break
         case .legendary:
-            life = life * 1450
+            life = life * 1650
             break
         }
         
-        return Int(life)
+        return Int(round(life))
     }
     
     static func maxHealth(level: Int, baseLife: Int) -> Int {
@@ -136,7 +136,7 @@ class GameMath {
             break
         }
         
-        return Int(speed)
+        return Int(round(speed))
     }
     
     static func speed(level: Int, baseSpeed: Int) -> Int {

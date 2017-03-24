@@ -112,6 +112,12 @@ class BattleScene: GameScene {
         self.botMothership = botMothership
     }
     
+    override func updateSize() {
+        super.updateSize()
+        self.gameCamera.update()
+        self.gameWorld.updateSize()
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
         

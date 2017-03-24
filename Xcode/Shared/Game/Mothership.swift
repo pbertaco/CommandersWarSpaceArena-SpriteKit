@@ -359,6 +359,7 @@ class Mothership: SKSpriteNode {
             spaceship.destination = nil
             spaceship.fadeSetDestinationEffect()
             spaceship.targetNode = nil
+            spaceship.updateBitMasks()
             spaceship.canRespawn = false
         }
     }

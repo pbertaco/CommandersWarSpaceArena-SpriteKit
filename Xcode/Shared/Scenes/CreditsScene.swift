@@ -15,6 +15,8 @@ class CreditsScene: GameScene {
     
     var spaceships = [Spaceship]()
     weak var gameWorld: GameWorld!
+    
+    weak var gameCamera: GameCamera!
 
     override func load() {
         super.load()
@@ -39,6 +41,7 @@ class CreditsScene: GameScene {
         gameWorld.shotSoundEffect = nil
         
         self.gameWorld = gameWorld
+        self.gameCamera = gameCamera
         
         Music.sharedInstance.playMusic(withType: .battle)
         
@@ -123,6 +126,12 @@ class CreditsScene: GameScene {
         self.afterDelay(60) { [weak self] in
             self?.view?.presentScene(CreditsScene(), transition: GameScene.defaultTransition)
         }
+    }
+    
+    override func updateSize() {
+        super.updateSize()
+        self.gameCamera.update()
+        self.gameWorld.updateSize()
     }
     
     override func update(_ currentTime: TimeInterval) {

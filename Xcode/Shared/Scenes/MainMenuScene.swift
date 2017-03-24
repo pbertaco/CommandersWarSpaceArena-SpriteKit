@@ -29,6 +29,8 @@ class MainMenuScene: GameScene {
     var state: state = .mainMenu
     var nextState: state = .mainMenu
     
+    weak var stars: Stars!
+    
     override func load() {
         super.load()
         
@@ -42,6 +44,7 @@ class MainMenuScene: GameScene {
         stars.position.x = stars.position.x + GameScene.currentSize.width/2
         stars.position.y = stars.position.y - GameScene.currentSize.height/2
         self.addChild(stars)
+        self.stars = stars
         
         let mothershipSlots = MothershipSlots(x: 0, y: 289, horizontalAlignment: .center, verticalAlignment: .center)
         
@@ -135,6 +138,13 @@ class MainMenuScene: GameScene {
         buttonGameCenter.isHidden = true
         buttonFacebook.isHidden = true
         buttonBuy.isHidden = true
+    }
+    
+    override func updateSize() {
+        super.updateSize()
+        self.stars.updateSize()
+        self.stars.position.x = self.stars.position.x + GameScene.currentSize.width/2
+        self.stars.position.y = self.stars.position.y - GameScene.currentSize.height/2
     }
     
     override func update(_ currentTime: TimeInterval) {

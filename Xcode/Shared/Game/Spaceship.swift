@@ -603,6 +603,18 @@ class Spaceship: SKSpriteNode {
         }
     }
     
+    func updateBitMasks() {
+        if let physicsBody = self.physicsBody {
+            if physicsBody.categoryBitMask == GameWorld.categoryBitMask.mothershipSpaceship.rawValue {
+                if physicsBody.allContactedBodies().filter({ (physicsBody: SKPhysicsBody) -> Bool in
+                    return physicsBody.categoryBitMask == GameWorld.categoryBitMask.mothership.rawValue
+                }).count <= 0 {
+                    self.setBitMasksToSpaceship()
+                }
+            }
+        }
+    }
+    
     func touchUp(touch: UITouch) {
         guard let parent = self.parent else { return }
         
@@ -611,21 +623,10 @@ class Spaceship: SKSpriteNode {
         if self == Spaceship.selectedSpaceship {
             
             self.targetNode = nil
+            self.updateBitMasks()
             
             if self.contains(point) {
-                
                 if self.destination != nil {
-                    
-                    if let physicsBody = self.physicsBody {
-                        if physicsBody.categoryBitMask == GameWorld.categoryBitMask.mothershipSpaceship.rawValue {
-                            if physicsBody.allContactedBodies().filter({ (physicsBody: SKPhysicsBody) -> Bool in
-                                return physicsBody.categoryBitMask == GameWorld.categoryBitMask.mothership.rawValue
-                            }).count <= 0 {
-                                self.setBitMasksToSpaceship()
-                            }
-                        }
-                    }
-                    
                     self.destination = nil
                     self.fadeSetDestinationEffect()
                 }
@@ -643,17 +644,17 @@ class Spaceship: SKSpriteNode {
     }
     
     func setTarget(spaceship: Spaceship) {
-        self.destination = nil
         self.fadeSetDestinationEffect()
         self.physicsBody?.isDynamic = true
+        self.destination = nil
         self.targetNode = spaceship
         self.setTargetEffect(position: spaceship.position, move: true)
     }
     
     func setTarget(mothership: Mothership) {
-        self.destination = nil
         self.fadeSetDestinationEffect()
         self.physicsBody?.isDynamic = true
+        self.destination = nil
         self.targetNode = mothership
         self.setTargetEffect(position: CGPoint(x: self.position.x, y: mothership.position.y), move: false)
     }
