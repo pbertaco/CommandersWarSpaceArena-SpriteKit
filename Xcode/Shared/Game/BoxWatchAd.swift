@@ -30,7 +30,6 @@ class BoxWatchAd: Box {
         self.addChild(buttonYes)
         buttonYes.addHandler { [weak self] in
             GameAdManager.sharedInstance.play()
-            GameScene.current()?.blackSpriteNode.isHidden = true
             self?.removeFromParent()
         }
     }

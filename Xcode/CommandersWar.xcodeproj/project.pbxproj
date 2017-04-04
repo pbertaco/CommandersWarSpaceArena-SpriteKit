@@ -211,6 +211,7 @@
 		849632C71E42DCB100AEC90F /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849632C61E42DCB100AEC90F /* Mission.swift */; };
 		849632C81E42DCB100AEC90F /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849632C61E42DCB100AEC90F /* Mission.swift */; };
 		849632C91E42DCB100AEC90F /* Mission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849632C61E42DCB100AEC90F /* Mission.swift */; };
+		8498CB531E93FAD600C30E4D /* BoxVideoAdAttemptFinished.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498CB521E93FAD600C30E4D /* BoxVideoAdAttemptFinished.swift */; };
 		849B4CB51E6F179300C14B8F /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B4CB41E6F179300C14B8F /* Music.swift */; };
 		849B4CB61E6F179300C14B8F /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B4CB41E6F179300C14B8F /* Music.swift */; };
 		849B4CB71E6F179300C14B8F /* Music.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B4CB41E6F179300C14B8F /* Music.swift */; };
@@ -439,6 +440,7 @@
 		848BD3831E7B7AD700E8F754 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		848BD3851E7B7AF300E8F754 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.2.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		849632C61E42DCB100AEC90F /* Mission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mission.swift; sourceTree = "<group>"; };
+		8498CB521E93FAD600C30E4D /* BoxVideoAdAttemptFinished.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxVideoAdAttemptFinished.swift; sourceTree = "<group>"; };
 		849B4CB41E6F179300C14B8F /* Music.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Music.swift; sourceTree = "<group>"; };
 		84A211261E3FC364008EE6ED /* HangarScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HangarScene.swift; sourceTree = "<group>"; };
 		84A4CFCF1E3C1B0800BE28FC /* SpaceshipHealthBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceshipHealthBar.swift; sourceTree = "<group>"; };
@@ -687,6 +689,7 @@
 				8487B0571E78F109007A4921 /* BoxResetData.swift */,
 				8487B04F1E78E15E007A4921 /* BoxSettings.swift */,
 				840BDF671E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift */,
+				8498CB521E93FAD600C30E4D /* BoxVideoAdAttemptFinished.swift */,
 				846841191E839B0A004CAF31 /* BoxWatchAd.swift */,
 				84138E001E439A9500B845E4 /* ControlMission.swift */,
 				84F945291E2EEEBA0034F530 /* ControlPoints.swift */,
@@ -1202,6 +1205,7 @@
 				840BDF681E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift in Sources */,
 				847182C91E25D5A60077D3EF /* SKNode+Extensions.swift in Sources */,
 				8400803C1E4BCD46005AF200 /* ScrollNode.swift in Sources */,
+				8498CB531E93FAD600C30E4D /* BoxVideoAdAttemptFinished.swift in Sources */,
 				84240B6E1E26DD060090E681 /* GameMath.swift in Sources */,
 				84BA34D61E7B5514006FEEAD /* GameAdManager.swift in Sources */,
 				840080301E4BCD46005AF200 /* GameColors.swift in Sources */,

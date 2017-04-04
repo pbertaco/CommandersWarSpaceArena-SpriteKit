@@ -48,9 +48,22 @@ class ControlPremiumPoints: Control {
             }
             
             gameAdManager.onVideoAdAttemptFinished = { [weak self] shown in
+                guard let scene = GameScene.current() else { return }
+                
                 let playerData = MemoryCard.sharedInstance.playerData!
                 playerData.premiumPoints = playerData.premiumPoints + 3
                 self?.setLabelPremiumPointsText(premiumPoints: playerData.premiumPoints)
+                
+                let boxVideoAdAttemptFinished = BoxVideoAdAttemptFinished(bonusPremiumPoints: 3)
+                boxVideoAdAttemptFinished.zPosition = MainMenuScene.zPosition.box.rawValue
+                scene.blackSpriteNode.isHidden = false
+                scene.blackSpriteNode.zPosition = MainMenuScene.zPosition.blackSpriteNode.rawValue
+                scene.addChild(boxVideoAdAttemptFinished)
+                scene.blackSpriteNode.removeAllHandlers()
+                scene.blackSpriteNode.addHandler { [weak boxVideoAdAttemptFinished] in
+                    boxVideoAdAttemptFinished?.removeFromParent()
+                    GameScene.current()?.blackSpriteNode.isHidden = true
+                }
             }
             
             buttonBuyMore.isHidden = !gameAdManager.isReady
