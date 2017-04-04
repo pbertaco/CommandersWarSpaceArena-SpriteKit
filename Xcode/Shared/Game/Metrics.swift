@@ -13,10 +13,30 @@
 import SpriteKit
 import GameKit
 
+import Fabric
+import Crashlytics
+import GameAnalytics
+
 class Metrics {
     
+    static var needToConfigure = true
+    
+    static func configure() {
+        
+        if Metrics.needToConfigure {
+            if Metrics.canSendEvents() {
+                Metrics.needToConfigure = false
+                Fabric.with([Crashlytics.self, GameAnalytics.self])
+                
+                let bundleShortVersionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
+                GameAnalytics.configureBuild(bundleShortVersionString)
+                GameAnalytics.initializeWithConfiguredGameKeyAndGameSecret()
+            }
+        }
+    }
+    
     static func openTheGame() {
-        guard Metrics.canSendEvents else { return }
+        guard Metrics.canSendEvents() else { return }
         
         let date = Date()
         let formatter = DateFormatter()
@@ -28,7 +48,7 @@ class Metrics {
     }
     
     static func win() {
-        if Metrics.canSendEvents {
+        if Metrics.canSendEvents() {
             let playerData = MemoryCard.sharedInstance.playerData!
             let botLevel = playerData.botLevel
             GameAnalytics.addDesignEvent(withEventId: "BattleWin:\(Metrics.userName()):\(botLevel)")
@@ -36,7 +56,7 @@ class Metrics {
     }
     
     static func lose() {
-        if Metrics.canSendEvents {
+        if Metrics.canSendEvents() {
             let playerData = MemoryCard.sharedInstance.playerData!
             let botLevel = playerData.botLevel
             GameAnalytics.addDesignEvent(withEventId: "BattleLose:\(Metrics.userName()):\(botLevel)")
@@ -44,15 +64,17 @@ class Metrics {
     }
     
     static func userName() -> String {
-        return GKLocalPlayer.localPlayer().alias ?? "Unknown"
+        return MemoryCard.sharedInstance.playerData.name ?? "Unknown"
     }
     
-    static let canSendEvents: Bool = {
+    static func canSendEvents() -> Bool {
         
-        if let alias = GKLocalPlayer.localPlayer().alias {
-            if ["PabloHenri91"].contains(alias) {
+        if let alias = MemoryCard.sharedInstance.playerData.name {
+            if ["", "PabloHenri91"].contains(alias) {
                 return false
             }
+        } else {
+            return false
         }
         
         #if DEBUG || !os(iOS)
@@ -60,7 +82,7 @@ class Metrics {
         #else
             return true
         #endif
-    }()
+    }
 }
 
 #if os(OSX)

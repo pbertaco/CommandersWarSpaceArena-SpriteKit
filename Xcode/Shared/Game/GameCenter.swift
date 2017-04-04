@@ -46,7 +46,7 @@ extension GameViewController: GKGameCenterControllerDelegate {
     }
     
     func save(score: Int) {
-        if Metrics.canSendEvents {
+        if Metrics.canSendEvents() {
             if GKLocalPlayer.localPlayer().isAuthenticated {
                 let scoreReporter = GKScore(leaderboardIdentifier: "\(Bundle.main.bundleIdentifier!).score")
                 scoreReporter.value = Int64(score)

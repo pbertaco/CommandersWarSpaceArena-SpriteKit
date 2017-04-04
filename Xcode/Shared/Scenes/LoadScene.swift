@@ -173,6 +173,7 @@ class LoadScene: GameScene {
             (self.view?.window?.rootViewController as? GameViewController)?.authenticateLocalPlayer {
                 if let alias = GKLocalPlayer.localPlayer().alias {
                     MemoryCard.sharedInstance.playerData.name = alias
+                    Metrics.configure()
                 }
             }
         #endif

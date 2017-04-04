@@ -8,9 +8,6 @@
 
 import UIKit
 
-import Fabric
-import Crashlytics
-import GameAnalytics
 import FBSDKCoreKit
 
 @UIApplicationMain
@@ -21,13 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        if Metrics.canSendEvents {
-            Fabric.with([Crashlytics.self, GameAnalytics.self])
-            
-            let bundleShortVersionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
-            GameAnalytics.configureBuild(bundleShortVersionString)
-            GameAnalytics.initializeWithConfiguredGameKeyAndGameSecret()
-        }
+        Metrics.configure()
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
