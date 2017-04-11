@@ -19,7 +19,7 @@ class SpaceshipHangarCell: Control {
     weak var control0: Control?
     weak var control1: Control?
     
-    private weak var spaceship: Spaceship?
+    weak var spaceship: Spaceship?
 
     init(spaceship: Spaceship) {
         super.init(imageNamed: "box233x144", x: 0, y: 0)
@@ -29,26 +29,28 @@ class SpaceshipHangarCell: Control {
         self.addChild(mothershipSlot)
         
         self.addChild(Label(text: "level", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 23))
-        self.labelLevel = Label(text: spaceship.level.description, horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 23)
+        self.labelLevel = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 23)
         self.addChild(self.labelLevel)
         
         self.addChild(Label(text: "damage", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 38))
-        self.labelDamage = Label(text: spaceship.damage.description, horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 38)
+        self.labelDamage = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 38)
         self.addChild(self.labelDamage)
         
         self.addChild(Label(text: "life", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 53))
-        self.labelMaxHealth = Label(text: spaceship.maxHealth.description, horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 53)
+        self.labelMaxHealth = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 53)
         self.addChild(self.labelMaxHealth)
         
         self.addChild(Label(text: "range", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 68))
-        self.labelWeaponRange = Label(text: Int(spaceship.weaponRange).description, horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 68)
+        self.labelWeaponRange = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 68)
         self.addChild(self.labelWeaponRange)
         
         self.addChild(Label(text: "speed", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 83))
-        self.labelSpeedAtribute = Label(text: spaceship.speedAtribute.description, horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 83)
+        self.labelSpeedAtribute = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 83)
         self.addChild(self.labelSpeedAtribute)
         
         self.spaceship = spaceship
+        
+        self.updateLabels(spaceship: spaceship)
         
         if let spaceshipData = spaceship.spaceshipData {
             
@@ -97,7 +99,7 @@ class SpaceshipHangarCell: Control {
                         
                         xp = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
                         
-                        buttonUpgrade?.text = xp.description
+                        buttonUpgrade?.text = "\(xp)"
                         
                         self?.updateLabels(spaceship: spaceship)
                         
@@ -295,10 +297,56 @@ class SpaceshipHangarCell: Control {
     
     func updateLabels(spaceship: Spaceship) {
         self.labelLevel.text = spaceship.level.description
-        self.labelDamage.text = spaceship.damage.description
-        self.labelMaxHealth.text = spaceship.maxHealth.description
-        self.labelWeaponRange.text = Int(spaceship.weaponRange).description
-        self.labelSpeedAtribute.text = spaceship.speedAtribute.description
+        self.labelDamage.text = "\(spaceship.damage)"
+        self.labelMaxHealth.text = "\(spaceship.maxHealth)"
+        self.labelWeaponRange.text = "\(Int(spaceship.weaponRange))"
+        self.labelSpeedAtribute.text = "\(spaceship.speedAtribute)"
+    }
+    
+    func clearLabelColors() {
+        self.labelLevel.set(color: GameColors.fontWhite)
+        self.labelDamage.set(color: GameColors.fontWhite)
+        self.labelMaxHealth.set(color: GameColors.fontWhite)
+        self.labelWeaponRange.set(color: GameColors.fontWhite)
+        self.labelSpeedAtribute.set(color: GameColors.fontWhite)
+    }
+    
+    func compareTo(spaceshipHangarCell: SpaceshipHangarCell) {
+        
+        guard let spaceship = spaceshipHangarCell.spaceship else { return }
+        
+        if let me = self.spaceship {
+            
+            if me.level != spaceship.level {
+                me.level > spaceship.level ? self.labelLevel.set(color: GameColors.fontGreen) : self.labelLevel.set(color: GameColors.fontRed)
+            } else {
+                self.labelLevel.set(color: GameColors.fontWhite)
+            }
+            
+            if me.baseDamage != spaceship.baseDamage {
+                me.baseDamage > spaceship.baseDamage ? self.labelDamage.set(color: GameColors.fontGreen) : self.labelDamage.set(color: GameColors.fontRed)
+            } else {
+                self.labelDamage.set(color: GameColors.fontWhite)
+            }
+            
+            if me.baseLife != spaceship.baseLife {
+                me.baseLife > spaceship.baseLife ? self.labelMaxHealth.set(color: GameColors.fontGreen) : self.labelMaxHealth.set(color: GameColors.fontRed)
+            } else {
+                self.labelMaxHealth.set(color: GameColors.fontWhite)
+            }
+            
+            if me.baseRange != spaceship.baseRange {
+                me.baseRange > spaceship.baseRange ? self.labelWeaponRange.set(color: GameColors.fontGreen) : self.labelWeaponRange.set(color: GameColors.fontRed)
+            } else {
+                self.labelWeaponRange.set(color: GameColors.fontWhite)
+            }
+            
+            if me.baseSpeed != spaceship.baseSpeed {
+                me.baseSpeed > spaceship.baseSpeed ? self.labelSpeedAtribute.set(color: GameColors.fontGreen) : self.labelSpeedAtribute.set(color: GameColors.fontRed)
+            } else {
+                self.labelSpeedAtribute.set(color: GameColors.fontWhite)
+            }
+        }
     }
     
     func spaceshipData() -> SpaceshipData? {

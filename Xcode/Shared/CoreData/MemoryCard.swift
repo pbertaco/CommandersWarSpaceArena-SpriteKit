@@ -124,7 +124,7 @@ class MemoryCard {
         #endif
         
         let url: URL = {
-            if let url = fileManager.url(forUbiquityContainerIdentifier: "iCloud.\(Bundle.main.bundleIdentifier!)") {
+            if let url = fileManager.url(forUbiquityContainerIdentifier: "iCloud.com.PabloHenri91.GameVI") {
                 let applicationSupportDirectoryURL = self.applicationSupportDirectory.appendingPathComponent(fileName)
                 if fileManager.fileExists(atPath: applicationSupportDirectoryURL.path) {
                     do {

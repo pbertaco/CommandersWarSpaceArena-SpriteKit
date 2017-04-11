@@ -55,7 +55,6 @@ class HangarScene: GameScene {
         
         self.loadButtonChange()
         
-        
         let control = Control(imageNamed: "box89x89", x: 375/2, y: -2, horizontalAlignment: .center)
         control.anchorPoint.x = 0.5
         control.size.width = GameScene.currentSize.width * 3
@@ -164,6 +163,22 @@ class HangarScene: GameScene {
         
         if scrollNodePlayerDataSpaceships.cells.count <= 0 {
             buttonChange.isHidden = true
+        } else {
+            self.compareShips()
+        }
+    }
+    
+    func compareShips() {
+        if scrollNodePlayerDataSpaceships.cells.count > 0 {
+            let a = self.scrollNodeMothershipSlots.cells[self.cellIndexMothershipSlots]
+            let b = self.scrollNodePlayerDataSpaceships.cells[self.cellIndexPlayerDataSpaceships]
+            
+            if let a = a as? SpaceshipHangarCell {
+                if let b = b as? SpaceshipHangarCell {
+                    a.compareTo(spaceshipHangarCell: b)
+                    b.compareTo(spaceshipHangarCell: a)
+                }
+            }
         }
     }
     
@@ -205,12 +220,20 @@ class HangarScene: GameScene {
             buttonRight.run(SKAction.fadeAlpha(to: 1, duration: 0.25))
             
             if this.cellIndexPlayerDataSpaceships > 0 {
+                
+                let cell = this.scrollNodePlayerDataSpaceships.cells[this.cellIndexPlayerDataSpaceships]
+                if let spaceshipHangarCell = cell as? SpaceshipHangarCell {
+                    spaceshipHangarCell.clearLabelColors()
+                }
+                
                 this.cellIndexPlayerDataSpaceships = this.cellIndexPlayerDataSpaceships - 1
                 scrollNode.back()
                 if this.cellIndexPlayerDataSpaceships <= 0 {
                     buttonLeft.isUserInteractionEnabled = false
                     buttonLeft.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
                 }
+                
+                this.compareShips()
             }
         }
         
@@ -224,12 +247,20 @@ class HangarScene: GameScene {
             buttonLeft.run(SKAction.fadeAlpha(to: 1, duration: 0.25))
             
             if this.cellIndexPlayerDataSpaceships < cellsPlayerDataSpaceships.count - 1 {
+                
+                let cell = this.scrollNodePlayerDataSpaceships.cells[this.cellIndexPlayerDataSpaceships]
+                if let spaceshipHangarCell = cell as? SpaceshipHangarCell {
+                    spaceshipHangarCell.clearLabelColors()
+                }
+                
                 this.cellIndexPlayerDataSpaceships = this.cellIndexPlayerDataSpaceships + 1
                 scrollNode.forward()
                 if this.cellIndexPlayerDataSpaceships >= cellsPlayerDataSpaceships.count - 1 {
                     buttonRight.isUserInteractionEnabled = false
                     buttonRight.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
                 }
+                
+                this.compareShips()
             }
         }
         
@@ -284,12 +315,20 @@ class HangarScene: GameScene {
             buttonRight.run(SKAction.fadeAlpha(to: 1, duration: 0.25))
             
             if this.cellIndexMothershipSlots > 0 {
+                
+                let cell = this.scrollNodeMothershipSlots.cells[this.cellIndexMothershipSlots]
+                if let spaceshipHangarCell = cell as? SpaceshipHangarCell {
+                    spaceshipHangarCell.clearLabelColors()
+                }
+                
                 this.cellIndexMothershipSlots = this.cellIndexMothershipSlots - 1
                 scrollNode.back()
                 if this.cellIndexMothershipSlots <= 0 {
                     buttonLeft.isUserInteractionEnabled = false
                     buttonLeft.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
                 }
+                
+                this.compareShips()
             }
         }
         
@@ -303,12 +342,20 @@ class HangarScene: GameScene {
             buttonLeft.run(SKAction.fadeAlpha(to: 1, duration: 0.25))
             
             if this.cellIndexMothershipSlots < cellsMothershipSlots.count - 1 {
+                
+                let cell = this.scrollNodeMothershipSlots.cells[this.cellIndexMothershipSlots]
+                if let spaceshipHangarCell = cell as? SpaceshipHangarCell {
+                    spaceshipHangarCell.clearLabelColors()
+                }
+                
                 this.cellIndexMothershipSlots = this.cellIndexMothershipSlots + 1
                 scrollNode.forward()
                 if this.cellIndexMothershipSlots >= cellsMothershipSlots.count - 1 {
                     buttonRight.isUserInteractionEnabled = false
                     buttonRight.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
                 }
+                
+                this.compareShips()
             }
         }
         

@@ -141,9 +141,23 @@ class BattleScene: GameScene {
                     
                     self.lastBotUpdate = currentTime
                     
-                    let aliveBotSpaceships = self.botMothership.spaceships.filter({ $0.health > 0 })
+                    let aliveBotSpaceships = self.botMothership.spaceships.filter({
+                        
+                        if let destination = $0.destination {
+                            if destination == $0.startingPosition {
+                                return false
+                            }
+                        }
+                        
+                        if ($0.position - $0.startingPosition).lengthSquared() < 4 {
+                            return $0.health >= $0.maxHealth
+                        } else {
+                            return $0.health > 0
+                        }
+                    })
                     
                     if aliveBotSpaceships.count > 0 {
+                        
                         let botSpaceship = aliveBotSpaceships[Int.random(aliveBotSpaceships.count)]
                         
                         let aliveSpaceships = self.mothership.spaceships.filter({ (spaceship: Spaceship) -> Bool in

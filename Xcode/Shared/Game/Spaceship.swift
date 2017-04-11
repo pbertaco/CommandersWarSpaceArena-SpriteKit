@@ -423,6 +423,8 @@ class Spaceship: SKSpriteNode {
                 if self.position.distanceTo(destination) <= Spaceship.diameter/2 {
                     if self.destination == self.startingPosition {
                         self.resetToStartingPosition()
+                    } else {
+                        self.updateBitMasks()
                     }
                     self.destination = nil
                     self.fadeSetDestinationEffect()
@@ -623,11 +625,11 @@ class Spaceship: SKSpriteNode {
         if self == Spaceship.selectedSpaceship {
             
             self.targetNode = nil
-            self.updateBitMasks()
             
             if self.contains(point) {
                 if self.destination != nil {
                     self.destination = nil
+                    self.updateBitMasks()
                     self.fadeSetDestinationEffect()
                 }
                 

@@ -7,15 +7,13 @@
 //
 
 #if os(iOS)
+    import Fabric
+    import Crashlytics
     import GameAnalytics
 #endif
 
 import SpriteKit
 import GameKit
-
-import Fabric
-import Crashlytics
-import GameAnalytics
 
 class Metrics {
     
@@ -26,11 +24,13 @@ class Metrics {
         if Metrics.needToConfigure {
             if Metrics.canSendEvents() {
                 Metrics.needToConfigure = false
-                Fabric.with([Crashlytics.self, GameAnalytics.self])
-                
-                let bundleShortVersionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
-                GameAnalytics.configureBuild(bundleShortVersionString)
-                GameAnalytics.initializeWithConfiguredGameKeyAndGameSecret()
+                #if os(iOS)
+                    Fabric.with([Crashlytics.self, GameAnalytics.self])
+                    
+                    let bundleShortVersionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0.0"
+                    GameAnalytics.configureBuild(bundleShortVersionString)
+                    GameAnalytics.initializeWithConfiguredGameKeyAndGameSecret()
+                #endif
             }
         }
     }
@@ -70,7 +70,7 @@ class Metrics {
     static func canSendEvents() -> Bool {
         
         if let alias = MemoryCard.sharedInstance.playerData.name {
-            if ["", "PabloHenri91"].contains(alias) {
+            if ["", "PabloHenri91", "Carolkarlinski"].contains(alias) {
                 return false
             }
         } else {
