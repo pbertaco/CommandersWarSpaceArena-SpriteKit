@@ -80,10 +80,10 @@ class SpaceshipHangarCell: Control {
             
             let buttonUpgrade = Button(imageNamed: "button89x34", x: 19, y: 102)
             
-            buttonUpgrade.set(label: Label(text: "upgrade", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: -6))
-            buttonUpgrade.set(label: Label(text: xp > 0 ? "\(xp)" : "free", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: 6))
+            buttonUpgrade.set(label: Label(text: "upgrade", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.points, y: -6))
+            buttonUpgrade.set(label: Label(text: xp > 0 ? "\(xp)" : "free", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.points, y: 6))
             
-            buttonUpgrade.set(color: GameColors.controlBlue, blendMode: .add)
+            buttonUpgrade.set(color: GameColors.points, blendMode: .add)
             self.addChild(buttonUpgrade)
             
             buttonUpgrade.addHandler { [weak self, weak buttonUpgrade, weak spaceship] in
@@ -141,9 +141,9 @@ class SpaceshipHangarCell: Control {
         let points: Int32 = Int32(GameMath.xpForLevel(level: spaceship.level))
         
         let buttonSell = Button(imageNamed: "button89x34", x: 125, y: 102)
-        buttonSell.set(label: Label(text: "sell", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: -6))
-        buttonSell.set(label: Label(text: "+\(points.pointsString())", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.controlBlue, y: 6))
-        buttonSell.set(color: GameColors.controlBlue, blendMode: .add)
+        buttonSell.set(label: Label(text: "sell", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.points, y: -6))
+        buttonSell.set(label: Label(text: "+\(points.pointsString())", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.points, y: 6))
+        buttonSell.set(color: GameColors.points, blendMode: .add)
         self.addChild(buttonSell)
         buttonSell.addHandler { [weak self] in
             self?.sell(points: points)
@@ -201,7 +201,7 @@ class SpaceshipHangarCell: Control {
         
         let circuit = Control(imageNamed: "Circuit", x: 19, y: 8)
         circuit.setScaleToFit(size: CGSize(width: 89, height: 89))
-        circuit.set(color: GameColors.controlYellow, blendMode: .add)
+        circuit.set(color: GameColors.premiumPoints, blendMode: .add)
         self.addChild(circuit)
         
         self.labelLevel.text = self.spaceship?.level.description ?? "?"
@@ -217,10 +217,10 @@ class SpaceshipHangarCell: Control {
         self.control0 = buttonIgnore
         
         let buttonUnlock = Button(imageNamed: "button89x34", x: 125, y: 102)
-        buttonUnlock.set(color: GameColors.controlYellow)
+        buttonUnlock.set(color: GameColors.premiumPoints)
         let priceInPremiumPoints = GameMath.unlockSpaceshipPriceInPremiumPoints(rarity: spaceship.rarity)
-        buttonUnlock.set(label: Label(text: "unlock", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.controlYellow, y: -6))
-        buttonUnlock.set(label: Label(text: "\(priceInPremiumPoints)", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.controlYellow, y: 6))
+        buttonUnlock.set(label: Label(text: "unlock", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.premiumPoints, y: -6))
+        buttonUnlock.set(label: Label(text: "\(priceInPremiumPoints)", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.premiumPoints, y: 6))
         self.addChild(buttonUnlock)
         self.control1 = buttonUnlock
         

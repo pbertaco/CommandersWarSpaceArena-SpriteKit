@@ -38,17 +38,17 @@ class BoxBattleResult: Box {
         
         var totalBattlePoints: Int32 = 0
         for spaceship in mothership.spaceships {
-            totalBattlePoints = totalBattlePoints + spaceship.battlePoints
+            totalBattlePoints = totalBattlePoints + Int32(spaceship.battlePoints)
         }
         
         playerData.points = playerData.points + totalBattlePoints
         
         let coins = Control(imageNamed: "Coins", x: 45, y: 73)
         coins.setScaleToFit(size: CGSize(width: 55, height: 55))
-        coins.set(color: GameColors.controlBlue)
+        coins.set(color: GameColors.points)
         self.addChild(coins)
         
-        self.addChild(Label(text: "+\(totalBattlePoints.pointsString())", fontColor: GameColors.controlBlue, x: 144, y: 100))
+        self.addChild(Label(text: "+\(totalBattlePoints.pointsString())", fontColor: GameColors.points, x: 144, y: 100))
         
         var i = 0
         var totalKills = 0

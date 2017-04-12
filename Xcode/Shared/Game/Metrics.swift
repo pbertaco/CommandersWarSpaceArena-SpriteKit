@@ -35,6 +35,14 @@ class Metrics {
         }
     }
     
+    static func battleStart() {
+        if Metrics.canSendEvents() {
+            let playerData = MemoryCard.sharedInstance.playerData!
+            let botLevel = playerData.botLevel
+            GameAnalytics.addDesignEvent(withEventId: "BattleStart:\(Metrics.userName()):\(botLevel)")
+        }
+    }
+    
     static func openTheGame() {
         guard Metrics.canSendEvents() else { return }
         

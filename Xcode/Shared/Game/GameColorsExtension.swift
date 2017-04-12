@@ -29,6 +29,9 @@ extension GameColors {
     static let linkedIn = #colorLiteral(red: 0, green: 0.4666666667, blue: 0.7098039216, alpha: 1)
     static let twitter = #colorLiteral(red: 0.3333333333, green: 0.6745098039, blue: 0.9333333333, alpha: 1)
     
+    static let points = #colorLiteral(red: 0.9058823529, green: 0.662745098, blue: 0.2470588235, alpha: 1)
+    static let premiumPoints = #colorLiteral(red: 0, green: 0.6078431373, blue: 0.8862745098, alpha: 1)
+    
     static let fontGreen = #colorLiteral(red: 0.5019607843, green: 1, blue: 0.5019607843, alpha: 1)
     static let fontRed = #colorLiteral(red: 1, green: 0.5019607843, blue: 0.5019607843, alpha: 1)
 }

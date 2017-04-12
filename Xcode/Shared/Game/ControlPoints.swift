@@ -30,15 +30,15 @@ class ControlPoints: Control {
         
         super.init(imageNamed: "box144x55", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
         
-        self.set(color: GameColors.controlBlue)
+        self.set(color: GameColors.points)
         
-        self.labelPoints = Label(text: "?", fontColor: GameColors.controlBlue, x: 97, y: 27)
+        self.labelPoints = Label(text: "?", fontColor: GameColors.points, x: 97, y: 27)
         self.addChild(labelPoints)
         
         let icon = Control(imageNamed: "Coins", x: 0, y: 0)
         icon.size = CGSize(width: 55, height: 55)
         
-        icon.set(color: GameColors.controlBlue)
+        icon.set(color: GameColors.points)
         self.addChild(icon)
         
         ControlPoints.lastInstance = self
