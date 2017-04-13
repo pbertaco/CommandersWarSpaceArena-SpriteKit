@@ -14,7 +14,7 @@ class MothershipSlot: Control {
     
     init(x: CGFloat, y: CGFloat, horizontalAlignment: horizontalAlignment = .left,
          verticalAlignment: verticalAlignment = .top) {
-        super.init(imageNamed: "box89x89", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
+        super.init(imageNamed: "box_89x89", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
         
         self.set(color: GameColors.common)
     }
@@ -49,16 +49,16 @@ class MothershipSlot: Control {
         
         switch spaceship.rarity {
         case .common:
-            self.color = GameColors.common
+            self.set(color: GameColors.common)
             break
         case .rare:
-            self.color = GameColors.rare
+            self.set(color: GameColors.rare)
             break
         case .epic:
-            self.color = GameColors.epic
+            self.set(color: GameColors.epic)
             break
         case .legendary:
-            self.color = GameColors.legendary
+            self.set(color: GameColors.legendary)
             break
         }
     }

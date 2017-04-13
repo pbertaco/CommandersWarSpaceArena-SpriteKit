@@ -18,11 +18,11 @@ class MissionCell: Control {
 
     
     init(missionIndex: Int, status: status, recommended: Bool, buttonPlayHandler block: @escaping () -> Void) {
-        super.init(imageNamed: "box233x144", x: 0, y: 0)
+        super.init(imageNamed: "box_233x144", x: 0, y: 0)
         
         let mission = Mission.types[missionIndex]
         
-        let control = Control(imageNamed: "box89x89", x: 19, y: 8)
+        let control = Control(imageNamed: "box_89x89", x: 19, y: 8)
         self.addChild(control)
         
         let sphere = Control(imageNamed: "Sphere", x: 0, y: 0)
@@ -55,7 +55,7 @@ class MissionCell: Control {
         
         if loadButtonStart {
             let buttonPlayColor = recommended ? GameColors.controlRed : GameColors.controlBlue
-            let buttonPlay = Button(imageNamed: "button89x34", x: 125, y: 102)
+            let buttonPlay = Button(imageNamed: "button_89x34", x: 125, y: 102)
             buttonPlay.setIcon(imageNamed: "Play")
             buttonPlay.set(color: buttonPlayColor, blendMode: .add)
             self.addChild(buttonPlay)

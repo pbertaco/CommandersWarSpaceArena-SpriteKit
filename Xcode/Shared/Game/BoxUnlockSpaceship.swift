@@ -16,7 +16,7 @@ class BoxUnlockSpaceship: Box {
     weak var buttonIgnore: Button?
     
     init(rarity: Spaceship.rarity) {
-        super.init(imageNamed: "box377x377")
+        super.init(imageNamed: "box_377x377")
         
         let spaceshipHangarCell = SpaceshipHangarCell(spaceship: Spaceship(level: 1, rarity: rarity))
         spaceshipHangarCell.sketchPosition = CGPoint(x: 72, y: 81)

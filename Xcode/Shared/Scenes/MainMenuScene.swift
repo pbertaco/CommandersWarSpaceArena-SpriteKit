@@ -51,7 +51,7 @@ class MainMenuScene: GameScene {
         mothershipSlots.load(slots: playerData.mothership?.slots)
         self.addChild(mothershipSlots)
         
-        let buttonPlay = Button(imageNamed: "button233x55", x: 71, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
+        let buttonPlay = Button(imageNamed: "button_233x55", x: 71, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonPlay.setIcon(imageNamed: "Play")
         buttonPlay.set(color: GameColors.controlRed, blendMode: .add)
         self.addChild(buttonPlay)
@@ -59,12 +59,12 @@ class MainMenuScene: GameScene {
             self?.nextState = .battle
         }
         
-        let buttonBuy = Button(imageNamed: "button55x55", x: 312, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
+        let buttonBuy = Button(imageNamed: "button_55x55", x: 312, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonBuy.setIcon(imageNamed: "Add Shopping Cart")
         buttonBuy.set(color: GameColors.controlYellow, blendMode: .add)
         self.addChild(buttonBuy)
         
-        let buttonShips = Button(imageNamed: "button55x55", x: 8, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
+        let buttonShips = Button(imageNamed: "button_55x55", x: 8, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonShips.setIcon(imageNamed: "Rocket")
         buttonShips.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonShips)
@@ -72,7 +72,7 @@ class MainMenuScene: GameScene {
             self?.nextState = .hangar
         }
         
-        let buttonSettings = Button(imageNamed: "button55x55", x: 312, y: 95, horizontalAlignment: .right, verticalAlignment: .top)
+        let buttonSettings = Button(imageNamed: "button_55x55", x: 312, y: 95, horizontalAlignment: .right, verticalAlignment: .top)
         buttonSettings.setIcon(imageNamed: "Settings")
         buttonSettings.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonSettings)
@@ -89,7 +89,7 @@ class MainMenuScene: GameScene {
             }
         }
         
-        let buttonGameCenter = Button(imageNamed: "button55x55", x: 312, y: 158, horizontalAlignment: .right, verticalAlignment: .top)
+        let buttonGameCenter = Button(imageNamed: "button_55x55", x: 312, y: 158, horizontalAlignment: .right, verticalAlignment: .top)
         buttonGameCenter.setIcon(imageNamed: "Game Center")
         buttonGameCenter.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonGameCenter)
@@ -99,7 +99,7 @@ class MainMenuScene: GameScene {
             }
         #endif
         
-        let buttonFacebook = Button(imageNamed: "button55x55", x: 312, y: 221, horizontalAlignment: .right, verticalAlignment: .top)
+        let buttonFacebook = Button(imageNamed: "button_55x55", x: 312, y: 221, horizontalAlignment: .right, verticalAlignment: .top)
         buttonFacebook.setIcon(imageNamed: "Facebook")
         buttonFacebook.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonFacebook)
@@ -113,11 +113,9 @@ class MainMenuScene: GameScene {
             }
         #endif
         
-        
-        
-        let control = Control(imageNamed: "box89x89", x: 375/2, y: -2, horizontalAlignment: .center)
-        control.anchorPoint.x = 0.5
-        control.size.width = GameScene.currentSize.width * 3
+        let x: Int = Int(GameScene.currentSize.width) + 4
+        let control = Control(imageNamed: "box_\(x)x89", x: 375/2, y: -2, horizontalAlignment: .center)
+        control.control?.anchorPoint.x = 0.5
         self.addChild(control)
         
         let controlPremiumPoints = ControlPremiumPoints(x: 8, y: 15)

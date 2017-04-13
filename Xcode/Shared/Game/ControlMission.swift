@@ -16,7 +16,7 @@ class ControlMission: Control {
          horizontalAlignment: horizontalAlignment = .left,
          verticalAlignment: verticalAlignment = .top) {
         
-        super.init(imageNamed: "box233x89", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
+        super.init(imageNamed: "box_233x89", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
         
         let playerData = MemoryCard.sharedInstance.playerData!
         
@@ -25,7 +25,7 @@ class ControlMission: Control {
         
         self.addChild(Label(text: "Sector \(sector + 1).\(mission + 1)", x: 151, y: 44))
         
-        self.buttonChooseMission = Button(imageNamed: "button55x55", x: 17, y: 17)
+        self.buttonChooseMission = Button(imageNamed: "button_55x55", x: 17, y: 17)
         self.buttonChooseMission.setIcon(imageNamed: "Waypoint Map")
         self.buttonChooseMission.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(self.buttonChooseMission)

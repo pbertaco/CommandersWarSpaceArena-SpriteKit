@@ -45,14 +45,14 @@ class CreditsScene: GameScene {
         
         Music.sharedInstance.playMusic(withType: .battle)
         
-        let box = Control(imageNamed: "box233x377", x: 71, y: 35, horizontalAlignment: .center, verticalAlignment: .center)
+        let box = Control(imageNamed: "box_233x377", x: 71, y: 35, horizontalAlignment: .center, verticalAlignment: .center)
         self.addChild(box)
         
         box.addChild(Label(text: "Code", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, x: 26, y: 51))
         
         box.addChild(Label(text: "Pablo Bertaco", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, x: 26, y: 82))
         
-        let buttonPabloMail = Button(imageNamed: "button55x55", x: 26, y: 110)
+        let buttonPabloMail = Button(imageNamed: "button_55x55", x: 26, y: 110)
         buttonPabloMail.setIcon(imageNamed: "Email")
         buttonPabloMail.set(color: GameColors.controlBlue, blendMode: .add)
         box.addChild(buttonPabloMail)
@@ -62,7 +62,7 @@ class CreditsScene: GameScene {
             #endif
         }
         
-        let buttonPabloFacebook = Button(imageNamed: "button55x55", x: 89, y: 110)
+        let buttonPabloFacebook = Button(imageNamed: "button_55x55", x: 89, y: 110)
         buttonPabloFacebook.setIcon(imageNamed: "Facebook")
         buttonPabloFacebook.set(color: GameColors.facebook, blendMode: .add)
         box.addChild(buttonPabloFacebook)
@@ -72,7 +72,7 @@ class CreditsScene: GameScene {
             #endif
         }
         
-        let buttonPabloLinkedIn = Button(imageNamed: "button55x55", x: 152, y: 110)
+        let buttonPabloLinkedIn = Button(imageNamed: "button_55x55", x: 152, y: 110)
         buttonPabloLinkedIn.setIcon(imageNamed: "LinkedIn")
         buttonPabloLinkedIn.set(color: GameColors.linkedIn, blendMode: .add)
         box.addChild(buttonPabloLinkedIn)
@@ -86,7 +86,7 @@ class CreditsScene: GameScene {
         
         box.addChild(Label(text: "Klamm", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, x: 26, y: 261))
         
-        let buttonKlammMail = Button(imageNamed: "button55x55", x: 26, y: 289)
+        let buttonKlammMail = Button(imageNamed: "button_55x55", x: 26, y: 289)
         buttonKlammMail.setIcon(imageNamed: "Email")
         buttonKlammMail.set(color: GameColors.controlBlue, blendMode: .add)
         box.addChild(buttonKlammMail)
@@ -96,7 +96,7 @@ class CreditsScene: GameScene {
             #endif
         }
         
-        let buttonKlammTwitter = Button(imageNamed: "button55x55", x: 89, y: 289)
+        let buttonKlammTwitter = Button(imageNamed: "button_55x55", x: 89, y: 289)
         buttonKlammTwitter.setIcon(imageNamed: "Twitter")
         buttonKlammTwitter.set(color: GameColors.twitter, blendMode: .add)
         box.addChild(buttonKlammTwitter)
@@ -106,7 +106,7 @@ class CreditsScene: GameScene {
             #endif
         }
         
-        let buttonKlammWebSite = Button(imageNamed: "button55x55", x: 152, y: 289)
+        let buttonKlammWebSite = Button(imageNamed: "button_55x55", x: 152, y: 289)
         buttonKlammWebSite.setIcon(imageNamed: "Web Design")
         buttonKlammWebSite.set(color: GameColors.controlBlue, blendMode: .add)
         box.addChild(buttonKlammWebSite)

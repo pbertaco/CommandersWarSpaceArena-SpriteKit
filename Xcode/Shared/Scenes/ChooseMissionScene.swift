@@ -36,7 +36,7 @@ class ChooseMissionScene: GameScene {
         self.addChild(stars)
         self.stars = stars
         
-        let buttonBack = Button(imageNamed: "button55x55", x: 8, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
+        let buttonBack = Button(imageNamed: "button_55x55", x: 8, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonBack.setIcon(imageNamed: "Back")
         buttonBack.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonBack)
@@ -67,9 +67,9 @@ class ChooseMissionScene: GameScene {
         
         self.addChild(scrollNode)
         
-        let control = Control(imageNamed: "box89x89", x: 375/2, y: -2, horizontalAlignment: .center)
-        control.anchorPoint.x = 0.5
-        control.size.width = GameScene.currentSize.width * 3
+        let x: Int = Int(GameScene.currentSize.width) + 4
+        let control = Control(imageNamed: "box_\(x)x89", x: 375/2, y: -2, horizontalAlignment: .center)
+        control.control?.anchorPoint.x = 0.5
         self.addChild(control)
         
         let controlPremiumPoints = ControlPremiumPoints(x: 8, y: 15)

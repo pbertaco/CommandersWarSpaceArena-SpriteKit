@@ -13,7 +13,7 @@ class BoxBattleResult: Box {
     weak var buttonOK: Button!
     
     init(mothership: Mothership, botMothership: Mothership) {
-        super.init(imageNamed: "box233x610", y: 12)
+        super.init(imageNamed: "box_233x610", y: 12)
         
         let playerData = MemoryCard.sharedInstance.playerData!
         
@@ -31,7 +31,7 @@ class BoxBattleResult: Box {
         
         self.addChild(Label(text: title, x: 117, y: 40))
         
-        self.buttonOK = Button(imageNamed: "button89x34", x: 72, y: 554)
+        self.buttonOK = Button(imageNamed: "button_89x34", x: 72, y: 554)
         self.buttonOK.set(label: Label(text: "OK"))
         self.buttonOK.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(self.buttonOK)
@@ -140,12 +140,12 @@ class BoxBattleResult: Box {
         
         self.addChild(Label(text: "\(totalKills)/\(totalDeaths)/\(totalAssists)", fontColor: GameColors.controlRed, x: 174, y: 160))
         
-        let controlHelp = Control(imageNamed: "box233x34", x: 0, y: 610)
+        let controlHelp = Control(imageNamed: "box_233x34", x: 0, y: 610)
         controlHelp.isHidden = true
         self.addChild(controlHelp)
         controlHelp.addChild(Label(text: "Kills/Deaths/Assists", x: controlHelp.size.width/2, y: controlHelp.size.height/2))
         
-        let buttonHelp = Button(imageNamed: "button34x34", x: 178, y: 554)
+        let buttonHelp = Button(imageNamed: "button_34x34", x: 178, y: 554)
         buttonHelp.setIcon(imageNamed: "Help")
         buttonHelp.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonHelp)

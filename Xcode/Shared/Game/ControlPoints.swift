@@ -28,7 +28,7 @@ class ControlPoints: Control {
          horizontalAlignment: horizontalAlignment = .left,
          verticalAlignment: verticalAlignment = .top) {
         
-        super.init(imageNamed: "box144x55", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
+        super.init(imageNamed: "box_144x55", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
         
         self.set(color: GameColors.points)
         

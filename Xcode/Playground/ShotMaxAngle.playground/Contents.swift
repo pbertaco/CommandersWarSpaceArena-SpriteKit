@@ -2,7 +2,7 @@
 
 import Cocoa
 
-let π = CGFloat(M_PI)
+let π = CGFloat(Double.pi)
 
 extension CGFloat {
     var toRadians: CGFloat { return self * π / 180.0 }

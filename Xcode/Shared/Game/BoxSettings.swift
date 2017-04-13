@@ -11,13 +11,13 @@ import SpriteKit
 class BoxSettings: Box {
 
     init() {
-        super.init(imageNamed: "box233x610")
+        super.init(imageNamed: "box_233x610")
         
         let playerData = MemoryCard.sharedInstance.playerData!
         
         self.addChild(Label(text: "Music", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, x: 43, y: 69 - 6))
         
-        let buttonMusic = Button(imageNamed: "button55x55", x: 43, y: 69)
+        let buttonMusic = Button(imageNamed: "button_55x55", x: 43, y: 69)
         buttonMusic.setIcon(imageNamed: playerData.music ? "Musical Notes 1" : "Musical Notes 0")
         buttonMusic.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonMusic)
@@ -30,7 +30,7 @@ class BoxSettings: Box {
         
         self.addChild(Label(text: "Sound Effects", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, x: 43, y: 190 - 6))
         
-        let buttonSound = Button(imageNamed: "button55x55", x: 43, y: 190)
+        let buttonSound = Button(imageNamed: "button_55x55", x: 43, y: 190)
         buttonSound.setIcon(imageNamed: playerData.sound ? "High Volume 1" : "High Volume 0")
         buttonSound.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonSound)
@@ -44,7 +44,7 @@ class BoxSettings: Box {
         
         self.addChild(Label(text: "Credits", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, x: 43, y: 312 - 6))
         
-        let buttonCredits = Button(imageNamed: "button55x55", x: 43, y: 312)
+        let buttonCredits = Button(imageNamed: "button_55x55", x: 43, y: 312)
         buttonCredits.setIcon(imageNamed: "About")
         buttonCredits.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonCredits)
@@ -55,7 +55,7 @@ class BoxSettings: Box {
         
         self.addChild(Label(text: "Reset Data", horizontalAlignmentMode: .left, verticalAlignmentMode: .baseline, x: 43, y: 434 - 6))
         
-        let buttonReset = Button(imageNamed: "button55x55", x: 43, y: 434)
+        let buttonReset = Button(imageNamed: "button_55x55", x: 43, y: 434)
         buttonReset.setIcon(imageNamed: "Waste")
         buttonReset.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonReset)
@@ -73,7 +73,7 @@ class BoxSettings: Box {
             boxSettings.removeFromParent()
         }
         
-        let buttonOK = Button(imageNamed: "button89x34", x: 72, y: 554)
+        let buttonOK = Button(imageNamed: "button_89x34", x: 72, y: 554)
         buttonOK.set(label: Label(text: "OK"))
         buttonOK.set(color: GameColors.controlBlue, blendMode: .add)
         addChild(buttonOK)

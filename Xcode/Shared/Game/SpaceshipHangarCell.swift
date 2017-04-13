@@ -22,7 +22,7 @@ class SpaceshipHangarCell: Control {
     weak var spaceship: Spaceship?
 
     init(spaceship: Spaceship) {
-        super.init(imageNamed: "box233x144", x: 0, y: 0)
+        super.init(imageNamed: "box_233x144", x: 0, y: 0)
         
         let mothershipSlot = MothershipSlot(x: 19, y: 8)
         mothershipSlot.load(spaceship: spaceship)
@@ -78,7 +78,7 @@ class SpaceshipHangarCell: Control {
         if spaceship.level < 10 {
             var xp: Int32 = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
             
-            let buttonUpgrade = Button(imageNamed: "button89x34", x: 19, y: 102)
+            let buttonUpgrade = Button(imageNamed: "button_89x34", x: 19, y: 102)
             
             buttonUpgrade.set(label: Label(text: "upgrade", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.points, y: -6))
             buttonUpgrade.set(label: Label(text: xp > 0 ? "\(xp)" : "free", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.points, y: 6))
@@ -119,7 +119,7 @@ class SpaceshipHangarCell: Control {
     func loadControlSlot(duration sec: TimeInterval = 0) {
         guard let mothershipSlotIndex = self.spaceship?.spaceshipData?.parentMothershipSlot?.index else { return }
     
-        let control = Control(imageNamed: "box89x34", x: 125, y: 102)
+        let control = Control(imageNamed: "box_89x34", x: 125, y: 102)
         control.addChild(Control(imageNamed: "slotIndex\(mothershipSlotIndex)", x: 2, y: 8))
         self.addChild(control)
         
@@ -140,7 +140,7 @@ class SpaceshipHangarCell: Control {
         
         let points: Int32 = Int32(GameMath.xpForLevel(level: spaceship.level))
         
-        let buttonSell = Button(imageNamed: "button89x34", x: 125, y: 102)
+        let buttonSell = Button(imageNamed: "button_89x34", x: 125, y: 102)
         buttonSell.set(label: Label(text: "sell", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.points, y: -6))
         buttonSell.set(label: Label(text: "+\(points.pointsString())", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.points, y: 6))
         buttonSell.set(color: GameColors.points, blendMode: .add)
@@ -160,17 +160,25 @@ class SpaceshipHangarCell: Control {
     func sell(points: Int32) {
         guard let spaceship = self.spaceship else { return }
         
-        let playerData = MemoryCard.sharedInstance.playerData!
-        
-        if let spaceshipData = spaceship.spaceshipData {
-            playerData.removeFromSpaceships(spaceshipData)
-            
-            playerData.points = playerData.points + points
-            ControlPoints.current()?.setLabelPointsText(points: playerData.points)
+        let box = BoxSellSpaceship(spaceship: spaceship)
+        if let scene = GameScene.current() {
+            scene.blackSpriteNode.isHidden = false
+            scene.blackSpriteNode.zPosition = HangarScene.zPosition.blackSpriteNode.rawValue
+            box.zPosition = HangarScene.zPosition.box.rawValue
+            scene.addChild(box)
         }
-        self.spaceship = nil
-        self.removeAllChildren()
-        self.isHidden = true
+        
+//        let playerData = MemoryCard.sharedInstance.playerData!
+//        
+//        if let spaceshipData = spaceship.spaceshipData {
+//            playerData.removeFromSpaceships(spaceshipData)
+//            
+//            playerData.points = playerData.points + points
+//            ControlPoints.current()?.setLabelPointsText(points: playerData.points)
+//        }
+//        self.spaceship = nil
+//        self.removeAllChildren()
+//        self.isHidden = true
     }
     
     private func lock() {
@@ -210,13 +218,13 @@ class SpaceshipHangarCell: Control {
         self.labelWeaponRange.text = "?"
         self.labelSpeedAtribute.text = "?"
         
-        let buttonIgnore = Button(imageNamed: "button89x34", x: 19, y: 102)
+        let buttonIgnore = Button(imageNamed: "button_89x34", x: 19, y: 102)
         buttonIgnore.set(color: GameColors.controlBlue)
         buttonIgnore.set(label: Label(text: "Ignore", fontSize: .fontSize8, fontColor: GameColors.controlBlue))
         self.addChild(buttonIgnore)
         self.control0 = buttonIgnore
         
-        let buttonUnlock = Button(imageNamed: "button89x34", x: 125, y: 102)
+        let buttonUnlock = Button(imageNamed: "button_89x34", x: 125, y: 102)
         buttonUnlock.set(color: GameColors.premiumPoints)
         let priceInPremiumPoints = GameMath.unlockSpaceshipPriceInPremiumPoints(rarity: spaceship.rarity)
         buttonUnlock.set(label: Label(text: "unlock", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.premiumPoints, y: -6))

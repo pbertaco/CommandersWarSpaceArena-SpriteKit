@@ -10,6 +10,11 @@ import SpriteKit
 
 class HangarScene: GameScene {
     
+    enum zPosition: CGFloat {
+        case blackSpriteNode = 100000
+        case box = 1000000
+    }
+    
     enum state: String {
         case hangar
         case mainMenu
@@ -41,7 +46,7 @@ class HangarScene: GameScene {
         self.addChild(stars)
         self.stars = stars
         
-        let buttonBack = Button(imageNamed: "button55x55", x: 8, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
+        let buttonBack = Button(imageNamed: "button_55x55", x: 8, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
         buttonBack.setIcon(imageNamed: "Back")
         buttonBack.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonBack)
@@ -55,9 +60,9 @@ class HangarScene: GameScene {
         
         self.loadButtonChange()
         
-        let control = Control(imageNamed: "box89x89", x: 375/2, y: -2, horizontalAlignment: .center)
-        control.anchorPoint.x = 0.5
-        control.size.width = GameScene.currentSize.width * 3
+        let x: Int = Int(GameScene.currentSize.width) + 4
+        let control = Control(imageNamed: "box_\(x)x89", x: 375/2, y: -2, horizontalAlignment: .center)
+        control.control?.anchorPoint.x = 0.5
         self.addChild(control)
         
         let controlPremiumPoints = ControlPremiumPoints(x: 8, y: 15)
@@ -108,7 +113,7 @@ class HangarScene: GameScene {
         
         let playerData = MemoryCard.sharedInstance.playerData!
         
-        let buttonChange = Button(imageNamed: "button233x55", x: 71, y: 306, horizontalAlignment: .center, verticalAlignment: .center)
+        let buttonChange = Button(imageNamed: "button_233x55", x: 71, y: 306, horizontalAlignment: .center, verticalAlignment: .center)
         buttonChange.setIcon(imageNamed: "Data in Both Directions")
         buttonChange.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonChange)
@@ -200,12 +205,12 @@ class HangarScene: GameScene {
         scrollNode.isUserInteractionEnabled = false
         self.addChild(scrollNode)
         
-        let buttonLeft = Button(imageNamed: "button55x55", x: 8, y: 414, horizontalAlignment: .center, verticalAlignment: .center)
+        let buttonLeft = Button(imageNamed: "button_55x55", x: 8, y: 414, horizontalAlignment: .center, verticalAlignment: .center)
         buttonLeft.setIcon(imageNamed: "Back")
         buttonLeft.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonLeft)
         
-        let buttonRight = Button(imageNamed: "button55x55", x: 312, y: 414, horizontalAlignment: .center, verticalAlignment: .center)
+        let buttonRight = Button(imageNamed: "button_55x55", x: 312, y: 414, horizontalAlignment: .center, verticalAlignment: .center)
         buttonRight.setIcon(imageNamed: "Forward")
         buttonRight.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonRight)
@@ -295,12 +300,12 @@ class HangarScene: GameScene {
         scrollNode.isUserInteractionEnabled = false
         self.addChild(scrollNode)
         
-        let buttonLeft = Button(imageNamed: "button55x55", x: 8, y: 199, horizontalAlignment: .center, verticalAlignment: .center)
+        let buttonLeft = Button(imageNamed: "button_55x55", x: 8, y: 199, horizontalAlignment: .center, verticalAlignment: .center)
         buttonLeft.setIcon(imageNamed: "Back")
         buttonLeft.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonLeft)
         
-        let buttonRight = Button(imageNamed: "button55x55", x: 312, y: 199, horizontalAlignment: .center, verticalAlignment: .center)
+        let buttonRight = Button(imageNamed: "button_55x55", x: 312, y: 199, horizontalAlignment: .center, verticalAlignment: .center)
         buttonRight.setIcon(imageNamed: "Forward")
         buttonRight.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonRight)

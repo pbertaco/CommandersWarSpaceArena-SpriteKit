@@ -21,11 +21,11 @@ class ControlPremiumPoints: Control {
          horizontalAlignment: horizontalAlignment = .left,
          verticalAlignment: verticalAlignment = .top) {
         
-        super.init(imageNamed: "box144x55", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
+        super.init(imageNamed: "box_144x55", x: x, y: y, horizontalAlignment: horizontalAlignment, verticalAlignment: verticalAlignment)
         
         self.set(color: GameColors.premiumPoints)
         
-        let buttonBuyMore = Button(imageNamed: "button55x55", x: 144, y: 0)
+        let buttonBuyMore = Button(imageNamed: "button_55x55", x: 144, y: 0)
         buttonBuyMore.setIcon(imageNamed: "Plus")
         buttonBuyMore.set(color: GameColors.premiumPoints, blendMode: .add)
         self.addChild(buttonBuyMore)
