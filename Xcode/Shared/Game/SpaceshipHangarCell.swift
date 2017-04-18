@@ -327,12 +327,6 @@ class SpaceshipHangarCell: Control {
         
         if let me = self.spaceship {
             
-            if me.level != spaceship.level {
-                me.level > spaceship.level ? self.labelLevel.set(color: GameColors.fontGreen) : self.labelLevel.set(color: GameColors.fontRed)
-            } else {
-                self.labelLevel.set(color: GameColors.fontWhite)
-            }
-            
             if me.baseDamage != spaceship.baseDamage {
                 me.baseDamage > spaceship.baseDamage ? self.labelDamage.set(color: GameColors.fontGreen) : self.labelDamage.set(color: GameColors.fontRed)
             } else {
