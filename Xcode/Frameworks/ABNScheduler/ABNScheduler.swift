@@ -50,7 +50,7 @@ class ABNScheduler {
     ///- returns: Notification's identifier if it was successfully scheduled, nil otherwise.
     /// To get an ABNotificaiton instance of this notification, use this identifier with 
     /// `ABNScheduler.notificationWithIdentifier(_:)`.
-    class func schedule(alertBody: String, fireDate: Date) -> String? {
+    @discardableResult class func schedule(alertBody: String, fireDate: Date) -> String? {
         let notification = ABNotification(alertBody: alertBody)
         if let identifier = notification.schedule(fireDate: fireDate) {
             return identifier
@@ -396,6 +396,7 @@ open class ABNotification : NSObject, NSCoding, Comparable {
             return nil
         } else {
             self.localNotification = UILocalNotification()
+            self.localNotification.applicationIconBadgeNumber = 1
             self.localNotification.alertBody = self.alertBody
             self.localNotification.alertAction = self.alertAction
             self.localNotification.fireDate = date.removeSeconds()

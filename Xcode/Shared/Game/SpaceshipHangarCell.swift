@@ -160,7 +160,7 @@ class SpaceshipHangarCell: Control {
     func sell(points: Int32) {
         guard let spaceship = self.spaceship else { return }
         
-        let box = BoxSellSpaceship(spaceship: spaceship)
+        let box = BoxSellSpaceship(spaceship: spaceship, points: points)
         if let scene = GameScene.current() {
             scene.blackSpriteNode.isHidden = false
             scene.blackSpriteNode.zPosition = HangarScene.zPosition.blackSpriteNode.rawValue
@@ -168,17 +168,19 @@ class SpaceshipHangarCell: Control {
             scene.addChild(box)
         }
         
-//        let playerData = MemoryCard.sharedInstance.playerData!
-//        
-//        if let spaceshipData = spaceship.spaceshipData {
-//            playerData.removeFromSpaceships(spaceshipData)
-//            
-//            playerData.points = playerData.points + points
-//            ControlPoints.current()?.setLabelPointsText(points: playerData.points)
-//        }
-//        self.spaceship = nil
-//        self.removeAllChildren()
-//        self.isHidden = true
+        box.buttonSell?.addHandler { [weak self] in
+            let playerData = MemoryCard.sharedInstance.playerData!
+            
+            if let spaceshipData = spaceship.spaceshipData {
+                playerData.removeFromSpaceships(spaceshipData)
+                
+                playerData.points = playerData.points + points
+                ControlPoints.current()?.setLabelPointsText(points: playerData.points)
+            }
+            self?.spaceship = nil
+            self?.removeAllChildren()
+            self?.isHidden = true
+        }
     }
     
     private func lock() {

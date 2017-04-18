@@ -9,7 +9,6 @@
 import UIKit
 
 import FBSDKCoreKit
-import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,18 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        ABNScheduler.cancelAllNotifications()
-        
-        if #available(iOS 10.0, *) {
-            let authorizationOptions: UNAuthorizationOptions = [.badge, .sound, .alert]
-            UNUserNotificationCenter.current().requestAuthorization(options: authorizationOptions) { (granted: Bool, error: Error?) in
-                
-            }
-        } else {
-            let userNotificationSettings = UIUserNotificationSettings(types: [.badge, .sound, .alert], categories: nil)
-            application.registerUserNotificationSettings(userNotificationSettings)
-        }
-        
         return true
     }
     
@@ -45,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         FBSDKAppEvents.activateApp()
         ABNScheduler.cancelAllNotifications()
+        application.applicationIconBadgeNumber = 0
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -56,6 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let alertBody = "Battle awaits in the Arena!".translation()
         ABNScheduler.schedule(alertBody: alertBody, fireDate: Date().nextDays(1))
         ABNScheduler.schedule(alertBody: alertBody, fireDate: Date().nextDays(7))
-        ABNScheduler.schedule(alertBody: alertBody, fireDate: Date().nextDays(30))
+        ABNScheduler.schedule(alertBody: alertBody, fireDate: Date().nextDays(28))
     }
 }

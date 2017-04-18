@@ -34,6 +34,8 @@ class MainMenuScene: GameScene {
     override func load() {
         super.load()
         
+        self.registerUserNotificationSettings()
+        
         Music.sharedInstance.playMusic(withType: .menu)
         
         let playerData = MemoryCard.sharedInstance.playerData!
