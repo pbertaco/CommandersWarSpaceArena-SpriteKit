@@ -35,7 +35,7 @@ class BoxSellSpaceship: Box {
         
         self.addChild(MultiLineLabel(text: "Are you sure you want to sell this \(rarityText) spaceship for \(points.pointsString()) coins?", maxWidth: 233, fontSize: .fontSize16, x: 72, y: 342))
         
-        let spaceshipHangarCell = SpaceshipHangarCell(spaceship: spaceship.createCopy())
+        let spaceshipHangarCell = SpaceshipHangarCell(spaceship: spaceship.createCopy(), sellCompletion: {})
         spaceshipHangarCell.control0?.removeFromParent()
         spaceshipHangarCell.control1?.removeFromParent()
         spaceshipHangarCell.sketchPosition = CGPoint(x: 72, y: 141)

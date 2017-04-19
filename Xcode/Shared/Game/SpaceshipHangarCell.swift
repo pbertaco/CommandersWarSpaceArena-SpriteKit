@@ -21,7 +21,7 @@ class SpaceshipHangarCell: Control {
     
     weak var spaceship: Spaceship?
 
-    init(spaceship: Spaceship) {
+    init(spaceship: Spaceship, sellCompletion block: @escaping () -> Void) {
         super.init(imageNamed: "box_233x144", x: 0, y: 0)
         
         let mothershipSlot = MothershipSlot(x: 19, y: 8)
@@ -59,7 +59,7 @@ class SpaceshipHangarCell: Control {
             if spaceshipData.parentMothershipSlot != nil {
                 self.loadControlSlot()
             } else {
-                self.loadButtonSell()
+                self.loadButtonSell(sellCompletion: block)
             }
         } else {
             self.lock()
@@ -95,7 +95,7 @@ class SpaceshipHangarCell: Control {
                         spaceship.level = spaceship.level + 1
                         spaceship.updateAttributes()
                         
-                        self?.loadButtonSell()
+                        self?.loadButtonSell(sellCompletion: {})
                         
                         xp = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
                         
@@ -131,7 +131,7 @@ class SpaceshipHangarCell: Control {
         self.control1 = control
     }
     
-    func loadButtonSell(duration sec: TimeInterval = 0) {
+    func loadButtonSell(duration sec: TimeInterval = 0, sellCompletion block: @escaping () -> Void) {
         guard let spaceship = self.spaceship else { return }
         
         if spaceship.spaceshipData?.parentMothershipSlot != nil {
@@ -146,7 +146,7 @@ class SpaceshipHangarCell: Control {
         buttonSell.set(color: GameColors.points, blendMode: .add)
         self.addChild(buttonSell)
         buttonSell.addHandler { [weak self] in
-            self?.sell(points: points)
+            self?.loadBoxSellSpaceship(points: points, completion: block)
         }
         
         self.control1?.isUserInteractionEnabled = false
@@ -157,7 +157,7 @@ class SpaceshipHangarCell: Control {
         self.control1 = buttonSell
     }
     
-    func sell(points: Int32) {
+    func loadBoxSellSpaceship(points: Int32, completion block: @escaping () -> Void) {
         guard let spaceship = self.spaceship else { return }
         
         let box = BoxSellSpaceship(spaceship: spaceship, points: points)
@@ -168,7 +168,7 @@ class SpaceshipHangarCell: Control {
             scene.addChild(box)
         }
         
-        box.buttonSell?.addHandler { [weak self] in
+        box.buttonSell?.addHandler {
             let playerData = MemoryCard.sharedInstance.playerData!
             
             if let spaceshipData = spaceship.spaceshipData {
@@ -177,9 +177,7 @@ class SpaceshipHangarCell: Control {
                 playerData.points = playerData.points + points
                 ControlPoints.current()?.setLabelPointsText(points: playerData.points)
             }
-            self?.spaceship = nil
-            self?.removeAllChildren()
-            self?.isHidden = true
+            block()
         }
     }
     
@@ -259,7 +257,7 @@ class SpaceshipHangarCell: Control {
             playerData.premiumPoints = playerData.premiumPoints - price
             self.forceUnlock(spaceship: spaceship)
             self.loadButtonUpgrade()
-            self.loadButtonSell()
+            self.loadButtonSell(sellCompletion: {})
         }
     }
     

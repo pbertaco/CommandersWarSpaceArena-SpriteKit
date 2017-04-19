@@ -31,6 +31,10 @@ class HangarScene: GameScene {
     
     weak var stars: Stars!
     
+    weak var buttonLeft: Button?
+    weak var buttonRight: Button?
+    weak var buttonChange: Button?
+    
     override func load() {
         super.load()
         
@@ -117,6 +121,7 @@ class HangarScene: GameScene {
         buttonChange.setIcon(imageNamed: "Data in Both Directions")
         buttonChange.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonChange)
+        self.buttonChange = buttonChange
         
         buttonChange.addHandler { [weak self, weak playerData] in
             guard let this = self else { return }
@@ -158,7 +163,9 @@ class HangarScene: GameScene {
                             playerData?.removeFromSpaceships(bSpaceshipData)
                             playerData?.addToSpaceships(aSpaceshipData)
                             
-                            a.loadButtonSell(duration: 0.25)
+                            a.loadButtonSell(duration: 0.25, sellCompletion: {
+                                self?.sellCompletion()
+                            })
                             b.loadControlSlot(duration: 0.25)
                         }
                     }
@@ -168,6 +175,36 @@ class HangarScene: GameScene {
         
         if scrollNodePlayerDataSpaceships.cells.count <= 0 {
             buttonChange.isHidden = true
+        } else {
+            self.compareShips()
+        }
+    }
+    
+    func sellCompletion() {
+        self.scrollNodePlayerDataSpaceships.remove(at: self.cellIndexPlayerDataSpaceships)
+        if self.cellIndexPlayerDataSpaceships >= self.scrollNodePlayerDataSpaceships.cells.count {
+            self.cellIndexPlayerDataSpaceships = self.scrollNodePlayerDataSpaceships.cells.count - 1
+            self.scrollNodePlayerDataSpaceships.back()
+        }
+        
+        if self.cellIndexPlayerDataSpaceships <= 0 {
+            self.buttonLeft?.isUserInteractionEnabled = false
+            self.buttonLeft?.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
+        }
+        
+        if self.cellIndexPlayerDataSpaceships >= self.scrollNodePlayerDataSpaceships.cells.count - 1 {
+            self.buttonRight?.isUserInteractionEnabled = false
+            self.buttonRight?.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
+        }
+        
+        if self.scrollNodePlayerDataSpaceships.cells.count <= 0 {
+            self.buttonChange?.isUserInteractionEnabled = false
+            self.buttonChange?.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
+            
+            let a = self.scrollNodeMothershipSlots.cells[self.cellIndexMothershipSlots]
+            if let a = a as? SpaceshipHangarCell {
+                a.clearLabelColors()
+            }
         } else {
             self.compareShips()
         }
@@ -197,7 +234,9 @@ class HangarScene: GameScene {
         }) {
             for spaceshipData in playerDataSpaceships {
                 let spaceship = Spaceship(spaceshipData: spaceshipData)
-                cellsPlayerDataSpaceships.append(SpaceshipHangarCell(spaceship: spaceship))
+                cellsPlayerDataSpaceships.append(SpaceshipHangarCell(spaceship: spaceship, sellCompletion: { [weak self] in
+                    self?.sellCompletion()
+                }))
             }
         }
         
@@ -209,11 +248,13 @@ class HangarScene: GameScene {
         buttonLeft.setIcon(imageNamed: "Back")
         buttonLeft.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonLeft)
+        self.buttonLeft = buttonLeft
         
         let buttonRight = Button(imageNamed: "button_55x55", x: 312, y: 414, horizontalAlignment: .center, verticalAlignment: .center)
         buttonRight.setIcon(imageNamed: "Forward")
         buttonRight.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonRight)
+        self.buttonRight = buttonRight
         
         buttonLeft.addHandler { [weak self, weak scrollNode, weak buttonLeft, weak buttonRight] in
             guard let this = self else { return }
@@ -251,7 +292,7 @@ class HangarScene: GameScene {
             buttonLeft.isUserInteractionEnabled = true
             buttonLeft.run(SKAction.fadeAlpha(to: 1, duration: 0.25))
             
-            if this.cellIndexPlayerDataSpaceships < cellsPlayerDataSpaceships.count - 1 {
+            if this.cellIndexPlayerDataSpaceships < scrollNode.cells.count - 1 {
                 
                 let cell = this.scrollNodePlayerDataSpaceships.cells[this.cellIndexPlayerDataSpaceships]
                 if let spaceshipHangarCell = cell as? SpaceshipHangarCell {
@@ -260,7 +301,7 @@ class HangarScene: GameScene {
                 
                 this.cellIndexPlayerDataSpaceships = this.cellIndexPlayerDataSpaceships + 1
                 scrollNode.forward()
-                if this.cellIndexPlayerDataSpaceships >= cellsPlayerDataSpaceships.count - 1 {
+                if this.cellIndexPlayerDataSpaceships >= scrollNode.cells.count - 1 {
                     buttonRight.isUserInteractionEnabled = false
                     buttonRight.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
                 }
@@ -291,7 +332,7 @@ class HangarScene: GameScene {
             for slot in mothershipSlots {
                 if let spaceshipData = slot.spaceship {
                     let spaceship = Spaceship(spaceshipData: spaceshipData)
-                    cellsMothershipSlots.append(SpaceshipHangarCell(spaceship: spaceship))
+                    cellsMothershipSlots.append(SpaceshipHangarCell(spaceship: spaceship, sellCompletion: {}))
                 }
             }
         }
@@ -346,7 +387,7 @@ class HangarScene: GameScene {
             buttonLeft.isUserInteractionEnabled = true
             buttonLeft.run(SKAction.fadeAlpha(to: 1, duration: 0.25))
             
-            if this.cellIndexMothershipSlots < cellsMothershipSlots.count - 1 {
+            if this.cellIndexMothershipSlots < scrollNode.cells.count - 1 {
                 
                 let cell = this.scrollNodeMothershipSlots.cells[this.cellIndexMothershipSlots]
                 if let spaceshipHangarCell = cell as? SpaceshipHangarCell {
@@ -355,7 +396,7 @@ class HangarScene: GameScene {
                 
                 this.cellIndexMothershipSlots = this.cellIndexMothershipSlots + 1
                 scrollNode.forward()
-                if this.cellIndexMothershipSlots >= cellsMothershipSlots.count - 1 {
+                if this.cellIndexMothershipSlots >= scrollNode.cells.count - 1 {
                     buttonRight.isUserInteractionEnabled = false
                     buttonRight.run(SKAction.fadeAlpha(to: 0, duration: 0.25))
                 }
