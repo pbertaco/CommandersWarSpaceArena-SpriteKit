@@ -36,8 +36,6 @@ class MainMenuScene: GameScene {
         
         self.registerUserNotificationSettings()
         
-        Music.sharedInstance.playMusic(withType: .menu)
-        
         let playerData = MemoryCard.sharedInstance.playerData!
         
         self.backgroundColor = GameColors.backgroundColor
@@ -134,9 +132,6 @@ class MainMenuScene: GameScene {
         controlMission.buttonChooseMission.addHandler { [weak self] in
             self?.nextState = .chooseMission
         }
-        
-        buttonGameCenter.isHidden = true
-        buttonFacebook.isHidden = true
         buttonBuy.isHidden = true
     }
     
@@ -171,6 +166,7 @@ class MainMenuScene: GameScene {
             case .mainMenu:
                 break
             case .battle:
+                Music.sharedInstance.stop()
                 self.view?.presentScene(BattleScene(), transition: GameScene.defaultTransition)
                 break
             case .hangar:
@@ -183,4 +179,13 @@ class MainMenuScene: GameScene {
         }
     }
     
+    override func fpsCountUpdate(fps: Int) {
+        
+        if fps >= 30 {
+            if self.needMusic {
+                self.needMusic = false
+                Music.sharedInstance.playMusic(withType: .menu)
+            }
+        }
+    }
 }

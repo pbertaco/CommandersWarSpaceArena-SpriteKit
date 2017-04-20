@@ -49,6 +49,7 @@ class BoxSettings: Box {
         buttonCredits.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonCredits)
         buttonCredits.addHandler { [weak self] in
+            Music.sharedInstance.stop()
             self?.scene?.view?.presentScene(CreditsScene(), transition: GameScene.defaultTransition)
         }
         

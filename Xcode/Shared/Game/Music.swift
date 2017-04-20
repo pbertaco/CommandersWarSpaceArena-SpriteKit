@@ -69,7 +69,6 @@ class Music {
         
         do {
             let audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer.volume = 1.0
             audioPlayer.numberOfLoops = -1
             self.audioPlayer = audioPlayer
             self.play()
@@ -81,9 +80,7 @@ class Music {
     func play() {
         if MemoryCard.sharedInstance.playerData.music {
             if let audioPlayer = self.audioPlayer {
-                audioPlayer.pause()
-                audioPlayer.prepareToPlay()
-                audioPlayer.play(atTime: audioPlayer.deviceCurrentTime + 1)
+                audioPlayer.play()
             }
         } else {
             self.pause()
@@ -95,6 +92,7 @@ class Music {
     }
     
     func stop() {
+        self.audioPlayer?.volume = 0
         self.audioPlayer?.stop()
     }
 }

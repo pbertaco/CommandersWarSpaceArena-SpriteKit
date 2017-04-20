@@ -12,6 +12,8 @@ class BoxBattleResult: Box {
     
     weak var buttonOK: Button!
     
+    var score = 0
+    
     init(mothership: Mothership, botMothership: Mothership) {
         super.init(imageNamed: "box_233x610", y: 12)
         
@@ -42,6 +44,7 @@ class BoxBattleResult: Box {
         }
         
         playerData.points = playerData.points + totalBattlePoints
+        self.score = Int(totalBattlePoints)
         
         let coins = Control(imageNamed: "Coins", x: 45, y: 73)
         coins.setScaleToFit(size: CGSize(width: 55, height: 55))

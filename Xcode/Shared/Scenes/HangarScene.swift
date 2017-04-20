@@ -38,8 +38,6 @@ class HangarScene: GameScene {
     override func load() {
         super.load()
         
-        Music.sharedInstance.playMusic(withType: .menu)
-        
         let playerData = MemoryCard.sharedInstance.playerData!
         
         self.backgroundColor = GameColors.backgroundColor
@@ -109,6 +107,16 @@ class HangarScene: GameScene {
             case .mainMenu:
                 self.view?.presentScene(MainMenuScene(), transition: GameScene.defaultTransition)
                 break
+            }
+        }
+    }
+    
+    override func fpsCountUpdate(fps: Int) {
+        
+        if fps >= 30 {
+            if self.needMusic {
+                self.needMusic = false
+                Music.sharedInstance.playMusic(withType: .menu)
             }
         }
     }

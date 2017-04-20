@@ -10,9 +10,6 @@ import SpriteKit
 
 class CreditsScene: GameScene {
     
-    var lastSpaceship: TimeInterval = 0
-    var fps = 0
-    
     var spaceships = [Spaceship]()
     weak var gameWorld: GameWorld!
     
@@ -42,8 +39,6 @@ class CreditsScene: GameScene {
         
         self.gameWorld = gameWorld
         self.gameCamera = gameCamera
-        
-        Music.sharedInstance.playMusic(withType: .battle)
         
         let box = Control(imageNamed: "box_233x377", x: 71, y: 35, horizontalAlignment: .center, verticalAlignment: .center)
         self.addChild(box)
@@ -137,8 +132,6 @@ class CreditsScene: GameScene {
     override func update(_ currentTime: TimeInterval) {
         super.update(currentTime)
         
-        self.fps = self.fps + 1
-        
         for spaceship in self.spaceships {
             spaceship.update(enemyMothership: nil, enemySpaceships: self.spaceships)
             if spaceship.health <= 0 {
@@ -146,53 +139,57 @@ class CreditsScene: GameScene {
                 spaceship.healthBar?.destroy()
             }
         }
+    }
+    
+    override func fpsCountUpdate(fps: Int) {
         
-        if currentTime - self.lastSpaceship > 1 {
-            self.lastSpaceship = currentTime
+        if fps >= 30 {
+            if self.needMusic {
+                self.needMusic = false
+                Music.sharedInstance.playMusic(withType: .battle)
+            }
+        }
+        
+        self.spaceships = self.spaceships.filter({ $0.health > 0 })
+        
+        if self.spaceships.count < 3 && fps >= 60 {
+            let spaceship = Spaceship(level: 1 + Int.random(10), rarity: Spaceship.randomRarity() ?? .common, loadPhysics: true, team: .none)
+            spaceship.setBitMasksToSpaceship()
+            spaceship.physicsBody?.isDynamic = true
+            spaceship.position = CGPoint(
+                x: CGFloat.random(min: -GameScene.sketchSize.width/2, max: GameScene.sketchSize.width/2),
+                y: CGFloat.random(min: -GameScene.sketchSize.height/2, max: GameScene.sketchSize.height/2))
+            spaceship.destination = CGPoint(
+                x: CGFloat.random(min: -GameScene.sketchSize.width/2, max: GameScene.sketchSize.width/2),
+                y: CGFloat.random(min: -GameScene.sketchSize.height/2, max: GameScene.sketchSize.height/2))
+            spaceship.canRespawn = false
+            self.gameWorld.addChild(spaceship)
+            self.spaceships.append(spaceship)
             
-            self.spaceships = self.spaceships.filter({ $0.health > 0 })
+            spaceship.loadHealthBar(gameWorld: gameWorld)
+            spaceship.loadJetEffect(gameWorld: gameWorld)
             
-            if self.spaceships.count < 3 && self.fps >= 60 {
-                let spaceship = Spaceship(level: 1 + Int.random(10), rarity: Spaceship.randomRarity() ?? .common, loadPhysics: true, team: .none)
-                spaceship.setBitMasksToSpaceship()
-                spaceship.physicsBody?.isDynamic = true
-                spaceship.position = CGPoint(
-                    x: CGFloat.random(min: -GameScene.sketchSize.width/2, max: GameScene.sketchSize.width/2),
-                    y: CGFloat.random(min: -GameScene.sketchSize.height/2, max: GameScene.sketchSize.height/2))
+            spaceship.updateHealthBarPosition()
+            
+            let action = SKAction.fadeAlpha(to: 1, duration: 1)
+            spaceship.alpha = 0
+            spaceship.run(action)
+            spaceship.healthBar?.alpha = 0
+            spaceship.healthBar?.run(action)
+            spaceship.zRotation = CGFloat.random(min: -π, max: +π)
+        }
+        
+        if self.spaceships.count > 0 {
+            let spaceship = self.spaceships[Int.random(self.spaceships.count)]
+            let newTargetNode = self.spaceships[Int.random(self.spaceships.count)]
+            if newTargetNode != spaceship {
+                spaceship.destination = nil
+                spaceship.targetNode = newTargetNode
+            } else {
                 spaceship.destination = CGPoint(
                     x: CGFloat.random(min: -GameScene.sketchSize.width/2, max: GameScene.sketchSize.width/2),
                     y: CGFloat.random(min: -GameScene.sketchSize.height/2, max: GameScene.sketchSize.height/2))
-                spaceship.canRespawn = false
-                self.gameWorld.addChild(spaceship)
-                self.spaceships.append(spaceship)
-                
-                spaceship.loadHealthBar(gameWorld: gameWorld)
-                spaceship.loadJetEffect(gameWorld: gameWorld)
-                
-                spaceship.updateHealthBarPosition()
-                
-                let action = SKAction.fadeAlpha(to: 1, duration: 1)
-                spaceship.alpha = 0
-                spaceship.run(action)
-                spaceship.healthBar?.alpha = 0
-                spaceship.healthBar?.run(action)
-                spaceship.zRotation = CGFloat.random(min: -π, max: +π)
             }
-            
-            if self.spaceships.count > 0 {
-                let spaceship = self.spaceships[Int.random(self.spaceships.count)]
-                let newTargetNode = self.spaceships[Int.random(self.spaceships.count)]
-                if newTargetNode != spaceship {
-                    spaceship.destination = nil
-                    spaceship.targetNode = newTargetNode
-                } else {
-                    spaceship.destination = CGPoint(
-                        x: CGFloat.random(min: -GameScene.sketchSize.width/2, max: GameScene.sketchSize.width/2),
-                        y: CGFloat.random(min: -GameScene.sketchSize.height/2, max: GameScene.sketchSize.height/2))
-                }
-            }
-            
-            self.fps = 0
         }
     }
     
@@ -208,6 +205,7 @@ class CreditsScene: GameScene {
     
     override func touchUp(touch: UITouch) {
         super.touchUp(touch: touch)
+        Music.sharedInstance.stop()
         self.view?.presentScene(MainMenuScene(), transition: GameScene.defaultTransition)
     }
 }

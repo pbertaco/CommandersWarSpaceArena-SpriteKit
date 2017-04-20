@@ -49,8 +49,6 @@ class BattleScene: GameScene {
     override func load() {
         super.load()
         
-        Music.sharedInstance.playMusic(withType: .battle)
-        
         let playerData = MemoryCard.sharedInstance.playerData!
         
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
@@ -238,6 +236,7 @@ class BattleScene: GameScene {
                 
             case .battle:
                 if self.battleBeginTime == 0 {
+                    Metrics.battleStart()
                     self.battleBeginTime = currentTime
                 }
                 break
@@ -292,14 +291,14 @@ class BattleScene: GameScene {
                     
                 } else {
                     if self.botMothership.health <= 0 {
-                        Metrics.win()
+                        Metrics.win(score: boxBattleResult.score)
                         if self.battleEndTime - self.battleBeginTime < 60 * 3 {
                             self.updateBotOnWin()
                         } else {
                             self.updateBotOnLose()
                         }
                     } else {
-                        Metrics.lose()
+                        Metrics.lose(score: boxBattleResult.score)
                         if self.battleEndTime - self.battleBeginTime < 60 * 3 {
                             self.updateBotOnLose()
                         } else {
@@ -311,8 +310,19 @@ class BattleScene: GameScene {
                 break
                 
             case .mainMenu:
+                Music.sharedInstance.stop()
                 self.view?.presentScene(MainMenuScene(), transition: GameScene.defaultTransition)
                 break
+            }
+        }
+    }
+    
+    override func fpsCountUpdate(fps: Int) {
+        
+        if fps >= 30 {
+            if self.needMusic {
+                self.needMusic = false
+                Music.sharedInstance.playMusic(withType: .battle)
             }
         }
     }

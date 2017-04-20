@@ -35,12 +35,26 @@ class Metrics {
         }
     }
     
+    static func loadBox(boxName: String) {
+        guard Metrics.canSendEvents() else { return }
+        
+        Answers.logContentView(withName: boxName, contentType: "box", contentId: nil)
+    }
+    
+    static func loadScene(sceneName: String) {
+        guard Metrics.canSendEvents() else { return }
+        
+        Answers.logContentView(withName: sceneName, contentType: "gameScene", contentId: nil)
+    }
+    
     static func battleStart() {
-        if Metrics.canSendEvents() {
-            let playerData = MemoryCard.sharedInstance.playerData!
-            let botLevel = playerData.botLevel
-            GameAnalytics.addDesignEvent(withEventId: "BattleStart:\(Metrics.userName()):\(botLevel)")
-        }
+        guard Metrics.canSendEvents() else { return }
+        
+        let playerData = MemoryCard.sharedInstance.playerData!
+        let botLevel = playerData.botLevel
+        
+        GameAnalytics.addDesignEvent(withEventId: "BattleStart:\(Metrics.userName()):\(botLevel)")
+        Answers.logLevelStart("\(botLevel)")
     }
     
     static func openTheGame() {
@@ -54,21 +68,26 @@ class Metrics {
         
         GameAnalytics.addDesignEvent(withEventId: "OpenTheGameAtHour:\(Metrics.userName()):\(hour)")
     }
-    
-    static func win() {
-        if Metrics.canSendEvents() {
-            let playerData = MemoryCard.sharedInstance.playerData!
-            let botLevel = playerData.botLevel
-            GameAnalytics.addDesignEvent(withEventId: "BattleWin:\(Metrics.userName()):\(botLevel)")
-        }
+    static func win(score: Int) {
+        guard Metrics.canSendEvents() else { return }
+        
+        let playerData = MemoryCard.sharedInstance.playerData!
+        let botLevel = playerData.botLevel
+        
+        GameAnalytics.addDesignEvent(withEventId: "BattleWin:\(Metrics.userName()):\(botLevel)")
+        
+        Answers.logLevelEnd("\(botLevel)", score: NSNumber(value: score), success: true)
     }
     
-    static func lose() {
-        if Metrics.canSendEvents() {
-            let playerData = MemoryCard.sharedInstance.playerData!
-            let botLevel = playerData.botLevel
-            GameAnalytics.addDesignEvent(withEventId: "BattleLose:\(Metrics.userName()):\(botLevel)")
-        }
+    static func lose(score: Int) {
+        guard Metrics.canSendEvents() else { return }
+        
+        let playerData = MemoryCard.sharedInstance.playerData!
+        let botLevel = playerData.botLevel
+        
+        GameAnalytics.addDesignEvent(withEventId: "BattleLose:\(Metrics.userName()):\(botLevel)")
+        
+        Answers.logLevelEnd("\(botLevel)", score: NSNumber(value: score), success: false)
     }
     
     static func userName() -> String {
@@ -94,7 +113,23 @@ class Metrics {
 }
 
 #if os(OSX)
+    class Answers {
+        
+        open class func logContentView(withName contentNameOrNil: String?, contentType contentTypeOrNil: String?, contentId contentIdOrNil: String?, customAttributes customAttributesOrNil: [String : Any]? = nil) {
+            
+        }
+        
+        open class func logLevelStart(_ levelNameOrNil: String?, customAttributes customAttributesOrNil: [String : Any]? = nil) {
+            
+        }
+        
+        open class func logLevelEnd(_ levelNameOrNil: String?, score scoreOrNil: NSNumber?, success levelCompletedSuccesfullyOrNil: NSNumber?, customAttributes customAttributesOrNil: [String : Any]? = nil) {
+            
+        }
+    }
+    
     class GameAnalytics {
+        
         open class func addDesignEvent(withEventId eventId: String!) {
             print(eventId)
         }
