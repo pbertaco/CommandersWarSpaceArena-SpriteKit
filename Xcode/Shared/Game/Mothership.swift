@@ -236,8 +236,9 @@ class Mothership: SKSpriteNode {
         }
         
         action = SKAction.run { [weak self] in
-            self?.isHidden = true
-            self?.healthBar?.isHidden = true
+            guard let `self` = self else { return }
+            self.isHidden = true
+            self.healthBar?.isHidden = true
         }
         
         actions.append(action)

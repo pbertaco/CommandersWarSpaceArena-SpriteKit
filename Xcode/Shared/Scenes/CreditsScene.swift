@@ -119,7 +119,8 @@ class CreditsScene: GameScene {
         self.addChild(Label(text: "Thanks for playing!", x: 187, y: 620, horizontalAlignment: .center, verticalAlignment: .center))
         
         self.afterDelay(60) { [weak self] in
-            self?.view?.presentScene(CreditsScene(), transition: GameScene.defaultTransition)
+            guard let `self` = self else { return }
+            self.view?.presentScene(CreditsScene(), transition: GameScene.defaultTransition)
         }
     }
     

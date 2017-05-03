@@ -87,6 +87,8 @@ class SpaceshipHangarCell: Control {
             self.addChild(buttonUpgrade)
             
             buttonUpgrade.addHandler { [weak self, weak buttonUpgrade, weak spaceship] in
+                guard let `self` = self else { return }
+                
                 if let spaceship = spaceship {
                     
                     if playerData.points >= xp {
@@ -95,18 +97,19 @@ class SpaceshipHangarCell: Control {
                         spaceship.level = spaceship.level + 1
                         spaceship.updateAttributes()
                         
-                        self?.loadButtonSell(sellCompletion: {})
+                        self.loadButtonSell(sellCompletion: {})
                         
                         xp = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
                         
                         buttonUpgrade?.text = "\(xp)"
                         
-                        self?.updateLabels(spaceship: spaceship)
+                        self.updateLabels(spaceship: spaceship)
                         
                         ControlPoints.current()?.setLabelPointsText(points: playerData.points)
                         
                         if spaceship.level >= 10 {
                             buttonUpgrade?.removeFromParent()
+                            GameViewController.sharedInstance()?.save(achievementIdentifier: "masterEngineer")
                         }
                     }
                 }
@@ -146,7 +149,8 @@ class SpaceshipHangarCell: Control {
         buttonSell.set(color: GameColors.points, blendMode: .add)
         self.addChild(buttonSell)
         buttonSell.addHandler { [weak self] in
-            self?.loadBoxSellSpaceship(points: points, completion: block)
+            guard let `self` = self else { return }
+            self.loadBoxSellSpaceship(points: points, completion: block)
         }
         
         self.control1?.isUserInteractionEnabled = false
@@ -233,11 +237,11 @@ class SpaceshipHangarCell: Control {
         self.control1 = buttonUnlock
         
         buttonUnlock.addHandler { [weak self, weak rocket, weak circuit] in
-            guard let this = self else { return }
-            this.unlockWithPremiumPoints()
-            self?.spaceship?.isHidden = false
-            self?.control0?.isHidden = true
-            self?.control1?.isHidden = true
+            guard let `self` = self else { return }
+            self.unlockWithPremiumPoints()
+            self.spaceship?.isHidden = false
+            self.control0?.isHidden = true
+            self.control1?.isHidden = true
             rocket?.removeFromParent()
             circuit?.removeFromParent()
         }
@@ -301,6 +305,16 @@ class SpaceshipHangarCell: Control {
         playerData.addToSpaceships(spaceshipData)
         
         self.updateLabels(spaceship: spaceship)
+        
+        if let spaceships = playerData.spaceships {
+            if spaceships.count >= 16 {
+                GameViewController.sharedInstance()?.save(achievementIdentifier: "collectorsEdition")
+            }
+        }
+        
+        if spaceship.rarity == .legendary {
+            GameViewController.sharedInstance()?.save(achievementIdentifier: "nowWeReTalking")
+        }
     }
     
     func updateLabels(spaceship: Spaceship) {

@@ -23,8 +23,9 @@ class BoxResetData: Box {
         buttonNo.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonNo)
         buttonNo.addHandler { [weak self] in
+            guard let `self` = self else { return }
             GameScene.current()?.blackSpriteNode.isHidden = true
-            self?.removeFromParent()
+            self.removeFromParent()
         }
         
         let buttonYes = Button(imageNamed: "button_89x34", x: 269, y: 279)
@@ -32,10 +33,11 @@ class BoxResetData: Box {
         buttonYes.set(color: GameColors.controlRed, blendMode: .add)
         self.addChild(buttonYes)
         buttonYes.addHandler { [weak self] in
+            guard let `self` = self else { return }
             SoundEffect(effectType: .explosion).play()
             MemoryCard.sharedInstance.reset()
             Music.sharedInstance = Music()
-            self?.scene?.view?.presentScene(LoadScene(), transition: GameScene.defaultTransition)
+            self.scene?.view?.presentScene(LoadScene(), transition: GameScene.defaultTransition)
         }
     }
     

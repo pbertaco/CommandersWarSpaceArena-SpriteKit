@@ -51,6 +51,7 @@ class LoadScene: GameScene {
                     }
                 }
             }
+            
         #endif
         
         self.backgroundColor = GameColors.backgroundColor
@@ -92,7 +93,8 @@ class LoadScene: GameScene {
         self.addChild(Label(text: "v\(bundleShortVersionString)(\(bundleVersion))", horizontalAlignmentMode: .right, verticalAlignmentMode: .baseline, fontName: .kenPixel, fontSize: .fontSize8, x: 370, y: 646, horizontalAlignment: .center, verticalAlignment: .center))
         
         self.afterDelay(60) { [weak self] in
-            self?.view?.presentScene(LoadScene(), transition: GameScene.defaultTransition)
+            guard let `self` = self else { return }
+            self.view?.presentScene(LoadScene(), transition: GameScene.defaultTransition)
         }
     }
     
@@ -181,7 +183,7 @@ class LoadScene: GameScene {
         Music.sharedInstance.stop()
         self.view?.presentScene(MainMenuScene(), transition: GameScene.defaultTransition)
         #if os(iOS)
-            (self.view?.window?.rootViewController as? GameViewController)?.authenticateLocalPlayer {
+            GameViewController.sharedInstance()?.authenticateLocalPlayer {
                 if let alias = GKLocalPlayer.localPlayer().alias {
                     MemoryCard.sharedInstance.playerData.name = alias
                     Metrics.configure()

@@ -48,11 +48,12 @@ class ControlPremiumPoints: Control {
             }
             
             gameAdManager.onVideoAdAttemptFinished = { [weak self] shown in
+                guard let `self` = self else { return }
                 guard let scene = GameScene.current() else { return }
                 
                 let playerData = MemoryCard.sharedInstance.playerData!
                 playerData.premiumPoints = playerData.premiumPoints + 3
-                self?.setLabelPremiumPointsText(premiumPoints: playerData.premiumPoints)
+                self.setLabelPremiumPointsText(premiumPoints: playerData.premiumPoints)
                 
                 let boxVideoAdAttemptFinished = BoxVideoAdAttemptFinished(bonusPremiumPoints: 3)
                 boxVideoAdAttemptFinished.zPosition = MainMenuScene.zPosition.box.rawValue

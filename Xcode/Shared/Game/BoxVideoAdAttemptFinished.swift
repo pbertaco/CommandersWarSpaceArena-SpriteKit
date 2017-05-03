@@ -20,8 +20,9 @@ class BoxVideoAdAttemptFinished: Box {
         buttonNo.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonNo)
         buttonNo.addHandler { [weak self] in
+            guard let `self` = self else { return }
             GameScene.current()?.blackSpriteNode.isHidden = true
-            self?.removeFromParent()
+            self.removeFromParent()
         }
     }
     

@@ -48,8 +48,9 @@ class BoxSellSpaceship: Box {
         buttonNo.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonNo)
         buttonNo.addHandler { [weak self] in
+            guard let `self` = self else { return }
             GameScene.current()?.blackSpriteNode.isHidden = true
-            self?.removeFromParent()
+            self.removeFromParent()
         }
         
         let buttonSell = Button(imageNamed: "button_89x34", x: 269, y: 507)
@@ -58,10 +59,11 @@ class BoxSellSpaceship: Box {
         buttonSell.set(color: GameColors.points, blendMode: .add)
         self.addChild(buttonSell)
         buttonSell.addHandler { [weak self] in
+            guard let `self` = self else { return }
             SoundEffect(effectType: .explosion).play()
             
             GameScene.current()?.blackSpriteNode.isHidden = true
-            self?.removeFromParent()
+            self.removeFromParent()
         }
         self.buttonSell = buttonSell
     }

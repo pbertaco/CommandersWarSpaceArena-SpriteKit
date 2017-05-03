@@ -121,31 +121,32 @@ class GameAdManager: UIResponder, VungleSDKDelegate {
     private func loadVideoAdColony() {
         
         AdColony.requestInterstitial(inZone: self.adColonyZoneID, options: nil, success: { [weak self] (adColonyInterstitial: AdColonyInterstitial) in
+            guard let `self` = self else { return }
             
-            guard let this = self else { return }
-            
-            adColonyInterstitial.setClose({ [weak this] in
-                this?.adColonyInterstitial = nil
+            adColonyInterstitial.setClose({ [weak self] in
+                guard let `self` = self else { return }
                 
-                this?.adColonyIsReady = false
-                this?.checkAdAvailability()
-                this?.loadVideoAdColony()
+                self.adColonyInterstitial = nil
+                
+                self.adColonyIsReady = false
+                self.checkAdAvailability()
+                self.loadVideoAdColony()
                 Music.sharedInstance.play()
-                this?.onVideoAdAttemptFinished?(true)
+                self.onVideoAdAttemptFinished?(true)
             })
             
-            adColonyInterstitial.setExpire({ [weak this] in
-                this?.adColonyInterstitial = nil
+            adColonyInterstitial.setExpire({
+                self.adColonyInterstitial = nil
                 
-                this?.adColonyIsReady = false
-                this?.checkAdAvailability()
-                this?.loadVideoAdColony()
+                self.adColonyIsReady = false
+                self.checkAdAvailability()
+                self.loadVideoAdColony()
             })
             
-            this.adColonyInterstitial = adColonyInterstitial
-            this.adColonyIsReady = true
-            this.eventHandlers.append(this.playVideoAdColony)
-            this.checkAdAvailability()
+            self.adColonyInterstitial = adColonyInterstitial
+            self.adColonyIsReady = true
+            self.eventHandlers.append(self.playVideoAdColony)
+            self.checkAdAvailability()
             
         }) { (adColonyAdRequestError: AdColonyAdRequestError) in
             print(adColonyAdRequestError.localizedDescription)

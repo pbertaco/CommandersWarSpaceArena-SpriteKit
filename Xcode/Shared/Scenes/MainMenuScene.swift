@@ -56,7 +56,9 @@ class MainMenuScene: GameScene {
         buttonPlay.set(color: GameColors.controlRed, blendMode: .add)
         self.addChild(buttonPlay)
         buttonPlay.addHandler { [weak self] in
-            self?.nextState = .battle
+            guard let `self` = self else { return }
+            self.nextState = .battle
+            GameViewController.sharedInstance()?.save(achievementIdentifier: "touchToStart")
         }
         
         let buttonBuy = Button(imageNamed: "button_55x55", x: 312, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
@@ -69,7 +71,8 @@ class MainMenuScene: GameScene {
         buttonShips.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonShips)
         buttonShips.addHandler { [weak self] in
-            self?.nextState = .hangar
+            guard let `self` = self else { return }
+            self.nextState = .hangar
         }
         
         let buttonSettings = Button(imageNamed: "button_55x55", x: 312, y: 95, horizontalAlignment: .right, verticalAlignment: .top)
@@ -77,15 +80,16 @@ class MainMenuScene: GameScene {
         buttonSettings.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonSettings)
         buttonSettings.addHandler { [weak self] in
+            guard let `self` = self else { return }
             let boxSettings = BoxSettings()
             boxSettings.zPosition = zPosition.box.rawValue
-            self?.blackSpriteNode.isHidden = false
-            self?.blackSpriteNode.zPosition = zPosition.blackSpriteNode.rawValue
-            self?.addChild(boxSettings)
-            self?.blackSpriteNode.removeAllHandlers()
-            self?.blackSpriteNode.addHandler { [weak boxSettings] in
+            self.blackSpriteNode.isHidden = false
+            self.blackSpriteNode.zPosition = zPosition.blackSpriteNode.rawValue
+            self.addChild(boxSettings)
+            self.blackSpriteNode.removeAllHandlers()
+            self.blackSpriteNode.addHandler { [weak boxSettings] in
                 boxSettings?.removeFromParent()
-                self?.blackSpriteNode.isHidden = true
+                self.blackSpriteNode.isHidden = true
             }
         }
         
@@ -94,8 +98,8 @@ class MainMenuScene: GameScene {
         buttonGameCenter.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonGameCenter)
         #if os(iOS)
-            buttonGameCenter.addHandler { [weak self] in
-                (self?.view?.window?.rootViewController as? GameViewController)?.presentGameCenterViewController()
+            buttonGameCenter.addHandler {
+                GameViewController.sharedInstance()?.presentGameCenterViewController()
             }
         #endif
         
@@ -130,7 +134,8 @@ class MainMenuScene: GameScene {
         self.addChild(controlMission)
         
         controlMission.buttonChooseMission.addHandler { [weak self] in
-            self?.nextState = .chooseMission
+            guard let `self` = self else { return }
+            self.nextState = .chooseMission
         }
         buttonBuy.isHidden = true
     }

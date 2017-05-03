@@ -260,30 +260,30 @@ class BattleScene: GameScene {
                 self.addChild(boxBattleResult)
                 
                 boxBattleResult.buttonOK.addHandler { [weak self, weak boxBattleResult] in
-                    guard let this = self else { return }
+                    guard let `self` = self else { return }
                     
-                    if this.mothership.health > 0 {
+                    if self.mothership.health > 0 {
                         if let rarity = Spaceship.randomRarity() {
                             boxBattleResult?.removeFromParent()
                             let boxUnlockSpaceship = BoxUnlockSpaceship(rarity: rarity)
                             boxUnlockSpaceship.zPosition = BattleScene.zPosition.boxUnlockSpaceship.rawValue
-                            this.addChild(boxUnlockSpaceship)
+                            self.addChild(boxUnlockSpaceship)
                             
                             boxUnlockSpaceship.buttonIgnore?.addHandler {
-                                this.nextState = .mainMenu
+                                self.nextState = .mainMenu
                             }
                             
                             boxUnlockSpaceship.buttonUnlock?.addHandler {
-                                this.afterDelay(3, runBlock: {
-                                    this.nextState = .mainMenu
+                                self.afterDelay(3, runBlock: {
+                                    self.nextState = .mainMenu
                                 })
                             }
                             
                         } else {
-                            this.nextState = .mainMenu
+                            self.nextState = .mainMenu
                         }
                     } else {
-                        this.nextState = .mainMenu
+                        self.nextState = .mainMenu
                     }
                 }
                 
@@ -292,14 +292,14 @@ class BattleScene: GameScene {
                 } else {
                     if self.botMothership.health <= 0 {
                         Metrics.win(score: boxBattleResult.score)
-                        if self.battleEndTime - self.battleBeginTime < 60 * 3 {
+                        if self.battleEndTime - self.battleBeginTime <= 60 * 3 {
                             self.updateBotOnWin()
                         } else {
                             self.updateBotOnLose()
                         }
                     } else {
                         Metrics.lose(score: boxBattleResult.score)
-                        if self.battleEndTime - self.battleBeginTime < 60 * 3 {
+                        if self.battleEndTime - self.battleBeginTime <= 60 * 3 {
                             self.updateBotOnLose()
                         } else {
                             self.updateBotOnLose()
@@ -527,6 +527,11 @@ class BattleScene: GameScene {
     
     func updateBotOnWin() {
         let playerData = MemoryCard.sharedInstance.playerData!
+        
+        if playerData.botLevel >= Int16(Mission.types.count) {
+            GameViewController.sharedInstance()?.save(achievementIdentifier: "masterOfTheGalaxy")
+        }
+        
         if playerData.botLevel < Int16(Mission.types.count - 1) {
             playerData.botLevel = playerData.botLevel + 1
         }

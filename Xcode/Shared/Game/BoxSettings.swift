@@ -49,8 +49,9 @@ class BoxSettings: Box {
         buttonCredits.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonCredits)
         buttonCredits.addHandler { [weak self] in
+            guard let `self` = self else { return }
             Music.sharedInstance.stop()
-            self?.scene?.view?.presentScene(CreditsScene(), transition: GameScene.defaultTransition)
+            self.scene?.view?.presentScene(CreditsScene(), transition: GameScene.defaultTransition)
         }
         
         
@@ -61,7 +62,7 @@ class BoxSettings: Box {
         buttonReset.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonReset)
         buttonReset.addHandler { [weak self] in
-            guard let boxSettings = self else { return }
+            guard let `self` = self else { return }
             let boxResetData = BoxResetData()
             GameScene.current()?.blackSpriteNode.removeAllHandlers()
             GameScene.current()?.blackSpriteNode.addHandler { [weak boxResetData] in
@@ -69,9 +70,9 @@ class BoxSettings: Box {
                 GameScene.current()?.blackSpriteNode.isHidden = true
             }
             
-            boxResetData.zPosition = boxSettings.zPosition
-            boxSettings.scene?.addChild(boxResetData)
-            boxSettings.removeFromParent()
+            boxResetData.zPosition = self.zPosition
+            self.scene?.addChild(boxResetData)
+            self.removeFromParent()
         }
         
         let buttonOK = Button(imageNamed: "button_89x34", x: 72, y: 554)
@@ -79,7 +80,8 @@ class BoxSettings: Box {
         buttonOK.set(color: GameColors.controlBlue, blendMode: .add)
         addChild(buttonOK)
         buttonOK.addHandler { [weak self] in
-            self?.removeFromParent()
+            guard let `self` = self else { return }
+            self.removeFromParent()
             GameScene.current()?.blackSpriteNode.isHidden = true
         }
     }

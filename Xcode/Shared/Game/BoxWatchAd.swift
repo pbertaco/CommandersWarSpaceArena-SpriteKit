@@ -20,8 +20,9 @@ class BoxWatchAd: Box {
         buttonNo.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonNo)
         buttonNo.addHandler { [weak self] in
+            guard let `self` = self else { return }
             GameScene.current()?.blackSpriteNode.isHidden = true
-            self?.removeFromParent()
+            self.removeFromParent()
         }
         
         let buttonYes = Button(imageNamed: "button_89x34", x: 216, y: 89)
@@ -29,8 +30,9 @@ class BoxWatchAd: Box {
         buttonYes.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonYes)
         buttonYes.addHandler { [weak self] in
+            guard let `self` = self else { return }
             GameAdManager.sharedInstance.play()
-            self?.removeFromParent()
+            self.removeFromParent()
         }
     }
     

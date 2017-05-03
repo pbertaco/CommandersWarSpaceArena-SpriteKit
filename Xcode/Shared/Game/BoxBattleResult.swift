@@ -17,6 +17,10 @@ class BoxBattleResult: Box {
     init(mothership: Mothership, botMothership: Mothership) {
         super.init(imageNamed: "box_233x610", y: 12)
         
+        // Achievements
+        var chickenMode = true
+        var win = false
+        
         let playerData = MemoryCard.sharedInstance.playerData!
         
         var title = ""
@@ -26,6 +30,7 @@ class BoxBattleResult: Box {
         } else {
             if botMothership.health <= 0 {
                 title = "Victory"
+                win = true
             } else {
                 title = "Defeat"
             }
@@ -40,11 +45,31 @@ class BoxBattleResult: Box {
         
         var totalBattlePoints: Int32 = 0
         for spaceship in mothership.spaceships {
+            if spaceship.rarity == .common {
+                chickenMode = false
+            }
             totalBattlePoints = totalBattlePoints + Int32(spaceship.battlePoints)
+        }
+        
+        for spaceship in botMothership.spaceships {
+            if spaceship.rarity != .common {
+                chickenMode = false
+            }
         }
         
         playerData.points = playerData.points + totalBattlePoints
         self.score = Int(totalBattlePoints)
+        
+        GameViewController.sharedInstance()?.save(scoreValue: Int(totalBattlePoints))
+        
+        if win && chickenMode {
+            GameViewController.sharedInstance()?.save(achievementIdentifier: "chickenMode")
+        }
+        
+        let veryLowHealth = Double(mothership.health)/Double(mothership.maxHealth) <= 0.05
+        if win && veryLowHealth {
+            GameViewController.sharedInstance()?.save(achievementIdentifier: "GGEasy")
+        }
         
         let coins = Control(imageNamed: "Coins", x: 45, y: 73)
         coins.setScaleToFit(size: CGSize(width: 55, height: 55))

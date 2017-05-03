@@ -39,7 +39,8 @@ class ChooseMissionScene: GameScene {
         buttonBack.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonBack)
         buttonBack.addHandler { [weak self] in
-            self?.nextState = .mainMenu
+            guard let `self` = self else { return }
+            self.nextState = .mainMenu
         }
         
         var missionCells = [MissionCell]()
@@ -57,7 +58,8 @@ class ChooseMissionScene: GameScene {
             }
             
             missionCells.append(MissionCell(missionIndex: i, status: status, recommended: Int16(i) == playerData.botLevel, buttonPlayHandler: { [weak self] in
-                self?.nextState = .battle
+                guard let `self` = self else { return }
+                self.nextState = .battle
             }))
         }
         
