@@ -60,16 +60,19 @@ class BoxBattleResult: Box {
         playerData.points = playerData.points + totalBattlePoints
         self.score = Int(totalBattlePoints)
         
-        GameViewController.sharedInstance()?.save(scoreValue: Int(totalBattlePoints))
-        
-        if win && chickenMode {
-            GameViewController.sharedInstance()?.save(achievementIdentifier: "chickenMode")
-        }
-        
-        let veryLowHealth = Double(mothership.health)/Double(mothership.maxHealth) <= 0.05
-        if win && veryLowHealth {
-            GameViewController.sharedInstance()?.save(achievementIdentifier: "GGEasy")
-        }
+        #if os(iOS)
+            GameViewController.sharedInstance()?.save(scoreValue: Int(totalBattlePoints))
+            
+            if win && chickenMode {
+                GameViewController.sharedInstance()?.save(achievementIdentifier: "chickenMode")
+            }
+            
+            let veryLowHealth = Double(mothership.health)/Double(mothership.maxHealth) <= 0.05
+            if win && veryLowHealth {
+                GameViewController.sharedInstance()?.save(achievementIdentifier: "GGEasy")
+                
+            }
+        #endif
         
         let coins = Control(imageNamed: "Coins", x: 45, y: 73)
         coins.setScaleToFit(size: CGSize(width: 55, height: 55))

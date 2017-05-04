@@ -20,8 +20,23 @@ class Spaceship: SKSpriteNode {
     var weaponRange: CGFloat = 461
     
     static var skins: [String] = [
-        "spaceshipA", "spaceshipB", "spaceshipC", "spaceshipD", "spaceshipE",
-        "spaceshipF", "spaceshipG", "spaceshipH"
+        "spaceship00",
+        "spaceship01",
+        "spaceship02",
+        "spaceship03",
+        "spaceship04",
+        "spaceship05",
+        "spaceship06",
+        "spaceship07",
+        "spaceship08",
+        "spaceship09",
+        "spaceship10",
+        "spaceship11",
+        "spaceship12",
+        "spaceship13",
+        "spaceship14",
+        "spaceship15",
+        "spaceship16"
     ]
     
     private(set) weak var spaceshipData: SpaceshipData?

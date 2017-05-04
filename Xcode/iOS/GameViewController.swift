@@ -10,6 +10,10 @@ import UIKit
 import SpriteKit
 
 class GameViewController: UIViewController {
+    
+    static func sharedInstance() -> GameViewController? {
+        return (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController as? GameViewController
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -529,7 +529,9 @@ class BattleScene: GameScene {
         let playerData = MemoryCard.sharedInstance.playerData!
         
         if playerData.botLevel >= Int16(Mission.types.count) {
-            GameViewController.sharedInstance()?.save(achievementIdentifier: "masterOfTheGalaxy")
+            #if os(iOS)
+                GameViewController.sharedInstance()?.save(achievementIdentifier: "masterOfTheGalaxy")
+            #endif
         }
         
         if playerData.botLevel < Int16(Mission.types.count - 1) {

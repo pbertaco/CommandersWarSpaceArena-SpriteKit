@@ -10,10 +10,6 @@ import GameKit
 
 extension GameViewController: GKGameCenterControllerDelegate {
     
-    static func sharedInstance() -> GameViewController? {
-        return (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController as? GameViewController
-    }
-    
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismiss(animated: true)
     }
@@ -67,14 +63,11 @@ extension GameViewController: GKGameCenterControllerDelegate {
     }
     
     func save(achievementIdentifier: String) {
-        
         if Metrics.canSendEvents() {
             if GKLocalPlayer.localPlayer().isAuthenticated {
-                
                 let achievement = GKAchievement(identifier: "com.PabloHenri91.GameVI.\(achievementIdentifier)")
                 achievement.showsCompletionBanner = true
                 achievement.percentComplete = 100
-                
                 GKAchievement.report([achievement], withCompletionHandler: { (error: Error?) in
                     if let error = error {
                         print(error.localizedDescription)

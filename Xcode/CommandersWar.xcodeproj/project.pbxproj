@@ -195,6 +195,12 @@
 		8487B0581E78F109007A4921 /* BoxResetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487B0571E78F109007A4921 /* BoxResetData.swift */; };
 		8487B0591E78F109007A4921 /* BoxResetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487B0571E78F109007A4921 /* BoxResetData.swift */; };
 		8487B05A1E78F109007A4921 /* BoxResetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8487B0571E78F109007A4921 /* BoxResetData.swift */; };
+		848B8F991EB979530002E557 /* BattleSceneOnline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B8F981EB979530002E557 /* BattleSceneOnline.swift */; };
+		848B8F9A1EB979530002E557 /* BattleSceneOnline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B8F981EB979530002E557 /* BattleSceneOnline.swift */; };
+		848B8F9B1EB979530002E557 /* BattleSceneOnline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B8F981EB979530002E557 /* BattleSceneOnline.swift */; };
+		848B8F9D1EB986D30002E557 /* BoxSearchingForOpponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B8F9C1EB986D30002E557 /* BoxSearchingForOpponent.swift */; };
+		848B8F9E1EB986D30002E557 /* BoxSearchingForOpponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B8F9C1EB986D30002E557 /* BoxSearchingForOpponent.swift */; };
+		848B8F9F1EB986D30002E557 /* BoxSearchingForOpponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848B8F9C1EB986D30002E557 /* BoxSearchingForOpponent.swift */; };
 		848BD36E1E7B799200E8F754 /* __vungle.db in Resources */ = {isa = PBXBuildFile; fileRef = 848BD3671E7B799200E8F754 /* __vungle.db */; };
 		848BD36F1E7B799200E8F754 /* vg_close.png in Resources */ = {isa = PBXBuildFile; fileRef = 848BD3681E7B799200E8F754 /* vg_close.png */; };
 		848BD3701E7B799200E8F754 /* vg_cta.png in Resources */ = {isa = PBXBuildFile; fileRef = 848BD3691E7B799200E8F754 /* vg_cta.png */; };
@@ -405,6 +411,8 @@
 		8487B0421E78CC9E007A4921 /* klamm_prisma.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = klamm_prisma.m4a; sourceTree = "<group>"; };
 		8487B04F1E78E15E007A4921 /* BoxSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxSettings.swift; sourceTree = "<group>"; };
 		8487B0571E78F109007A4921 /* BoxResetData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxResetData.swift; sourceTree = "<group>"; };
+		848B8F981EB979530002E557 /* BattleSceneOnline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleSceneOnline.swift; sourceTree = "<group>"; };
+		848B8F9C1EB986D30002E557 /* BoxSearchingForOpponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxSearchingForOpponent.swift; sourceTree = "<group>"; };
 		848BD3671E7B799200E8F754 /* __vungle.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = __vungle.db; sourceTree = "<group>"; };
 		848BD3681E7B799200E8F754 /* vg_close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_close.png; sourceTree = "<group>"; };
 		848BD3691E7B799200E8F754 /* vg_cta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vg_cta.png; sourceTree = "<group>"; };
@@ -593,6 +601,7 @@
 				84A211261E3FC364008EE6ED /* HangarScene.swift */,
 				842A85F81E25BB3F006B31F7 /* LoadScene.swift */,
 				840B12FE1E25E6C200707EE9 /* MainMenuScene.swift */,
+				848B8F981EB979530002E557 /* BattleSceneOnline.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -602,6 +611,7 @@
 			children = (
 				845436651E44FE7600E1E2A7 /* BoxBattleResult.swift */,
 				8487B0571E78F109007A4921 /* BoxResetData.swift */,
+				848B8F9C1EB986D30002E557 /* BoxSearchingForOpponent.swift */,
 				8437399F1E9F2ADF00C61B6F /* BoxSellSpaceship.swift */,
 				8487B04F1E78E15E007A4921 /* BoxSettings.swift */,
 				840BDF671E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift */,
@@ -1071,6 +1081,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84B4E33D1E53A2C9003E8674 /* MissionCell.swift in Sources */,
+				848B8F991EB979530002E557 /* BattleSceneOnline.swift in Sources */,
 				847182C01E25D5A60077D3EF /* SKAction+Extensions.swift in Sources */,
 				84798FA31E7083C100741DE5 /* SoundEffect.swift in Sources */,
 				845436661E44FE7600E1E2A7 /* BoxBattleResult.swift in Sources */,
@@ -1087,6 +1098,7 @@
 				84F9452A1E2EEEBA0034F530 /* ControlPoints.swift in Sources */,
 				840931511E26985500C61711 /* GameColorsExtension.swift in Sources */,
 				8468411A1E839B0A004CAF31 /* BoxWatchAd.swift in Sources */,
+				848B8F9D1EB986D30002E557 /* BoxSearchingForOpponent.swift in Sources */,
 				84AFAE1B1E2FC949006359DD /* BattleScene.swift in Sources */,
 				8409314D1E26930700C61711 /* MothershipSlot.swift in Sources */,
 				840080331E4BCD46005AF200 /* GameScene.swift in Sources */,
@@ -1159,6 +1171,7 @@
 				84D587061E426BD90041BAAD /* SpaceshipHangarCell.swift in Sources */,
 				8400803A1E4BCD46005AF200 /* MultiLineLabel.swift in Sources */,
 				849B4CB61E6F179300C14B8F /* Music.swift in Sources */,
+				848B8F9E1EB986D30002E557 /* BoxSearchingForOpponent.swift in Sources */,
 				84F9452B1E2EEEBA0034F530 /* ControlPoints.swift in Sources */,
 				84138E021E439A9500B845E4 /* ControlMission.swift in Sources */,
 				840080371E4BCD46005AF200 /* Label.swift in Sources */,
@@ -1181,6 +1194,7 @@
 				847182CD1E25D5A60077D3EF /* SKTAudio.swift in Sources */,
 				847182C41E25D5A60077D3EF /* SKAction+SpecialEffects.swift in Sources */,
 				84D03EE11E35A1E7007425E0 /* Mothership.swift in Sources */,
+				848B8F9A1EB979530002E557 /* BattleSceneOnline.swift in Sources */,
 				842A859D1E25B715006B31F7 /* GameViewController.swift in Sources */,
 				840080221E4BCD46005AF200 /* Box.swift in Sources */,
 				84798FA41E7083C100741DE5 /* SoundEffect.swift in Sources */,
@@ -1229,6 +1243,7 @@
 				84D587071E426BD90041BAAD /* SpaceshipHangarCell.swift in Sources */,
 				8400803B1E4BCD46005AF200 /* MultiLineLabel.swift in Sources */,
 				849B4CB71E6F179300C14B8F /* Music.swift in Sources */,
+				848B8F9F1EB986D30002E557 /* BoxSearchingForOpponent.swift in Sources */,
 				84F9452C1E2EEEBA0034F530 /* ControlPoints.swift in Sources */,
 				84138E031E439A9500B845E4 /* ControlMission.swift in Sources */,
 				840080381E4BCD46005AF200 /* Label.swift in Sources */,
@@ -1251,6 +1266,7 @@
 				847182CE1E25D5A60077D3EF /* SKTAudio.swift in Sources */,
 				847182C51E25D5A60077D3EF /* SKAction+SpecialEffects.swift in Sources */,
 				84D03EE21E35A1E7007425E0 /* Mothership.swift in Sources */,
+				848B8F9B1EB979530002E557 /* BattleSceneOnline.swift in Sources */,
 				842A85AB1E25B715006B31F7 /* GameViewController.swift in Sources */,
 				840080231E4BCD46005AF200 /* Box.swift in Sources */,
 				84798FA51E7083C100741DE5 /* SoundEffect.swift in Sources */,

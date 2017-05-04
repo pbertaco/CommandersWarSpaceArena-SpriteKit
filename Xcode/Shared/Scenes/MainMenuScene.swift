@@ -7,6 +7,8 @@
 //
 
 import SpriteKit
+import MultipeerConnectivity
+import AudioToolbox
 
 #if os(iOS)
     import FBSDKLoginKit
@@ -31,8 +33,62 @@ class MainMenuScene: GameScene {
     
     weak var stars: Stars!
     
+    //MultiplayerOnline
+    let serverManager = ServerManager.sharedInstance
+    var lastOnlineUpdate: Double = 0
+    var emitInterval: TimeInterval = 1/30
+    
+    var waitForPlayersTime: Double = 0
+    var waitForPlayersTimeOut: Double = 10
+    
+    var waitSyncGameDataTime: Double = 0
+    var waitSyncGameDataTimeOut: Double = 10
+    
     override func load() {
         super.load()
+        
+        let serverManager = ServerManager.sharedInstance
+        
+        serverManager.onAny { [weak self] (event: String, peerID: MCPeerID, items: Any) in
+            guard let `self` = self else { return }
+            switch event {
+            case "connected":
+                print("a player wants to play")
+                print("show match request")
+                break
+            default:
+                print("event: \(event), peerID: \(peerID), items: \(items)")
+                break
+            }
+        }
+        serverManager.startBrowsingForPeers()
+        
+        let buttonPlayOnline = Button(imageNamed: "button_55x55", x: 249, y: 95, horizontalAlignment: .right, verticalAlignment: .top)
+        buttonPlayOnline.setIcon(imageNamed: "Bluetooth")
+        buttonPlayOnline.set(color: GameColors.controlRed, blendMode: .add)
+        self.addChild(buttonPlayOnline)
+        buttonPlayOnline.addHandler { [weak self] in
+            guard let `self` = self else { return }
+            
+            let boxSearchingForOpponent = BoxSearchingForOpponent()
+            boxSearchingForOpponent.zPosition = zPosition.box.rawValue
+            self.blackSpriteNode.isHidden = false
+            self.blackSpriteNode.zPosition = zPosition.blackSpriteNode.rawValue
+            self.addChild(boxSearchingForOpponent)
+            
+            serverManager.onAny { (event: String, peerID: MCPeerID, items: Any) in
+                switch event {
+                case "connected":
+                    print("connected to server")
+                    print("wait for match comfirmation")
+                    break
+                default:
+                    print("event: \(event), peerID: \(peerID), items: \(items)")
+                    break
+                }
+            }
+            serverManager.startAdvertisingPeer()
+        }
         
         self.registerUserNotificationSettings()
         
@@ -58,7 +114,9 @@ class MainMenuScene: GameScene {
         buttonPlay.addHandler { [weak self] in
             guard let `self` = self else { return }
             self.nextState = .battle
-            GameViewController.sharedInstance()?.save(achievementIdentifier: "touchToStart")
+            #if os(iOS)
+                GameViewController.sharedInstance()?.save(achievementIdentifier: "touchToStart")
+            #endif
         }
         
         let buttonBuy = Button(imageNamed: "button_55x55", x: 312, y: 604, horizontalAlignment: .center, verticalAlignment: .bottom)
@@ -108,12 +166,16 @@ class MainMenuScene: GameScene {
         buttonFacebook.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonFacebook)
         #if os(iOS)
-            buttonFacebook.addHandler { [weak buttonFacebook] in
-                FacebookClient.sharedInstance.logInWith(successBlock: {
-                    buttonFacebook?.removeFromParent()
-                }, andFailureBlock: { (error: Error?) in
-                    print(error?.localizedDescription ?? "Something went very wrong.")
-                })
+            if FBSDKAccessToken.current() != nil {
+                buttonFacebook.removeFromParent()
+            } else {
+                buttonFacebook.addHandler { [weak buttonFacebook] in
+                    FacebookClient.sharedInstance.logInWith(successBlock: {
+                        buttonFacebook?.removeFromParent()
+                    }, andFailureBlock: { (error: Error?) in
+                        print(error?.localizedDescription ?? "Something went very wrong.")
+                    })
+                }
             }
         #endif
         

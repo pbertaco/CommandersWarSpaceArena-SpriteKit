@@ -109,7 +109,9 @@ class SpaceshipHangarCell: Control {
                         
                         if spaceship.level >= 10 {
                             buttonUpgrade?.removeFromParent()
-                            GameViewController.sharedInstance()?.save(achievementIdentifier: "masterEngineer")
+                            #if os(iOS)
+                                GameViewController.sharedInstance()?.save(achievementIdentifier: "masterEngineer")
+                            #endif
                         }
                     }
                 }
@@ -306,15 +308,17 @@ class SpaceshipHangarCell: Control {
         
         self.updateLabels(spaceship: spaceship)
         
-        if let spaceships = playerData.spaceships {
-            if spaceships.count >= 16 {
-                GameViewController.sharedInstance()?.save(achievementIdentifier: "collectorsEdition")
+        #if os(iOS)
+            if let spaceships = playerData.spaceships {
+                if spaceships.count >= 16 {
+                    GameViewController.sharedInstance()?.save(achievementIdentifier: "collectorsEdition")
+                }
             }
-        }
-        
-        if spaceship.rarity == .legendary {
-            GameViewController.sharedInstance()?.save(achievementIdentifier: "nowWeReTalking")
-        }
+            
+            if spaceship.rarity == .legendary {
+                GameViewController.sharedInstance()?.save(achievementIdentifier: "nowWeReTalking")
+            }
+        #endif
     }
     
     func updateLabels(spaceship: Spaceship) {
