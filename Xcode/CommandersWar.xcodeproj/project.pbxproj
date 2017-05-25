@@ -64,6 +64,9 @@
 		840B13071E25F64400707EE9 /* MothershipData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B13061E25F64400707EE9 /* MothershipData.swift */; };
 		840B13081E25F64400707EE9 /* MothershipData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B13061E25F64400707EE9 /* MothershipData.swift */; };
 		840B13091E25F64400707EE9 /* MothershipData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B13061E25F64400707EE9 /* MothershipData.swift */; };
+		840B4DB11ED4B42D00C6ECD1 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B4DB01ED4B42D00C6ECD1 /* Element.swift */; };
+		840B4DB21ED4B42D00C6ECD1 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B4DB01ED4B42D00C6ECD1 /* Element.swift */; };
+		840B4DB31ED4B42D00C6ECD1 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840B4DB01ED4B42D00C6ECD1 /* Element.swift */; };
 		840BDF681E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BDF671E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift */; };
 		840BDF691E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BDF671E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift */; };
 		840BDF6A1E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840BDF671E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift */; };
@@ -347,6 +350,7 @@
 		840B12FE1E25E6C200707EE9 /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		840B13021E25E7AE00707EE9 /* SpaceshipData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceshipData.swift; sourceTree = "<group>"; };
 		840B13061E25F64400707EE9 /* MothershipData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipData.swift; sourceTree = "<group>"; };
+		840B4DB01ED4B42D00C6ECD1 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
 		840BDF671E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxUnlockSpaceship.swift; sourceTree = "<group>"; };
 		840DB2831E54F72800247ACB /* Stars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stars.swift; sourceTree = "<group>"; };
 		84138E001E439A9500B845E4 /* ControlMission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlMission.swift; sourceTree = "<group>"; };
@@ -620,6 +624,7 @@
 				84138E001E439A9500B845E4 /* ControlMission.swift */,
 				84F945291E2EEEBA0034F530 /* ControlPoints.swift */,
 				84F945211E2EE6780034F530 /* ControlPremiumPoints.swift */,
+				840B4DB01ED4B42D00C6ECD1 /* Element.swift */,
 				846F28451E2925510040DB51 /* FacebookClient.swift */,
 				8479051B1E28584100872D70 /* GameCenter.swift */,
 				840931501E26985500C61711 /* GameColorsExtension.swift */,
@@ -1100,6 +1105,7 @@
 				8468411A1E839B0A004CAF31 /* BoxWatchAd.swift in Sources */,
 				848B8F9D1EB986D30002E557 /* BoxSearchingForOpponent.swift in Sources */,
 				84AFAE1B1E2FC949006359DD /* BattleScene.swift in Sources */,
+				840B4DB11ED4B42D00C6ECD1 /* Element.swift in Sources */,
 				8409314D1E26930700C61711 /* MothershipSlot.swift in Sources */,
 				840080331E4BCD46005AF200 /* GameScene.swift in Sources */,
 				840B13031E25E7AE00707EE9 /* SpaceshipData.swift in Sources */,
@@ -1210,6 +1216,7 @@
 				84240B6F1E26DD060090E681 /* GameMath.swift in Sources */,
 				840080281E4BCD46005AF200 /* Control.swift in Sources */,
 				84A211281E3FC364008EE6ED /* HangarScene.swift in Sources */,
+				840B4DB21ED4B42D00C6ECD1 /* Element.swift in Sources */,
 				842A859B1E25B715006B31F7 /* AppDelegate.swift in Sources */,
 				847182C71E25D5A60077D3EF /* SKColor+Extensions.swift in Sources */,
 				840B13081E25F64400707EE9 /* MothershipData.swift in Sources */,
@@ -1282,6 +1289,7 @@
 				84240B701E26DD060090E681 /* GameMath.swift in Sources */,
 				840080291E4BCD46005AF200 /* Control.swift in Sources */,
 				84A211291E3FC364008EE6ED /* HangarScene.swift in Sources */,
+				840B4DB31ED4B42D00C6ECD1 /* Element.swift in Sources */,
 				842A85A91E25B715006B31F7 /* AppDelegate.swift in Sources */,
 				847182C81E25D5A60077D3EF /* SKColor+Extensions.swift in Sources */,
 				840B13091E25F64400707EE9 /* MothershipData.swift in Sources */,

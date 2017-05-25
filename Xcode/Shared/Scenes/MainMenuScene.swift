@@ -47,6 +47,8 @@ class MainMenuScene: GameScene {
     override func load() {
         super.load()
         
+        MemoryCard.sharedInstance.saveGame()
+        
         let serverManager = ServerManager.sharedInstance
         
         serverManager.onAny { [weak self] (event: String, peerID: MCPeerID, items: Any) in

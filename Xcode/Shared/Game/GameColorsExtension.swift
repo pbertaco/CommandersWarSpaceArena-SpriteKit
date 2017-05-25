@@ -34,4 +34,15 @@ extension GameColors {
     
     static let fontGreen = #colorLiteral(red: 0.5019607843, green: 1, blue: 0.5019607843, alpha: 1)
     static let fontRed = #colorLiteral(red: 1, green: 0.5019607843, blue: 0.5019607843, alpha: 1)
+    
+    static let fire = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
+    static let ice = #colorLiteral(red: 0, green: 1, blue: 1, alpha: 1)
+    static let wind = #colorLiteral(red: 1, green: 1, blue: 0, alpha: 1)
+    static let earth = #colorLiteral(red: 0, green: 1, blue: 0, alpha: 1)
+    static let thunder = #colorLiteral(red: 1, green: 0, blue: 1, alpha: 1)
+    static let water = #colorLiteral(red: 0, green: 0, blue: 1, alpha: 1)
+    static let light = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    static let darkness = #colorLiteral(red: 0.4980392157, green: 0.4980392157, blue: 0.4980392157, alpha: 1)
+    
+    
 }

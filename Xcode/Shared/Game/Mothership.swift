@@ -189,14 +189,14 @@ class Mothership: SKSpriteNode {
         ))
     }
     
-    func explosionEffect() {
-        guard let targetNode = self.parent else { return }
+    func explosionAction() -> SKAction {
+        guard let targetNode = self.parent else { return SKAction() }
         let particleZPosition = GameWorld.zPosition.explosion.rawValue
         let position = self.position
         let particlePositionRange = CGVector(dx: self.size.width/2, dy: self.size.height/2)
         let texture = SKTexture(imageNamed: "spark")
         
-        var action = SKAction.run {
+        let action = SKAction.run {
             let emitterNode = SKEmitterNode()
             emitterNode.particleTexture = texture
             emitterNode.particleSize = CGSize(width: 21, height: 21)
@@ -226,6 +226,12 @@ class Mothership: SKSpriteNode {
             GameWorld.current()?.explosionSoundEffect?.play()
             GameWorld.current()?.shake()
         }
+        return action
+    }
+    
+    func explosionEffect() {
+        
+        var action = self.explosionAction()
         
         var actions = [SKAction]()
         actions.append(action)

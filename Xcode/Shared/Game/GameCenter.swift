@@ -44,42 +44,39 @@ extension GameViewController: GKGameCenterControllerDelegate {
     }
     
     func save(scoreValue: Int) {
-        if Metrics.canSendEvents() {
-            if GKLocalPlayer.localPlayer().isAuthenticated {
-                let score = GKScore(leaderboardIdentifier: "\(Bundle.main.bundleIdentifier!).score")
-                score.value = Int64(scoreValue)
-                GKScore.report([score], withCompletionHandler: { (error: Error?) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                })
-            } else {
-                self.authenticateLocalPlayer { [weak self] in
-                    guard let `self` = self else { return }
-                    self.save(scoreValue: scoreValue)
+        if GKLocalPlayer.localPlayer().isAuthenticated {
+            let score = GKScore(leaderboardIdentifier: "\(Bundle.main.bundleIdentifier!).score")
+            score.value = Int64(scoreValue)
+            GKScore.report([score], withCompletionHandler: { (error: Error?) in
+                if let error = error {
+                    print(error.localizedDescription)
                 }
+            })
+        } else {
+            self.authenticateLocalPlayer { [weak self] in
+                guard let `self` = self else { return }
+                self.save(scoreValue: scoreValue)
             }
         }
     }
     
+    
     func save(achievementIdentifier: String) {
-        if Metrics.canSendEvents() {
-            if GKLocalPlayer.localPlayer().isAuthenticated {
-                let achievement = GKAchievement(identifier: "com.PabloHenri91.GameVI.\(achievementIdentifier)")
-                achievement.showsCompletionBanner = true
-                achievement.percentComplete = 100
-                GKAchievement.report([achievement], withCompletionHandler: { (error: Error?) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    } else {
-                        print(achievementIdentifier)
-                    }
-                })
-            } else {
-                self.authenticateLocalPlayer { [weak self] in
-                    guard let `self` = self else { return }
-                    self.save(achievementIdentifier: achievementIdentifier)
+        if GKLocalPlayer.localPlayer().isAuthenticated {
+            let achievement = GKAchievement(identifier: "com.PabloHenri91.GameVI.\(achievementIdentifier)")
+            achievement.showsCompletionBanner = true
+            achievement.percentComplete = 100
+            GKAchievement.report([achievement], withCompletionHandler: { (error: Error?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print(achievementIdentifier)
                 }
+            })
+        } else {
+            self.authenticateLocalPlayer { [weak self] in
+                guard let `self` = self else { return }
+                self.save(achievementIdentifier: achievementIdentifier)
             }
         }
     }

@@ -15,7 +15,9 @@ extension MemoryCard {
         
         playerData.botLevel = 0
         playerData.maxBotLevel = 0
-        playerData.modelVersion = 1
+        playerData.maxBotRarity = Int16(Spaceship.rarity.common.rawValue)
+        playerData.maxSpaceshipLevel = 1
+        playerData.modelVersion = 2
         playerData.music = true
         playerData.name = ""
         playerData.points = 10000
@@ -62,7 +64,7 @@ extension MemoryCard {
             spaceshipData.baseSpeed = 18
             
             spaceshipData.colorRed = 1.0
-            spaceshipData.colorGreen = 0.75
+            spaceshipData.colorGreen = 0.45
             spaceshipData.colorBlue = 0
             
             spaceshipData.level = 10

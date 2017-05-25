@@ -14,6 +14,8 @@ class Spaceship: SKSpriteNode {
         case common, rare, epic, legendary
     }
     
+    var element: Element!
+    
     static weak var selectedSpaceship: Spaceship?
     
     static var diameter: CGFloat = 55
@@ -41,11 +43,7 @@ class Spaceship: SKSpriteNode {
     
     private(set) weak var spaceshipData: SpaceshipData?
     
-    var level: Int! {
-        didSet {
-            self.spaceshipData?.level = Int16(self.level)
-        }
-    }
+    var level: Int!
     
     var baseLife = 1
     var baseDamage = 1
@@ -89,6 +87,7 @@ class Spaceship: SKSpriteNode {
     weak var labelRespawn: Label?
     
     var battlePoints = 0
+    var battleStartLevel: Int!
     var kills = 0
     var assists = 0
     var deaths = 0
@@ -178,6 +177,7 @@ class Spaceship: SKSpriteNode {
               skinIndex: Int, color: SKColor, loadPhysics: Bool = false, team: Mothership.team) {
         
         self.level = level
+        self.battleStartLevel = level
         
         self.skinIndex = skinIndex
         
@@ -185,6 +185,8 @@ class Spaceship: SKSpriteNode {
         self.texture = texture
         self.size = texture.size()
         self.setScaleToFit(width: Spaceship.diameter, height: Spaceship.diameter)
+        
+        self.element = Spaceship.elementFor(color: color)
         
         self.color = color
         self.colorBlendFactor = 1
@@ -231,9 +233,15 @@ class Spaceship: SKSpriteNode {
         while totalRotationToShot < Float(-π) { totalRotationToShot += Float(π * 2) }
         while totalRotationToShot > Float(π) { totalRotationToShot -= Float(π * 2) }
         
-        let damageMultiplier = max(abs(totalRotationToShot), 1)
+        var damageMultiplier = max(abs(totalRotationToShot), 1)
         
-        shot.damage = Int(Float(shot.damage) * damageMultiplier)
+        if self.element.weakness == shot.element.element {
+            damageMultiplier = damageMultiplier * Float.pi
+        }
+        
+        if self.element.strength == shot.element.element {
+            damageMultiplier = damageMultiplier / Float.pi
+        }
         
         if let shooter = shot.shooter {
             if shooter.team != self.team {
@@ -241,6 +249,8 @@ class Spaceship: SKSpriteNode {
                 shooter.battlePoints = shooter.battlePoints + shot.damage
             }
         }
+        
+        shot.damage = Int(Float(shot.damage) * damageMultiplier)
         
         self.damageEffect(damage: shot.damage, damageMultiplier: CGFloat(damageMultiplier), position: shot.position)
         
@@ -250,7 +260,6 @@ class Spaceship: SKSpriteNode {
             self.health = self.health - shot.damage
         }
         self.updateHealthBar(health: self.health, maxHealth: self.maxHealth)
-        
         shot.damage = 0
         shot.removeFromParent()
     }
@@ -261,6 +270,7 @@ class Spaceship: SKSpriteNode {
         
         if let shooter = shooter {
             shooter.kills = shooter.kills + 1
+            shooter.healthBar?.labelLevel.set(color: GameColors.controlYellow)
             self.getHitBySpaceships.remove(shooter)
         }
         
@@ -300,6 +310,10 @@ class Spaceship: SKSpriteNode {
     }
     
     func heal() {
+        if self.level < self.battleStartLevel + self.kills {
+            self.upgradeOnBattle()
+            self.healthBar?.labelLevel.set(color: GameColors.fontBlack)
+        }
         if self.health < self.maxHealth {
             self.health = self.health + (self.maxHealth/60)
             if self.health > self.maxHealth {
@@ -314,7 +328,7 @@ class Spaceship: SKSpriteNode {
     
     func respawn() {
         self.isHidden = false
-        self.health = self.maxHealth
+        self.health = 1
         self.updateHealthBar(health: self.health, maxHealth: self.maxHealth)
         self.labelRespawn?.text = ""
         self.setBitMasksToMothershipSpaceship()
@@ -357,7 +371,16 @@ class Spaceship: SKSpriteNode {
         emitterNode.particleAlphaSpeed = -4
         emitterNode.particleScaleSpeed = -1
         emitterNode.particleColorBlendFactor = 1
-        emitterNode.particleColor = self.color
+        
+        switch self.team {
+        case .blue:
+            emitterNode.particleColor = GameColors.blueTeam
+            break
+        case .red, .none:
+            emitterNode.particleColor = GameColors.redTeam
+            break
+        }
+        
         emitterNode.particleBlendMode = .add
         emitterNode.particleZPosition = -1
         
@@ -538,10 +561,32 @@ class Spaceship: SKSpriteNode {
             if self.canShot {
                 self.canShot = false
                 self.lastShot = GameScene.currentTime
-                self.parent?.addChild(Shot(shooter: self))
+                self.parent?.addChild(Shot(shooter: self, element: self.element))
                 GameWorld.current()?.shotSoundEffect?.play()
             }
         }
+    }
+    
+    func upgradeOnBattle() {
+        self.setBattleLevel(self.level + 1)
+    }
+    
+    func setBattleLevel(_ level: Int) {
+        if level < self.level {
+            self.health = self.maxHealth
+        }
+        
+        self.maxHealth = GameMath.maxHealth(level: level, baseLife: self.baseLife)
+        self.damage = GameMath.damage(level: level, baseDamage: self.baseDamage)
+        
+        self.speedAtribute = GameMath.speed(level: min(level, 10), baseSpeed: self.baseSpeed)
+        self.maxVelocitySquared = GameMath.spaceshipMaxVelocitySquared(level: self.level, speedAtribute: self.speedAtribute)
+        self.force = maxVelocitySquared / 240
+        self.defaultEmitterNodeParticleBirthRate  = CGFloat(self.speedAtribute * 20)
+        
+        self.level = level
+        self.healthBar?.update(health: self.health, maxHealth: self.maxHealth)
+        self.healthBar?.labelLevel.text = level.description
     }
     
     func nearestSpaceshipInRange(spaceships: [Spaceship]) -> Spaceship? {
@@ -967,13 +1012,115 @@ class Spaceship: SKSpriteNode {
         var red = CGFloat.random()
         var green = CGFloat.random()
         var blue = CGFloat.random()
-        let maxColor = 1 - max(max(red, green), blue)
         
-        red = red + maxColor
-        green = green + maxColor
-        blue = blue + maxColor
+        let color = SKColor(red: red, green: green, blue: blue, alpha: 1)
+        let element = Spaceship.elementFor(color: color)
+        
+        let elementColor: CIColor = {
+            let color = CIColor(color: element.color)
+            #if os(OSX)
+                return color!
+            #else
+                return color
+            #endif
+        }()
+        
+        red = (red + elementColor.red) / 2
+        green = (green + elementColor.green) / 2
+        blue = (blue + elementColor.blue) / 2
+        
+        if element.element != .darkness {
+            let maxColor = 1 - max(max(red, green), blue)
+            red = red + maxColor
+            green = green + maxColor
+            blue = blue + maxColor
+        }
         
         return SKColor(red: red, green: green, blue: blue, alpha: 1)
+    }
+    
+    static func elementColorFor(color: SKColor) -> SKColor {
+        
+        var elementColor = GameColors.darkness
+        
+        switch elementFor(color: color).element {
+        case .fire:
+            elementColor = GameColors.fire
+            break
+        case .ice:
+            elementColor = GameColors.ice
+            break
+        case .wind:
+            elementColor = GameColors.wind
+            break
+        case .earth:
+            elementColor = GameColors.earth
+            break
+        case .thunder:
+            elementColor = GameColors.thunder
+            break
+        case .water:
+            elementColor = GameColors.water
+            break
+        case .light:
+            elementColor = GameColors.light
+            break
+        case .darkness:
+            elementColor = GameColors.darkness
+            break
+        }
+        
+        return elementColor
+    }
+    
+    static func elementFor(color: SKColor) -> Element {
+        
+        let color: CIColor = {
+            let color = CIColor(color: color)
+            #if os(OSX)
+                return color!
+            #else
+                return color
+            #endif
+        }()
+        
+        let red  = color.red
+        let green = color.green
+        let blue = color.blue
+        
+        var element: Element? = Element.types[.darkness]
+        
+        switch (red > 0.5, green > 0.5, blue > 0.5) {
+            
+        case (true, false, false):
+            element = Element.types[.fire]
+            break
+        case (false, true, false):
+            element = Element.types[.earth]
+            break
+        case (false, false, true):
+            element = Element.types[.water]
+            break
+            
+        case (false, true, true):
+            element = Element.types[.ice]
+            break
+        case (true, false, true):
+            element = Element.types[.thunder]
+            break
+        case (true, true, false):
+            element = Element.types[.wind]
+            break
+            
+        case (true, true, true):
+            element = Element.types[.light]
+            break
+        case (false, false, false):
+            element = Element.types[.darkness]
+            break
+        }
+        
+        return element!
     }
     
     static func randomRarity() -> rarity? {

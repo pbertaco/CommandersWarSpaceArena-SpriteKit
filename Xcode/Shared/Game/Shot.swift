@@ -20,20 +20,14 @@ class Shot: SKSpriteNode {
     
     weak var emitterNode: SKEmitterNode?
     
-    init(shooter: Spaceship) {
+    var element: Element
+    
+    init(shooter: Spaceship, element: Element) {
         
         self.shooter = shooter
+        self.element = element
         
-        var color: SKColor = .white
-        
-        switch shooter.team {
-        case .blue:
-            color = GameColors.blueTeam
-            break
-        case .red, .none:
-            color = GameColors.redTeam
-            break
-        }
+        let color: SKColor = element.color
         
         let texture = SKTexture(imageNamed: "spark", filteringMode: GameScene.defaultFilteringMode)
         
@@ -48,7 +42,7 @@ class Shot: SKSpriteNode {
         self.startingPosition = shooter.position
         
         self.position = shooter.position
-        self.zRotation = shooter.zRotation// + CGFloat.random(min: -0.1, max: 0.1)
+        self.zRotation = shooter.zRotation + CGFloat.random(min: -0.1, max: 0.1)
         
         self.loadPhysics(shooter: shooter)
         

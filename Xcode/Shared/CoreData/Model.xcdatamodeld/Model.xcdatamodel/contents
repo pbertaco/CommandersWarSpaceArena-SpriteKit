@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="15G1108" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16E195" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="MothershipData" representedClassName="MothershipData" syncable="YES" codeGenerationType="class">
         <relationship name="parentPlayer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="mothership" inverseEntity="PlayerData" syncable="YES"/>
         <relationship name="slots" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MothershipSlotData" inverseName="parentMothership" inverseEntity="MothershipSlotData" syncable="YES"/>
@@ -12,6 +12,8 @@
     <entity name="PlayerData" representedClassName="PlayerData" syncable="YES" codeGenerationType="class">
         <attribute name="botLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="maxBotLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="maxBotRarity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="maxSpaceshipLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="modelVersion" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="music" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -32,13 +34,14 @@
         <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="rarity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="skin" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="xp" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="parentMothershipSlot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MothershipSlotData" inverseName="spaceship" inverseEntity="MothershipSlotData" syncable="YES"/>
         <relationship name="parentPlayer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="spaceships" inverseEntity="PlayerData" syncable="YES"/>
     </entity>
     <elements>
         <element name="MothershipData" positionX="-227" positionY="-351" width="128" height="75"/>
         <element name="MothershipSlotData" positionX="-461" positionY="-378" width="128" height="88"/>
-        <element name="PlayerData" positionX="-11" positionY="-270" width="128" height="195"/>
-        <element name="SpaceshipData" positionX="-648" positionY="-351" width="128" height="225"/>
+        <element name="PlayerData" positionX="-11" positionY="-270" width="128" height="225"/>
+        <element name="SpaceshipData" positionX="-648" positionY="-351" width="128" height="240"/>
     </elements>
 </model>

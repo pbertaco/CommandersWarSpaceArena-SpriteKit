@@ -43,17 +43,35 @@ class BoxBattleResult: Box {
         self.buttonOK.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(self.buttonOK)
         
+        for spaceship in botMothership.spaceships {
+            if spaceship.rarity != .common {
+                chickenMode = false
+            }
+            
+            if Int16(spaceship.rarity.rawValue) > playerData.maxBotRarity {
+                playerData.maxBotRarity = Int16(spaceship.rarity.rawValue)
+            }
+            if Int16(spaceship.battleStartLevel) > playerData.maxSpaceshipLevel {
+                playerData.maxSpaceshipLevel = Int16(spaceship.battleStartLevel)
+            }
+        }
+        
         var totalBattlePoints: Int32 = 0
         for spaceship in mothership.spaceships {
             if spaceship.rarity == .common {
                 chickenMode = false
             }
             totalBattlePoints = totalBattlePoints + Int32(spaceship.battlePoints)
-        }
-        
-        for spaceship in botMothership.spaceships {
-            if spaceship.rarity != .common {
-                chickenMode = false
+            if let spaceshipData = spaceship.spaceshipData {
+                if spaceshipData.level < playerData.maxSpaceshipLevel {
+                    spaceshipData.xp = spaceshipData.xp + Int32(spaceship.battlePoints)
+                    let xp: Int32 = Int32(GameMath.xpForLevel(level: Int(spaceshipData.level) + 1))
+                    
+                    if spaceshipData.xp <= xp {
+                        spaceshipData.xp = spaceshipData.xp - xp
+                        spaceshipData.level = spaceshipData.level + 1
+                    }
+                }
             }
         }
         

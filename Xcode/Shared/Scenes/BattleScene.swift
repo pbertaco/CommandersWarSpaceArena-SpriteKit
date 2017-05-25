@@ -31,6 +31,7 @@ class BattleScene: GameScene {
         case showBattleResult
         
         case mainMenu
+        case credits
     }
     
     var state: state = .loading
@@ -139,6 +140,34 @@ class BattleScene: GameScene {
                     
                     self.lastBotUpdate = currentTime
                     
+                    var health = 0
+                    for spaceship in self.mothership.spaceships {
+                        health = health + spaceship.health
+                    }
+                    if health <= 0 {
+                        self.mothership.health = self.mothership.health - (self.mothership.maxHealth/10)
+                        self.mothership.updateHealthBar(health: self.mothership.health, maxHealth: self.mothership.maxHealth)
+                        if self.mothership.health <= 0 {
+                            self.mothership.die(shooter: nil)
+                        } else {
+                            self.run(self.mothership.explosionAction())
+                        }
+                    }
+                    
+                    health = 0
+                    for spaceship in self.botMothership.spaceships {
+                        health = health + spaceship.health
+                    }
+                    if health <= 0 {
+                        self.botMothership.health = self.botMothership.health - (self.botMothership.maxHealth/10)
+                        self.botMothership.updateHealthBar(health: self.botMothership.health, maxHealth: self.botMothership.maxHealth)
+                        if self.botMothership.health <= 0 {
+                            self.botMothership.die(shooter: nil)
+                        } else {
+                            self.run(self.botMothership.explosionAction())
+                        }
+                    }
+                    
                     let aliveBotSpaceships = self.botMothership.spaceships.filter({
                         
                         if let destination = $0.destination {
@@ -160,18 +189,25 @@ class BattleScene: GameScene {
                         
                         let aliveSpaceships = self.mothership.spaceships.filter({ (spaceship: Spaceship) -> Bool in
                             if spaceship.health > 0 {
-                                if let targetMothership = spaceship.targetNode as? Mothership {
-                                    let point = CGPoint(x: spaceship.position.x, y: targetMothership.position.y)
-                                    if spaceship.position.distanceTo(point) <= spaceship.weaponRange + 89/2 {
-                                        return true
-                                    }
+                                return true
+                            }
+                            return false
+                        }).sorted(by: {
+                            $0.health * ($0.element.weakness == botSpaceship.element.element ? 3 : 1) < $1.health * ($1.element.weakness == botSpaceship.element.element ? 3 : 1)
+                        })
+                        
+                        let targets = aliveSpaceships.filter({ (spaceship: Spaceship) -> Bool in
+                            if let targetMothership = spaceship.targetNode as? Mothership {
+                                let point = CGPoint(x: spaceship.position.x, y: targetMothership.position.y)
+                                if spaceship.position.distanceTo(point) <= spaceship.weaponRange + 89/2 {
+                                    return true
                                 }
                             }
                             return false
-                        }).sorted(by: { $0.health < $1.health })
+                        })
                         
-                        if aliveSpaceships.count > 0 {
-                            botSpaceship.setTarget(spaceship: aliveSpaceships[0])
+                        if targets.count > 0 {
+                            botSpaceship.setTarget(spaceship: targets.first!)
                         } else {
                             if botSpaceship.targetNode != nil {
                                 if botSpaceship.health < botSpaceship.maxHealth/2 {
@@ -183,14 +219,26 @@ class BattleScene: GameScene {
                                         if botSpaceship.health < botSpaceship.maxHealth {
                                             botSpaceship.retreat()
                                         } else {
-                                            let x = Int.random(min: -55/2, max: 55/2)
-                                            let y = Int.random(min: -89, max: -89/2)
-                                            let point = botSpaceship.position + CGPoint(x: x, y: y)
-                                            if self.mothership.contains(point) {
-                                                botSpaceship.setTarget(mothership: self.mothership)
+                                            
+                                            let targets = aliveSpaceships.filter({ (spaceship: Spaceship) -> Bool in
+                                                if (spaceship.targetNode as? Spaceship) != nil {
+                                                    return spaceship.element.weakness == botSpaceship.element.element
+                                                }
+                                                return false
+                                            })
+                                            
+                                            if targets.count > 0 {
+                                                botSpaceship.setTarget(spaceship: targets.first!)
                                             } else {
-                                                botSpaceship.physicsBody?.isDynamic = true
-                                                botSpaceship.destination = point
+                                                let x = Int.random(min: -55/2, max: 55/2)
+                                                let y = Int.random(min: -89, max: -89/2)
+                                                let point = botSpaceship.position + CGPoint(x: x, y: y)
+                                                if self.mothership.contains(point) {
+                                                    botSpaceship.setTarget(mothership: self.mothership)
+                                                } else {
+                                                    botSpaceship.physicsBody?.isDynamic = true
+                                                    botSpaceship.destination = point
+                                                }
                                             }
                                         }
                                     }
@@ -222,6 +270,10 @@ class BattleScene: GameScene {
                 break
                 
             case .mainMenu:
+                self.mothership.update()
+                self.botMothership.update()
+                break
+            case .credits:
                 self.mothership.update()
                 self.botMothership.update()
                 break
@@ -262,8 +314,16 @@ class BattleScene: GameScene {
                 boxBattleResult.buttonOK.addHandler { [weak self, weak boxBattleResult] in
                     guard let `self` = self else { return }
                     
-                    if self.mothership.health > 0 {
-                        if let rarity = Spaceship.randomRarity() {
+                    let playerData = MemoryCard.sharedInstance.playerData!
+                    
+                    if playerData.botLevel >= Int16(Mission.types.count) {
+                        self.nextState = .credits
+                    } else {
+                        if self.mothership.health > 0 {
+                            var rarity: Spaceship.rarity = Spaceship.randomRarity() ?? .common
+                            if Int16(rarity.rawValue) > playerData.maxBotRarity {
+                                rarity = Spaceship.rarity(rawValue: Int(playerData.maxBotRarity))!
+                            }
                             boxBattleResult?.removeFromParent()
                             let boxUnlockSpaceship = BoxUnlockSpaceship(rarity: rarity)
                             boxUnlockSpaceship.zPosition = BattleScene.zPosition.boxUnlockSpaceship.rawValue
@@ -278,12 +338,9 @@ class BattleScene: GameScene {
                                     self.nextState = .mainMenu
                                 })
                             }
-                            
                         } else {
                             self.nextState = .mainMenu
                         }
-                    } else {
-                        self.nextState = .mainMenu
                     }
                 }
                 
@@ -312,6 +369,9 @@ class BattleScene: GameScene {
             case .mainMenu:
                 Music.sharedInstance.stop()
                 self.view?.presentScene(MainMenuScene(), transition: GameScene.defaultTransition)
+                break
+            case .credits:
+                self.view?.presentScene(CreditsScene(), transition: GameScene.defaultTransition)
                 break
             }
         }
@@ -387,6 +447,8 @@ class BattleScene: GameScene {
             
         case .mainMenu:
             break
+        case .credits:
+            break
         }
     }
     
@@ -426,6 +488,8 @@ class BattleScene: GameScene {
             break
             
         case .mainMenu:
+            break
+        case .credits:
             break
         }
     }
@@ -489,7 +553,8 @@ class BattleScene: GameScene {
             
         case .mainMenu:
             break
-            
+        case .credits:
+            break
         }
     }
     

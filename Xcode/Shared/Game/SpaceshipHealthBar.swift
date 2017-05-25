@@ -15,6 +15,7 @@ class SpaceshipHealthBar: SKSpriteNode {
     
     weak var fill: SKSpriteNode!
     weak var label: Label!
+    weak var labelLevel: Label!
     
     init(level: Int, health: Int, team: Mothership.team, rarity: Spaceship.rarity) {
         
@@ -72,6 +73,7 @@ class SpaceshipHealthBar: SKSpriteNode {
         
         let labelLevel = Label(text: level.description, fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.fontBlack)
         levelBackground.addChild(labelLevel)
+        self.labelLevel = labelLevel
         
         self.color = teamColor
         self.fill.color = rarityColor

@@ -11,6 +11,7 @@ import SpriteKit
 class SpaceshipHangarCell: Control {
     
     weak var labelLevel: Label!
+    weak var labelElement: Label!
     weak var labelDamage: Label!
     weak var labelMaxHealth: Label!
     weak var labelWeaponRange: Label!
@@ -28,24 +29,28 @@ class SpaceshipHangarCell: Control {
         mothershipSlot.load(spaceship: spaceship)
         self.addChild(mothershipSlot)
         
-        self.addChild(Label(text: "level", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 23))
-        self.labelLevel = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 23)
+        self.addChild(Label(text: "level", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 16))
+        self.labelLevel = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 16)
         self.addChild(self.labelLevel)
         
-        self.addChild(Label(text: "damage", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 38))
-        self.labelDamage = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 38)
+        self.addChild(Label(text: "element", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 31))
+        self.labelElement = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 31)
+        self.addChild(self.labelElement)
+        
+        self.addChild(Label(text: "damage", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 45))
+        self.labelDamage = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 45)
         self.addChild(self.labelDamage)
         
-        self.addChild(Label(text: "life", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 53))
-        self.labelMaxHealth = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 53)
+        self.addChild(Label(text: "life", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 60))
+        self.labelMaxHealth = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 60)
         self.addChild(self.labelMaxHealth)
         
-        self.addChild(Label(text: "range", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 68))
-        self.labelWeaponRange = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 68)
+        self.addChild(Label(text: "range", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 74))
+        self.labelWeaponRange = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 74)
         self.addChild(self.labelWeaponRange)
         
-        self.addChild(Label(text: "speed", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 83))
-        self.labelSpeedAtribute = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 83)
+        self.addChild(Label(text: "speed", horizontalAlignmentMode: .right, fontName: .kenPixel, fontSize: .fontSize8, x: 172, y: 89))
+        self.labelSpeedAtribute = Label(text: "", horizontalAlignmentMode: .left, fontName: .kenPixel, fontSize: .fontSize8, x: 179, y: 89)
         self.addChild(self.labelSpeedAtribute)
         
         self.spaceship = spaceship
@@ -75,7 +80,7 @@ class SpaceshipHangarCell: Control {
         
         let playerData = MemoryCard.sharedInstance.playerData!
         
-        if spaceship.level < 10 {
+        if Int16(spaceship.level) < playerData.maxSpaceshipLevel {
             var xp: Int32 = Int32(GameMath.xpForLevel(level: spaceship.level + 1))
             
             let buttonUpgrade = Button(imageNamed: "button_89x34", x: 19, y: 102)
@@ -95,6 +100,7 @@ class SpaceshipHangarCell: Control {
                         playerData.points = playerData.points - xp
                         
                         spaceship.level = spaceship.level + 1
+                        spaceship.spaceshipData?.level = Int16(spaceship.level)
                         spaceship.updateAttributes()
                         
                         self.loadButtonSell(sellCompletion: {})
@@ -107,7 +113,7 @@ class SpaceshipHangarCell: Control {
                         
                         ControlPoints.current()?.setLabelPointsText(points: playerData.points)
                         
-                        if spaceship.level >= 10 {
+                        if Int16(spaceship.level) >= playerData.maxSpaceshipLevel {
                             buttonUpgrade?.removeFromParent()
                             #if os(iOS)
                                 GameViewController.sharedInstance()?.save(achievementIdentifier: "masterEngineer")
@@ -219,6 +225,7 @@ class SpaceshipHangarCell: Control {
         self.addChild(circuit)
         
         self.labelLevel.text = self.spaceship?.level.description ?? "?"
+        self.labelElement.text = "?"
         self.labelDamage.text = "?"
         self.labelMaxHealth.text = "?"
         self.labelWeaponRange.text = "?"
@@ -323,6 +330,7 @@ class SpaceshipHangarCell: Control {
     
     func updateLabels(spaceship: Spaceship) {
         self.labelLevel.text = spaceship.level.description
+        self.labelElement.text = spaceship.element.element.rawValue
         self.labelDamage.text = "\(spaceship.damage)"
         self.labelMaxHealth.text = "\(spaceship.maxHealth)"
         self.labelWeaponRange.text = "\(Int(spaceship.weaponRange))"
