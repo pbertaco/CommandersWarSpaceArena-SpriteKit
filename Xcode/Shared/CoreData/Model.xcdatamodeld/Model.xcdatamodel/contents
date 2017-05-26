@@ -11,6 +11,7 @@
     </entity>
     <entity name="PlayerData" representedClassName="PlayerData" syncable="YES" codeGenerationType="class">
         <attribute name="botLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="deviceName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="maxBotLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="maxBotRarity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="maxSpaceshipLevel" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -41,7 +42,7 @@
     <elements>
         <element name="MothershipData" positionX="-227" positionY="-351" width="128" height="75"/>
         <element name="MothershipSlotData" positionX="-461" positionY="-378" width="128" height="88"/>
-        <element name="PlayerData" positionX="-11" positionY="-270" width="128" height="225"/>
+        <element name="PlayerData" positionX="-11" positionY="-270" width="128" height="240"/>
         <element name="SpaceshipData" positionX="-648" positionY="-351" width="128" height="240"/>
     </elements>
 </model>

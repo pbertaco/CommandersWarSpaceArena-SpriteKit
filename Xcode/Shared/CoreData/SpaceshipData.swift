@@ -6,16 +6,17 @@
 //  Copyright © 2017 PabloHenri91. All rights reserved.
 //
 
+import SpriteKit
 import CoreData
 import CoreImage
 
 extension MemoryCard {
     
-    func newSpaceshipData(rarity: Spaceship.rarity) -> SpaceshipData {
+    func newSpaceshipData(rarity: Spaceship.rarity, color: SKColor? = nil) -> SpaceshipData {
         let spaceshipData: SpaceshipData = self.insertNewObject()
         
         let color: CIColor = {
-            let color = CIColor(color: Spaceship.randomColor())
+            let color = CIColor(color: color ?? Spaceship.randomColor())
             #if os(OSX)
                 return color!
             #else

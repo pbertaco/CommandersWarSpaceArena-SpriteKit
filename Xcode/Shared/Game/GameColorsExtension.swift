@@ -13,9 +13,12 @@ extension GameColors {
     static let backgroundColor = #colorLiteral(red: 0.0862745098, green: 0.05882352941, blue: 0.1490196078, alpha: 1)
 
     static let common = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    static let rare = #colorLiteral(red: 0.5019607843, green: 1, blue: 0.5019607843, alpha: 1)
-    static let epic = #colorLiteral(red: 1, green: 1, blue: 0.5019607843, alpha: 1)
-    static let legendary = #colorLiteral(red: 1, green: 0.5019607843, blue: 1, alpha: 1)
+    static let uncommon = #colorLiteral(red: 0.4815354347, green: 1, blue: 0.4763019681, alpha: 1)
+    static let rare = #colorLiteral(red: 0.7422516942, green: 1, blue: 0.4721496701, alpha: 1)
+    static let heroic = #colorLiteral(red: 1, green: 1, blue: 0.4655374289, alpha: 1)
+    static let epic = #colorLiteral(red: 1, green: 0.7514713407, blue: 0.4818159938, alpha: 1)
+    static let legendary = #colorLiteral(red: 1, green: 0.4985902309, blue: 0.4918352962, alpha: 1)
+    static let supreme = #colorLiteral(red: 1, green: 0.4923908114, blue: 0.7510616779, alpha: 1)
     
     static let controlBlue = #colorLiteral(red: 0, green: 0.6078431373, blue: 0.8862745098, alpha: 1)
     static let controlRed = #colorLiteral(red: 1, green: 0, blue: 0.3960784314, alpha: 1)

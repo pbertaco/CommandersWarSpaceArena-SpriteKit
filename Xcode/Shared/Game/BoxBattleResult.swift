@@ -51,6 +51,7 @@ class BoxBattleResult: Box {
             if Int16(spaceship.rarity.rawValue) > playerData.maxBotRarity {
                 playerData.maxBotRarity = Int16(spaceship.rarity.rawValue)
             }
+            
             if Int16(spaceship.battleStartLevel) > playerData.maxSpaceshipLevel {
                 playerData.maxSpaceshipLevel = Int16(spaceship.battleStartLevel)
             }

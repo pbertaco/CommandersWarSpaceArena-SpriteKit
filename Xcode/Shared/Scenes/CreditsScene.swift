@@ -154,7 +154,7 @@ class CreditsScene: GameScene {
         self.spaceships = self.spaceships.filter({ $0.health > 0 })
         
         if self.spaceships.count < 3 && fps >= 60 {
-            let spaceship = Spaceship(level: 1 + Int.random(10), rarity: Spaceship.randomRarity() ?? .common, loadPhysics: true, team: .none)
+            let spaceship = Spaceship(level: 1 + Int.random(10), rarity: Spaceship.randomRarity(), loadPhysics: true, team: .none)
             spaceship.setBitMasksToSpaceship()
             spaceship.physicsBody?.isDynamic = true
             spaceship.position = CGPoint(

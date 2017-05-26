@@ -14,10 +14,15 @@ extension MemoryCard {
         let playerData: PlayerData = self.insertNewObject()
         
         playerData.botLevel = 0
+        #if os(OSX)
+            playerData.deviceName = Host.current().localizedName!
+        #else
+            playerData.deviceName = UIDevice.current.name
+        #endif
         playerData.maxBotLevel = 0
         playerData.maxBotRarity = Int16(Spaceship.rarity.common.rawValue)
         playerData.maxSpaceshipLevel = 1
-        playerData.modelVersion = 2
+        playerData.modelVersion = 3
         playerData.music = true
         playerData.name = ""
         playerData.points = 10000
@@ -29,7 +34,7 @@ extension MemoryCard {
         for i in 0..<4 {
             let mothershipSlot: MothershipSlotData = self.newMothershipSlotData()
             mothershipSlot.index = Int16(i)
-            let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: .common)
+            let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: .common, color: Spaceship.randomColorFor(element: .water))
             
             mothershipSlot.spaceship = spaceshipData
             
@@ -71,6 +76,19 @@ extension MemoryCard {
             spaceshipData.skin = 13
             
             playerData.addToSpaceships(spaceshipData)
+        }
+        
+        if self.playerData.modelVersion < 3 {
+            self.playerData.modelVersion = 3
+            
+            self.playerData.points = self.playerData.points + 1000000
+            self.playerData.premiumPoints = self.playerData.premiumPoints + 1000
+            
+            #if os(OSX)
+                self.playerData.deviceName = Host.current().localizedName!
+            #else
+                self.playerData.deviceName = UIDevice.current.name
+            #endif
         }
     }
 }

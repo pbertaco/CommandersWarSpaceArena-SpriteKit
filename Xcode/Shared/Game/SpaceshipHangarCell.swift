@@ -203,14 +203,23 @@ class SpaceshipHangarCell: Control {
         case .common:
             rocketColor = GameColors.common
             break
+        case .uncommon:
+            rocketColor = GameColors.uncommon
+            break
         case .rare:
             rocketColor = GameColors.rare
+            break
+        case .heroic:
+            rocketColor = GameColors.heroic
             break
         case .epic:
             rocketColor = GameColors.epic
             break
         case .legendary:
             rocketColor = GameColors.legendary
+            break
+        case .supreme:
+            rocketColor = GameColors.supreme
             break
         }
         
@@ -224,40 +233,58 @@ class SpaceshipHangarCell: Control {
         circuit.set(color: GameColors.premiumPoints, blendMode: .add)
         self.addChild(circuit)
         
-        self.labelLevel.text = self.spaceship?.level.description ?? "?"
+        self.labelLevel.text = "?"
         self.labelElement.text = "?"
         self.labelDamage.text = "?"
         self.labelMaxHealth.text = "?"
         self.labelWeaponRange.text = "?"
         self.labelSpeedAtribute.text = "?"
         
-        let buttonIgnore = Button(imageNamed: "button_89x34", x: 19, y: 102)
-        buttonIgnore.set(color: GameColors.controlBlue)
-        buttonIgnore.set(label: Label(text: "Ignore", fontSize: .fontSize8, fontColor: GameColors.controlBlue))
-        self.addChild(buttonIgnore)
-        self.control0 = buttonIgnore
+        let buttonUnlockWithPoints = Button(imageNamed: "button_89x34", x: 19, y: 102)
+        buttonUnlockWithPoints.set(color: GameColors.points)
+        let priceInPoints = GameMath.unlockSpaceshipPriceInPoints(rarity: spaceship.rarity)
+        buttonUnlockWithPoints.set(label: Label(text: "unlock", fontSize: .fontSize8, fontColor: GameColors.points, y: -6))
+        buttonUnlockWithPoints.set(label: Label(text: "\(priceInPoints)", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.points, y: 6))
+        self.addChild(buttonUnlockWithPoints)
+        self.control0 = buttonUnlockWithPoints
         
-        let buttonUnlock = Button(imageNamed: "button_89x34", x: 125, y: 102)
-        buttonUnlock.set(color: GameColors.premiumPoints)
-        let priceInPremiumPoints = GameMath.unlockSpaceshipPriceInPremiumPoints(rarity: spaceship.rarity)
-        buttonUnlock.set(label: Label(text: "unlock", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.premiumPoints, y: -6))
-        buttonUnlock.set(label: Label(text: "\(priceInPremiumPoints)", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.premiumPoints, y: 6))
-        self.addChild(buttonUnlock)
-        self.control1 = buttonUnlock
-        
-        buttonUnlock.addHandler { [weak self, weak rocket, weak circuit] in
+        buttonUnlockWithPoints.addHandler { [weak self, weak rocket, weak circuit] in
             guard let `self` = self else { return }
-            self.unlockWithPremiumPoints()
-            self.spaceship?.isHidden = false
-            self.control0?.isHidden = true
-            self.control1?.isHidden = true
-            rocket?.removeFromParent()
-            circuit?.removeFromParent()
+            if self.unlockWithPoints() {
+                self.spaceship?.isHidden = false
+                self.control0?.isHidden = true
+                self.control1?.isHidden = true
+                rocket?.removeFromParent()
+                circuit?.removeFromParent()
+            } else {
+                
+            }
+        }
+        
+        let buttonUnlockWithPremiumPoints = Button(imageNamed: "button_89x34", x: 125, y: 102)
+        buttonUnlockWithPremiumPoints.set(color: GameColors.premiumPoints)
+        let priceInPremiumPoints = GameMath.unlockSpaceshipPriceInPremiumPoints(rarity: spaceship.rarity)
+        buttonUnlockWithPremiumPoints.set(label: Label(text: "unlock", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.premiumPoints, y: -6))
+        buttonUnlockWithPremiumPoints.set(label: Label(text: "\(priceInPremiumPoints)", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.premiumPoints, y: 6))
+        self.addChild(buttonUnlockWithPremiumPoints)
+        self.control1 = buttonUnlockWithPremiumPoints
+        
+        buttonUnlockWithPremiumPoints.addHandler { [weak self, weak rocket, weak circuit] in
+            guard let `self` = self else { return }
+            if self.unlockWithPremiumPoints() {
+                self.spaceship?.isHidden = false
+                self.control0?.isHidden = true
+                self.control1?.isHidden = true
+                rocket?.removeFromParent()
+                circuit?.removeFromParent()
+            } else {
+                
+            }
         }
     }
     
-    func unlockWithPremiumPoints() {
-        guard let spaceship = self.spaceship else { return }
+    func unlockWithPremiumPoints() -> Bool {
+        guard let spaceship = self.spaceship else { return false }
         
         let playerData = MemoryCard.sharedInstance.playerData!
         
@@ -271,7 +298,10 @@ class SpaceshipHangarCell: Control {
             self.forceUnlock(spaceship: spaceship)
             self.loadButtonUpgrade()
             self.loadButtonSell(sellCompletion: {})
+            return true
         }
+        
+        return false
     }
     
     func buyWithPremiumPoints() -> Bool {
@@ -284,6 +314,27 @@ class SpaceshipHangarCell: Control {
         if playerData.premiumPoints >= price {
             playerData.premiumPoints = playerData.premiumPoints - price
             self.forceUnlock(spaceship: spaceship)
+            return true
+        }
+        
+        return false
+    }
+    
+    func unlockWithPoints() -> Bool {
+        guard let spaceship = self.spaceship else { return false }
+        
+        let playerData = MemoryCard.sharedInstance.playerData!
+        
+        self.control0?.removeFromParent()
+        self.control1?.removeFromParent()
+        
+        let price = Int32(GameMath.unlockSpaceshipPriceInPoints(rarity: spaceship.rarity))
+        
+        if playerData.points >= price {
+            playerData.points = playerData.points - price
+            self.forceUnlock(spaceship: spaceship)
+            self.loadButtonUpgrade()
+            self.loadButtonSell(sellCompletion: {})
             return true
         }
         

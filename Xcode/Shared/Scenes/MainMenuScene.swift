@@ -233,6 +233,7 @@ class MainMenuScene: GameScene {
             switch self.nextState {
                 
             case .mainMenu:
+                self.view?.presentScene(MainMenuScene(), transition: GameScene.defaultTransition)
                 break
             case .battle:
                 Music.sharedInstance.stop()

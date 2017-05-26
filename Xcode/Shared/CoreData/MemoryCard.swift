@@ -125,36 +125,19 @@ class MemoryCard {
         
         let url: URL = {
             if let url = fileManager.url(forUbiquityContainerIdentifier: "iCloud.com.PabloHenri91.GameVI") {
-                let applicationSupportDirectoryURL = self.applicationSupportDirectory.appendingPathComponent(fileName)
-                if fileManager.fileExists(atPath: applicationSupportDirectoryURL.path) {
-                    do {
-                        try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: applicationSupportDirectoryURL, options: options)
-                        for persistentStore in coordinator.persistentStores {
-                            try coordinator.migratePersistentStore(persistentStore, to: url.appendingPathComponent(fileName), options: options, withType: NSSQLiteStoreType)
-                        }
-                        try fileManager.removeItem(at: applicationSupportDirectoryURL)
-                    } catch {
-                        #if DEBUG
-                            try? fileManager.removeItem(at: applicationSupportDirectoryURL)
-                            exit(1)
-                        #endif
-                    }
-                }
                 return url.appendingPathComponent(fileName)
             } else {
                 return self.applicationSupportDirectory.appendingPathComponent(fileName)
             }
         }()
         
-        if coordinator.persistentStores.count <= 0 {
-            do {
-                try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
-            } catch {
-                #if DEBUG
-                    try? fileManager.removeItem(at: url)
-                    exit(1)
-                #endif
-            }
+        do {
+            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
+        } catch {
+            #if DEBUG
+                try? fileManager.removeItem(at: url)
+                exit(1)
+            #endif
         }
         
         return coordinator

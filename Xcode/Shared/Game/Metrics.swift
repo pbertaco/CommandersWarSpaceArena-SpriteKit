@@ -53,7 +53,7 @@ class Metrics {
         let playerData = MemoryCard.sharedInstance.playerData!
         let botLevel = playerData.botLevel
         
-        GameAnalytics.addDesignEvent(withEventId: "BattleStart:\(Metrics.userName()):\(botLevel)")
+        GameAnalytics.addDesignEvent(withEventId: "BattleStart:\(Metrics.userName()) on \(Metrics.deviceName()):\(botLevel)")
         Answers.logLevelStart("\(botLevel)")
     }
     
@@ -66,7 +66,7 @@ class Metrics {
         formatter.timeZone = NSTimeZone.local
         let hour = formatter.string(from: date)
         
-        GameAnalytics.addDesignEvent(withEventId: "OpenTheGameAtHour:\(Metrics.userName()):\(hour)")
+        GameAnalytics.addDesignEvent(withEventId: "OpenTheGameAtHour:\(Metrics.userName()) on \(Metrics.deviceName()):\(hour)")
     }
     static func win(score: Int) {
         guard Metrics.canSendEvents() else { return }
@@ -74,7 +74,7 @@ class Metrics {
         let playerData = MemoryCard.sharedInstance.playerData!
         let botLevel = playerData.botLevel
         
-        GameAnalytics.addDesignEvent(withEventId: "BattleWin:\(Metrics.userName()):\(botLevel)")
+        GameAnalytics.addDesignEvent(withEventId: "BattleWin:\(Metrics.userName()) on \(Metrics.deviceName()):\(botLevel)")
         
         Answers.logLevelEnd("\(botLevel)", score: NSNumber(value: score), success: true)
     }
@@ -85,13 +85,17 @@ class Metrics {
         let playerData = MemoryCard.sharedInstance.playerData!
         let botLevel = playerData.botLevel
         
-        GameAnalytics.addDesignEvent(withEventId: "BattleLose:\(Metrics.userName()):\(botLevel)")
+        GameAnalytics.addDesignEvent(withEventId: "BattleLose:\(Metrics.userName()) on \(Metrics.deviceName()):\(botLevel)")
         
         Answers.logLevelEnd("\(botLevel)", score: NSNumber(value: score), success: false)
     }
     
     static func userName() -> String {
         return MemoryCard.sharedInstance.playerData.name ?? "Unknown"
+    }
+    
+    static func deviceName() -> String {
+        return (MemoryCard.sharedInstance.playerData.deviceName ?? "Unknown").replacingOccurrences(of: ":", with: ";")
     }
     
     static func canSendEvents() -> Bool {

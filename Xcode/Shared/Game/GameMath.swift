@@ -20,8 +20,13 @@ class GameMath {
         return Int(price)
     }
     
+    static func unlockSpaceshipPriceInPoints(rarity: Spaceship.rarity) -> Int {
+        let price = 62500.0/2.0 * pow(2.0, Double(rarity.rawValue))
+        return Int(price)
+    }
+    
     static func buySpaceshipPriceInPoints(rarity: Spaceship.rarity) -> Int {
-        let price = pow(2.0, Double(rarity.rawValue)) * 62500
+        let price = 62500.0 * pow(2.0, Double(rarity.rawValue))
         return Int(price)
     }
     
@@ -41,13 +46,22 @@ class GameMath {
         case .common:
             range = range * 178
             break
+        case .uncommon:
+            range = range * 122
+            break
         case .rare:
             range = range * 122
+            break
+        case .heroic:
+            range = range * 84
             break
         case .epic:
             range = range * 84
             break
         case .legendary:
+            range = range * 58
+            break
+        case .supreme:
             range = range * 58
             break
         }
@@ -69,14 +83,23 @@ class GameMath {
         case .common:
             damage = damage * 11
             break
-        case .rare:
+        case .uncommon:
             damage = damage * 16
             break
-        case .epic:
+        case .rare:
             damage = damage * 23
             break
+        case .heroic:
+            damage = damage * 34
+            break
+        case .epic:
+            damage = damage * 50
+            break
         case .legendary:
-            damage = damage * 33
+            damage = damage * 73
+            break
+        case .supreme:
+            damage = damage * 107
             break
         }
         
@@ -97,14 +120,23 @@ class GameMath {
         case .common:
             life = life * 550
             break
-        case .rare:
+        case .uncommon:
             life = life * 800
             break
-        case .epic:
+        case .rare:
             life = life * 1150
             break
+        case .heroic:
+            life = life * 1700
+            break
+        case .epic:
+            life = life * 2500
+            break
         case .legendary:
-            life = life * 1650
+            life = life * 3650
+            break
+        case .supreme:
+            life = life * 5350
             break
         }
         
@@ -125,14 +157,23 @@ class GameMath {
         case .common:
             speed = speed * 13
             break
-        case .rare:
+        case .uncommon:
             speed = speed * 14
             break
-        case .epic:
+        case .rare:
             speed = speed * 15
             break
-        case .legendary:
+        case .heroic:
             speed = speed * 16
+            break
+        case .epic:
+            speed = speed * 17
+            break
+        case .legendary:
+            speed = speed * 18
+            break
+        case .supreme:
+            speed = speed * 19
             break
         }
         

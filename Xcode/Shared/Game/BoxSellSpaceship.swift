@@ -22,14 +22,23 @@ class BoxSellSpaceship: Box {
         case .common:
             rarityText = "Common"
             break
+        case .uncommon:
+            rarityText = "Uncommon"
+            break
         case .rare:
             rarityText = "Rare"
+            break
+        case .heroic:
+            rarityText = "Heroic"
             break
         case .epic:
             rarityText = "Epic"
             break
         case .legendary:
             rarityText = "Legendary"
+            break
+        case .supreme:
+            rarityText = "Supreme"
             break
         }
         

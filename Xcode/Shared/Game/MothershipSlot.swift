@@ -51,14 +51,23 @@ class MothershipSlot: Control {
         case .common:
             self.set(color: GameColors.common)
             break
+        case .uncommon:
+            self.set(color: GameColors.uncommon)
+            break
         case .rare:
             self.set(color: GameColors.rare)
+            break
+        case .heroic:
+            self.set(color: GameColors.heroic)
             break
         case .epic:
             self.set(color: GameColors.epic)
             break
         case .legendary:
             self.set(color: GameColors.legendary)
+            break
+        case .supreme:
+            self.set(color: GameColors.supreme)
             break
         }
     }

@@ -354,6 +354,7 @@
 		840BDF671E4A7DC000B2B0FA /* BoxUnlockSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxUnlockSpaceship.swift; sourceTree = "<group>"; };
 		840DB2831E54F72800247ACB /* Stars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stars.swift; sourceTree = "<group>"; };
 		84138E001E439A9500B845E4 /* ControlMission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlMission.swift; sourceTree = "<group>"; };
+		841EED961ED73DBD00C84815 /* Rarity.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Rarity.playground; sourceTree = "<group>"; };
 		84240B6D1E26DD060090E681 /* GameMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMath.swift; sourceTree = "<group>"; };
 		842A85681E25B715006B31F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		842A856D1E25B715006B31F7 /* CommandersWar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CommandersWar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -808,6 +809,7 @@
 				84D587091E426DE70041BAAD /* Damage.playground */,
 				84D5870A1E426DE70041BAAD /* MaxRange.playground */,
 				84B93A431E42DFA300F3708B /* Mission.playground */,
+				841EED961ED73DBD00C84815 /* Rarity.playground */,
 				84D5870B1E426DE70041BAAD /* ShotMaxAngle.playground */,
 				84B93A441E42DFBB00F3708B /* SpaceshipXP.playground */,
 			);

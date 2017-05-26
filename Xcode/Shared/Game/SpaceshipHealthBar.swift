@@ -44,14 +44,23 @@ class SpaceshipHealthBar: SKSpriteNode {
         case .common:
             rarityColor = GameColors.common
             break
+        case .uncommon:
+            rarityColor = GameColors.uncommon
+            break
         case .rare:
             rarityColor = GameColors.rare
+            break
+        case .heroic:
+            rarityColor = GameColors.heroic
             break
         case .epic:
             rarityColor = GameColors.epic
             break
         case .legendary:
             rarityColor = GameColors.legendary
+            break
+        case .supreme:
+            rarityColor = GameColors.supreme
             break
         }
         

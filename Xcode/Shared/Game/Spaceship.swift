@@ -11,7 +11,7 @@ import SpriteKit
 class Spaceship: SKSpriteNode {
     
     enum rarity: Int {
-        case common, rare, epic, legendary
+        case common, uncommon, rare, heroic, epic, legendary, supreme
     }
     
     var element: Element!
@@ -125,7 +125,7 @@ class Spaceship: SKSpriteNode {
                   team: team)
     }
     
-    init(level: Int, rarity: rarity, loadPhysics: Bool = false, team: Mothership.team = .blue) {
+    init(level: Int, rarity: rarity, loadPhysics: Bool = false, team: Mothership.team = .blue, color: SKColor? = nil) {
         
         self.team = team
         
@@ -139,7 +139,7 @@ class Spaceship: SKSpriteNode {
                   baseSpeed: GameMath.randomBaseSpeed(rarity: self.rarity),
                   baseRange: GameMath.randomBaseRange(rarity: self.rarity),
                   skinIndex: Int.random(Spaceship.skins.count),
-                  color: Spaceship.randomColor(),
+                  color: color ?? Spaceship.randomColor(),
                   loadPhysics: loadPhysics,
                   team: team)
     }
@@ -255,6 +255,9 @@ class Spaceship: SKSpriteNode {
         self.damageEffect(damage: shot.damage, damageMultiplier: CGFloat(damageMultiplier), position: shot.position)
         
         if self.health > 0 && self.health - shot.damage <= 0 {
+            if shot.damage > self.maxHealth {
+                self.canRespawn = false
+            }
             self.die(shooter: shot.shooter)
         } else {
             self.health = self.health - shot.damage
@@ -1039,6 +1042,15 @@ class Spaceship: SKSpriteNode {
         return SKColor(red: red, green: green, blue: blue, alpha: 1)
     }
     
+    static func randomColorFor(element: Elements) -> SKColor {
+        let color = Spaceship.randomColor()
+        if Spaceship.elementFor(color: color).element == element {
+            return color
+        } else {
+            return Spaceship.randomColorFor(element: element)
+        }
+    }
+    
     static func elementColorFor(color: SKColor) -> SKColor {
         
         var elementColor = GameColors.darkness
@@ -1123,19 +1135,19 @@ class Spaceship: SKSpriteNode {
         return element!
     }
     
-    static func randomRarity() -> rarity? {
+    static func randomRarity() -> rarity {
+        let n: CGFloat = CGFloat.random()
+        var i: CGFloat = 1.0/2.0
         
-        switch Int.random(100) {
-        case 0..<5: // 5%
-            return .legendary
-        case 5..<15: // 10%
-            return .epic
-        case 15..<35: // 20%
-            return .rare
-        case 35..<75: // 40%
-            return .common
-        default:
-            return nil
+        let rarities: [rarity] = [.uncommon, .rare, .epic, .legendary, .supreme]
+        var value: rarity = .common
+        
+        for r in rarities {
+            if n < i {
+                i = i / 2.0
+                value = r
+            }
         }
+        return value
     }
 }

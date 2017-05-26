@@ -30,28 +30,28 @@ class LoadScene: GameScene {
         
         #if DEBUG
             self.view?.showsFPS = true
-            //self.view?.showsDrawCount = true
-            //self.view?.showsNodeCount = true
-            //self.view?.showsPhysics = true
-            
-            //MemoryCard.sharedInstance.reset()
+//            self.view?.showsDrawCount = true
+//            self.view?.showsNodeCount = true
+//            self.view?.showsPhysics = true
+//            
+//            MemoryCard.sharedInstance.reset()
             let playerData = MemoryCard.sharedInstance.playerData!
-            playerData.points = 999999
-            playerData.premiumPoints = 999999
-            playerData.maxBotLevel = 100
-            
-            if let spaceships = playerData.spaceships {
-                if spaceships.count < 3 {
-                    for _ in spaceships.count...3 {
-                        if let rarity = Spaceship.randomRarity() {
-                            let spaceship = Spaceship(level: 1, rarity: rarity)
-                            let spaceshipData = MemoryCard.sharedInstance.newSpaceshipData(spaceship: spaceship)
-                            playerData.addToSpaceships(spaceshipData)
-                        }
-                    }
-                }
-            }
-            
+            playerData.points = 9999999
+//            playerData.premiumPoints = 999999
+//            playerData.maxBotLevel = Int16(Mission.types.count)
+//            print(playerData.maxBotLevel)
+//            playerData.maxSpaceshipLevel = 10
+//            
+//            if let spaceships = playerData.spaceships {
+//                if spaceships.count < 100 {
+//                    for _ in spaceships.count...100 {
+//                        let rarity = Spaceship.randomRarity()
+//                        let spaceship = Spaceship(level: 1, rarity: rarity)
+//                        let spaceshipData = MemoryCard.sharedInstance.newSpaceshipData(spaceship: spaceship)
+//                        playerData.addToSpaceships(spaceshipData)
+//                    }
+//                }
+//            }
         #endif
         
         self.backgroundColor = GameColors.backgroundColor
@@ -128,7 +128,7 @@ class LoadScene: GameScene {
         self.spaceships = self.spaceships.filter({ $0.health > 0 })
         
         if self.spaceships.count < 3 && fps >= 60 {
-            let spaceship = Spaceship(level: 1 + Int.random(10), rarity: Spaceship.randomRarity() ?? .common, loadPhysics: true, team: .none)
+            let spaceship = Spaceship(level: 1 + Int.random(10), rarity: Spaceship.randomRarity(), loadPhysics: true, team: .none)
             spaceship.setBitMasksToSpaceship()
             spaceship.physicsBody?.isDynamic = true
             spaceship.position = CGPoint(

@@ -90,10 +90,14 @@ class BattleScene: GameScene {
         let mission = Mission.types[Int(playerData.botLevel)]
         
         for rarity in mission.rarities {
+            var color: SKColor?
+            if Int.random(Mission.types.count) > Int(playerData.botLevel) {
+                color = mission.color
+            }
             botMothership.spaceships.append(Spaceship(
                 level: (mission.level + Int.random(min: -2, max: 0)).clamped(1...10),
                 rarity: rarity,
-                loadPhysics: true, team: .red))
+                loadPhysics: true, team: .red, color: color))
         }
         botMothership.loadSpaceships(gameWorld: gameWorld)
         
@@ -193,7 +197,7 @@ class BattleScene: GameScene {
                             }
                             return false
                         }).sorted(by: {
-                            $0.health * ($0.element.weakness == botSpaceship.element.element ? 3 : 1) < $1.health * ($1.element.weakness == botSpaceship.element.element ? 3 : 1)
+                            $0.health * ($0.element.weakness == botSpaceship.element.element ? 3 : 1) / ($0.element.strength == botSpaceship.element.element ? 3 : 1) < $1.health * ($1.element.weakness == botSpaceship.element.element ? 3 : 1) / ($1.element.strength == botSpaceship.element.element ? 3 : 1)
                         })
                         
                         let targets = aliveSpaceships.filter({ (spaceship: Spaceship) -> Bool in
@@ -316,31 +320,10 @@ class BattleScene: GameScene {
                     
                     let playerData = MemoryCard.sharedInstance.playerData!
                     
-                    if playerData.botLevel >= Int16(Mission.types.count) {
+                    if playerData.botLevel >= Int16(Mission.types.count - 1) {
                         self.nextState = .credits
                     } else {
-                        if self.mothership.health > 0 {
-                            var rarity: Spaceship.rarity = Spaceship.randomRarity() ?? .common
-                            if Int16(rarity.rawValue) > playerData.maxBotRarity {
-                                rarity = Spaceship.rarity(rawValue: Int(playerData.maxBotRarity))!
-                            }
-                            boxBattleResult?.removeFromParent()
-                            let boxUnlockSpaceship = BoxUnlockSpaceship(rarity: rarity)
-                            boxUnlockSpaceship.zPosition = BattleScene.zPosition.boxUnlockSpaceship.rawValue
-                            self.addChild(boxUnlockSpaceship)
-                            
-                            boxUnlockSpaceship.buttonIgnore?.addHandler {
-                                self.nextState = .mainMenu
-                            }
-                            
-                            boxUnlockSpaceship.buttonUnlock?.addHandler {
-                                self.afterDelay(3, runBlock: {
-                                    self.nextState = .mainMenu
-                                })
-                            }
-                        } else {
-                            self.nextState = .mainMenu
-                        }
+                        self.nextState = .mainMenu
                     }
                 }
                 
@@ -368,7 +351,44 @@ class BattleScene: GameScene {
                 
             case .mainMenu:
                 Music.sharedInstance.stop()
-                self.view?.presentScene(MainMenuScene(), transition: GameScene.defaultTransition)
+                
+                let scene = MainMenuScene()
+                
+                if self.mothership.health > 0 {
+                    let playerData = MemoryCard.sharedInstance.playerData!
+                    
+                    var rarity: Spaceship.rarity = Spaceship.randomRarity()
+                    if Int16(rarity.rawValue) > playerData.maxBotRarity {
+                        rarity = Spaceship.rarity(rawValue: Int(playerData.maxBotRarity))!
+                    }
+                    let spaceship = self.botMothership.spaceships[Int.random(self.botMothership.spaceships.count)]
+                    spaceship.level = Int.random(spaceship.battleStartLevel).clamped(1...10)
+                    let boxUnlockSpaceship = BoxUnlockSpaceship(spaceship: spaceship.createCopy())
+                    boxUnlockSpaceship.zPosition = MainMenuScene.zPosition.box.rawValue
+                    scene.addChild(boxUnlockSpaceship)
+                    
+                    scene.blackSpriteNode.isHidden = false
+                    scene.blackSpriteNode.zPosition = MainMenuScene.zPosition.blackSpriteNode.rawValue
+                    
+                    boxUnlockSpaceship.buttonUnlockWithPoints?.addHandler { [weak scene] in
+                        scene?.afterDelay(3, runBlock: { [weak scene] in
+                            scene?.nextState = .hangar
+                        })
+                    }
+                    
+                    boxUnlockSpaceship.buttonUnlockWithPremiumPoints?.addHandler { [weak scene] in
+                        scene?.afterDelay(3, runBlock: { [weak scene] in
+                            scene?.nextState = .hangar
+                        })
+                    }
+                    
+                    scene.blackSpriteNode.addHandler { [weak scene, weak boxUnlockSpaceship] in
+                        boxUnlockSpaceship?.removeFromParent()
+                        scene?.blackSpriteNode.isHidden = true
+                    }
+                }
+                
+                self.view?.presentScene(scene, transition: GameScene.defaultTransition)
                 break
             case .credits:
                 self.view?.presentScene(CreditsScene(), transition: GameScene.defaultTransition)
