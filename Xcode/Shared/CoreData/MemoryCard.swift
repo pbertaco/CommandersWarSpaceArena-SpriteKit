@@ -123,21 +123,13 @@ class MemoryCard {
             let fileName = "\(productName).sqlite"
         #endif
         
-        let url: URL = {
-            if let url = fileManager.url(forUbiquityContainerIdentifier: "iCloud.com.PabloHenri91.GameVI") {
-                return url.appendingPathComponent(fileName)
-            } else {
-                return self.applicationSupportDirectory.appendingPathComponent(fileName)
-            }
-        }()
+        let url: URL = self.applicationSupportDirectory.appendingPathComponent(fileName)
         
         do {
             try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
         } catch {
-            #if DEBUG
-                try? fileManager.removeItem(at: url)
-                exit(1)
-            #endif
+            try? fileManager.removeItem(at: url)
+            fatalError()
         }
         
         return coordinator

@@ -52,10 +52,12 @@ class ControlPremiumPoints: Control {
                 guard let scene = GameScene.current() else { return }
                 
                 let playerData = MemoryCard.sharedInstance.playerData!
-                playerData.premiumPoints = playerData.premiumPoints + 3
+                let bonusPremiumPoints = 1 + Int.random(100)
+                
+                playerData.premiumPoints = playerData.premiumPoints + Int32(bonusPremiumPoints)
                 self.setLabelPremiumPointsText(premiumPoints: playerData.premiumPoints)
                 
-                let boxVideoAdAttemptFinished = BoxVideoAdAttemptFinished(bonusPremiumPoints: 3)
+                let boxVideoAdAttemptFinished = BoxVideoAdAttemptFinished(bonusPremiumPoints: bonusPremiumPoints)
                 boxVideoAdAttemptFinished.zPosition = MainMenuScene.zPosition.box.rawValue
                 scene.blackSpriteNode.isHidden = false
                 scene.blackSpriteNode.zPosition = MainMenuScene.zPosition.blackSpriteNode.rawValue

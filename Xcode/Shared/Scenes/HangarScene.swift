@@ -124,19 +124,17 @@ class HangarScene: GameScene {
     
     func loadButtonChange() {
         
-        let playerData = MemoryCard.sharedInstance.playerData!
-        
         let buttonChange = Button(imageNamed: "button_233x55", x: 71, y: 306, horizontalAlignment: .center, verticalAlignment: .center)
         buttonChange.setIcon(imageNamed: "Data in Both Directions")
         buttonChange.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonChange)
         self.buttonChange = buttonChange
         
-        buttonChange.addHandler { [weak self, weak playerData] in
-            guard let `self` = self else { return }
+        buttonChange.addHandler { [weak self] in
+            guard let this = self else { return }
             
-            let a = self.scrollNodeMothershipSlots.cells[self.cellIndexMothershipSlots]
-            let b = self.scrollNodePlayerDataSpaceships.cells[self.cellIndexPlayerDataSpaceships]
+            let a = this.scrollNodeMothershipSlots.cells[this.cellIndexMothershipSlots]
+            let b = this.scrollNodePlayerDataSpaceships.cells[this.cellIndexPlayerDataSpaceships]
             
             if let b = b as? SpaceshipHangarCell {
                 if b.spaceshipData() == nil {
@@ -144,8 +142,8 @@ class HangarScene: GameScene {
                 }
             }
             
-            self.scrollNodeMothershipSlots.cells[self.cellIndexMothershipSlots] = b
-            self.scrollNodePlayerDataSpaceships.cells[self.cellIndexPlayerDataSpaceships] = a
+            this.scrollNodeMothershipSlots.cells[this.cellIndexMothershipSlots] = b
+            this.scrollNodePlayerDataSpaceships.cells[this.cellIndexPlayerDataSpaceships] = a
             
             if let aParent = a.parent {
                 if let bParent = b.parent {
@@ -169,11 +167,13 @@ class HangarScene: GameScene {
                         if let bSpaceshipData = b.spaceshipData() {
                             
                             aSpaceshipData.parentMothershipSlot?.spaceship = bSpaceshipData
-                            playerData?.removeFromSpaceships(bSpaceshipData)
-                            playerData?.addToSpaceships(aSpaceshipData)
+                            
+                            let playerData = MemoryCard.sharedInstance.playerData!
+                            playerData.removeFromSpaceships(bSpaceshipData)
+                            playerData.addToSpaceships(aSpaceshipData)
                             
                             a.loadButtonSell(duration: 0.25, sellCompletion: {
-                                self.sellCompletion()
+                                this.sellCompletion()
                             })
                             b.loadControlSlot(duration: 0.25)
                         }

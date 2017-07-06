@@ -46,6 +46,7 @@ class BattleScene: GameScene {
     var battleEndTime: Double = 0
     
     var battleBeginTime: Double = 0
+    var maxBattleDuration: Double = 60 * 3
     
     override func load() {
         super.load()
@@ -89,7 +90,7 @@ class BattleScene: GameScene {
         
         let mission = Mission.types[Int(playerData.botLevel)]
         
-        for rarity in mission.rarities {
+        for rarity in mission.rarities.shuffled() {
             var color: SKColor?
             if Int.random(Mission.types.count) > Int(playerData.botLevel) {
                 color = mission.color
@@ -148,7 +149,7 @@ class BattleScene: GameScene {
                     for spaceship in self.mothership.spaceships {
                         health = health + spaceship.health
                     }
-                    if health <= 0 {
+                    if health <= 0 || currentTime - self.battleBeginTime > self.maxBattleDuration {
                         self.mothership.health = self.mothership.health - (self.mothership.maxHealth/10)
                         self.mothership.updateHealthBar(health: self.mothership.health, maxHealth: self.mothership.maxHealth)
                         if self.mothership.health <= 0 {
@@ -162,7 +163,7 @@ class BattleScene: GameScene {
                     for spaceship in self.botMothership.spaceships {
                         health = health + spaceship.health
                     }
-                    if health <= 0 {
+                    if health <= 0 || currentTime - self.battleBeginTime > self.maxBattleDuration {
                         self.botMothership.health = self.botMothership.health - (self.botMothership.maxHealth/10)
                         self.botMothership.updateHealthBar(health: self.botMothership.health, maxHealth: self.botMothership.maxHealth)
                         if self.botMothership.health <= 0 {
@@ -315,7 +316,7 @@ class BattleScene: GameScene {
                 self.blackSpriteNode.zPosition = zPosition.blackSpriteNode.rawValue
                 self.addChild(boxBattleResult)
                 
-                boxBattleResult.buttonOK.addHandler { [weak self, weak boxBattleResult] in
+                boxBattleResult.buttonOK.addHandler { [weak self] in
                     guard let `self` = self else { return }
                     
                     let playerData = MemoryCard.sharedInstance.playerData!

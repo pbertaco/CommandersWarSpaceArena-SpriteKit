@@ -42,7 +42,7 @@ class Shot: SKSpriteNode {
         self.startingPosition = shooter.position
         
         self.position = shooter.position
-        self.zRotation = shooter.zRotation + CGFloat.random(min: -0.1, max: 0.1)
+        self.zRotation = shooter.zRotation// + CGFloat.random(min: -0.2, max: 0.2)
         
         self.loadPhysics(shooter: shooter)
         

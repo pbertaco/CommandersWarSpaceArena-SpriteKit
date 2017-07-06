@@ -52,7 +52,7 @@ class MainMenuScene: GameScene {
         let serverManager = ServerManager.sharedInstance
         
         serverManager.onAny { [weak self] (event: String, peerID: MCPeerID, items: Any) in
-            guard let `self` = self else { return }
+            guard self != nil else { return }
             switch event {
             case "connected":
                 print("a player wants to play")

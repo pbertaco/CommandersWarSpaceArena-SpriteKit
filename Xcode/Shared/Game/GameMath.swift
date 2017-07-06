@@ -155,25 +155,25 @@ class GameMath {
         
         switch rarity {
         case .common:
-            speed = speed * 13
+            speed = speed * 20
             break
         case .uncommon:
-            speed = speed * 14
+            speed = speed * 19
             break
         case .rare:
-            speed = speed * 15
-            break
-        case .heroic:
-            speed = speed * 16
-            break
-        case .epic:
-            speed = speed * 17
-            break
-        case .legendary:
             speed = speed * 18
             break
+        case .heroic:
+            speed = speed * 17
+            break
+        case .epic:
+            speed = speed * 16
+            break
+        case .legendary:
+            speed = speed * 15
+            break
         case .supreme:
-            speed = speed * 19
+            speed = speed * 14
             break
         }
         

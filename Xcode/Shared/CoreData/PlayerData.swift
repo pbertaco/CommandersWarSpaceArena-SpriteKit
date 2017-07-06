@@ -31,10 +31,12 @@ extension MemoryCard {
         
         playerData.mothership = self.newMothershipData()
         
+        let elements: [Elements] = [.water, .fire, .ice, .wind]
+        
         for i in 0..<4 {
             let mothershipSlot: MothershipSlotData = self.newMothershipSlotData()
             mothershipSlot.index = Int16(i)
-            let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: .common, color: Spaceship.randomColorFor(element: .water))
+            let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: .common, color: Spaceship.randomColorFor(element: elements[i]))
             
             mothershipSlot.spaceship = spaceshipData
             
