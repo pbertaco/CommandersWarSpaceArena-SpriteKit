@@ -198,7 +198,10 @@ class BattleScene: GameScene {
                             }
                             return false
                         }).sorted(by: {
-                            $0.health * ($0.element.weakness == botSpaceship.element.element ? 3 : 1) / ($0.element.strength == botSpaceship.element.element ? 3 : 1) < $1.health * ($1.element.weakness == botSpaceship.element.element ? 3 : 1) / ($1.element.strength == botSpaceship.element.element ? 3 : 1)
+                            $0.health * ($0.element.weakness == botSpaceship.element.element ? 3 : 1) /
+                                ($0.element.strength == botSpaceship.element.element ? 3 : 1)
+                                < $1.health * ($1.element.weakness == botSpaceship.element.element ? 3 : 1) /
+                                ($1.element.strength == botSpaceship.element.element ? 3 : 1)
                         })
                         
                         let targets = aliveSpaceships.filter({ (spaceship: Spaceship) -> Bool in

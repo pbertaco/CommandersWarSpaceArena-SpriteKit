@@ -21,7 +21,7 @@ extension MemoryCard {
         #endif
         playerData.maxBotLevel = 0
         playerData.maxBotRarity = Int16(Spaceship.rarity.common.rawValue)
-        playerData.maxSpaceshipLevel = 1
+        playerData.maxSpaceshipLevel = 10
         playerData.modelVersion = 3
         playerData.music = true
         playerData.name = ""

@@ -201,6 +201,8 @@ class Spaceship: SKSpriteNode {
         
         self.health = self.maxHealth
         
+        
+        
         if loadPhysics {
             self.loadPhysics()
         }
@@ -236,12 +238,13 @@ class Spaceship: SKSpriteNode {
         var damageMultiplier = max(abs(totalRotationToShot), 1)
         
         if self.element.weakness == shot.element.element {
-            damageMultiplier = damageMultiplier * Float.pi
+            damageMultiplier = damageMultiplier * Float(π / 2)
         }
         
         if self.element.strength == shot.element.element {
-            damageMultiplier = damageMultiplier / Float.pi
+            damageMultiplier = damageMultiplier / Float(π / 2)
         }
+        
         
         if let shooter = shot.shooter {
             if shooter.team != self.team {
