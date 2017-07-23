@@ -217,12 +217,12 @@ class Spaceship: SKSpriteNode {
     
     func getHitBy(_ shot: Shot) {
         
-        if shot.shooter == self {
+        if shot.shooter == self || shot.damage <= 0 {
             return
         }
         
         if self.team != .none {
-            if shot.shooter?.team == self.team || shot.damage <= 0 {
+            if shot.shooter?.team == self.team {
                 return
             }
         }
