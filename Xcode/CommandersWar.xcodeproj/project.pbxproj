@@ -819,9 +819,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		842A856C1E25B715006B31F7 /* iOS */ = {
+		842A856C1E25B715006B31F7 /* CommandersWar */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 842A85C91E25B715006B31F7 /* Build configuration list for PBXNativeTarget "iOS" */;
+			buildConfigurationList = 842A85C91E25B715006B31F7 /* Build configuration list for PBXNativeTarget "CommandersWar" */;
 			buildPhases = (
 				842A85691E25B715006B31F7 /* Sources */,
 				842A856A1E25B715006B31F7 /* Frameworks */,
@@ -833,7 +833,7 @@
 			);
 			dependencies = (
 			);
-			name = iOS;
+			name = CommandersWar;
 			productName = iOS;
 			productReference = 842A856D1E25B715006B31F7 /* CommandersWar.app */;
 			productType = "com.apple.product-type.application";
@@ -928,7 +928,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				842A856C1E25B715006B31F7 /* iOS */,
+				842A856C1E25B715006B31F7 /* CommandersWar */,
 				842A85971E25B715006B31F7 /* tvOS */,
 				842A85A51E25B715006B31F7 /* macOS */,
 			);
@@ -1585,7 +1585,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		842A85C91E25B715006B31F7 /* Build configuration list for PBXNativeTarget "iOS" */ = {
+		842A85C91E25B715006B31F7 /* Build configuration list for PBXNativeTarget "CommandersWar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				842A85CA1E25B715006B31F7 /* Debug */,

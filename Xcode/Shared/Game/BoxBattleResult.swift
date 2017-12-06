@@ -68,11 +68,12 @@ class BoxBattleResult: Box {
                     spaceshipData.xp = spaceshipData.xp + Int32(spaceship.battlePoints)
                     let xp: Int32 = Int32(GameMath.xpForLevel(level: Int(spaceshipData.level) + 1))
                     
-                    if spaceshipData.xp <= xp {
+                    if spaceshipData.xp >= xp {
                         spaceshipData.xp = spaceshipData.xp - xp
                         spaceshipData.level = spaceshipData.level + 1
                     }
                 }
+            } else {
             }
         }
         

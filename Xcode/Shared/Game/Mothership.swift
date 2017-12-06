@@ -254,6 +254,8 @@ class Mothership: SKSpriteNode {
     
     func loadSpaceship(spaceship: Spaceship, gameWorld: GameWorld, i: Int) {
         
+        spaceship.health = 1
+        
         spaceship.team = self.team
         
         var position = CGPoint.zero

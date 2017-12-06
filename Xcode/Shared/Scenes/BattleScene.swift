@@ -195,8 +195,8 @@ class BattleScene: GameScene {
                         let aliveSpaceships = self.mothership.spaceships.filter({ (spaceship: Spaceship) -> Bool in
                             return spaceship.health > 0
                         }).sorted(by: { (a: Spaceship, b: Spaceship) -> Bool in
-                            let x = a.health * (a.element.weakness == botSpaceship.element.element ? 3 : 1) / (a.element.strength == botSpaceship.element.element ? 3 : 1)
-                            let y = b.health * (b.element.weakness == botSpaceship.element.element ? 3 : 1) / (b.element.strength == botSpaceship.element.element ? 3 : 1)
+                            let x = a.health * (a.element.weakness == botSpaceship.element.element ? 4 : 1) / (a.element.strength == botSpaceship.element.element ? 4 : 1)
+                            let y = b.health * (b.element.weakness == botSpaceship.element.element ? 4 : 1) / (b.element.strength == botSpaceship.element.element ? 4 : 1)
                             return x < y
                         })
                         
@@ -331,9 +331,24 @@ class BattleScene: GameScene {
                     
                 } else {
                     if self.botMothership.health <= 0 {
+                        
+                        var deaths = 0
+                        for i in self.mothership.spaceships {
+                            deaths = deaths + i.deaths
+                        }
+                        if deaths <= 0 {
+                            self.updateBotOnWin()
+                        }
+                        
                         Metrics.win(score: boxBattleResult.score)
                         if self.battleEndTime - self.battleBeginTime <= 60 * 3 {
                             self.updateBotOnWin()
+                            if self.battleEndTime - self.battleBeginTime <= 60 * 2 {
+                                self.updateBotOnWin()
+                                if self.battleEndTime - self.battleBeginTime <= 60 * 1 {
+                                    self.updateBotOnWin()
+                                }
+                            }
                         } else {
                             self.updateBotOnLose()
                         }
@@ -538,6 +553,7 @@ class BattleScene: GameScene {
                         nearestSpaceship.touchUp(touch: touch)
                     } else {
                         nearestSpaceship.physicsBody?.isDynamic = true
+                        nearestSpaceship.retreating = false
                     }
                     break
                 case .red, .none:
@@ -552,6 +568,7 @@ class BattleScene: GameScene {
                     if let selectedSpaceship = Spaceship.selectedSpaceship {
                         if selectedSpaceship.position.distanceTo(selectedSpaceship.startingPosition) > 4 {
                             selectedSpaceship.retreat()
+                            selectedSpaceship.retreating = true
                         }
                     }
                     return

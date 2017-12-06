@@ -100,6 +100,9 @@ class Spaceship: SKSpriteNode {
     
     var destinationEffectSpriteNode: SKSpriteNode?
     
+    var retreating = false
+    var lastHeal: Double = 0
+    
     init(spaceshipData: SpaceshipData, loadPhysics: Bool = false, team: Mothership.team = .blue) {
         
         self.team = team
@@ -264,6 +267,11 @@ class Spaceship: SKSpriteNode {
             self.die(shooter: shot.shooter)
         } else {
             self.health = self.health - shot.damage
+            if self.targetNode is Mothership {
+                if let shooter = shot.shooter {
+                    self.setTarget(spaceship: shooter)
+                }
+            }
         }
         self.updateHealthBar(health: self.health, maxHealth: self.maxHealth)
         shot.damage = 0
@@ -321,7 +329,8 @@ class Spaceship: SKSpriteNode {
             self.healthBar?.labelLevel.set(color: GameColors.fontBlack)
         }
         if self.health < self.maxHealth {
-            self.health = self.health + (self.maxHealth/60)
+            self.lastHeal = GameScene.currentTime
+            self.health = self.health + max((self.maxHealth/180), 1)
             if self.health > self.maxHealth {
                 self.health = self.maxHealth
             }
@@ -329,6 +338,12 @@ class Spaceship: SKSpriteNode {
                 self.getHitBySpaceships.removeAll()
             }
             self.updateHealthBar(health: self.health, maxHealth: self.maxHealth)
+        } else {
+            if GameScene.currentTime - self.lastHeal > 3 {
+                if !self.retreating {
+                    self.physicsBody?.isDynamic = true
+                }
+            }
         }
     }
     
@@ -348,9 +363,9 @@ class Spaceship: SKSpriteNode {
         label.zPosition = GameWorld.zPosition.damageEffect.rawValue
         label.position = position
         Control.set.remove(label)
-//        label.position = CGPoint(
-//            x: Int(self.position.x) + Int.random(min: -27, max: 27),
-//            y: Int(self.position.y) + Int.random(min: -27, max: 27))
+        //        label.position = CGPoint(
+        //            x: Int(self.position.x) + Int.random(min: -27, max: 27),
+        //            y: Int(self.position.y) + Int.random(min: -27, max: 27))
         self.parent?.addChild(label)
         
         label.run(SKAction.scale(to: 2, duration: 0))
@@ -867,7 +882,7 @@ class Spaceship: SKSpriteNode {
     func didBeginContact(with bodyB: SKPhysicsBody) {
         if let bodyA = self.physicsBody {
             switch GameWorld.categoryBitMask(rawValue: bodyA.categoryBitMask | bodyB.categoryBitMask) {
-            
+                
             case [.spaceship, .shot]:
                 if let shot = bodyB.node as? Shot {
                     self.getHitBy(shot)
@@ -1154,3 +1169,4 @@ class Spaceship: SKSpriteNode {
         return value
     }
 }
+
