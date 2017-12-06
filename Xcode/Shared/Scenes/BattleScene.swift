@@ -193,15 +193,11 @@ class BattleScene: GameScene {
                         let botSpaceship = aliveBotSpaceships[Int.random(aliveBotSpaceships.count)]
                         
                         let aliveSpaceships = self.mothership.spaceships.filter({ (spaceship: Spaceship) -> Bool in
-                            if spaceship.health > 0 {
-                                return true
-                            }
-                            return false
-                        }).sorted(by: {
-                            $0.health * ($0.element.weakness == botSpaceship.element.element ? 3 : 1) /
-                                ($0.element.strength == botSpaceship.element.element ? 3 : 1)
-                                < $1.health * ($1.element.weakness == botSpaceship.element.element ? 3 : 1) /
-                                ($1.element.strength == botSpaceship.element.element ? 3 : 1)
+                            return spaceship.health > 0
+                        }).sorted(by: { (a: Spaceship, b: Spaceship) -> Bool in
+                            let x = a.health * (a.element.weakness == botSpaceship.element.element ? 3 : 1) / (a.element.strength == botSpaceship.element.element ? 3 : 1)
+                            let y = b.health * (b.element.weakness == botSpaceship.element.element ? 3 : 1) / (b.element.strength == botSpaceship.element.element ? 3 : 1)
+                            return x < y
                         })
                         
                         let targets = aliveSpaceships.filter({ (spaceship: Spaceship) -> Bool in

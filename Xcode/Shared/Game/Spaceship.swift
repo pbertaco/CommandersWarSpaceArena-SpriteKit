@@ -41,7 +41,7 @@ class Spaceship: SKSpriteNode {
         "spaceship16"
     ]
     
-    private(set) weak var spaceshipData: SpaceshipData?
+    private(set) var spaceshipData: SpaceshipData?
     
     var level: Int!
     

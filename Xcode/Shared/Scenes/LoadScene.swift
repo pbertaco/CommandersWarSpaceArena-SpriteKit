@@ -184,9 +184,10 @@ class LoadScene: GameScene {
         Music.sharedInstance.stop()
         self.view?.presentScene(MainMenuScene(), transition: GameScene.defaultTransition)
         #if os(iOS)
-            GameViewController.sharedInstance()?.authenticateLocalPlayer {
+            let playerData = MemoryCard.sharedInstance.playerData
+            GameViewController.sharedInstance()?.authenticateLocalPlayer { [weak playerData] in
                 if let alias = GKLocalPlayer.localPlayer().alias {
-                    MemoryCard.sharedInstance.playerData.name = alias
+                    playerData?.name = alias
                     Metrics.configure()
                 }
             }
