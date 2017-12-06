@@ -47,9 +47,11 @@ class GameAdManager: UIResponder, VungleSDKDelegate {
     
     @objc private  func reachabilityChanged(_ notification: Notification) {
         if let reachability = notification.object as? Reachability {
-            if reachability.isReachable && self.needToConfigure {
-                self.needToConfigure = false
-                self.configure()
+            if reachability.isReachableViaWiFi {
+                if self.needToConfigure {
+                    self.needToConfigure = false
+                    self.configure()
+                }
             }
         }
     }
@@ -93,6 +95,7 @@ class GameAdManager: UIResponder, VungleSDKDelegate {
     }
     
     func vungleSDKAdPlayableChanged(_ isAdPlayable: Bool) {
+        
         self.vungleIsReady = isAdPlayable
         if isAdPlayable {
             self.eventHandlers.append(self.playVideoVungle)
@@ -119,6 +122,10 @@ class GameAdManager: UIResponder, VungleSDKDelegate {
     }
     
     private func loadVideoAdColony() {
+        
+        if self.reachability?.isReachableViaWiFi != true {
+            return
+        }
         
         AdColony.requestInterstitial(inZone: self.adColonyZoneID, options: nil, success: { [weak self] (adColonyInterstitial: AdColonyInterstitial) in
             guard let `self` = self else { return }
