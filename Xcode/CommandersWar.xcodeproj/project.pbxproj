@@ -1065,7 +1065,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "./Frameworks/Fabric.framework/run 3e7f6f013ee0dc3a5f45f5e4db357d194356643b 850680baf12e910f1f651af0e6d7a8d27fc45be1905cbf7f243b802cce84c15e\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+			shellScript = "./Frameworks/Fabric.framework/run ed86560586bc781e35b7a73c6fe78e7beedff020 072a83851210664f7c3fad5880bd93b3d1bfa0d51d2b53928a78e2e2c4b614e7\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
 		};
 		8498D9C71E5BFA8300C2D92D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
