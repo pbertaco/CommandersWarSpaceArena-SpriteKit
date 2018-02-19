@@ -2,7 +2,7 @@
 
 import Cocoa
 
-//common, uncommon, rare, heroic, epic, legendary, immortal
+//common, uncommon, rare, heroic, epic, legendary, supreme
 
 let min: Double = 0.9
 let max: Double = 1.1

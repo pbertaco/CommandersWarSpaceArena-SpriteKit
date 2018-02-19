@@ -3,7 +3,7 @@
 import SpriteKit
 
 enum rarity: String {
-    case common, uncommon, rare, epic, legendary, supreme
+    case common, uncommon, rare, heroic, epic, legendary, supreme
 }
 
 func random() -> CGFloat {
@@ -15,7 +15,7 @@ func randomRarity() -> rarity {
     let n: CGFloat = random()
     var i: CGFloat = 1.0/2.0
     
-    let rarities: [rarity] = [.uncommon, .rare, .epic, .legendary, .supreme]
+    let rarities: [rarity] = [.uncommon, .rare, .heroic, .epic, .legendary, .supreme]
     var value: rarity = .common
     
     for r in rarities {
@@ -31,11 +31,12 @@ func randomRarity() -> rarity {
 var commonCount = 0
 var uncommonCount = 0
 var rareCount = 0
+var heroicCount = 0
 var epicCount = 0
 var legendaryCount = 0
 var supremeCount = 0
 
-for i in 1...100 {
+for _ in 1...100 {
     switch randomRarity() {
     case .common:
         commonCount = commonCount + 1
@@ -45,6 +46,9 @@ for i in 1...100 {
         break
     case .rare:
         rareCount = rareCount + 1
+        break
+    case .heroic:
+        heroicCount = heroicCount + 1
         break
     case .epic:
         epicCount = epicCount + 1
