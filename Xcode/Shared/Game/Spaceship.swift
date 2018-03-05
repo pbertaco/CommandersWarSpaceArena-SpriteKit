@@ -316,7 +316,7 @@ class Spaceship: SKSpriteNode {
         self.lastSecond = GameScene.currentTime
         
         if self.canRespawn {
-            self.labelRespawn?.text = (self.deaths * 5).description
+            self.labelRespawn?.text = (self.deaths * (self.rarity.rawValue + 1)).description
         }
         
         self.setBitMasksToDeadSpaceship()
@@ -557,11 +557,11 @@ class Spaceship: SKSpriteNode {
                 if GameScene.currentTime - self.lastSecond > 1 {
                     self.lastSecond = GameScene.currentTime
                     
-                    if GameScene.currentTime - self.deathTime > Double(self.deaths * 5) {
+                    if GameScene.currentTime - self.deathTime > Double(self.deaths * (self.rarity.rawValue + 1)) {
                         self.respawn()
                     } else {
                         if let label = self.labelRespawn {
-                            let text = Int((self.deaths * 5) - Int(GameScene.currentTime - self.deathTime)).description
+                            let text = Int((self.deaths * (self.rarity.rawValue + 1)) - Int(GameScene.currentTime - self.deathTime)).description
                             label.text = text
                         }
                     }

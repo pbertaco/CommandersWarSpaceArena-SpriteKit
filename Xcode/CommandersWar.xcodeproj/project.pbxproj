@@ -1455,6 +1455,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = iOS/CommandersWar.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JZ3J7RVLD7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1469,6 +1470,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI;
 				PRODUCT_NAME = CommandersWar;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "iOS/iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1485,6 +1487,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = iOS/CommandersWar.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JZ3J7RVLD7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1499,6 +1502,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI;
 				PRODUCT_NAME = CommandersWar;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "iOS/iOS-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
