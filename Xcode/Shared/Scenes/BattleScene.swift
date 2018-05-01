@@ -310,9 +310,9 @@ class BattleScene: GameScene {
             case .showBattleResult:
                 
                 let boxBattleResult = BoxBattleResult(mothership: self.mothership, botMothership: self.botMothership)
-                boxBattleResult.zPosition = zPosition.boxBattleResult.rawValue
+                boxBattleResult.zPosition = BattleScene.zPosition.boxBattleResult.rawValue
                 self.blackSpriteNode.isHidden = false
-                self.blackSpriteNode.zPosition = zPosition.blackSpriteNode.rawValue
+                self.blackSpriteNode.zPosition = BattleScene.zPosition.blackSpriteNode.rawValue
                 self.addChild(boxBattleResult)
                 
                 boxBattleResult.buttonOK.addHandler { [weak self] in

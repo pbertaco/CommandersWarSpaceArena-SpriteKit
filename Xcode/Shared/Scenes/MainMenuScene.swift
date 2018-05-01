@@ -73,9 +73,9 @@ class MainMenuScene: GameScene {
             guard let `self` = self else { return }
             
             let boxSearchingForOpponent = BoxSearchingForOpponent()
-            boxSearchingForOpponent.zPosition = zPosition.box.rawValue
+            boxSearchingForOpponent.zPosition = MainMenuScene.zPosition.box.rawValue
             self.blackSpriteNode.isHidden = false
-            self.blackSpriteNode.zPosition = zPosition.blackSpriteNode.rawValue
+            self.blackSpriteNode.zPosition = MainMenuScene.zPosition.blackSpriteNode.rawValue
             self.addChild(boxSearchingForOpponent)
             
             serverManager.onAny { (event: String, peerID: MCPeerID, items: Any) in
@@ -142,9 +142,9 @@ class MainMenuScene: GameScene {
         buttonSettings.addHandler { [weak self] in
             guard let `self` = self else { return }
             let boxSettings = BoxSettings()
-            boxSettings.zPosition = zPosition.box.rawValue
+            boxSettings.zPosition = MainMenuScene.zPosition.box.rawValue
             self.blackSpriteNode.isHidden = false
-            self.blackSpriteNode.zPosition = zPosition.blackSpriteNode.rawValue
+            self.blackSpriteNode.zPosition = MainMenuScene.zPosition.blackSpriteNode.rawValue
             self.addChild(boxSettings)
             self.blackSpriteNode.removeAllHandlers()
             self.blackSpriteNode.addHandler { [weak boxSettings] in

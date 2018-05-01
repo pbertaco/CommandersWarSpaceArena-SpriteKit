@@ -40,7 +40,7 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
         GameWorld.lastInstance = self
         
         let border = SKSpriteNode(imageNamed: "gameWorld", filteringMode: GameScene.defaultFilteringMode)
-        border.zPosition = zPosition.border.rawValue
+        border.zPosition = GameWorld.zPosition.border.rawValue
         self.addChild(border)
         
         let stars = Stars()

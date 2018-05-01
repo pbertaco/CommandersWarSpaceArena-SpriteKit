@@ -115,7 +115,7 @@ class Spaceship: SKSpriteNode {
             green: CGFloat(spaceshipData.colorGreen),
             blue: CGFloat(spaceshipData.colorBlue), alpha: 1)
         
-        self.rarity = rarity(rawValue: Int(spaceshipData.rarity))!
+        self.rarity = Spaceship.rarity(rawValue: Int(spaceshipData.rarity))!
         
         self.load(level: Int(spaceshipData.level),
                   baseDamage: Int(spaceshipData.baseDamage),
