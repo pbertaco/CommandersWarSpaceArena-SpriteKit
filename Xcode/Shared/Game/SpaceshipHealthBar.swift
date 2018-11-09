@@ -62,6 +62,9 @@ class SpaceshipHealthBar: SKSpriteNode {
         case .supreme:
             rarityColor = GameColors.supreme
             break
+        case .boss:
+            rarityColor = GameColors.supreme
+            break
         }
         
         let fill = SKSpriteNode(texture: nil, color: .clear, size: self.size)

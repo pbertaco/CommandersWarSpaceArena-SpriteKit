@@ -11,7 +11,7 @@ import SpriteKit
 class Spaceship: SKSpriteNode {
     
     enum rarity: Int {
-        case common, uncommon, rare, heroic, epic, legendary, supreme
+        case common, uncommon, rare, heroic, epic, legendary, supreme, boss
     }
     
     var element: Element!
@@ -326,7 +326,6 @@ class Spaceship: SKSpriteNode {
     func heal() {
         if self.level < self.battleStartLevel + self.kills {
             self.upgradeOnBattle()
-            self.healthBar?.labelLevel.set(color: GameColors.fontBlack)
         }
         if self.health < self.maxHealth {
             self.lastHeal = GameScene.currentTime
@@ -590,6 +589,7 @@ class Spaceship: SKSpriteNode {
     
     func upgradeOnBattle() {
         self.setBattleLevel(self.level + 1)
+        self.healthBar?.labelLevel.set(color: GameColors.fontBlack)
     }
     
     func setBattleLevel(_ level: Int) {
@@ -671,8 +671,8 @@ class Spaceship: SKSpriteNode {
     }
     
     func applyForce() {
-        
-        let multiplier = max(1 - abs(self.totalRotationToDestination * 2), 0)
+        let absTotalRotationToDestination = abs(self.totalRotationToDestination * 2)
+        let multiplier = max(1 - absTotalRotationToDestination, 0)
         
         if multiplier > 0 {
             if let physicsBody = self.physicsBody {

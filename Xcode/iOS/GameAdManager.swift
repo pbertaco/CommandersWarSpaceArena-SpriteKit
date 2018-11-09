@@ -8,6 +8,7 @@
 
 import UIKit
 
+/*
 class GameAdManager: UIResponder, VungleSDKDelegate {
 
     static let sharedInstance = GameAdManager()
@@ -169,3 +170,4 @@ class GameAdManager: UIResponder, VungleSDKDelegate {
     }
     
 }
+ */

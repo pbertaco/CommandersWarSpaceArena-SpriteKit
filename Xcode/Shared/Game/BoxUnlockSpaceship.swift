@@ -49,6 +49,9 @@ class BoxUnlockSpaceship: Box {
         case .supreme:
             rarityText = "Supreme"
             break
+        case .boss:
+            rarityText = "Boss"
+            break
         }
         
         self.addChild(Label(text: "Secret \(rarityText) Spaceship", x: 189, y: 41))

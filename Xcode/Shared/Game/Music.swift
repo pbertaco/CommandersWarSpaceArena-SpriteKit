@@ -29,7 +29,13 @@ class Music {
             "klamm_infinity.m4a",
             "klamm_prisma.m4a",
             "klamm_vortex.m4a",
-            "Scorpion.m4a"
+            "Scorpion.m4a",
+            "klamm_discoveries.m4a",
+            "klamm_reign-of-robots.m4a",
+            "klamm_subzero.m4a",
+            "klamm_discoveries.m4a",
+            "klamm_reign-of-robots.m4a",
+            "klamm_subzero.m4a"
         ]
     }
     

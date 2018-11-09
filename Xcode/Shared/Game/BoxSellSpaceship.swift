@@ -40,6 +40,9 @@ class BoxSellSpaceship: Box {
         case .supreme:
             rarityText = "Supreme"
             break
+        case .boss:
+            rarityText = "Boss"
+            break
         }
         
         self.addChild(MultiLineLabel(text: "Are you sure you want to sell this \(rarityText) \(spaceship.element.element.rawValue) spaceship for \(points.pointsString()) coins?", maxWidth: 233, fontSize: .fontSize16, x: 72, y: 342))

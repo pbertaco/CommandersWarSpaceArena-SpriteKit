@@ -221,6 +221,9 @@ class SpaceshipHangarCell: Control {
         case .supreme:
             rocketColor = GameColors.supreme
             break
+        case .boss:
+            rocketColor = GameColors.supreme
+            break
         }
         
         let rocket = Control(imageNamed: "Rocket", x: 19, y: 8)

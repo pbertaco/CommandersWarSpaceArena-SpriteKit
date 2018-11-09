@@ -40,19 +40,23 @@ class ControlPremiumPoints: Control {
         
         ControlPremiumPoints.lastInstance = self
         
-        #if os(iOS)
-            let gameAdManager = GameAdManager.sharedInstance
+        let playerData = MemoryCard.sharedInstance.playerData!
+        
+        buttonBuyMore.isHidden = true
+        
+        if Date().timeIntervalSince1970 - playerData.lastGift > 3600 {
             
-            gameAdManager.onAdAvailabilityChange = { [weak buttonBuyMore] isReady in
-                buttonBuyMore?.isHidden = !gameAdManager.isReady
-            }
+            buttonBuyMore.isHidden = false
             
-            gameAdManager.onVideoAdAttemptFinished = { [weak self] shown in
+            buttonBuyMore.addHandler { [weak self, buttonBuyMore] in
                 guard let `self` = self else { return }
                 guard let scene = GameScene.current() else { return }
                 
                 let playerData = MemoryCard.sharedInstance.playerData!
                 let bonusPremiumPoints = 1 + Int.random(100)
+                
+                buttonBuyMore.isHidden = true
+                playerData.lastGift = Date().timeIntervalSince1970
                 
                 playerData.premiumPoints = playerData.premiumPoints + Int32(bonusPremiumPoints)
                 self.setLabelPremiumPointsText(premiumPoints: playerData.premiumPoints)
@@ -68,24 +72,7 @@ class ControlPremiumPoints: Control {
                     GameScene.current()?.blackSpriteNode.isHidden = true
                 }
             }
-            
-            buttonBuyMore.isHidden = !gameAdManager.isReady
-            
-            buttonBuyMore.addHandler {
-                guard let scene = GameScene.current() else { return }
-                
-                let boxWatchAd = BoxWatchAd()
-                boxWatchAd.zPosition = MainMenuScene.zPosition.box.rawValue
-                scene.blackSpriteNode.isHidden = false
-                scene.blackSpriteNode.zPosition = MainMenuScene.zPosition.blackSpriteNode.rawValue
-                scene.addChild(boxWatchAd)
-                scene.blackSpriteNode.removeAllHandlers()
-                scene.blackSpriteNode.addHandler { [weak boxWatchAd] in
-                    boxWatchAd?.removeFromParent()
-                    GameScene.current()?.blackSpriteNode.isHidden = true
-                }
-            }
-        #endif
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

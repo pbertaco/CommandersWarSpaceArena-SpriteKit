@@ -25,6 +25,7 @@ class BattleScene: GameScene {
         case loading
         
         case battle
+        case bossBattle
         
         case battleEnd
         case battleEndInterval
@@ -82,38 +83,51 @@ class BattleScene: GameScene {
                 }
             }
         }
+        
         mothership.loadSpaceships(gameWorld: gameWorld)
         
-        let botMothership = Mothership(team: Mothership.team.red)
-        botMothership.loadHealthBar(gameWorld: gameWorld)
-        gameWorld.addChild(botMothership)
-        
-        let mission = Mission.types[Int(playerData.botLevel)]
-        
-        for rarity in mission.rarities.shuffled() {
-            var color: SKColor?
-            if Int.random(Mission.types.count) > Int(playerData.botLevel) {
-                color = mission.color
-            }
-            botMothership.spaceships.append(Spaceship(
-                level: (mission.level + Int.random(min: -2, max: 0)).clamped(1...10),
-                rarity: rarity,
-                loadPhysics: true, team: .red, color: color))
-        }
-        botMothership.loadSpaceships(gameWorld: gameWorld)
-        
-        mothership.updateMaxHealth(enemySpaceships: botMothership.spaceships)
-        botMothership.updateMaxHealth(enemySpaceships: mothership.spaceships)
-        
-        mothership.update()
-        botMothership.update()
-        
-        self.nextState = .battle
-        
         self.gameWorld = gameWorld
+        
+        if false {
+            self.spawnSpaceship()
+            
+            mothership.updateMaxHealth(enemySpaceships: self.spaceships)
+            mothership.update()
+            
+            self.nextState = .bossBattle
+            
+        } else {
+            let botMothership = Mothership(team: Mothership.team.red)
+            botMothership.loadHealthBar(gameWorld: gameWorld)
+            gameWorld.addChild(botMothership)
+            
+            let mission = Mission.types[Int(playerData.botLevel)]
+            
+            for rarity in mission.rarities.shuffled() {
+                var color: SKColor?
+                if Int.random(Mission.types.count) > Int(playerData.botLevel) {
+                    color = mission.color
+                }
+                botMothership.spaceships.append(Spaceship(
+                    level: (mission.level + Int.random(min: -2, max: 0)).clamped(1...10),
+                    rarity: rarity,
+                    loadPhysics: true, team: .red, color: color))
+            }
+            botMothership.loadSpaceships(gameWorld: gameWorld)
+            
+            mothership.updateMaxHealth(enemySpaceships: botMothership.spaceships)
+            botMothership.updateMaxHealth(enemySpaceships: mothership.spaceships)
+            
+            mothership.update()
+            botMothership.update()
+            
+            self.botMothership = botMothership
+            
+            self.nextState = .battle
+        }
+        
         self.gameCamera = gameCamera
         self.mothership = mothership
-        self.botMothership = botMothership
     }
     
     override func updateSize() {
@@ -132,14 +146,37 @@ class BattleScene: GameScene {
             case .loading:
                 break
                 
+            case .bossBattle:
+                
+                if self.mothership.health <= 0 {
+                    self.nextState = .battleEnd
+                }
+                
+                var health = 0
+                for spaceship in self.spaceships {
+                    health = health + spaceship.health
+                }
+                
+                if health <= 0 {
+                    self.nextState = .battleEnd
+                }
+                
+                self.mothership.update(enemyMothership: self.botMothership, enemySpaceships: self.spaceships)
+                
+                self.updateSpaceships()
+                
+                break;
+                
             case .battle:
                 
                 if self.mothership.health <= 0 || self.botMothership.health <= 0 {
                     self.nextState = .battleEnd
                 }
                 
-                self.mothership.update(enemyMothership: self.botMothership, enemySpaceships: self.botMothership.spaceships)
-                self.botMothership.update(enemyMothership: self.mothership, enemySpaceships: self.mothership.spaceships)
+                self.mothership.update(enemyMothership: self.botMothership, enemySpaceships: self.botMothership.spaceships + self.spaceships)
+                self.botMothership.update(enemyMothership: self.mothership, enemySpaceships: self.mothership.spaceships + self.spaceships)
+                
+                self.updateSpaceships()
                 
                 if currentTime - self.lastBotUpdate > 1 {
                     
@@ -261,7 +298,7 @@ class BattleScene: GameScene {
                 
             case .battleEndInterval:
                 self.mothership.update()
-                self.botMothership.update()
+                self.botMothership?.update()
                 
                 if currentTime - self.battleEndTime > 2 {
                     self.nextState = .showBattleResult
@@ -290,6 +327,13 @@ class BattleScene: GameScene {
             case .loading:
                 break
                 
+            case .bossBattle:
+                if self.battleBeginTime == 0 {
+                    Metrics.battleStart()
+                    self.battleBeginTime = currentTime
+                }
+                break;
+                
             case .battle:
                 if self.battleBeginTime == 0 {
                     Metrics.battleStart()
@@ -299,7 +343,7 @@ class BattleScene: GameScene {
                 
             case .battleEnd:
                 self.mothership.endBattle()
-                self.botMothership.endBattle()
+                self.botMothership?.endBattle()
                 self.battleEndTime = currentTime
                 self.nextState = .battleEndInterval
                 break
@@ -341,11 +385,11 @@ class BattleScene: GameScene {
                         }
                         
                         Metrics.win(score: boxBattleResult.score)
-                        if self.battleEndTime - self.battleBeginTime <= 60 * 3 {
+                        if self.battleEndTime - self.battleBeginTime <= Double(60 * 3) {
                             self.updateBotOnWin()
-                            if self.battleEndTime - self.battleBeginTime <= 60 * 2 {
+                            if self.battleEndTime - self.battleBeginTime <= Double(60 * 2) {
                                 self.updateBotOnWin()
-                                if self.battleEndTime - self.battleBeginTime <= 60 * 1 {
+                                if self.battleEndTime - self.battleBeginTime <= Double(60 * 1) {
                                     self.updateBotOnWin()
                                 }
                             }
@@ -354,7 +398,7 @@ class BattleScene: GameScene {
                         }
                     } else {
                         Metrics.lose(score: boxBattleResult.score)
-                        if self.battleEndTime - self.battleBeginTime <= 60 * 3 {
+                        if self.battleEndTime - self.battleBeginTime <= Double(60 * 3) {
                             self.updateBotOnLose()
                         } else {
                             self.updateBotOnLose()
@@ -420,15 +464,20 @@ class BattleScene: GameScene {
                 Music.sharedInstance.playMusic(withType: .battle)
             }
         }
+        
+        self.fpsCountUpdateSpaceships()
     }
     
     override func didSimulatePhysics() {
         super.didSimulatePhysics()
         Shot.update()
         
-        self.mothership.didSimulatePhysics()
-        self.botMothership.didSimulatePhysics()
+        for spaceship in self.spaceships {
+            spaceship.didSimulatePhysics()
+        }
         
+        self.mothership.didSimulatePhysics()
+        self.botMothership?.didSimulatePhysics()
     }
     
     override func touchDown(touch: UITouch) {
@@ -438,6 +487,31 @@ class BattleScene: GameScene {
             
         case .loading:
             break
+            
+        case .bossBattle:
+            
+            if let nearestSpaceship = self.nearestSpaceship(spaceships: self.spaceships + self.mothership.spaceships, touch: touch) {
+                switch nearestSpaceship.team {
+                case .blue:
+                    nearestSpaceship.touchUp(touch: touch)
+                    break
+                case .red, .none:
+                    Spaceship.selectedSpaceship?.setTarget(spaceship: nearestSpaceship)
+                    break
+                }
+                return
+            }
+            
+            if let parent = self.mothership.parent {
+                if self.mothership.contains(touch.location(in: parent)) {
+                    Spaceship.selectedSpaceship?.retreat()
+                    return
+                }
+            }
+            
+            Spaceship.selectedSpaceship?.touchUp(touch: touch)
+            
+            break;
             
         case .battle:
             
@@ -495,6 +569,18 @@ class BattleScene: GameScene {
         case .loading:
             break
             
+        case .bossBattle:
+            
+            if let parent = self.mothership.parent {
+                if self.mothership.contains(touch.location(in: parent)) {
+                    return
+                }
+            }
+            
+            Spaceship.selectedSpaceship?.touchUp(touch: touch)
+            
+            break;
+            
         case .battle:
             
             if let parent = self.botMothership.parent {
@@ -536,6 +622,41 @@ class BattleScene: GameScene {
             
         case .loading:
             break
+            
+        case .bossBattle:
+            
+            if let nearestSpaceship = self.nearestSpaceship(spaceships: self.spaceships + self.mothership.spaceships, touch: touch) {
+                switch nearestSpaceship.team {
+                case .blue:
+                    if (nearestSpaceship.position - nearestSpaceship.startingPosition).lengthSquared() > 4 {
+                        nearestSpaceship.touchUp(touch: touch)
+                    } else {
+                        nearestSpaceship.physicsBody?.isDynamic = true
+                        nearestSpaceship.retreating = false
+                    }
+                    break
+                case .red, .none:
+                    Spaceship.selectedSpaceship?.setTarget(spaceship: nearestSpaceship)
+                    break
+                }
+                return
+            }
+            
+            if let parent = self.mothership.parent {
+                if self.mothership.contains(touch.location(in: parent)) {
+                    if let selectedSpaceship = Spaceship.selectedSpaceship {
+                        if selectedSpaceship.position.distanceTo(selectedSpaceship.startingPosition) > 4 {
+                            selectedSpaceship.retreat()
+                            selectedSpaceship.retreating = true
+                        }
+                    }
+                    return
+                }
+            }
+            
+            Spaceship.selectedSpaceship?.touchUp(touch: touch)
+            
+            break;
             
         case .battle:
             
@@ -651,5 +772,62 @@ class BattleScene: GameScene {
             playerData.botLevel = playerData.botLevel - 1
         }
     }
+    
+    func spawnSpaceship() {
+        Spaceship.diameter = Spaceship.diameter * 2
+        let spaceship = Spaceship(level: 1 + Int.random(10), rarity: .common, loadPhysics: true, team: .none)
+        spaceship.setBitMasksToSpaceship()
+        spaceship.physicsBody?.isDynamic = true
+        spaceship.position = CGPoint(
+            x: CGFloat.random(min: -GameScene.sketchSize.width/2, max: GameScene.sketchSize.width/2),
+            y: CGFloat.random(min: -GameScene.sketchSize.width/2, max: GameScene.sketchSize.width/2))
+        spaceship.destination = CGPoint(
+            x: CGFloat.random(min: -GameScene.sketchSize.width/2, max: GameScene.sketchSize.width/2),
+            y: CGFloat.random(min: -GameScene.sketchSize.width/2, max: GameScene.sketchSize.width/2))
+        spaceship.canRespawn = false
+        self.gameWorld.addChild(spaceship)
+        self.spaceships.append(spaceship)
+        
+        spaceship.loadHealthBar(gameWorld: gameWorld)
+        spaceship.loadJetEffect(gameWorld: gameWorld)
+        
+        spaceship.updateHealthBarPosition()
+        
+        let action = SKAction.fadeAlpha(to: 1, duration: 1)
+        spaceship.alpha = 0
+        spaceship.run(action)
+        spaceship.healthBar?.alpha = 0
+        spaceship.healthBar?.run(action)
+        spaceship.zRotation = CGFloat.random(min: -π, max: +π)
+        Spaceship.diameter = Spaceship.diameter / 2
+    }
+    
+    func updateSpaceships() {
+        for spaceship in self.spaceships {
+            spaceship.update(enemyMothership: nil, enemySpaceships: self.mothership.spaceships)
+            if spaceship.health <= 0 {
+                spaceship.destroy()
+                spaceship.healthBar?.destroy()
+            }
+        }
+    }
+    
+    func fpsCountUpdateSpaceships() {
+        if self.spaceships.count > 0 {
+            let spaceship = self.spaceships[Int.random(self.spaceships.count)]
+            let newTargets = self.mothership.spaceships
+            let newTargetNode = newTargets[Int.random(newTargets.count)]
+            if newTargetNode != spaceship {
+                spaceship.destination = nil
+                spaceship.targetNode = newTargetNode
+            } else {
+                spaceship.destination = CGPoint(
+                    x: CGFloat.random(min: -GameScene.sketchSize.width/2, max: GameScene.sketchSize.width/2),
+                    y: CGFloat.random(min: -GameScene.sketchSize.width/2, max: GameScene.sketchSize.width/2))
+            }
+        }
+    }
+    
+    var spaceships = [Spaceship]()
     
 }

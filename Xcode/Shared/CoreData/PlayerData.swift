@@ -17,7 +17,7 @@ extension MemoryCard {
         #if os(OSX)
             playerData.deviceName = Host.current().localizedName!
         #else
-            playerData.deviceName = UIDevice.current.name
+            //playerData.deviceName = UIDevice.current.name
         #endif
         playerData.maxBotLevel = 0
         playerData.maxBotRarity = Int16(Spaceship.rarity.common.rawValue)
@@ -89,8 +89,13 @@ extension MemoryCard {
             #if os(OSX)
                 self.playerData.deviceName = Host.current().localizedName!
             #else
-                self.playerData.deviceName = UIDevice.current.name
+                //self.playerData.deviceName = UIDevice.current.name
             #endif
+        }
+        
+        if self.playerData.modelVersion < 4 {
+            self.playerData.modelVersion = 4
+            self.playerData.lastGift = 0;
         }
     }
 }

@@ -31,7 +31,7 @@ class BoxWatchAd: Box {
         self.addChild(buttonYes)
         buttonYes.addHandler { [weak self] in
             guard let `self` = self else { return }
-            GameAdManager.sharedInstance.play()
+            //GameAdManager.sharedInstance.play()
             self.removeFromParent()
         }
     }

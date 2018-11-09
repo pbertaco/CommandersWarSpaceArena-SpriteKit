@@ -64,6 +64,9 @@ class GameMath {
         case .supreme:
             range = range * 58
             break
+        case .boss:
+            range = range * 58 * 2
+            break
         }
         
         return Int(round(range))
@@ -100,6 +103,9 @@ class GameMath {
             break
         case .supreme:
             damage = damage * 107
+            break
+        case .boss:
+            damage = damage * 107 * 2
             break
         }
         
@@ -138,6 +144,9 @@ class GameMath {
         case .supreme:
             life = life * 5350
             break
+        case .boss:
+            life = life * 5350 * 10
+            break
         }
         
         return Int(round(life))
@@ -174,6 +183,9 @@ class GameMath {
             break
         case .supreme:
             speed = speed * 14
+            break
+        case .boss:
+            speed = speed * 14 * 2
             break
         }
         

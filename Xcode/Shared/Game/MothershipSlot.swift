@@ -69,6 +69,9 @@ class MothershipSlot: Control {
         case .supreme:
             self.set(color: GameColors.supreme)
             break
+        case .boss:
+            self.set(color: GameColors.supreme)
+            break
         }
     }
 
