@@ -79,7 +79,7 @@ class Spaceship: SKSpriteNode {
     weak var healthBar: SpaceshipHealthBar?
     
     var lastShot: Double = 0
-    var canShot = true
+    var canShoot = true
     
     var canRespawn = true
     var deathTime = 0.0
@@ -578,8 +578,8 @@ class Spaceship: SKSpriteNode {
     
     func tryToShoot() {
         if GameScene.currentTime - self.lastShot > 0.2 {
-            if self.canShot {
-                self.canShot = false
+            if self.canShoot {
+                self.canShoot = false
                 self.lastShot = GameScene.currentTime
                 self.parent?.addChild(Shot(shooter: self, element: self.element))
                 GameWorld.current()?.shotSoundEffect?.play()

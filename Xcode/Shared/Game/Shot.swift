@@ -44,7 +44,7 @@ class Shot: SKSpriteNode {
         self.position = shooter.position
         self.zRotation = shooter.zRotation// + CGFloat.random(min: -0.2, max: 0.2)
         
-        self.loadPhysics(shooter: shooter)
+        self.loadPhysics()
         
         self.loadEmitterNode(targetNode: shooter.parent, color: color)
         
@@ -71,7 +71,7 @@ class Shot: SKSpriteNode {
         }
     }
     
-    func loadPhysics(shooter: Spaceship) {
+    func loadPhysics() {
         
         self.zPosition = GameWorld.zPosition.shot.rawValue
         
@@ -105,7 +105,7 @@ class Shot: SKSpriteNode {
     
     func loadEmitterNode(targetNode: SKNode?, color: SKColor) {
         let emitterNode = SKEmitterNode()
-        let texture = SKTexture(imageNamed: "spark")
+        let texture = self.texture ?? SKTexture(imageNamed: "spark")
         emitterNode.particleTexture = texture
         emitterNode.particleSize = CGSize(width: 8, height: 8)
         emitterNode.particleBirthRate = 60
@@ -168,7 +168,7 @@ class Shot: SKSpriteNode {
         }
         
         Shot.set.remove(self)
-        self.shooter?.canShot = true
+        self.shooter?.canShoot = true
         super.removeFromParent()
         
         self.emitterNode?.particleBirthRate = 0
