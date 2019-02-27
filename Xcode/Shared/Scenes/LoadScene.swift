@@ -29,29 +29,29 @@ class LoadScene: GameScene {
         super.load()
         
         #if DEBUG
-            self.view?.showsFPS = true
-//            self.view?.showsDrawCount = true
-//            self.view?.showsNodeCount = true
-//            self.view?.showsPhysics = true
-//            
-//            MemoryCard.sharedInstance.reset()
-//            let playerData = MemoryCard.sharedInstance.playerData!
-//            playerData.points = 9999999
-//            playerData.premiumPoints = 999999
-//            playerData.maxBotLevel = Int16(Mission.types.count)
-//            print(playerData.maxBotLevel)
-//            playerData.maxSpaceshipLevel = 10
-//            
-//            if let spaceships = playerData.spaceships {
-//                if spaceships.count < 100 {
-//                    for _ in spaceships.count...100 {
-//                        let rarity = Spaceship.randomRarity()
-//                        let spaceship = Spaceship(level: 1, rarity: rarity)
-//                        let spaceshipData = MemoryCard.sharedInstance.newSpaceshipData(spaceship: spaceship)
-//                        playerData.addToSpaceships(spaceshipData)
-//                    }
-//                }
-//            }
+        self.view?.showsFPS = true
+        //            self.view?.showsDrawCount = true
+        //            self.view?.showsNodeCount = true
+        //            self.view?.showsPhysics = true
+        //
+        //            MemoryCard.sharedInstance.reset()
+        //            let playerData = MemoryCard.sharedInstance.playerData!
+        //            playerData.points = 9999999
+        //            playerData.premiumPoints = 999999
+        //            playerData.maxBotLevel = Int16(Mission.types.count)
+        //            print(playerData.maxBotLevel)
+        //            playerData.maxSpaceshipLevel = 10
+        //
+        //            if let spaceships = playerData.spaceships {
+        //                if spaceships.count < 100 {
+        //                    for _ in spaceships.count...100 {
+        //                        let rarity = Spaceship.randomRarity()
+        //                        let spaceship = Spaceship(level: 1, rarity: rarity)
+        //                        let spaceshipData = MemoryCard.sharedInstance.newSpaceshipData(spaceship: spaceship)
+        //                        playerData.addToSpaceships(spaceshipData)
+        //                    }
+        //                }
+        //            }
         #endif
         
         self.backgroundColor = GameColors.backgroundColor
@@ -184,13 +184,12 @@ class LoadScene: GameScene {
         Music.sharedInstance.stop()
         self.view?.presentScene(MainMenuScene(), transition: GameScene.defaultTransition)
         #if os(iOS)
-            let playerData = MemoryCard.sharedInstance.playerData
-            GameViewController.sharedInstance()?.authenticateLocalPlayer { [weak playerData] in
-                if let alias = GKLocalPlayer.localPlayer().alias {
-                    playerData?.name = alias
-                    Metrics.configure()
-                }
-            }
+        let playerData = MemoryCard.sharedInstance.playerData
+        GameViewController.sharedInstance()?.authenticateLocalPlayer { [weak playerData] in
+            let alias = GKLocalPlayer.local.alias
+            playerData?.name = alias
+            Metrics.configure()
+        }
         #endif
     }
 }
