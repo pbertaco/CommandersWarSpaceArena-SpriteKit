@@ -34,21 +34,26 @@ class GameWorld: SKNode, SKPhysicsContactDelegate {
     
     weak var stars: Stars!
     
-    override init() {
+    init(loadBorder: Bool = true) {
         super.init()
         
         GameWorld.lastInstance = self
-        
-        let border = SKSpriteNode(imageNamed: "gameWorld", filteringMode: GameScene.defaultFilteringMode)
-        border.zPosition = GameWorld.zPosition.border.rawValue
-        self.addChild(border)
         
         let stars = Stars()
         self.addChild(stars)
         self.stars = stars
         
-        self.loadPhysics()
         self.loadSoundEffect()
+        
+        if !loadBorder {
+            return
+        }
+        
+        let border = SKSpriteNode(imageNamed: "gameWorld", filteringMode: GameScene.defaultFilteringMode)
+        border.zPosition = GameWorld.zPosition.border.rawValue
+        self.addChild(border)
+        
+        self.loadPhysics()
     }
     
     required init?(coder aDecoder: NSCoder) {

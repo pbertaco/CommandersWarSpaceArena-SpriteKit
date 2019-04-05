@@ -297,6 +297,8 @@
 		84E0F2A01E25C77100E12E09 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E0F29F1E25C77100E12E09 /* PlayerData.swift */; };
 		84E0F2A11E25C77100E12E09 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E0F29F1E25C77100E12E09 /* PlayerData.swift */; };
 		84E0F2A21E25C77100E12E09 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E0F29F1E25C77100E12E09 /* PlayerData.swift */; };
+		84E128192249BAEE0077DDB8 /* BattleRoyaleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E128182249BAEE0077DDB8 /* BattleRoyaleScene.swift */; };
+		84E1281A2249BAEE0077DDB8 /* BattleRoyaleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E128182249BAEE0077DDB8 /* BattleRoyaleScene.swift */; };
 		84F945201E29C45B0034F530 /* InvitableFriends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F9451F1E29C45B0034F530 /* InvitableFriends.swift */; };
 		84F945221E2EE6780034F530 /* ControlPremiumPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F945211E2EE6780034F530 /* ControlPremiumPoints.swift */; };
 		84F945231E2EE6780034F530 /* ControlPremiumPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F945211E2EE6780034F530 /* ControlPremiumPoints.swift */; };
@@ -460,6 +462,7 @@
 		84E0F2971E25C6F000E12E09 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		84E0F29B1E25C74600E12E09 /* MemoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCard.swift; sourceTree = "<group>"; };
 		84E0F29F1E25C77100E12E09 /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerData.swift; sourceTree = "<group>"; };
+		84E128182249BAEE0077DDB8 /* BattleRoyaleScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleRoyaleScene.swift; sourceTree = "<group>"; };
 		84F9451F1E29C45B0034F530 /* InvitableFriends.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitableFriends.swift; sourceTree = "<group>"; };
 		84F945211E2EE6780034F530 /* ControlPremiumPoints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlPremiumPoints.swift; sourceTree = "<group>"; };
 		84F945251E2EEBCD0034F530 /* kenpixel.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = kenpixel.ttf; sourceTree = "<group>"; };
@@ -594,6 +597,7 @@
 		842A85D31E25BAAF006B31F7 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				84E128182249BAEE0077DDB8 /* BattleRoyaleScene.swift */,
 				84AFAE1A1E2FC949006359DD /* BattleScene.swift */,
 				848B8F981EB979530002E557 /* BattleSceneOnline.swift */,
 				84B7BAF81E4D186B00074CDA /* ChooseMissionScene.swift */,
@@ -1094,6 +1098,7 @@
 				84E0F29C1E25C74600E12E09 /* MemoryCard.swift in Sources */,
 				847182BA1E25D5A60077D3EF /* CGVector+Extensions.swift in Sources */,
 				840080241E4BCD46005AF200 /* Button.swift in Sources */,
+				84E128192249BAEE0077DDB8 /* BattleRoyaleScene.swift in Sources */,
 				846585421E3D9C1100C890D3 /* MothershipHealthBar.swift in Sources */,
 				847182CC1E25D5A60077D3EF /* SKTAudio.swift in Sources */,
 				840B12FB1E25E49100707EE9 /* Spaceship.swift in Sources */,
@@ -1240,6 +1245,7 @@
 				84F945241E2EE6780034F530 /* ControlPremiumPoints.swift in Sources */,
 				84AFAE1D1E2FC949006359DD /* BattleScene.swift in Sources */,
 				8409314B1E268CDD00C61711 /* MothershipSlots.swift in Sources */,
+				84E1281A2249BAEE0077DDB8 /* BattleRoyaleScene.swift in Sources */,
 				843739A21E9F2ADF00C61B6F /* BoxSellSpaceship.swift in Sources */,
 				847182B91E25D5A60077D3EF /* CGPoint+Extensions.swift in Sources */,
 				849632C91E42DCB100AEC90F /* Mission.swift in Sources */,

@@ -24,6 +24,7 @@ class MainMenuScene: GameScene {
     enum state: String {
         case mainMenu
         case battle
+        case battleRoyale
         case hangar
         case chooseMission
     }
@@ -70,26 +71,29 @@ class MainMenuScene: GameScene {
         buttonPlayOnline.set(color: GameColors.controlRed, blendMode: .add)
         self.addChild(buttonPlayOnline)
         buttonPlayOnline.addHandler { [weak self] in
+//            guard let `self` = self else { return }
+//
+//            let boxSearchingForOpponent = BoxSearchingForOpponent()
+//            boxSearchingForOpponent.zPosition = MainMenuScene.zPosition.box.rawValue
+//            self.blackSpriteNode.isHidden = false
+//            self.blackSpriteNode.zPosition = MainMenuScene.zPosition.blackSpriteNode.rawValue
+//            self.addChild(boxSearchingForOpponent)
+//
+//            serverManager.onAny { (event: String, peerID: MCPeerID, items: Any) in
+//                switch event {
+//                case "connected":
+//                    print("connected to server")
+//                    print("wait for match comfirmation")
+//                    break
+//                default:
+//                    print("event: \(event), peerID: \(peerID), items: \(items)")
+//                    break
+//                }
+//            }
+//            serverManager.startAdvertisingPeer()
+            
             guard let `self` = self else { return }
-            
-            let boxSearchingForOpponent = BoxSearchingForOpponent()
-            boxSearchingForOpponent.zPosition = MainMenuScene.zPosition.box.rawValue
-            self.blackSpriteNode.isHidden = false
-            self.blackSpriteNode.zPosition = MainMenuScene.zPosition.blackSpriteNode.rawValue
-            self.addChild(boxSearchingForOpponent)
-            
-            serverManager.onAny { (event: String, peerID: MCPeerID, items: Any) in
-                switch event {
-                case "connected":
-                    print("connected to server")
-                    print("wait for match comfirmation")
-                    break
-                default:
-                    print("event: \(event), peerID: \(peerID), items: \(items)")
-                    break
-                }
-            }
-            serverManager.startAdvertisingPeer()
+            self.nextState = .battleRoyale
         }
         
         self.registerUserNotificationSettings()
@@ -222,6 +226,8 @@ class MainMenuScene: GameScene {
                 break
             case .battle:
                 break
+            case .battleRoyale:
+                break
             case .hangar:
                 break
             case .chooseMission:
@@ -238,6 +244,10 @@ class MainMenuScene: GameScene {
             case .battle:
                 Music.sharedInstance.stop()
                 self.view?.presentScene(BattleScene(), transition: GameScene.defaultTransition)
+                break
+            case .battleRoyale:
+                Music.sharedInstance.stop()
+                self.view?.presentScene(BattleRoyaleScene(), transition: GameScene.defaultTransition)
                 break
             case .hangar:
                 self.view?.presentScene(HangarScene(), transition: GameScene.defaultTransition)
