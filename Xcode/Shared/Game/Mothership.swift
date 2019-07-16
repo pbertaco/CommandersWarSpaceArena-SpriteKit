@@ -296,13 +296,18 @@ class Mothership: SKSpriteNode {
         spaceship.loadLabelRespawn(gameWorld: gameWorld)
         spaceship.loadJetEffect(gameWorld: gameWorld)
         spaceship.loadSetDestinationEffect(gameWorld: gameWorld)
+        
+        spaceship.loaded = true
     }
     
-    func loadSpaceships(gameWorld: GameWorld) {
+    func loadSpaceships(gameWorld: GameWorld, botLevel: Int) {
         var i = 0
         for spaceship in self.spaceships {
             self.loadSpaceship(spaceship: spaceship, gameWorld: gameWorld, i: i)
             i += 1
+            if i > botLevel {
+                return
+            }
         }
     }
     
@@ -353,12 +358,13 @@ class Mothership: SKSpriteNode {
         var totalDamage = 0
         var spaceshipCount = 0
         for spaceship in self.spaceships + enemySpaceships {
+            if !spaceship.loaded { continue }
             totalDamage = totalDamage + spaceship.damage
             spaceshipCount = spaceshipCount + 1
         }
         
         if spaceshipCount > 0 {
-            self.maxHealth = Int((Float(totalDamage)/Float(spaceshipCount)) * 200)
+            self.maxHealth = Int((Float(totalDamage)/Float(spaceshipCount)) * 100)
             self.health = self.maxHealth
         }
     }

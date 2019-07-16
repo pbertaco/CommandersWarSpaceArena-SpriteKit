@@ -84,7 +84,7 @@ class BattleScene: GameScene {
             }
         }
         
-        mothership.loadSpaceships(gameWorld: gameWorld)
+        mothership.loadSpaceships(gameWorld: gameWorld, botLevel: Int(playerData.botLevel))
         
         self.gameWorld = gameWorld
         
@@ -113,7 +113,7 @@ class BattleScene: GameScene {
                     rarity: rarity,
                     loadPhysics: true, team: .red, color: color))
             }
-            botMothership.loadSpaceships(gameWorld: gameWorld)
+            botMothership.loadSpaceships(gameWorld: gameWorld, botLevel: Int(playerData.botLevel))
             
             mothership.updateMaxHealth(enemySpaceships: botMothership.spaceships)
             botMothership.updateMaxHealth(enemySpaceships: mothership.spaceships)

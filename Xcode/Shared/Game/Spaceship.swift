@@ -67,7 +67,6 @@ class Spaceship: SKSpriteNode {
     
     var team: Mothership.team
     
-    var rotationToDestination: CGFloat = 0
     var totalRotationToDestination: CGFloat = 0
     
     var maxAngularVelocity: CGFloat = 3
@@ -102,6 +101,8 @@ class Spaceship: SKSpriteNode {
     
     var retreating = false
     var lastHeal: Double = 0
+    
+    var loaded = false
     
     init(spaceshipData: SpaceshipData, loadPhysics: Bool = false, team: Mothership.team = .blue) {
         
@@ -230,13 +231,7 @@ class Spaceship: SKSpriteNode {
             }
         }
         
-        let dx = Float(shot.position.x - self.position.x)
-        let dy = Float(shot.position.y - self.position.y)
-        
-        let rotationToShot = -atan2f(dx, dy)
-        var totalRotationToShot = rotationToShot - Float(self.zRotation)
-        while totalRotationToShot < Float(-π) { totalRotationToShot += Float(π * 2) }
-        while totalRotationToShot > Float(π) { totalRotationToShot -= Float(π * 2) }
+        let totalRotationToShot = self.totalRotation(to: shot.position)
         
         var damageMultiplier = max(abs(totalRotationToShot), 1)
         
@@ -576,9 +571,29 @@ class Spaceship: SKSpriteNode {
         self.updateJetEffect()
     }
     
+    func totalRotation(to point: CGPoint) -> Float {
+        
+        let dx = Float(point.x - self.position.x)
+        let dy = Float(point.y - self.position.y)
+        
+        let rotationToPoint = -atan2f(dx, dy)
+        var totalRotationToPoint = rotationToPoint - Float(self.zRotation)
+        while totalRotationToPoint < Float(-π) { totalRotationToPoint += Float(π * 2) }
+        while totalRotationToPoint > Float(π) { totalRotationToPoint -= Float(π * 2) }
+        
+        return totalRotationToPoint
+    }
+    
+    func canTryToShoot() -> Bool {
+        guard let targetSpaceship = self.targetNode else { return true }
+        let maxAngle = asin((Spaceship.diameter / 2) / self.position.distanceTo(targetSpaceship.position)) / 2
+        return abs(self.totalRotationToDestination) <= maxAngle
+    }
+    
     func tryToShoot() {
         if GameScene.currentTime - self.lastShot > 0.2 {
             if self.canShoot {
+                guard self.canTryToShoot() else { return }
                 self.canShoot = false
                 self.lastShot = GameScene.currentTime
                 self.parent?.addChild(Shot(shooter: self, element: self.element))
@@ -652,19 +667,8 @@ class Spaceship: SKSpriteNode {
     
     func rotateTo(point: CGPoint) {
         if let physicsBody = self.physicsBody {
-            
-            let dx = Float(point.x - self.position.x)
-            let dy = Float(point.y - self.position.y)
-            
-            self.rotationToDestination = CGFloat(-atan2(dx, dy))
-            
             if abs(physicsBody.angularVelocity) < self.maxAngularVelocity {
-                
-                self.totalRotationToDestination = self.rotationToDestination - self.zRotation
-                
-                while self.totalRotationToDestination < -π { self.totalRotationToDestination += π * 2 }
-                while self.totalRotationToDestination >  π { self.totalRotationToDestination -= π * 2 }
-                
+                self.totalRotationToDestination = CGFloat(self.totalRotation(to: point))
                 physicsBody.applyAngularImpulse(self.totalRotationToDestination * self.angularImpulse)
             }
         }
