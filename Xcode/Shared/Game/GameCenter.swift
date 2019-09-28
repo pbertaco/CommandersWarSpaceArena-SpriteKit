@@ -16,7 +16,7 @@ extension GameViewController: GKGameCenterControllerDelegate {
     
     func presentGameCenterViewController() {
         #if !DEBUG
-        guard GKLocalPlayer.localPlayer().isAuthenticated else { return }
+        guard GKLocalPlayer.local.isAuthenticated else { return }
         let gameCenterViewController = GKGameCenterViewController()
         gameCenterViewController.gameCenterDelegate = self
         self.present(gameCenterViewController, animated: true)
@@ -25,7 +25,7 @@ extension GameViewController: GKGameCenterControllerDelegate {
 
     func authenticateLocalPlayer(completion block: @escaping () -> Void = {}) {
         #if !DEBUG
-        let localPlayer = GKLocalPlayer.localPlayer()
+        let localPlayer = GKLocalPlayer.local
         
         if localPlayer.isAuthenticated {
             block()
@@ -48,7 +48,7 @@ extension GameViewController: GKGameCenterControllerDelegate {
     
     func save(scoreValue: Int) {
         #if !DEBUG
-        if GKLocalPlayer.localPlayer().isAuthenticated {
+        if GKLocalPlayer.local.isAuthenticated {
             let score = GKScore(leaderboardIdentifier: "\(Bundle.main.bundleIdentifier!).score")
             score.value = Int64(scoreValue)
             GKScore.report([score], withCompletionHandler: { (error: Error?) in
@@ -68,7 +68,7 @@ extension GameViewController: GKGameCenterControllerDelegate {
     
     func save(achievementIdentifier: String) {
         #if !DEBUG
-        if GKLocalPlayer.localPlayer().isAuthenticated {
+        if GKLocalPlayer.local.isAuthenticated {
             let achievement = GKAchievement(identifier: "com.PabloHenri91.GameVI.\(achievementIdentifier)")
             achievement.showsCompletionBanner = true
             achievement.percentComplete = 100
