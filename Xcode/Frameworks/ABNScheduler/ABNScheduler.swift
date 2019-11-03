@@ -82,7 +82,7 @@ class ABNScheduler {
     
     ///- returns: Count of scheduled UILocalNotification by iOS.
     class func scheduledCount() -> Int {
-        return (UIApplication.shared.scheduledLocalNotifications?.count)!
+        return (UIApplication.shared.scheduledLocalNotifications?.count) ?? 0
     }
     
     ///- returns: Count of queued ABNotification.

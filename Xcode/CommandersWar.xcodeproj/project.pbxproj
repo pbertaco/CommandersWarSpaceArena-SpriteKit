@@ -883,7 +883,7 @@
 					};
 					842A85A51E25B715006B31F7 = {
 						CreatedOnToolsVersion = 8.2;
-						LastSwiftMigration = "";
+						LastSwiftMigration = 1110;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.iCloud = {
@@ -898,6 +898,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -1453,6 +1454,7 @@
 				);
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2.7;
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-ObjC",
 					"-fobjc-arc",
@@ -1483,6 +1485,7 @@
 				);
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2.7;
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-ObjC",
 					"-fobjc-arc",
@@ -1543,7 +1546,7 @@
 				PRODUCT_NAME = CommandersWar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1561,7 +1564,7 @@
 				PRODUCT_NAME = CommandersWar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

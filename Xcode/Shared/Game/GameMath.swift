@@ -37,8 +37,8 @@ class GameMath {
     }
     
     static func randomBaseRange(rarity: Spaceship.rarity) -> Int {
-        let min: CGFloat = 0.9
-        let max: CGFloat = 1.1
+        let min: CGFloat = 0.8
+        let max: CGFloat = 1.2
         
         var range = CGFloat.random(min: min, max: max)
         
@@ -77,8 +77,8 @@ class GameMath {
     }
     
     static func randomBaseDamage(rarity: Spaceship.rarity) -> Int {
-        let min: CGFloat = 0.9
-        let max: CGFloat = 1.1
+        let min: CGFloat = 0.8
+        let max: CGFloat = 1.2
         
         var damage = CGFloat.random(min: min, max: max)
         
@@ -117,8 +117,8 @@ class GameMath {
     }
     
     static func randomBaseLife(rarity: Spaceship.rarity) -> Int {
-        let min: CGFloat = 0.9
-        let max: CGFloat = 1.1
+        let min: CGFloat = 0.8
+        let max: CGFloat = 1.2
         
         var life = CGFloat.random(min: min, max: max)
         
@@ -157,8 +157,8 @@ class GameMath {
     }
     
     static func randomBaseSpeed(rarity: Spaceship.rarity) -> Int {
-        let min: CGFloat = 0.9
-        let max: CGFloat = 1.1
+        let min: CGFloat = 0.8
+        let max: CGFloat = 1.2
         
         var speed = CGFloat.random(min: min, max: max)
         
