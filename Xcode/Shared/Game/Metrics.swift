@@ -37,14 +37,10 @@ class Metrics {
     
     static func loadBox(boxName: String) {
         guard Metrics.canSendEvents() else { return }
-        
-        Answers.logContentView(withName: boxName, contentType: "box", contentId: nil)
     }
     
     static func loadScene(sceneName: String) {
         guard Metrics.canSendEvents() else { return }
-        
-        Answers.logContentView(withName: sceneName, contentType: "gameScene", contentId: nil)
     }
     
     static func battleStart() {
@@ -52,9 +48,6 @@ class Metrics {
         
         let playerData = MemoryCard.sharedInstance.playerData!
         let botLevel = playerData.botLevel
-        
-        GameAnalytics.addDesignEvent(withEventId: "BattleStart:\(Metrics.userName()) on \(Metrics.deviceName()):\(botLevel)")
-        Answers.logLevelStart("\(botLevel)")
     }
     
     static func openTheGame() {
@@ -65,18 +58,12 @@ class Metrics {
         formatter.dateFormat = "HH"
         formatter.timeZone = NSTimeZone.local
         let hour = formatter.string(from: date)
-        
-        GameAnalytics.addDesignEvent(withEventId: "OpenTheGameAtHour:\(Metrics.userName()) on \(Metrics.deviceName()):\(hour)")
     }
     static func win(score: Int) {
         guard Metrics.canSendEvents() else { return }
         
         let playerData = MemoryCard.sharedInstance.playerData!
         let botLevel = playerData.botLevel
-        
-        GameAnalytics.addDesignEvent(withEventId: "BattleWin:\(Metrics.userName()) on \(Metrics.deviceName()):\(botLevel)")
-        
-        Answers.logLevelEnd("\(botLevel)", score: NSNumber(value: score), success: true)
     }
     
     static func lose(score: Int) {
@@ -84,10 +71,6 @@ class Metrics {
         
         let playerData = MemoryCard.sharedInstance.playerData!
         let botLevel = playerData.botLevel
-        
-        GameAnalytics.addDesignEvent(withEventId: "BattleLose:\(Metrics.userName()) on \(Metrics.deviceName()):\(botLevel)")
-        
-        Answers.logLevelEnd("\(botLevel)", score: NSNumber(value: score), success: false)
     }
     
     static func userName() -> String {
