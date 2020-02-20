@@ -8,7 +8,7 @@
 
 import UIKit
 
-import FBSDKCoreKit
+//import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,21 +17,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        Metrics.configure()
-        
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+//        Metrics.configure()
+//
+//        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         return true
     }
     
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        let handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-        return handled
-    }
+//    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+//        let handled = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+//        return handled
+//    }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        FBSDKAppEvents.activateApp()
-        ABNScheduler.cancelAllNotifications()
+//        FBSDKAppEvents.activateApp()
+//        ABNScheduler.cancelAllNotifications()
         application.applicationIconBadgeNumber = 0
     }
 
@@ -41,9 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func scheduleNotifications() {
-        let alertBody = "Battle awaits in the Arena!".translation()
-        ABNScheduler.schedule(alertBody: alertBody, fireDate: Date().nextDays(1))
-        ABNScheduler.schedule(alertBody: alertBody, fireDate: Date().nextDays(7))
-        ABNScheduler.schedule(alertBody: alertBody, fireDate: Date().nextDays(28))
+//        let alertBody = "Battle awaits in the Arena!".translation()
+//        ABNScheduler.schedule(alertBody: alertBody, fireDate: Date().nextDays(1))
+//        ABNScheduler.schedule(alertBody: alertBody, fireDate: Date().nextDays(7))
+//        ABNScheduler.schedule(alertBody: alertBody, fireDate: Date().nextDays(28))
     }
 }

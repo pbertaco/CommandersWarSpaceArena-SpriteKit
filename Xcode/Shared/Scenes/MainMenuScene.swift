@@ -11,7 +11,7 @@ import MultipeerConnectivity
 import AudioToolbox
 
 #if os(iOS)
-    import FBSDKLoginKit
+//    import FBSDKLoginKit
 #endif
 
 class MainMenuScene: GameScene {
@@ -168,17 +168,17 @@ class MainMenuScene: GameScene {
         buttonFacebook.set(color: GameColors.controlBlue, blendMode: .add)
         self.addChild(buttonFacebook)
         #if os(iOS)
-            if FBSDKAccessToken.current() != nil {
-                buttonFacebook.removeFromParent()
-            } else {
-                buttonFacebook.addHandler { [weak buttonFacebook] in
-                    FacebookClient.sharedInstance.logInWith(successBlock: {
-                        buttonFacebook?.removeFromParent()
-                    }, andFailureBlock: { (error: Error?) in
-                        print(error?.localizedDescription ?? "Something went very wrong.")
-                    })
-                }
-            }
+//            if FBSDKAccessToken.current() != nil {
+//                buttonFacebook.removeFromParent()
+//            } else {
+//                buttonFacebook.addHandler { [weak buttonFacebook] in
+//                    FacebookClient.sharedInstance.logInWith(successBlock: {
+//                        buttonFacebook?.removeFromParent()
+//                    }, andFailureBlock: { (error: Error?) in
+//                        print(error?.localizedDescription ?? "Something went very wrong.")
+//                    })
+//                }
+//            }
         #endif
         
         let x: Int = Int(GameScene.currentSize.width) + 4

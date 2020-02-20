@@ -26,7 +26,7 @@ class GameViewController: NSViewController, NSWindowDelegate {
         super.viewDidAppear()
         if let window = self.view.window {
             window.delegate = self
-            window.toggleFullScreen(nil)
+            // window.toggleFullScreen(nil)
         }
     }
     

@@ -54,8 +54,6 @@ class LoadScene: GameScene {
         //            }
         #endif
         
-        self.backgroundColor = GameColors.backgroundColor
-        
         Label.defaultFontName = .kenPixel
         Label.defaultColor = GameColors.fontWhite
         
@@ -188,7 +186,7 @@ class LoadScene: GameScene {
         GameViewController.sharedInstance()?.authenticateLocalPlayer { [weak playerData] in
             let alias = GKLocalPlayer.local.alias
             playerData?.name = alias
-            Metrics.configure()
+//            Metrics.configure()
         }
         #endif
     }

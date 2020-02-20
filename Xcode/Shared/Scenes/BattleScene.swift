@@ -329,14 +329,14 @@ class BattleScene: GameScene {
                 
             case .bossBattle:
                 if self.battleBeginTime == 0 {
-                    Metrics.battleStart()
+//                    Metrics.battleStart()
                     self.battleBeginTime = currentTime
                 }
                 break;
                 
             case .battle:
                 if self.battleBeginTime == 0 {
-                    Metrics.battleStart()
+//                    Metrics.battleStart()
                     self.battleBeginTime = currentTime
                 }
                 break
@@ -384,7 +384,7 @@ class BattleScene: GameScene {
                             self.updateBotOnWin()
                         }
                         
-                        Metrics.win(score: boxBattleResult.score)
+//                        Metrics.win(score: boxBattleResult.score)
                         if self.battleEndTime - self.battleBeginTime <= Double(60 * 3) {
                             self.updateBotOnWin()
                             if self.battleEndTime - self.battleBeginTime <= Double(60 * 2) {
@@ -397,7 +397,7 @@ class BattleScene: GameScene {
                             self.updateBotOnLose()
                         }
                     } else {
-                        Metrics.lose(score: boxBattleResult.score)
+//                        Metrics.lose(score: boxBattleResult.score)
                         if self.battleEndTime - self.battleBeginTime <= Double(60 * 3) {
                             self.updateBotOnLose()
                         } else {

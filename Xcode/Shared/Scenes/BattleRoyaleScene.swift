@@ -137,7 +137,7 @@ class BattleRoyaleScene: GameScene {
                 
             case .battle:
                 if self.battleBeginTime == 0 {
-                    Metrics.battleStart()
+//                    Metrics.battleStart()
                     self.battleBeginTime = currentTime
                 }
                 break
