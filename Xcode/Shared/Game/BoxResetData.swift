@@ -24,7 +24,7 @@ class BoxResetData: Box {
         self.addChild(buttonNo)
         buttonNo.addHandler { [weak self] in
             guard let `self` = self else { return }
-            GameScene.current()?.blackSpriteNode.isHidden = true
+            GameScene.current?.blackSpriteNode.isHidden = true
             self.removeFromParent()
         }
         

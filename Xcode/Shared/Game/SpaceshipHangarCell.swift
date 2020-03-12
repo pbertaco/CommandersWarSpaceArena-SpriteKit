@@ -173,7 +173,7 @@ class SpaceshipHangarCell: Control {
         guard let spaceship = self.spaceship else { return }
         
         let box = BoxSellSpaceship(spaceship: spaceship, points: points)
-        if let scene = GameScene.current() {
+        if let scene = GameScene.current {
             scene.blackSpriteNode.isHidden = false
             scene.blackSpriteNode.zPosition = HangarScene.zPosition.blackSpriteNode.rawValue
             box.zPosition = HangarScene.zPosition.box.rawValue

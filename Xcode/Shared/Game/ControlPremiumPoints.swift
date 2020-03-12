@@ -50,7 +50,7 @@ class ControlPremiumPoints: Control {
             
             buttonBuyMore.addHandler { [weak self, buttonBuyMore] in
                 guard let `self` = self else { return }
-                guard let scene = GameScene.current() else { return }
+                guard let scene = GameScene.current else { return }
                 
                 let playerData = MemoryCard.sharedInstance.playerData!
                 let bonusPremiumPoints = 1 + Int.random(100)
@@ -69,7 +69,7 @@ class ControlPremiumPoints: Control {
                 scene.blackSpriteNode.removeAllHandlers()
                 scene.blackSpriteNode.addHandler { [weak boxVideoAdAttemptFinished] in
                     boxVideoAdAttemptFinished?.removeFromParent()
-                    GameScene.current()?.blackSpriteNode.isHidden = true
+                    GameScene.current?.blackSpriteNode.isHidden = true
                 }
             }
         }

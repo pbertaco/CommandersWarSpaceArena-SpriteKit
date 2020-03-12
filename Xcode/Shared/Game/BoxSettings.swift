@@ -64,10 +64,10 @@ class BoxSettings: Box {
         buttonReset.addHandler { [weak self] in
             guard let `self` = self else { return }
             let boxResetData = BoxResetData()
-            GameScene.current()?.blackSpriteNode.removeAllHandlers()
-            GameScene.current()?.blackSpriteNode.addHandler { [weak boxResetData] in
+            GameScene.current?.blackSpriteNode.removeAllHandlers()
+            GameScene.current?.blackSpriteNode.addHandler { [weak boxResetData] in
                 boxResetData?.removeFromParent()
-                GameScene.current()?.blackSpriteNode.isHidden = true
+                GameScene.current?.blackSpriteNode.isHidden = true
             }
             
             boxResetData.zPosition = self.zPosition
@@ -82,7 +82,7 @@ class BoxSettings: Box {
         buttonOK.addHandler { [weak self] in
             guard let `self` = self else { return }
             self.removeFromParent()
-            GameScene.current()?.blackSpriteNode.isHidden = true
+            GameScene.current?.blackSpriteNode.isHidden = true
         }
     }
     

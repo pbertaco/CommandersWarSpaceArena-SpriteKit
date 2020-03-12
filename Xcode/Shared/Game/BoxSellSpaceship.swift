@@ -61,7 +61,7 @@ class BoxSellSpaceship: Box {
         self.addChild(buttonNo)
         buttonNo.addHandler { [weak self] in
             guard let `self` = self else { return }
-            GameScene.current()?.blackSpriteNode.isHidden = true
+            GameScene.current?.blackSpriteNode.isHidden = true
             self.removeFromParent()
         }
         
@@ -74,7 +74,7 @@ class BoxSellSpaceship: Box {
             guard let `self` = self else { return }
             SoundEffect(effectType: .explosion).play()
             
-            GameScene.current()?.blackSpriteNode.isHidden = true
+            GameScene.current?.blackSpriteNode.isHidden = true
             self.removeFromParent()
         }
         self.buttonSell = buttonSell

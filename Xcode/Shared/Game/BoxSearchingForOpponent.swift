@@ -29,7 +29,7 @@ class BoxSearchingForOpponent: Box {
             guard let `self` = self else { return }
             SoundEffect(effectType: .explosion).play()
             
-            GameScene.current()?.blackSpriteNode.isHidden = true
+            GameScene.current?.blackSpriteNode.isHidden = true
             self.removeFromParent()
         }
     }
