@@ -378,5 +378,24 @@ class Mothership: SKSpriteNode {
             spaceship.canRespawn = false
         }
     }
+    
+    override func contains(_ p: CGPoint) -> Bool {
+        switch self.team {
+        case .blue:
+            if p.y < self.position.y {
+                return super.contains(CGPoint(x: p.x, y: self.position.y))
+            }
+            break
+        case .red:
+            if p.y < self.position.y {
+                return super.contains(CGPoint(x: p.x, y: self.position.y))
+            }
+            break
+        default:
+            break
+        }
+        
+        return super.contains(p)
+    }
 
 }
