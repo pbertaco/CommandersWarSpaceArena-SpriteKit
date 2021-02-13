@@ -200,4 +200,13 @@ class GameMath {
         let maxVelocity = CGFloat(speedAtribute) * 6
         return maxVelocity * maxVelocity
     }
+    
+    static func randomFear() -> CGFloat {
+        let min: CGFloat = 0.0
+        let max: CGFloat = 1.0
+        
+        let fear = CGFloat.random(min: min, max: max)
+        
+        return fear
+    }
 }

@@ -410,40 +410,37 @@ class BattleScene: GameScene {
                 
             case .mainMenu:
                 Music.sharedInstance.stop()
-                
                 let scene = MainMenuScene()
                 
                 if self.mothership.health > 0 {
+                    let spaceship = self.botMothership.spaceships[Int.random(self.botMothership.spaceships.count)]
                     let playerData = MemoryCard.sharedInstance.playerData!
                     
-                    var rarity: Spaceship.rarity = Spaceship.randomRarity()
-                    if Int16(rarity.rawValue) > playerData.maxBotRarity {
-                        rarity = Spaceship.rarity(rawValue: Int(playerData.maxBotRarity))!
-                    }
-                    let spaceship = self.botMothership.spaceships[Int.random(self.botMothership.spaceships.count)]
-                    spaceship.level = Int.random(spaceship.battleStartLevel).clamped(1...10)
-                    let boxUnlockSpaceship = BoxUnlockSpaceship(spaceship: spaceship.createCopy())
-                    boxUnlockSpaceship.zPosition = MainMenuScene.zPosition.box.rawValue
-                    scene.addChild(boxUnlockSpaceship)
-                    
-                    scene.blackSpriteNode.isHidden = false
-                    scene.blackSpriteNode.zPosition = MainMenuScene.zPosition.blackSpriteNode.rawValue
-                    
-                    boxUnlockSpaceship.buttonUnlockWithPoints?.addHandler { [weak scene] in
-                        scene?.afterDelay(3, runBlock: { [weak scene] in
-                            scene?.nextState = .hangar
-                        })
-                    }
-                    
-                    boxUnlockSpaceship.buttonUnlockWithPremiumPoints?.addHandler { [weak scene] in
-                        scene?.afterDelay(3, runBlock: { [weak scene] in
-                            scene?.nextState = .hangar
-                        })
-                    }
-                    
-                    scene.blackSpriteNode.addHandler { [weak scene, weak boxUnlockSpaceship] in
-                        boxUnlockSpaceship?.removeFromParent()
-                        scene?.blackSpriteNode.isHidden = true
+                    if playerData.points >= GameMath.unlockSpaceshipPriceInPoints(rarity: spaceship.rarity) || playerData.premiumPoints >= GameMath.unlockSpaceshipPriceInPremiumPoints(rarity: spaceship.rarity) {
+                        spaceship.level = Int.random(spaceship.battleStartLevel).clamped(1...10)
+                        let boxUnlockSpaceship = BoxUnlockSpaceship(spaceship: spaceship.createCopy())
+                        boxUnlockSpaceship.zPosition = MainMenuScene.zPosition.box.rawValue
+                        scene.addChild(boxUnlockSpaceship)
+                        
+                        scene.blackSpriteNode.isHidden = false
+                        scene.blackSpriteNode.zPosition = MainMenuScene.zPosition.blackSpriteNode.rawValue
+                        
+                        boxUnlockSpaceship.buttonUnlockWithPoints?.addHandler { [weak scene] in
+                            scene?.afterDelay(3, runBlock: { [weak scene] in
+                                scene?.nextState = .hangar
+                            })
+                        }
+                        
+                        boxUnlockSpaceship.buttonUnlockWithPremiumPoints?.addHandler { [weak scene] in
+                            scene?.afterDelay(3, runBlock: { [weak scene] in
+                                scene?.nextState = .hangar
+                            })
+                        }
+                        
+                        scene.blackSpriteNode.addHandler { [weak scene, weak boxUnlockSpaceship] in
+                            boxUnlockSpaceship?.removeFromParent()
+                            scene?.blackSpriteNode.isHidden = true
+                        }
                     }
                 }
                 

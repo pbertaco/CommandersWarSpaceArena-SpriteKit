@@ -38,11 +38,12 @@ class Shot: SKSpriteNode {
         self.blendMode = .add
         
         self.damage = shooter.damage
-        self.rangeSquared = shooter.weaponRange * shooter.weaponRange
+        let weaponRange = shooter.weaponRange * 2
+        self.rangeSquared = weaponRange * weaponRange
         self.startingPosition = shooter.position
         
         self.position = shooter.position
-        self.zRotation = shooter.zRotation// + CGFloat.random(min: -0.2, max: 0.2)
+        self.zRotation = shooter.zRotation + CGFloat.random(min: -0.1, max: 0.1)
         
         self.loadPhysics()
         

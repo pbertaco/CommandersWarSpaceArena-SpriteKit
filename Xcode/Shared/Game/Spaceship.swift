@@ -49,6 +49,7 @@ class Spaceship: SKSpriteNode {
     var baseDamage = 1
     var baseSpeed = 1
     var baseRange = 1
+    var fearLevel: CGFloat = 0.0
     
     var damage: Int = 1
     var maxHealth: Int = 1
@@ -123,6 +124,7 @@ class Spaceship: SKSpriteNode {
                   baseLife: Int(spaceshipData.baseLife),
                   baseSpeed: Int(spaceshipData.baseSpeed),
                   baseRange: Int(spaceshipData.baseRange),
+                  fearLevel: CGFloat(spaceshipData.fearLevel),
                   skinIndex: Int(spaceshipData.skin),
                   color: color,
                   loadPhysics: loadPhysics,
@@ -142,6 +144,7 @@ class Spaceship: SKSpriteNode {
                   baseLife: GameMath.randomBaseLife(rarity: self.rarity),
                   baseSpeed: GameMath.randomBaseSpeed(rarity: self.rarity),
                   baseRange: GameMath.randomBaseRange(rarity: self.rarity),
+                  fearLevel: GameMath.randomFear(),
                   skinIndex: Int.random(Spaceship.skins.count),
                   color: color ?? Spaceship.randomColor(),
                   loadPhysics: loadPhysics,
@@ -160,6 +163,7 @@ class Spaceship: SKSpriteNode {
                   baseLife: spaceship.baseLife,
                   baseSpeed: spaceship.baseSpeed,
                   baseRange: spaceship.baseRange,
+                  fearLevel: spaceship.fearLevel,
                   skinIndex: spaceship.skinIndex,
                   color: spaceship.color,
                   loadPhysics: loadPhysics,
@@ -177,7 +181,7 @@ class Spaceship: SKSpriteNode {
     }
     
     // swiftlint:disable:next function_parameter_count
-    func load(level: Int, baseDamage: Int, baseLife: Int, baseSpeed: Int, baseRange: Int,
+    func load(level: Int, baseDamage: Int, baseLife: Int, baseSpeed: Int, baseRange: Int, fearLevel: CGFloat,
               skinIndex: Int, color: SKColor, loadPhysics: Bool = false, team: Mothership.team) {
         
         self.level = level
@@ -200,6 +204,7 @@ class Spaceship: SKSpriteNode {
         self.baseDamage = baseDamage
         self.baseSpeed = baseSpeed
         self.baseRange = baseRange
+        self.fearLevel = fearLevel
         
         self.updateAttributes()
         
@@ -213,10 +218,10 @@ class Spaceship: SKSpriteNode {
     }
     
     func updateAttributes() {
-        self.maxHealth = GameMath.maxHealth(level: level, baseLife: self.baseLife)
-        self.damage = GameMath.damage(level: level, baseDamage: self.baseDamage)
-        self.speedAtribute = GameMath.speed(level: level, baseSpeed: self.baseSpeed)
-        self.weaponRange = CGFloat(GameMath.range(level: level, baseRange: self.baseRange))
+        self.maxHealth = GameMath.maxHealth(level: self.level, baseLife: self.baseLife)
+        self.damage = GameMath.damage(level: self.level, baseDamage: self.baseDamage)
+        self.speedAtribute = GameMath.speed(level: self.level, baseSpeed: self.baseSpeed)
+        self.weaponRange = CGFloat(GameMath.range(level: self.level, baseRange: self.baseRange))
     }
     
     func getHitBy(_ shot: Shot) {
@@ -262,11 +267,16 @@ class Spaceship: SKSpriteNode {
             self.die(shooter: shot.shooter)
         } else {
             self.health = self.health - shot.damage
-            if self.targetNode is Mothership {
-                if let shooter = shot.shooter {
-                    self.setTarget(spaceship: shooter)
+            
+//            if CGFloat(self.health) / CGFloat(self.maxHealth) < self.fearLevel {
+//                self.retreat()
+//            } else {
+                if self.targetNode is Mothership {
+                    if let shooter = shot.shooter {
+                        self.setTarget(spaceship: shooter)
+                    }
                 }
-            }
+//            }
         }
         self.updateHealthBar(health: self.health, maxHealth: self.maxHealth)
         shot.damage = 0
@@ -405,7 +415,7 @@ class Spaceship: SKSpriteNode {
         effectNode.blendMode = .add
         effectNode.zPosition = self.zPosition - 1
         
-        let maskTexture = Spaceship.skinMaskTexture(index: skinIndex)
+        let maskTexture = Spaceship.skinMaskTexture(index: self.skinIndex)
         let maskNode = SKSpriteNode(texture: maskTexture, size: maskTexture.size())
         maskNode.setScaleToFit(width: Spaceship.diameter, height: Spaceship.diameter)
         

@@ -31,6 +31,7 @@ extension MemoryCard {
         spaceshipData.level = 1
         spaceshipData.baseLife = Int16(GameMath.randomBaseLife(rarity: rarity))
         spaceshipData.baseRange = Int16(GameMath.randomBaseRange(rarity: rarity))
+        spaceshipData.fearLevel = Double(GameMath.randomFear())
         spaceshipData.baseSpeed = Int16(GameMath.randomBaseSpeed(rarity: rarity))
         spaceshipData.rarity = Int16(rarity.rawValue)
         spaceshipData.skin = Int16(Int.random(Spaceship.skins.count))
@@ -61,6 +62,7 @@ extension MemoryCard {
         spaceshipData.baseSpeed = Int16(spaceship.baseSpeed)
         spaceshipData.rarity = Int16(spaceship.rarity.rawValue)
         spaceshipData.skin = Int16(spaceship.skinIndex)
+        spaceshipData.fearLevel = Double(spaceship.fearLevel)
         
         return spaceshipData
         

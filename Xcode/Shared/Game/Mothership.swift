@@ -387,7 +387,7 @@ class Mothership: SKSpriteNode {
             }
             break
         case .red:
-            if p.y < self.position.y {
+            if p.y > self.position.y {
                 return super.contains(CGPoint(x: p.x, y: self.position.y))
             }
             break

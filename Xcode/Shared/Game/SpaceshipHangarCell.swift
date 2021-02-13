@@ -243,13 +243,22 @@ class SpaceshipHangarCell: Control {
         self.labelWeaponRange.text = "?"
         self.labelSpeedAtribute.text = "?"
         
+        let playerData = MemoryCard.sharedInstance.playerData!
+        let points = playerData.points
+        let premiumPoints = playerData.premiumPoints
+        let priceInPoints = GameMath.unlockSpaceshipPriceInPoints(rarity: spaceship.rarity)
+        let priceInPremiumPoints = GameMath.unlockSpaceshipPriceInPremiumPoints(rarity: spaceship.rarity)
+        
         let buttonUnlockWithPoints = Button(imageNamed: "button_89x34", x: 19, y: 102)
         buttonUnlockWithPoints.set(color: GameColors.points)
-        let priceInPoints = GameMath.unlockSpaceshipPriceInPoints(rarity: spaceship.rarity)
         buttonUnlockWithPoints.set(label: Label(text: "unlock", fontSize: .fontSize8, fontColor: GameColors.points, y: -6))
         buttonUnlockWithPoints.set(label: Label(text: "\(priceInPoints)", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.points, y: 6))
         self.addChild(buttonUnlockWithPoints)
         self.control0 = buttonUnlockWithPoints
+        
+        if points < priceInPoints {
+            buttonUnlockWithPoints.isHidden = true
+        }
         
         buttonUnlockWithPoints.addHandler { [weak self, weak rocket, weak circuit] in
             guard let `self` = self else { return }
@@ -266,11 +275,14 @@ class SpaceshipHangarCell: Control {
         
         let buttonUnlockWithPremiumPoints = Button(imageNamed: "button_89x34", x: 125, y: 102)
         buttonUnlockWithPremiumPoints.set(color: GameColors.premiumPoints)
-        let priceInPremiumPoints = GameMath.unlockSpaceshipPriceInPremiumPoints(rarity: spaceship.rarity)
         buttonUnlockWithPremiumPoints.set(label: Label(text: "unlock", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.premiumPoints, y: -6))
         buttonUnlockWithPremiumPoints.set(label: Label(text: "\(priceInPremiumPoints)", fontName: .kenPixel, fontSize: .fontSize8, fontColor: GameColors.premiumPoints, y: 6))
         self.addChild(buttonUnlockWithPremiumPoints)
         self.control1 = buttonUnlockWithPremiumPoints
+        
+        if premiumPoints < priceInPremiumPoints {
+            buttonUnlockWithPremiumPoints.isHidden = true
+        }
         
         buttonUnlockWithPremiumPoints.addHandler { [weak self, weak rocket, weak circuit] in
             guard let `self` = self else { return }

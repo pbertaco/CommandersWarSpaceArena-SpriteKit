@@ -68,6 +68,7 @@ extension MemoryCard {
             spaceshipData.baseDamage = 36
             spaceshipData.baseLife = 1815
             spaceshipData.baseRange = 64
+            spaceshipData.fearLevel = 0.5
             spaceshipData.baseSpeed = 18
             
             spaceshipData.colorRed = 1.0
