@@ -49,49 +49,6 @@ class MainMenuScene: GameScene {
         
         MemoryCard.sharedInstance.saveGame()
         
-        let serverManager = ServerManager.sharedInstance
-        
-        serverManager.onAny { [weak self] (event: String, peerID: MCPeerID, items: Any) in
-            guard self != nil else { return }
-            switch event {
-            case "connected":
-                print("a player wants to play")
-                print("show match request")
-                break
-            default:
-                print("event: \(event), peerID: \(peerID), items: \(items)")
-                break
-            }
-        }
-        serverManager.startBrowsingForPeers()
-        
-        let buttonPlayOnline = Button(imageNamed: "button_55x55", x: 249, y: 95, horizontalAlignment: .right, verticalAlignment: .top)
-        buttonPlayOnline.setIcon(imageNamed: "Bluetooth")
-        buttonPlayOnline.set(color: GameColors.controlRed, blendMode: .add)
-        self.addChild(buttonPlayOnline)
-        buttonPlayOnline.addHandler { [weak self] in
-            guard let `self` = self else { return }
-
-            let boxSearchingForOpponent = BoxSearchingForOpponent()
-            boxSearchingForOpponent.zPosition = MainMenuScene.zPosition.box.rawValue
-            self.blackSpriteNode.isHidden = false
-            self.blackSpriteNode.zPosition = MainMenuScene.zPosition.blackSpriteNode.rawValue
-            self.addChild(boxSearchingForOpponent)
-
-            serverManager.onAny { (event: String, peerID: MCPeerID, items: Any) in
-                switch event {
-                case "connected":
-                    print("connected to server")
-                    print("wait for match comfirmation")
-                    break
-                default:
-                    print("event: \(event), peerID: \(peerID), items: \(items)")
-                    break
-                }
-            }
-            serverManager.startAdvertisingPeer()
-        }
-        
         self.registerUserNotificationSettings()
         
         let playerData = MemoryCard.sharedInstance.playerData!
@@ -161,24 +118,6 @@ class MainMenuScene: GameScene {
             buttonGameCenter.addHandler {
                 GameViewController.sharedInstance()?.presentGameCenterViewController()
             }
-        #endif
-        
-        let buttonFacebook = Button(imageNamed: "button_55x55", x: 312, y: 221, horizontalAlignment: .right, verticalAlignment: .top)
-        buttonFacebook.setIcon(imageNamed: "Facebook")
-        buttonFacebook.set(color: GameColors.controlBlue, blendMode: .add)
-        self.addChild(buttonFacebook)
-        #if os(iOS)
-//            if FBSDKAccessToken.current() != nil {
-//                buttonFacebook.removeFromParent()
-//            } else {
-//                buttonFacebook.addHandler { [weak buttonFacebook] in
-//                    FacebookClient.sharedInstance.logInWith(successBlock: {
-//                        buttonFacebook?.removeFromParent()
-//                    }, andFailureBlock: { (error: Error?) in
-//                        print(error?.localizedDescription ?? "Something went very wrong.")
-//                    })
-//                }
-//            }
         #endif
         
         let x: Int = Int(GameScene.currentSize.width) + 4
