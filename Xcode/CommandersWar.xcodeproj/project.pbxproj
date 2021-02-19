@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		764A2E5925E018CC00279B76 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 764A2E5825E018CC00279B76 /* CloudKit.framework */; };
+		76FE476E25DDA51700179321 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FE476D25DDA51700179321 /* AudioToolbox.framework */; };
 		840931491E268CDD00C61711 /* MothershipSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931481E268CDD00C61711 /* MothershipSlots.swift */; };
 		8409314B1E268CDD00C61711 /* MothershipSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931481E268CDD00C61711 /* MothershipSlots.swift */; };
 		8409314D1E26930700C61711 /* MothershipSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409314C1E26930700C61711 /* MothershipSlot.swift */; };
@@ -247,6 +249,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		764A2E5125E015A400279B76 /* CommandersWar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommandersWar.entitlements; sourceTree = "<group>"; };
+		764A2E5825E018CC00279B76 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
+		76FE476C25DDA51700179321 /* CommandersWar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CommandersWar.entitlements; path = ../CommandersWar.entitlements; sourceTree = "<group>"; };
+		76FE476D25DDA51700179321 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		840931481E268CDD00C61711 /* MothershipSlots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipSlots.swift; sourceTree = "<group>"; };
 		8409314C1E26930700C61711 /* MothershipSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipSlot.swift; sourceTree = "<group>"; };
 		840931501E26985500C61711 /* GameColorsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameColorsExtension.swift; sourceTree = "<group>"; };
@@ -384,6 +390,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76FE476E25DDA51700179321 /* AudioToolbox.framework in Frameworks */,
+				764A2E5925E018CC00279B76 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +443,7 @@
 		842A856F1E25B715006B31F7 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				76FE476C25DDA51700179321 /* CommandersWar.entitlements */,
 				842A85701E25B715006B31F7 /* AppDelegate.swift */,
 				8484EC411E7A192600EB14DB /* CommandersWar.entitlements */,
 				84BA34D51E7B5514006FEEAD /* GameAdManager.swift */,
@@ -450,6 +459,7 @@
 		842A85A71E25B715006B31F7 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				764A2E5125E015A400279B76 /* CommandersWar.entitlements */,
 				842A85A81E25B715006B31F7 /* AppDelegate.swift */,
 				842A85AA1E25B715006B31F7 /* GameViewController.swift */,
 				842A85AC1E25B715006B31F7 /* Main.storyboard */,
@@ -536,6 +546,8 @@
 		847126EF241A8C4700B0BB75 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				764A2E5825E018CC00279B76 /* CloudKit.framework */,
+				76FE476D25DDA51700179321 /* AudioToolbox.framework */,
 				84712715241A8C7800B0BB75 /* Hydra */,
 				847126F0241A8C6E00B0BB75 /* SKTUtils */,
 			);
@@ -737,6 +749,7 @@
 					};
 					842A85A51E25B715006B31F7 = {
 						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = JZ3J7RVLD7;
 						LastSwiftMigration = 1110;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -1130,8 +1143,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=100 -Xfrontend -warn-long-expression-type-checking=100";
@@ -1182,8 +1195,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
@@ -1194,6 +1207,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = CommandersWar.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JZ3J7RVLD7;
@@ -1203,7 +1217,7 @@
 				);
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2.8;
+				MARKETING_VERSION = 1.2.9;
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-ObjC",
 					"-fobjc-arc",
@@ -1224,6 +1238,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = CommandersWar.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JZ3J7RVLD7;
@@ -1233,7 +1248,7 @@
 				);
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2.8;
+				MARKETING_VERSION = 1.2.9;
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-ObjC",
 					"-fobjc-arc",
@@ -1253,10 +1268,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_ENTITLEMENTS = macOS/CommandersWar.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JZ3J7RVLD7;
 				INFOPLIST_FILE = macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI.OSX;
@@ -1271,10 +1287,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_ENTITLEMENTS = macOS/CommandersWar.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = JZ3J7RVLD7;
 				INFOPLIST_FILE = macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI.OSX;

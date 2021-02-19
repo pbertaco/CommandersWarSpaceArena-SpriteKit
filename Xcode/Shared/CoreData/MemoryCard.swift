@@ -13,10 +13,12 @@ class MemoryCard {
     static let sharedInstance = MemoryCard()
     
     private var autoSave: Bool = false
+    private var managedObjectContext: NSManagedObjectContext!
     
     var playerData: PlayerData!
     
     init() {
+        self.managedObjectContext = self.persistentContainer.viewContext
         self.loadGame()
     }
     
@@ -88,65 +90,27 @@ class MemoryCard {
     
     // MARK: - Core Data stack
     
-    lazy var applicationSupportDirectory: URL = {
-        
-        let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
-        
-        let url = urls.last!.appendingPathComponent(Bundle.main.bundleIdentifier!)
-        
-        let fileManager = FileManager.default
-        if !fileManager.fileExists(atPath: url.path) {
-            try? fileManager.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
-        }
-        
-        return url
-    }()
-    
-    lazy var managedObjectModel: NSManagedObjectModel = {
-        let url = Bundle.main.url(forResource: "Model", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOf: url)!
-    }()
-    
-    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
-        
-        let fileManager = FileManager.default
-        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let productName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String ?? "App"
-        let options = [
-            NSMigratePersistentStoresAutomaticallyOption: true,
-            NSInferMappingModelAutomaticallyOption: true
-        ]
-        
-        #if DEBUG
-            let fileName = "\(productName)Debug.sqlite"
-        #else
-            let fileName = "\(productName).sqlite"
-        #endif
-        
-        let url: URL = self.applicationSupportDirectory.appendingPathComponent(fileName)
-        
-        do {
-            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: options)
-        } catch {
-            try? fileManager.removeItem(at: url)
-            fatalError()
-        }
-        
-        return coordinator
-    }()
-    
-    lazy var managedObjectContext: NSManagedObjectContext = {
-        let coordinator = self.persistentStoreCoordinator
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = coordinator
-        return managedObjectContext
+    lazy var persistentContainer: NSPersistentCloudKitContainer = {
+        let container = NSPersistentCloudKitContainer(name: "Model")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
     }()
     
     // MARK: - Core Data Saving support
     
     func saveContext() {
-        if self.managedObjectContext.hasChanges {
-            try? managedObjectContext.save()
+        let context = self.persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
         }
     }
 }
