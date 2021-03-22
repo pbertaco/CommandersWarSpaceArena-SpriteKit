@@ -1221,7 +1221,7 @@
 				);
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2.9;
+				MARKETING_VERSION = 1.3.0;
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-ObjC",
 					"-fobjc-arc",
@@ -1252,7 +1252,7 @@
 				);
 				INFOPLIST_FILE = iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.2.9;
+				MARKETING_VERSION = 1.3.0;
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-ObjC",
 					"-fobjc-arc",
