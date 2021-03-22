@@ -98,5 +98,10 @@ extension MemoryCard {
             self.playerData.modelVersion = 4
             self.playerData.lastGift = 0;
         }
+        
+        if self.playerData.modelVersion < 5 {
+            self.playerData.modelVersion = 5
+            self.playerData.date = Date()
+        }
     }
 }

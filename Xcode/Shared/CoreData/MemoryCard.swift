@@ -31,18 +31,22 @@ class MemoryCard {
     func saveGame() {
         if self.autoSave {
             self.autoSave = false
+            self.playerData.date = Date()
             self.saveContext()
             self.autoSave = true
         }
     }
     
     func loadGame() {
-        guard self.playerData == nil else { return }
-        
         let fetchRequestData = self.fetchRequest() as [PlayerData]
         
         if fetchRequestData.count > 0 {
-            self.playerData = fetchRequestData.last
+            if fetchRequestData.count > 1 {
+                self.playerData = self.merge(fetchRequestData: fetchRequestData)
+            } else {
+                self.playerData = fetchRequestData.last
+            }
+            
             self.updateModelVersion()
             self.autoSave = true
         } else {
@@ -50,8 +54,41 @@ class MemoryCard {
         }
     }
     
-    func reset() {
+    func merge(fetchRequestData: [PlayerData]) -> PlayerData? {
         
+        guard let playerData = fetchRequestData.sorted(by: { (x, y) -> Bool in
+            return x.date ?? Date() < y.date ?? Date()
+        }).first else { return nil }
+        
+        for i in fetchRequestData {
+            if i == playerData {
+                continue
+            }
+            
+            playerData.points = playerData.points + i.points
+            playerData.premiumPoints = playerData.premiumPoints + i.premiumPoints
+            
+            for spaceshipData in i.spaceships as? Set<SpaceshipData> ?? [] {
+                let spaceship = Spaceship(spaceshipData: spaceshipData).createCopy()
+                playerData.addToSpaceships(self.newSpaceshipData(spaceship: spaceship))
+                self.managedObjectContext.delete(spaceshipData)
+            }
+            
+            for mothershipSlotData in i.mothership?.slots as? Set<MothershipSlotData> ?? [] {
+                if let spaceshipData = mothershipSlotData.spaceship {
+                    let spaceship = Spaceship(spaceshipData: spaceshipData).createCopy()
+                    playerData.addToSpaceships(self.newSpaceshipData(spaceship: spaceship))
+                    self.managedObjectContext.delete(spaceshipData)
+                }
+            }
+            
+            self.managedObjectContext.delete(i)
+        }
+        
+        return playerData
+    }
+    
+    func reset() {
         for item in self.fetchRequest() as [MothershipData] {
             self.managedObjectContext.delete(item)
         }
@@ -104,6 +141,8 @@ class MemoryCard {
     
     func saveContext() {
         let context = self.persistentContainer.viewContext
+        context.mergePolicy = NSOverwriteMergePolicy
+        
         if context.hasChanges {
             do {
                 try context.save()

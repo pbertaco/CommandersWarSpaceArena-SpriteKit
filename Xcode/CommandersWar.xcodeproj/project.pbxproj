@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		764A2E5925E018CC00279B76 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 764A2E5825E018CC00279B76 /* CloudKit.framework */; };
+		76F59F8C25E2DACF003B3A12 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76F59F8B25E2DACF003B3A12 /* CloudKit.framework */; };
 		76FE476E25DDA51700179321 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FE476D25DDA51700179321 /* AudioToolbox.framework */; };
 		840931491E268CDD00C61711 /* MothershipSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931481E268CDD00C61711 /* MothershipSlots.swift */; };
 		8409314B1E268CDD00C61711 /* MothershipSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931481E268CDD00C61711 /* MothershipSlots.swift */; };
@@ -251,6 +252,7 @@
 /* Begin PBXFileReference section */
 		764A2E5125E015A400279B76 /* CommandersWar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommandersWar.entitlements; sourceTree = "<group>"; };
 		764A2E5825E018CC00279B76 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
+		76F59F8B25E2DACF003B3A12 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		76FE476C25DDA51700179321 /* CommandersWar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CommandersWar.entitlements; path = ../CommandersWar.entitlements; sourceTree = "<group>"; };
 		76FE476D25DDA51700179321 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		840931481E268CDD00C61711 /* MothershipSlots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipSlots.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76F59F8C25E2DACF003B3A12 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +549,7 @@
 		847126EF241A8C4700B0BB75 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				76F59F8B25E2DACF003B3A12 /* CloudKit.framework */,
 				764A2E5825E018CC00279B76 /* CloudKit.framework */,
 				76FE476D25DDA51700179321 /* AudioToolbox.framework */,
 				84712715241A8C7800B0BB75 /* Hydra */,
@@ -1275,7 +1279,7 @@
 				DEVELOPMENT_TEAM = JZ3J7RVLD7;
 				INFOPLIST_FILE = macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI.OSX;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI;
 				PRODUCT_NAME = CommandersWar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
@@ -1294,7 +1298,7 @@
 				DEVELOPMENT_TEAM = JZ3J7RVLD7;
 				INFOPLIST_FILE = macOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI.OSX;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI;
 				PRODUCT_NAME = CommandersWar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
