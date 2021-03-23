@@ -10,6 +10,9 @@ import CoreData
 
 extension MemoryCard {
     
+    static var startingPoints: Int32 = 10000
+    static var startingPremiumPoints: Int32 = 256
+    
     func newPlayerData() -> PlayerData {
         let playerData: PlayerData = self.insertNewObject()
         
@@ -25,8 +28,8 @@ extension MemoryCard {
         playerData.modelVersion = 3
         playerData.music = true
         playerData.name = ""
-        playerData.points = 10000
-        playerData.premiumPoints = 256
+        playerData.points = MemoryCard.startingPoints
+        playerData.premiumPoints = MemoryCard.startingPremiumPoints
         playerData.sound = true
         
         playerData.mothership = self.newMothershipData()

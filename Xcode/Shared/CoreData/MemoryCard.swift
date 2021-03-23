@@ -32,6 +32,12 @@ class MemoryCard {
         if self.autoSave {
             self.autoSave = false
             self.playerData.date = Date()
+            let fetchRequestData = self.fetchRequest() as [PlayerData]
+            
+            if fetchRequestData.count > 1 {
+                self.playerData = self.merge(fetchRequestData: fetchRequestData)
+            }
+            
             self.saveContext()
             self.autoSave = true
         }
@@ -65,8 +71,10 @@ class MemoryCard {
                 continue
             }
             
-            playerData.points = playerData.points + i.points
-            playerData.premiumPoints = playerData.premiumPoints + i.premiumPoints
+            i.points = i.points - MemoryCard.startingPoints
+            playerData.points = playerData.points + (i.points > 0 ? i.points : 0)
+            i.premiumPoints = i.premiumPoints - MemoryCard.startingPremiumPoints
+            playerData.premiumPoints = playerData.premiumPoints + (i.premiumPoints > 0 ? i.premiumPoints : 0)
             
             for spaceshipData in i.spaceships as? Set<SpaceshipData> ?? [] {
                 let spaceship = Spaceship(spaceshipData: spaceshipData).createCopy()
@@ -77,7 +85,11 @@ class MemoryCard {
             for mothershipSlotData in i.mothership?.slots as? Set<MothershipSlotData> ?? [] {
                 if let spaceshipData = mothershipSlotData.spaceship {
                     let spaceship = Spaceship(spaceshipData: spaceshipData).createCopy()
-                    playerData.addToSpaceships(self.newSpaceshipData(spaceship: spaceship))
+                    
+                    if spaceship.level > 1 || spaceship.rarity.rawValue > 1 {
+                        playerData.addToSpaceships(self.newSpaceshipData(spaceship: spaceship))
+                    }
+                    
                     self.managedObjectContext.delete(spaceshipData)
                 }
             }
