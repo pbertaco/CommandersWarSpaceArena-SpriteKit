@@ -63,8 +63,8 @@ extension MemoryCard {
             
             self.playerData.modelVersion = 2
             
-            self.playerData.points = self.playerData.points + 1000000
-            self.playerData.premiumPoints = self.playerData.premiumPoints + 1000
+            self.playerData.points += 1000000
+            self.playerData.premiumPoints += 1000
             
             let spaceshipData: SpaceshipData = self.newSpaceshipData(rarity: .legendary)
             
@@ -87,8 +87,8 @@ extension MemoryCard {
         if self.playerData.modelVersion < 3 {
             self.playerData.modelVersion = 3
             
-            self.playerData.points = self.playerData.points + 1000000
-            self.playerData.premiumPoints = self.playerData.premiumPoints + 1000
+            self.playerData.points += 1000000
+            self.playerData.premiumPoints += 1000
             
             #if os(OSX)
                 self.playerData.deviceName = Host.current().localizedName!
@@ -99,7 +99,7 @@ extension MemoryCard {
         
         if self.playerData.modelVersion < 4 {
             self.playerData.modelVersion = 4
-            self.playerData.lastGift = 0;
+            self.playerData.lastGift = 0
         }
         
         if self.playerData.modelVersion < 5 {

@@ -34,10 +34,10 @@ class Stars: SKNode {
         }
         
         let size = self.calculateAccumulatedFrame().size
-        self.position.x = -GameScene.currentSize.width/2 + texture.size().width/2
-        self.position.y = GameScene.currentSize.height/2 - texture.size().height/2
+        self.position.x = -GameScene.currentSize.width / 2 + texture.size().width / 2
+        self.position.y = GameScene.currentSize.height / 2 - texture.size().height / 2
         
-        self.position.x = self.position.x + (GameScene.currentSize.width - size.width)/2
-        self.position.y = self.position.y - (GameScene.currentSize.height - size.height)/2
+        self.position.x += (GameScene.currentSize.width - size.width) / 2
+        self.position.y -= (GameScene.currentSize.height - size.height) / 2
     }
 }

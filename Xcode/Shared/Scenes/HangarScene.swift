@@ -43,8 +43,8 @@ class HangarScene: GameScene {
         self.backgroundColor = GameColors.backgroundColor
         
         let stars = Stars()
-        stars.position.x = stars.position.x + GameScene.currentSize.width/2
-        stars.position.y = stars.position.y - GameScene.currentSize.height/2
+        stars.position.x += GameScene.currentSize.width/2
+        stars.position.y -= GameScene.currentSize.height/2
         self.addChild(stars)
         self.stars = stars
         
@@ -80,8 +80,8 @@ class HangarScene: GameScene {
     override func updateSize() {
         super.updateSize()
         self.stars.updateSize()
-        self.stars.position.x = self.stars.position.x + GameScene.currentSize.width/2
-        self.stars.position.y = self.stars.position.y - GameScene.currentSize.height/2
+        self.stars.position.x += GameScene.currentSize.width/2
+        self.stars.position.y -= GameScene.currentSize.height/2
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -282,7 +282,7 @@ class HangarScene: GameScene {
                     spaceshipHangarCell.clearLabelColors()
                 }
                 
-                self.cellIndexPlayerDataSpaceships = self.cellIndexPlayerDataSpaceships - 1
+                self.cellIndexPlayerDataSpaceships -= 1
                 scrollNode.back()
                 if self.cellIndexPlayerDataSpaceships <= 0 {
                     buttonLeft.isUserInteractionEnabled = false
@@ -309,7 +309,7 @@ class HangarScene: GameScene {
                     spaceshipHangarCell.clearLabelColors()
                 }
                 
-                self.cellIndexPlayerDataSpaceships = self.cellIndexPlayerDataSpaceships + 1
+                self.cellIndexPlayerDataSpaceships += 1
                 scrollNode.forward()
                 if self.cellIndexPlayerDataSpaceships >= scrollNode.cells.count - 1 {
                     buttonRight.isUserInteractionEnabled = false
@@ -377,7 +377,7 @@ class HangarScene: GameScene {
                     spaceshipHangarCell.clearLabelColors()
                 }
                 
-                self.cellIndexMothershipSlots = self.cellIndexMothershipSlots - 1
+                self.cellIndexMothershipSlots -= 1
                 scrollNode.back()
                 if self.cellIndexMothershipSlots <= 0 {
                     buttonLeft.isUserInteractionEnabled = false
@@ -404,7 +404,7 @@ class HangarScene: GameScene {
                     spaceshipHangarCell.clearLabelColors()
                 }
                 
-                self.cellIndexMothershipSlots = self.cellIndexMothershipSlots + 1
+                self.cellIndexMothershipSlots += 1
                 scrollNode.forward()
                 if self.cellIndexMothershipSlots >= scrollNode.cells.count - 1 {
                     buttonRight.isUserInteractionEnabled = false

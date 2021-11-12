@@ -252,7 +252,7 @@ class Spaceship: SKSpriteNode {
         if let shooter = shot.shooter {
             if shooter.team != self.team {
                 self.getHitBySpaceships.insert(shooter)
-                shooter.battlePoints = shooter.battlePoints + shot.damage
+                shooter.battlePoints += shot.damage
             }
         }
         
@@ -266,7 +266,7 @@ class Spaceship: SKSpriteNode {
             }
             self.die(shooter: shot.shooter)
         } else {
-            self.health = self.health - shot.damage
+            self.health -= shot.damage
             
 //            if CGFloat(self.health) / CGFloat(self.maxHealth) < self.fearLevel {
 //                self.retreat()
@@ -288,13 +288,13 @@ class Spaceship: SKSpriteNode {
         self.emitterNodeParticleBirthRate = 0
         
         if let shooter = shooter {
-            shooter.kills = shooter.kills + 1
+            shooter.kills += 1
             shooter.healthBar?.labelLevel.set(color: GameColors.controlYellow)
             self.getHitBySpaceships.remove(shooter)
         }
         
         for shooter in self.getHitBySpaceships {
-            shooter.assists = shooter.assists + 1
+            shooter.assists += 1
         }
         
         self.getHitBySpaceships.removeAll()
@@ -316,7 +316,7 @@ class Spaceship: SKSpriteNode {
         
         self.isHidden = true
         
-        self.deaths = self.deaths + 1
+        self.deaths += 1
         self.deathTime = GameScene.currentTime
         self.lastSecond = GameScene.currentTime
         
@@ -334,7 +334,7 @@ class Spaceship: SKSpriteNode {
         }
         if self.health < self.maxHealth {
             self.lastHeal = GameScene.currentTime
-            self.health = self.health + max((self.maxHealth/180), 1)
+            self.health += max((self.maxHealth/180), 1)
             if self.health > self.maxHealth {
                 self.health = self.maxHealth
             }
@@ -1066,9 +1066,9 @@ class Spaceship: SKSpriteNode {
         
         if element.element != .darkness {
             let maxColor = 1 - max(max(red, green), blue)
-            red = red + maxColor
-            green = green + maxColor
-            blue = blue + maxColor
+            red += maxColor
+            green += maxColor
+            blue += maxColor
         }
         
         return SKColor(red: red, green: green, blue: blue, alpha: 1)
@@ -1176,7 +1176,7 @@ class Spaceship: SKSpriteNode {
         
         for r in rarities {
             if n < i {
-                i = i / 2.0
+                i /= 2.0
                 value = r
             }
         }

@@ -20,7 +20,7 @@ func randomRarity() -> rarity {
     
     for r in rarities {
         if n < i {
-            i = i / 2.0
+            i /= 2.0
             value = r
         }
     }
@@ -39,25 +39,25 @@ var supremeCount = 0
 for _ in 1...100 {
     switch randomRarity() {
     case .common:
-        commonCount = commonCount + 1
+        commonCount += 1
         break
     case .uncommon:
-        uncommonCount = uncommonCount + 1
+        uncommonCount += 1
         break
     case .rare:
-        rareCount = rareCount + 1
+        rareCount += 1
         break
     case .heroic:
-        heroicCount = heroicCount + 1
+        heroicCount += 1
         break
     case .epic:
-        epicCount = epicCount + 1
+        epicCount += 1
         break
     case .legendary:
-        legendaryCount = legendaryCount + 1
+        legendaryCount += 1
         break
     case .supreme:
-        supremeCount = supremeCount + 1
+        supremeCount += 1
         break
     }
 }

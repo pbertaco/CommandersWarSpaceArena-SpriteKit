@@ -39,7 +39,7 @@ class MothershipHealthBar: SKSpriteNode {
         let fill = SKSpriteNode(texture: nil, color: .clear, size: self.size)
         self.fillSizeWidth = fill.size.width - 4
         fill.size.width = self.fillSizeWidth
-        fill.size.height = fill.size.height - 4
+        fill.size.height -= 4
         fill.position = CGPoint(x: -179.5, y: 0)
         fill.anchorPoint = CGPoint(x: 0, y: 0.5)
         self.addChild(fill)

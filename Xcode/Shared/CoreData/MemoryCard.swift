@@ -71,10 +71,10 @@ class MemoryCard {
                 continue
             }
             
-            i.points = i.points - MemoryCard.startingPoints
-            playerData.points = playerData.points + (i.points > 0 ? i.points : 0)
-            i.premiumPoints = i.premiumPoints - MemoryCard.startingPremiumPoints
-            playerData.premiumPoints = playerData.premiumPoints + (i.premiumPoints > 0 ? i.premiumPoints : 0)
+            i.points -= MemoryCard.startingPoints
+            playerData.points += (i.points > 0 ? i.points : 0)
+            i.premiumPoints -= MemoryCard.startingPremiumPoints
+            playerData.premiumPoints += (i.premiumPoints > 0 ? i.premiumPoints : 0)
             
             for spaceshipData in i.spaceships as? Set<SpaceshipData> ?? [] {
                 let spaceship = Spaceship(spaceshipData: spaceshipData).createCopy()

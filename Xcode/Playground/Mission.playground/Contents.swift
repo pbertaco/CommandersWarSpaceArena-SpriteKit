@@ -105,11 +105,11 @@ missions.sort { (a: [rarity], b: [rarity]) -> Bool in
     var bTotal: UInt16 = 0
     
     for r in a {
-        aTotal = aTotal + r.rawValue
+        aTotal += r.rawValue
     }
     
     for r in b {
-        bTotal = bTotal + r.rawValue
+        bTotal += r.rawValue
     }
     
     return aTotal < bTotal
@@ -212,9 +212,9 @@ func randomColor() -> SKColor {
     
     if element.element != .darkness {
         let maxColor = 1 - max(max(red, green), blue)
-        red = red + maxColor
-        green = green + maxColor
-        blue = blue + maxColor
+        red += maxColor
+        green += maxColor
+        blue += maxColor
     }
     
     return SKColor(red: red, green: green, blue: blue, alpha: 1)
@@ -228,7 +228,7 @@ for m in finalMissions {
     if element == .darkness {
         iElement = 0
     } else {
-        iElement = iElement + 1
+        iElement += 1
     }
     
     let color = randomColorFor(element: element)
@@ -236,7 +236,7 @@ for m in finalMissions {
     let colorString = "SKColor(red: \(String(format: "%.1f", color.redComponent)), green: \(String(format: "%.1f", color.greenComponent)), blue: \(String(format: "%.1f", color.blueComponent)), alpha: 1)"
     
     print("Mission(level: \(Int(i/Float(finalMissions.count) * 12.0) + 1), rarities: \(m), color: \(colorString)),")
-    i = i + 1
+    i += 1
 }
 
 finalMissions.count

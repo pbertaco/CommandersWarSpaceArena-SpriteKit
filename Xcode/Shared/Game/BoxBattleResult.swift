@@ -62,22 +62,22 @@ class BoxBattleResult: Box {
             if spaceship.rarity == .common {
                 chickenMode = false
             }
-            totalBattlePoints = totalBattlePoints + Int32(spaceship.battlePoints)
+            totalBattlePoints += Int32(spaceship.battlePoints)
             if let spaceshipData = spaceship.spaceshipData {
                 if spaceshipData.level < playerData.maxSpaceshipLevel {
-                    spaceshipData.xp = spaceshipData.xp + Int32(spaceship.battlePoints)
+                    spaceshipData.xp += Int32(spaceship.battlePoints)
                     let xp: Int32 = Int32(GameMath.xpForLevel(level: Int(spaceshipData.level) + 1))
                     
                     if spaceshipData.xp >= xp {
-                        spaceshipData.xp = spaceshipData.xp - xp
-                        spaceshipData.level = spaceshipData.level + 1
+                        spaceshipData.xp -= xp
+                        spaceshipData.level += 1
                     }
                 }
             } else {
             }
         }
         
-        playerData.points = playerData.points + totalBattlePoints
+        playerData.points += totalBattlePoints
         self.score = Int(totalBattlePoints)
         
         #if os(iOS)
@@ -137,11 +137,11 @@ class BoxBattleResult: Box {
             
             self.addChild(Label(text: "\(spaceship.kills)/\(spaceship.deaths)/\(spaceship.assists)", fontColor: GameColors.controlBlue, x: 167, y: y + 17))
             
-            totalKills = totalKills + spaceship.kills
-            totalDeaths = totalDeaths + spaceship.deaths
-            totalAssists = totalAssists + spaceship.assists
+            totalKills += spaceship.kills
+            totalDeaths += spaceship.deaths
+            totalAssists += spaceship.assists
             
-            i = i + 1
+            i += 1
         }
         
         self.addChild(Label(text: "\(totalKills)/\(totalDeaths)/\(totalAssists)", fontColor: GameColors.controlBlue, x: 59, y: 160))
@@ -182,11 +182,11 @@ class BoxBattleResult: Box {
             
             self.addChild(Label(text: "\(spaceship.kills)/\(spaceship.deaths)/\(spaceship.assists)", fontColor: GameColors.controlRed, x: 167, y: y + 17))
             
-            totalKills = totalKills + spaceship.kills
-            totalDeaths = totalDeaths + spaceship.deaths
-            totalAssists = totalAssists + spaceship.assists
+            totalKills += spaceship.kills
+            totalDeaths += spaceship.deaths
+            totalAssists += spaceship.assists
             
-            i = i + 1
+            i += 1
         }
         
         self.addChild(Label(text: "\(totalKills)/\(totalDeaths)/\(totalAssists)", fontColor: GameColors.controlRed, x: 174, y: 160))

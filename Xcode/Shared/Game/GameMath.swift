@@ -44,28 +44,28 @@ class GameMath {
         
         switch rarity {
         case .common:
-            range = range * 178
+            range *= 178
             break
         case .uncommon:
-            range = range * 122
+            range *= 122
             break
         case .rare:
-            range = range * 122
+            range *= 122
             break
         case .heroic:
-            range = range * 84
+            range *= 84
             break
         case .epic:
-            range = range * 84
+            range *= 84
             break
         case .legendary:
-            range = range * 58
+            range *= 58
             break
         case .supreme:
-            range = range * 58
+            range *= 58
             break
         case .boss:
-            range = range * 58 * 2
+            range *= 58 * 2
             break
         }
         
@@ -84,28 +84,28 @@ class GameMath {
         
         switch rarity {
         case .common:
-            damage = damage * 11
+            damage *= 11
             break
         case .uncommon:
-            damage = damage * 16
+            damage *= 16
             break
         case .rare:
-            damage = damage * 23
+            damage *= 23
             break
         case .heroic:
-            damage = damage * 34
+            damage *= 34
             break
         case .epic:
-            damage = damage * 50
+            damage *= 50
             break
         case .legendary:
-            damage = damage * 73
+            damage *= 73
             break
         case .supreme:
-            damage = damage * 107
+            damage *= 107
             break
         case .boss:
-            damage = damage * 107 * 2
+            damage *= 107 * 2
             break
         }
         
@@ -124,28 +124,28 @@ class GameMath {
         
         switch rarity {
         case .common:
-            life = life * 550
+            life *= 550
             break
         case .uncommon:
-            life = life * 800
+            life *= 800
             break
         case .rare:
-            life = life * 1150
+            life *= 1150
             break
         case .heroic:
-            life = life * 1700
+            life *= 1700
             break
         case .epic:
-            life = life * 2500
+            life *= 2500
             break
         case .legendary:
-            life = life * 3650
+            life *= 3650
             break
         case .supreme:
-            life = life * 5350
+            life *= 5350
             break
         case .boss:
-            life = life * 5350 * 10
+            life *= 5350 * 10
             break
         }
         
@@ -164,28 +164,28 @@ class GameMath {
         
         switch rarity {
         case .common:
-            speed = speed * 20
+            speed *= 20
             break
         case .uncommon:
-            speed = speed * 19
+            speed *= 19
             break
         case .rare:
-            speed = speed * 18
+            speed *= 18
             break
         case .heroic:
-            speed = speed * 17
+            speed *= 17
             break
         case .epic:
-            speed = speed * 16
+            speed *= 16
             break
         case .legendary:
-            speed = speed * 15
+            speed *= 15
             break
         case .supreme:
-            speed = speed * 14
+            speed *= 14
             break
         case .boss:
-            speed = speed * 14 * 2
+            speed *= 14 * 2
             break
         }
         

@@ -58,7 +58,7 @@ class ControlPremiumPoints: Control {
                 buttonBuyMore.isHidden = true
                 playerData.lastGift = Date().timeIntervalSince1970
                 
-                playerData.premiumPoints = playerData.premiumPoints + Int32(bonusPremiumPoints)
+                playerData.premiumPoints += Int32(bonusPremiumPoints)
                 self.setLabelPremiumPointsText(premiumPoints: playerData.premiumPoints)
                 
                 let boxVideoAdAttemptFinished = BoxVideoAdAttemptFinished(bonusPremiumPoints: bonusPremiumPoints)

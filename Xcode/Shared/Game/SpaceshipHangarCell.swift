@@ -97,9 +97,9 @@ class SpaceshipHangarCell: Control {
                 if let spaceship = spaceship {
                     
                     if playerData.points >= xp {
-                        playerData.points = playerData.points - xp
+                        playerData.points -= xp
                         
-                        spaceship.level = spaceship.level + 1
+                        spaceship.level += 1
                         spaceship.spaceshipData?.level = Int16(spaceship.level)
                         spaceship.updateAttributes()
                         
@@ -186,7 +186,7 @@ class SpaceshipHangarCell: Control {
             if let spaceshipData = spaceship.spaceshipData {
                 playerData.removeFromSpaceships(spaceshipData)
                 
-                playerData.points = playerData.points + points
+                playerData.points += points
                 ControlPoints.current()?.setLabelPointsText(points: playerData.points)
             }
             block()
@@ -309,7 +309,7 @@ class SpaceshipHangarCell: Control {
         let price = Int32(GameMath.unlockSpaceshipPriceInPremiumPoints(rarity: spaceship.rarity))
         
         if playerData.premiumPoints >= price {
-            playerData.premiumPoints = playerData.premiumPoints - price
+            playerData.premiumPoints -= price
             self.forceUnlock(spaceship: spaceship)
             self.loadButtonUpgrade()
             self.loadButtonSell(sellCompletion: {})
@@ -327,7 +327,7 @@ class SpaceshipHangarCell: Control {
         let price = Int32(GameMath.buySpaceshipPriceInPremiumPoints(rarity: spaceship.rarity))
         
         if playerData.premiumPoints >= price {
-            playerData.premiumPoints = playerData.premiumPoints - price
+            playerData.premiumPoints -= price
             self.forceUnlock(spaceship: spaceship)
             return true
         }
@@ -346,7 +346,7 @@ class SpaceshipHangarCell: Control {
         let price = Int32(GameMath.unlockSpaceshipPriceInPoints(rarity: spaceship.rarity))
         
         if playerData.points >= price {
-            playerData.points = playerData.points - price
+            playerData.points -= price
             self.forceUnlock(spaceship: spaceship)
             self.loadButtonUpgrade()
             self.loadButtonSell(sellCompletion: {})
@@ -364,7 +364,7 @@ class SpaceshipHangarCell: Control {
         let price = Int32(GameMath.buySpaceshipPriceInPoints(rarity: spaceship.rarity))
         
         if playerData.points >= price {
-            playerData.points = playerData.points - price
+            playerData.points -= price
             self.forceUnlock(spaceship: spaceship)
             return true
         }

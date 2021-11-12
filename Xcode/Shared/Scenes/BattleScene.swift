@@ -154,7 +154,7 @@ class BattleScene: GameScene {
                 
                 var health = 0
                 for spaceship in self.spaceships {
-                    health = health + spaceship.health
+                    health += spaceship.health
                 }
                 
                 if health <= 0 {
@@ -165,7 +165,7 @@ class BattleScene: GameScene {
                 
                 self.updateSpaceships()
                 
-                break;
+                break
                 
             case .battle:
                 
@@ -184,10 +184,10 @@ class BattleScene: GameScene {
                     
                     var health = 0
                     for spaceship in self.mothership.spaceships {
-                        health = health + spaceship.health
+                        health += spaceship.health
                     }
                     if health <= 0 || currentTime - self.battleBeginTime > self.maxBattleDuration {
-                        self.mothership.health = self.mothership.health - (self.mothership.maxHealth/10)
+                        self.mothership.health -= (self.mothership.maxHealth/10)
                         self.mothership.updateHealthBar(health: self.mothership.health, maxHealth: self.mothership.maxHealth)
                         if self.mothership.health <= 0 {
                             self.mothership.die(shooter: nil)
@@ -198,10 +198,10 @@ class BattleScene: GameScene {
                     
                     health = 0
                     for spaceship in self.botMothership.spaceships {
-                        health = health + spaceship.health
+                        health += spaceship.health
                     }
                     if health <= 0 || currentTime - self.battleBeginTime > self.maxBattleDuration {
-                        self.botMothership.health = self.botMothership.health - (self.botMothership.maxHealth/10)
+                        self.botMothership.health -= (self.botMothership.maxHealth/10)
                         self.botMothership.updateHealthBar(health: self.botMothership.health, maxHealth: self.botMothership.maxHealth)
                         if self.botMothership.health <= 0 {
                             self.botMothership.die(shooter: nil)
@@ -378,7 +378,7 @@ class BattleScene: GameScene {
                         
                         var deaths = 0
                         for i in self.mothership.spaceships {
-                            deaths = deaths + i.deaths
+                            deaths += i.deaths
                         }
                         if deaths <= 0 {
                             self.updateBotOnWin()
@@ -755,7 +755,7 @@ class BattleScene: GameScene {
         }
         
         if playerData.botLevel < Int16(Mission.types.count - 1) {
-            playerData.botLevel = playerData.botLevel + 1
+            playerData.botLevel += 1
         }
         
         if playerData.maxBotLevel < playerData.botLevel {
@@ -766,12 +766,12 @@ class BattleScene: GameScene {
     func updateBotOnLose() {
         let playerData = MemoryCard.sharedInstance.playerData!
         if playerData.botLevel > 0 {
-            playerData.botLevel = playerData.botLevel - 1
+            playerData.botLevel -= 1
         }
     }
     
     func spawnSpaceship() {
-        Spaceship.diameter = Spaceship.diameter * 2
+        Spaceship.diameter *= 2
         let spaceship = Spaceship(level: 1 + Int.random(10), rarity: .common, loadPhysics: true, team: .none)
         spaceship.setBitMasksToSpaceship()
         spaceship.physicsBody?.isDynamic = true
@@ -796,7 +796,7 @@ class BattleScene: GameScene {
         spaceship.healthBar?.alpha = 0
         spaceship.healthBar?.run(action)
         spaceship.zRotation = CGFloat.random(min: -π, max: +π)
-        Spaceship.diameter = Spaceship.diameter / 2
+        Spaceship.diameter /= 2
     }
     
     func updateSpaceships() {

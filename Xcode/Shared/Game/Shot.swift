@@ -90,7 +90,7 @@ class Shot: SKSpriteNode {
         physicsBody.velocity = CGVector(dx: -sin(self.zRotation) * speed, dy: cos(self.zRotation) * speed)
         
         if let shooterPhysicsBody = self.shooter?.physicsBody {
-            physicsBody.velocity = physicsBody.velocity + shooterPhysicsBody.velocity
+            physicsBody.velocity += shooterPhysicsBody.velocity
         }
         
         self.physicsBody = physicsBody
