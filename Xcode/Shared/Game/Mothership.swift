@@ -354,7 +354,7 @@ class Mothership: SKSpriteNode {
         }
     }
     
-    func updateMaxHealth(enemySpaceships: [Spaceship]) {
+    func updateMaxHealth(enemySpaceships: [Spaceship], botLevel: Int16) {
         var totalDamage = 0
         var spaceshipCount = 0
         for spaceship in self.spaceships + enemySpaceships {
@@ -363,8 +363,10 @@ class Mothership: SKSpriteNode {
             spaceshipCount += 1
         }
         
+        let scale = Float(min(botLevel + 1, 20))
+        
         if spaceshipCount > 0 {
-            self.maxHealth = Int((Float(totalDamage)/Float(spaceshipCount)) * 100)
+            self.maxHealth = Int((Float(totalDamage)/Float(spaceshipCount)) * 5 * scale)
             self.health = self.maxHealth
         }
     }

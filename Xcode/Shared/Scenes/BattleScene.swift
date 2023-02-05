@@ -91,7 +91,7 @@ class BattleScene: GameScene {
         if false {
             self.spawnSpaceship()
             
-            mothership.updateMaxHealth(enemySpaceships: self.spaceships)
+            mothership.updateMaxHealth(enemySpaceships: self.spaceships, botLevel: playerData.botLevel)
             mothership.update()
             
             self.nextState = .bossBattle
@@ -115,8 +115,8 @@ class BattleScene: GameScene {
             }
             botMothership.loadSpaceships(gameWorld: gameWorld, botLevel: Int(playerData.botLevel))
             
-            mothership.updateMaxHealth(enemySpaceships: botMothership.spaceships)
-            botMothership.updateMaxHealth(enemySpaceships: mothership.spaceships)
+            mothership.updateMaxHealth(enemySpaceships: botMothership.spaceships, botLevel: playerData.botLevel)
+            botMothership.updateMaxHealth(enemySpaceships: mothership.spaceships, botLevel: playerData.botLevel)
             
             mothership.update()
             botMothership.update()

@@ -16,7 +16,7 @@ extension MemoryCard {
         let spaceshipData: SpaceshipData = self.insertNewObject()
         
         let color: CIColor = {
-            let color = CIColor(color: color ?? Spaceship.randomColor())
+            let color = CIColor(color: color ?? Spaceship.randomColorFor(element: Spaceship.randomElements()))
             #if os(OSX)
                 return color!
             #else

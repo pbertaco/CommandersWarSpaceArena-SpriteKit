@@ -20,19 +20,18 @@ public enum Elements: String {
 }
 
 class Element {
-    
     var element: Elements
     var strength: Elements
     var weakness: Elements
     var color: SKColor
-    
+
     init(element: Elements, strength: Elements, weakness: Elements) {
         self.element = element
         self.strength = strength
         self.weakness = weakness
-        
+
         var elementColor = GameColors.darkness
-        
+
         switch element {
         case .fire:
             elementColor = GameColors.fire
@@ -61,7 +60,7 @@ class Element {
         }
         self.color = elementColor
     }
-    
+
     static var types: [Elements: Element] = [
         .fire: Element(element: .fire, strength: .ice, weakness: .water),
         .ice: Element(element: .ice, strength: .wind, weakness: .fire),
@@ -70,6 +69,6 @@ class Element {
         .thunder: Element(element: .thunder, strength: .water, weakness: .earth),
         .water: Element(element: .water, strength: .fire, weakness: .thunder),
         .light: Element(element: .light, strength: .light, weakness: .darkness),
-        .darkness: Element(element: .darkness, strength: .darkness, weakness: .light)
+        .darkness: Element(element: .darkness, strength: .darkness, weakness: .light),
     ]
 }

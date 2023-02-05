@@ -146,7 +146,7 @@ class Spaceship: SKSpriteNode {
                   baseRange: GameMath.randomBaseRange(rarity: self.rarity),
                   fearLevel: GameMath.randomFear(),
                   skinIndex: Int.random(Spaceship.skins.count),
-                  color: color ?? Spaceship.randomColor(),
+                  color: color ?? Spaceship.randomColorFor(element: Spaceship.randomElements()),
                   loadPhysics: loadPhysics,
                   team: team)
     }
@@ -1041,6 +1041,10 @@ class Spaceship: SKSpriteNode {
     static func skinMaskTexture(index i: Int) -> SKTexture {
         let texture = SKTexture(imageNamed: Spaceship.skins[i] + "Mask", filteringMode: GameScene.defaultFilteringMode)
         return texture
+    }
+    
+    static func randomElements() -> Elements {
+        return Element.types.randomElement()?.key ?? .darkness
     }
     
     static func randomColor() -> SKColor {
