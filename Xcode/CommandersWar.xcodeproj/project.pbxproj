@@ -3,13 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		764A2E5925E018CC00279B76 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 764A2E5825E018CC00279B76 /* CloudKit.framework */; };
 		76F59F8C25E2DACF003B3A12 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76F59F8B25E2DACF003B3A12 /* CloudKit.framework */; };
-		76FE476E25DDA51700179321 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76FE476D25DDA51700179321 /* AudioToolbox.framework */; };
 		840931491E268CDD00C61711 /* MothershipSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931481E268CDD00C61711 /* MothershipSlots.swift */; };
 		8409314B1E268CDD00C61711 /* MothershipSlots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840931481E268CDD00C61711 /* MothershipSlots.swift */; };
 		8409314D1E26930700C61711 /* MothershipSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409314C1E26930700C61711 /* MothershipSlot.swift */; };
@@ -251,10 +249,8 @@
 
 /* Begin PBXFileReference section */
 		764A2E5125E015A400279B76 /* CommandersWar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CommandersWar.entitlements; sourceTree = "<group>"; };
-		764A2E5825E018CC00279B76 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		76F59F8B25E2DACF003B3A12 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		76FE476C25DDA51700179321 /* CommandersWar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = CommandersWar.entitlements; path = ../CommandersWar.entitlements; sourceTree = "<group>"; };
-		76FE476D25DDA51700179321 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		840931481E268CDD00C61711 /* MothershipSlots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipSlots.swift; sourceTree = "<group>"; };
 		8409314C1E26930700C61711 /* MothershipSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipSlot.swift; sourceTree = "<group>"; };
 		840931501E26985500C61711 /* GameColorsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameColorsExtension.swift; sourceTree = "<group>"; };
@@ -392,8 +388,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76FE476E25DDA51700179321 /* AudioToolbox.framework in Frameworks */,
-				764A2E5925E018CC00279B76 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,12 +544,10 @@
 			isa = PBXGroup;
 			children = (
 				76F59F8B25E2DACF003B3A12 /* CloudKit.framework */,
-				764A2E5825E018CC00279B76 /* CloudKit.framework */,
-				76FE476D25DDA51700179321 /* AudioToolbox.framework */,
 				84712715241A8C7800B0BB75 /* Hydra */,
 				847126F0241A8C6E00B0BB75 /* SKTUtils */,
 			);
-			path = Frameworks;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		847126F0241A8C6E00B0BB75 /* SKTUtils */ = {
@@ -575,7 +567,7 @@
 				847126FC241A8C6E00B0BB75 /* CGFloat+Extensions.swift */,
 			);
 			name = SKTUtils;
-			path = "../../../Hydra-SpriteKit/SKTUtils";
+			path = ../../SKTUtils/SKTUtils;
 			sourceTree = "<group>";
 		};
 		84712715241A8C7800B0BB75 /* Hydra */ = {
@@ -598,7 +590,7 @@
 				8471272B241A8C7800B0BB75 /* Button.swift */,
 			);
 			name = Hydra;
-			path = "../../../Hydra-SpriteKit/Hydra";
+			path = "../../Hydra-SpriteKit/Hydra";
 			sourceTree = "<group>";
 		};
 		84712717241A8C7800B0BB75 /* Tiled */ = {
@@ -733,8 +725,9 @@
 		842A85601E25B715006B31F7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = PabloHenri91;
 				TargetAttributes = {
 					842A856C1E25B715006B31F7 = {
@@ -1129,6 +1122,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1188,6 +1182,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1202,7 +1197,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -1221,7 +1217,10 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = iOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.3.0;
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-ObjC",
@@ -1253,7 +1252,10 @@
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = iOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.3.0;
 				"OTHER_LDFLAGS[arch=*]" = (
 					"-ObjC",
@@ -1278,10 +1280,14 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI;
 				PRODUCT_NAME = CommandersWar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1298,10 +1304,14 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = JZ3J7RVLD7;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = macOS/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.GameVI;
 				PRODUCT_NAME = CommandersWar;
 				PROVISIONING_PROFILE_SPECIFIER = "";
